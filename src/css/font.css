@@ -19,14 +19,16 @@
 
 @font-face {
   font-family: "PPStella-Bold";
-  src: url("../../assets/fonts/PPStella-Bold.otf") format("opentype");
+  src: url("../../assets/fonts/PPStella-Bold.ttf") format("truetype"),
+    url("../../assets/fonts/PPStella-Bold.otf") format("opentype");
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: "PPStella-Light";
-  src: url("../../assets/fonts/PPStella-Light.otf") format("opentype");
+  src: url("../../assets/fonts/PPStella-Light.ttf") format("truetype"),
+    url("../../assets/fonts/PPStella-Light.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }

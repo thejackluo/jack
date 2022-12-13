@@ -32,22 +32,26 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   </head>
   <body>
-    <!-- Create a background that is a futuristic gradient of dark grey to dark purple -->
-    <div class="background">
-      <div class="background-gradient"></div>
+    <!-- Main webpage -->
+    <div id="fullpage">
+      <section class="section active" id="landing">
+        <!-- Create a div with the class landing-city with another div inside with the class landing-angular-filter -->
+        <div class="landing-city">
+          <div class="landing-angular-filter">
+            <h1>Jack Luo</h1>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="about">
+        <div class="slide" id="status"></div>
+        <div class="slide" id="me"></div>
+      </section>
+      <section class="section" id="achievements">
+        <div class="slide" id="numbers"></div>
+        <div class="slide" id="project"></div>
+      </section>
+      <footer class="section" id="footer"></footer>
     </div>
-
-    <!-- Create header, 4 sections, and a footer with nothing inside -->
-    <header>
-      <!-- Create the header Jack Luo using a custom css class from font.css in order to use the font -->
-      <h1>JACK LUO</h1>
-    </header>
-
-    <section></section>
-    <section></section>
-    <section></section>
-    <section></section>
-    <footer></footer>
 
     <!-- Loading libraries -->
     <script src="lib/js/aos.js"></script>
