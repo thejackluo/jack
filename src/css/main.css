@@ -2,46 +2,44 @@
 
 /* Create h1 - h6 css with font Eliantro for h1, Dual for h2 - h3, PPStellar bold for h4, and PPStella for h5 - h6 with consideration of responsiveness (use em as unit and start with 6em and go down to 2em proportionally) and center the fonts */
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-align: center;
+  color: white;
+}
+
 h1 {
   font-family: "Elianto-Regular";
   font-size: 4em;
-  text-align: center;
-  color: white;
 }
 
 h2 {
   font-family: "Dual-300";
   font-size: 3.5em;
-  text-align: center;
-  color: white;
 }
 
 h3 {
   font-family: "Dual-300";
   font-size: 3em;
-  text-align: center;
-  color: white;
 }
 
 h4 {
-  font-family: "PPStella-Bold";
+  font-family: "Dual-300";
   font-size: 2em;
-  text-align: center;
-  color: white;
 }
 
 h5 {
-  font-family: "PPStella-Light";
+  font-family: "Dual-300";
   font-size: 1.5em;
-  text-align: center;
-  color: white;
 }
 
 h6 {
-  font-family: "PPStella-Light";
+  font-family: "Dual-300";
   font-size: 1.25em;
-  text-align: center;
-  color: white;
 }
 
 /* Other basic elements */
@@ -177,4 +175,48 @@ nav {
   width: 100%;
   height: 50vh;
   z-index: -3;
+}
+
+/* Landing content */
+
+/* Create a .landing-main-center class selector that centers all elements and put them in one line and other necessary properties */
+.landing-main-center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.landing-sm-handle {
+  font-size: 1.5em;
+  font-family: "Dual-300";
+  text-align: center;
+}
+
+/* Create a .landing-name class selector that has a font size of 4em, a font family of Elianto, and a color of white */
+
+.landing-name {
+  width: 30%;
+  font-size: 4em;
+  font-family: "Elianto";
+  text-align: center;
+  padding: 0 1em;
+}
+
+/* Create a .landing-image class selector that has a width of 20%, a height of 20%, a border-radius of 50%, and a margin of 0 1em */
+
+.landing-image {
+  width: 20%;
+  height: 20%;
+  border-radius: 50%;
+  filter: drop-shadow(0px 0px 40px rgba(255, 255, 255, 0.5));
+}
+
+/* Create a .landing-status class selector that has a font size of 2em, a font family of Dual-300, and a color of white */
+
+.landing-status {
+  font-size: 1.25em;
+  font-family: "Dual-300";
+  text-align: center;
 }
