@@ -1,3 +1,6 @@
+# Ignore zips folder
+zips
+
 # Logs
 logs
 *.log
