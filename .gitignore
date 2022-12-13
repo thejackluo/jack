@@ -1,5 +1,5 @@
 # Ignore zips folder
-zips
+dist
 
 # Logs
 logs
