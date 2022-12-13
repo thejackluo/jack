@@ -1,0 +1,48 @@
+/* use this css file to create fontfaces for all the fonts (Dual-300.ttf, Elianto-Regular.ttf, PPStella-Bold.otf, and PPStella-Light.otf) from ../../assets/fonts 
+/* the fontfaces are used in the other css files in this folder */
+
+@font-face {
+  font-family: "Dual-300";
+  src: url("../../assets/fonts/Dual-300.ttf") format("truetype"),
+    url("../../assets/fonts/Dual-300.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Elianto-Regular";
+  src: url("../../assets/fonts/Elianto-Regular.ttf") format("truetype"),
+    url("../../assets/fonts/Elianto-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "PPStella-Bold";
+  src: url("../../assets/fonts/PPStella-Bold.otf") format("opentype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "PPStella-Light";
+  src: url("../../assets/fonts/PPStella-Light.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.dual-300 {
+  font-family: "Dual-300";
+}
+
+.elianto-regular {
+  font-family: "Elianto-Regular";
+}
+
+.ppstella-bold {
+  font-family: "PPStella-Bold";
+}
+
+.ppstella-light {
+  font-family: "PPStella-Light";
+}
