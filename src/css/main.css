@@ -1,0 +1,37 @@
+/* Create h1 - h6 css with font Eliantro for h1, Dual for h2 - h3, PPStellar bold for h4, and PPStella for h5 - h6 with consideration of responsiveness (use em as unit and start with 6em and go down to 2em proportionally) and center the fonts */
+
+h1 {
+  font-family: "Elianto-Regular";
+  font-size: 6em;
+  text-align: center;
+}
+
+h2 {
+  font-family: "Dual-300";
+  font-size: 5em;
+  text-align: center;
+}
+
+h3 {
+  font-family: "Dual-300";
+  font-size: 4em;
+  text-align: center;
+}
+
+h4 {
+  font-family: "PPStella-Bold";
+  font-size: 3em;
+  text-align: center;
+}
+
+h5 {
+  font-family: "PPStella-Light";
+  font-size: 2em;
+  text-align: center;
+}
+
+h6 {
+  font-family: "PPStella-Light";
+  font-size: 1em;
+  text-align: center;
+}

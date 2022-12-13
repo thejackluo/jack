@@ -1,9 +1,22 @@
+<!-- 
+  Designed by Jack Luo
+  2022/12/13
+  Personal Website
+ -->
+
+<!DOCTYPE html>
 <html>
   <head>
-    <title>Writing</title>
-    <!-- Link to all files in lib/css and lib/js -->
-    <link rel="stylesheet" href="lib/css/main.css" />
-    <link rel="stylesheet" href="lib/css/font.css" />
+    <title>Jack Luo</title>
+    <!-- Link to all files in lib/css including aos, fullpage, and normalize -->
+    <link rel="stylesheet" href="lib/css/aos.css" />
+    <link rel="stylesheet" href="lib/css/fullpage.css" />
+    <link rel="stylesheet" href="lib/css/normalize.css" />
+
+    <!-- Link to all files in lib/css-->
+    <link rel="stylesheet" href="src/css/main.css" />
+    <link rel="stylesheet" href="src/css/font.css" />
+
     <!-- Create meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -13,9 +26,26 @@
     />
     <meta name="keywords" content="Jack Luo, Personal Website" />
     <meta name="author" content="Jack Luo" />
+
     <!-- Create favicon -->
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   </head>
-  <body></body>
+  <body>
+    <!-- Create a background that is a futuristic gradient of dark grey to dark purple -->
+    <div class="background">
+      <div class="background-gradient"></div>
+    </div>
+
+    <header>
+      <h1>JACK LUO</h1>
+    </header>
+
+    <!-- Loading libraries -->
+    <script src="lib/js/aos.js"></script>
+    <script src="lib/js/fullpage.js"></script>
+
+    <!-- Loading the script file -->
+    <script src="src/js/script.js"></script>
+  </body>
 </html>

@@ -1,11 +1,21 @@
-<!-- This is a personal website about Jack Luo-->
+<!-- 
+  Designed by Jack Luo
+  2022/12/13
+  Personal Website
+ -->
 
+<!DOCTYPE html>
 <html>
   <head>
     <title>Jack Luo</title>
-    <!-- Link to all files in lib/css and lib/js -->
-    <link rel="stylesheet" href="lib/css/main.css" />
-    <link rel="stylesheet" href="lib/css/font.css" />
+    <!-- Link to all files in lib/css including aos, fullpage, and normalize -->
+    <link rel="stylesheet" href="lib/css/aos.css" />
+    <link rel="stylesheet" href="lib/css/fullpage.css" />
+    <link rel="stylesheet" href="lib/css/normalize.css" />
+
+    <!-- Link to all files in lib/css-->
+    <link rel="stylesheet" href="src/css/main.css" />
+    <link rel="stylesheet" href="src/css/font.css" />
 
     <!-- Create meta tags -->
     <meta charset="utf-8" />
@@ -30,7 +40,7 @@
     <!-- Create header, 4 sections, and a footer with nothing inside -->
     <header>
       <!-- Create the header Jack Luo using a custom css class from font.css in order to use the font -->
-      <h1 class="elianto-regular">Jack Luo</h1>
+      <h1>JACK LUO</h1>
     </header>
 
     <section></section>
@@ -39,7 +49,11 @@
     <section></section>
     <footer></footer>
 
-    <!-- Create a script that will load the script.js file -->
-    <script src="lib/js/script.js"></script>
+    <!-- Loading libraries -->
+    <script src="lib/js/aos.js"></script>
+    <script src="lib/js/fullpage.js"></script>
+
+    <!-- Loading the script file -->
+    <script src="src/js/script.js"></script>
   </body>
 </html>
