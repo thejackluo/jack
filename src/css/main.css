@@ -18,6 +18,19 @@ a {
 }
 
 p {
+  font-family: "PP Stellar";
+  font-weight: normal;
+  color: white;
+}
+
+b {
+  font-family: "PP Stellar";
+  font-weight: bold;
+}
+
+li {
+  font-family: "PP Stellar";
+  font-weight: normal;
   color: white;
 }
 

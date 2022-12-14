@@ -4,17 +4,19 @@
 
 /* Create a vertical navigation container class selector vertical-nav that uses the flex box model to create vertical items */
 
-.vertical-nav {
+.vnav {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
+  width: 8.33%;
 }
 
-.circle {
+.vnav-circle {
   width: 20px;
   height: 20px;
+  display: inline-block;
 
   margin: 2em;
   border-radius: 50%;
@@ -32,6 +34,10 @@
 /* Create a about-main class selector */
 
 .about-main {
+  /* width: 83.33%;
+  height: 83.33%; */
+  width: 80%;
+  height: 80vh;
   background: radial-gradient(
     50% 50% at 50% 50%,
     rgba(255, 255, 255, 0) 0%,
@@ -45,4 +51,10 @@
   /* Note: backdrop-filter has minimal browser support */
 
   border-radius: 120px;
+}
+
+/* Create about-body selector */
+
+.about-body {
+  font-size: 1.5em;
 }

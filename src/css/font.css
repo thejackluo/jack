@@ -18,7 +18,7 @@
 }
 
 @font-face {
-  font-family: "PPStella-Bold";
+  font-family: "PP Stellar";
   src: url("../../assets/fonts/PPStella-Bold.ttf") format("truetype"),
     url("../../assets/fonts/PPStella-Bold.otf") format("opentype");
   font-weight: bold;
@@ -26,7 +26,7 @@
 }
 
 @font-face {
-  font-family: "PPStella-Light";
+  font-family: "PP Stellar";
   src: url("../../assets/fonts/PPStella-Light.ttf") format("truetype"),
     url("../../assets/fonts/PPStella-Light.otf") format("opentype");
   font-weight: normal;
@@ -42,9 +42,11 @@
 }
 
 .ppstella-bold {
-  font-family: "PPStella-Bold";
+  font-family: "PP Stellar";
+  font-weight: bold;
 }
 
 .ppstella-light {
-  font-family: "PPStella-Light";
+  font-family: "PP Stellar";
+  font-weight: normal;
 }
