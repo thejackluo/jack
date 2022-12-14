@@ -36,14 +36,18 @@
   <body>
     <!-- Main webpage -->
     <div id="fullpage">
-      <section class="section active container-fluid" id="landing">
-        <div class="landing-container">
+      <section id="landing">
+        <!-- Create a div with the class landing-container -->
+        <div class="landing-container container-fluid">
           <!-- Nav Bar -->
-          <nav class="navbar navbar-expand-sm row-2">
+          <nav class="navbar">
             <div class="container-fluid">
-              <div class="nav-brand nav-logo">
+              <!-- JL -->
+              <div class="nav-logo">
                 <a href="#landing">JL</a>
               </div>
+
+              <!-- Other Nav items -->
               <div class="nav-container">
                 <div class="nav-item">
                   <a href="journey.html">Journey</a>
@@ -56,18 +60,25 @@
           </nav>
 
           <!-- Landing main -->
-          <div class="landing-main">
-            <h3 class="landing-sm-handle">
-              <a href="#about">@thejackluo</a>
-            </h3>
-
-            <div class="landing-main-center">
-              <h1 class="landing-name">JACK</h1>
-              <img class="landing-image" src="assets/images/jack.jpg" />
-              <h1 class="landing-name">LUO</h1>
+          <div class="landing-main container-fluid">
+            <div class="row landing-row">
+              <h3 class="landing-sm-handle">
+                <a href="#about">@thejackluo</a>
+              </h3>
             </div>
 
-            <h4 class="landing-status">Currently: Designing</h4>
+            <div class="landing-main-center row landing-row">
+              <h1 class="landing-name col-4 col-md-3 col-sm-2">JACK</h1>
+              <img
+                class="landing-image col-4 col-md-6 col-sm-8"
+                src="assets/images/jack.jpg"
+              />
+              <h1 class="landing-name col-4 col-md-3 col-sm-2">LUO</h1>
+            </div>
+
+            <div class="row landing-row">
+              <h4 class="landing-status">Currently: Designing</h4>
+            </div>
           </div>
         </div>
 
@@ -76,15 +87,15 @@
           <div class="landing-city"></div>
         </div>
       </section>
-      <section class="section" id="about">
+      <section id="about">
         <div class="slide" id="status"></div>
         <div class="slide" id="me"></div>
       </section>
-      <section class="section" id="achievements">
-        <div class="slide" id="numbers"></div>
-        <div class="slide" id="project"></div>
+      <section id="achievements">
+        <div id="numbers"></div>
+        <div id="project"></div>
       </section>
-      <footer class="section" id="footer"></footer>
+      <footer id="footer"></footer>
     </div>
 
     <!-- Loading libraries -->
