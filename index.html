@@ -17,6 +17,9 @@
 
     <!-- Link to all files in lib/css-->
     <link rel="stylesheet" href="src/css/main.css" />
+    <link rel="stylesheet" href="src/css/index.css" />
+    <link rel="stylesheet" href="src/css/landing.css" />
+    <link rel="stylesheet" href="src/css/about.css" />
     <link rel="stylesheet" href="src/css/font.css" />
 
     <!-- Create meta tags -->
@@ -88,12 +91,34 @@
         </div>
       </section>
       <section id="about">
-        <div class="slide" id="status"></div>
-        <div class="slide" id="me"></div>
+        <div class="container-fluid">
+          <div class="col-1">
+            <nav class="vertical-nav">
+              <a href="#landing">
+                <div class="circle"></div>
+              </a>
+              <a href="#about">
+                <div class="circle"></div>
+              </a>
+              <a href="#achievements">
+                <div class="circle"></div>
+              </a>
+              <a href="#footer">
+                <div class="circle"></div>
+              </a>
+            </nav>
+          </div>
+          <div class="col-10">
+            <!-- <div class="about-main">about</div> -->
+          </div>
+          <div class="col-1"></div>
+        </div>
+        <!-- <div class="slide" id="status"></div>
+        <div class="slide" id="me"></div> -->
       </section>
       <section id="achievements">
-        <div id="numbers"></div>
-        <div id="project"></div>
+        <!-- <div id="numbers"></div>
+        <div id="project"></div> -->
       </section>
       <footer id="footer"></footer>
     </div>
