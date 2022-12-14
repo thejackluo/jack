@@ -1,8 +1,6 @@
 /* Basic elements */
 
-/*  h1 - h6 */
-
-/*  Create h1 - h6 css with font Eliantro for h1, Dual for h2 - h3, PPStellar bold for h4, and PPStella for h5 - h6 with consideration of responsiveness (use em as unit and start with 4em and go down to 1.25em proportionally) and center the fonts */
+/*  h1 - h6, a, p*/
 
 h1,
 h2,
@@ -14,38 +12,6 @@ h6 {
   color: white;
 }
 
-/* h1 {
-  font-family: "Elianto-Regular";
-  font-size: 4em;
-}
-
-h2 {
-  font-family: "Dual-300";
-  font-size: 3.5em;
-}
-
-h3 {
-  font-family: "Dual-300";
-  font-size: 3em;
-}
-
-h4 {
-  font-family: "Dual-300";
-  font-size: 2em;
-}
-
-h5 {
-  font-family: "Dual-300";
-  font-size: 1.5em;
-}
-
-h6 {
-  font-family: "Dual-300";
-  font-size: 1.25em;
-} */
-
-/*  Other basic elements */
-
 a {
   text-decoration: none;
   color: white;
@@ -54,6 +20,8 @@ a {
 p {
   color: white;
 }
+
+/*  Other basic elements */
 
 /* Full page */
 
@@ -166,41 +134,29 @@ nav {
   height: 15%;
 }
 
-.nav-logo {
-  padding: 0 2em;
-}
-
 .nav-container {
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
 
-.nav-item {
-  padding: 0 2em;
-}
-
-.nav-item-jl {
+.nav-logo {
+  padding: 0 1em;
   font-family: "Elianto";
   font-size: 4em;
-
   text-align: center;
   color: #ffffff;
   text-shadow: 4px 4px 10px rgba(255, 255, 255, 0.25);
 }
 
-.nav-item-journey {
+.nav-item {
+  padding: 0 1em;
   font-family: "Dual-300";
   font-size: 2em;
   text-align: center;
   color: #ffffff;
-}
-
-.nav-item-writing {
-  font-family: "Dual-300";
-  font-size: 2em;
-  text-align: center;
-  color: #ffffff;
+  text-decoration: none;
+  display: block;
 }
 
 /* Landing Main */
