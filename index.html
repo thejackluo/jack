@@ -36,17 +36,17 @@
   <body>
     <!-- Main webpage -->
     <div id="fullpage">
-      <section class="section active" id="landing">
+      <section class="section active container-fluid" id="landing">
         <div class="landing-container">
           <!-- Nav Bar -->
 
           <!-- Create a nav bar with the class landing-nav that contains JL in h1, Journey and Writing in h5. 
               JL, Journey and Writing should be clickable using <a> tag and redirects to google.com. -->
-          <nav>
-            <div class="nav-logo">
+          <nav class="container-fluid">
+            <div class="nav-logo col-3">
               <a href="#landing" class="nav-item-jl">JL</a>
             </div>
-            <div class="nav-container">
+            <div class="nav-container col-9">
               <div class="nav-item">
                 <a href="journey.html" class="nav-item-journey">Journey</a>
               </div>
@@ -70,9 +70,10 @@
             <h4 class="landing-status">Currently: Designing</h4>
           </div>
         </div>
+
         <!-- Create a div with the class landing-city with another div inside with the class landing-angular-filter -->
-        <div class="landing-city">
-          <div class="landing-angular-filter"></div>
+        <div class="landing-angular-filter">
+          <div class="landing-city"></div>
         </div>
       </section>
       <section class="section" id="about">
