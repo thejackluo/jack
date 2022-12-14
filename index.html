@@ -11,6 +11,7 @@
     <!-- Link to all files in lib/css including aos, fullpage, and normalize -->
     <link rel="stylesheet" href="lib/css/aos.css" />
     <link rel="stylesheet" href="lib/css/fullpage.css" />
+    <link rel="stylesheet" href="lib/css/bootstrap.css" />
     <link rel="stylesheet" href="lib/css/normalize.css" />
     <link rel="stylesheet" href="lib/css/main.css" />
 
@@ -36,36 +37,39 @@
     <!-- Main webpage -->
     <div id="fullpage">
       <section class="section active" id="landing">
-        <!-- Nav Bar -->
+        <div class="landing-container">
+          <!-- Nav Bar -->
 
-        <!-- Create a nav bar with the class landing-nav that contains JL in h1, Journey and Writing in h5. 
+          <!-- Create a nav bar with the class landing-nav that contains JL in h1, Journey and Writing in h5. 
               JL, Journey and Writing should be clickable using <a> tag and redirects to google.com. -->
-        <nav>
-          <div class="nav-logo">
-            <a href="#landing" class="nav-item-jl">JL</a>
-          </div>
-          <div class="nav-container">
-            <div class="nav-item">
-              <a href="journey.html" class="nav-item-journey">Journey</a>
+          <nav>
+            <div class="nav-logo">
+              <a href="#landing" class="nav-item-jl">JL</a>
             </div>
-            <div class="nav-item">
-              <a href="writing.html" class="nav-item-writing">Writing</a>
+            <div class="nav-container">
+              <div class="nav-item">
+                <a href="journey.html" class="nav-item-journey">Journey</a>
+              </div>
+              <div class="nav-item">
+                <a href="writing.html" class="nav-item-writing">Writing</a>
+              </div>
             </div>
+          </nav>
+
+          <div class="landing-main">
+            <h3 class="landing-sm-handle">
+              <a href="#about">@thejackluo</a>
+            </h3>
+
+            <div class="landing-main-center">
+              <h1 class="landing-name">JACK</h1>
+              <img class="landing-image" src="assets/images/jack.jpg" />
+              <h1 class="landing-name">LUO</h1>
+            </div>
+
+            <h4 class="landing-status">Currently: Designing</h4>
           </div>
-        </nav>
-
-        <div class="landing-main">
-          <h3 class="landing-sm-handle"><a href="#about">@thejackluo</a></h3>
-
-          <div class="landing-main-center">
-            <h1 class="landing-name">JACK</h1>
-            <img class="landing-image" src="assets/images/jack.jpg" />
-            <h1 class="landing-name">LUO</h1>
-          </div>
-
-          <h4 class="landing-status">Currently: Designing</h4>
         </div>
-
         <!-- Create a div with the class landing-city with another div inside with the class landing-angular-filter -->
         <div class="landing-city">
           <div class="landing-angular-filter"></div>
@@ -85,6 +89,7 @@
     <!-- Loading libraries -->
     <script src="lib/js/aos.js"></script>
     <script src="lib/js/fullpage.js"></script>
+    <script src="lib/js/bootstrap.js"></script>
 
     <!-- Loading the script file -->
     <script src="src/js/script.js"></script>

@@ -49,7 +49,106 @@ a {
   color: white;
 }
 
-/* Navbar */
+/* Full page */
+
+/* Set id full-page to 350vh and 100% */
+
+#full-page {
+  width: 100%;
+  height: 350vh;
+}
+
+/* Section backgrounds */
+
+/* Create a black background for the id landing */
+
+#landing {
+  /* position: absolute;
+  top: 0;
+  left: 0; */
+
+  background-color: black;
+  width: 100%;
+  height: 100vh;
+
+  /* z-index: -3; */
+}
+
+/* Create class selectors for landing-city and landing-angular-filter with landing as the back layer, landing city as the middle layer, and landing angular filter as the front layer */
+
+.landing-city {
+  /* position: static;
+  top: 0;
+  left: 0; */
+
+  width: 100%;
+  height: 100vh;
+
+  background: url("../../assets/images/city.png");
+  opacity: 0.5;
+  filter: blur(50px);
+
+  /* z-index: -2; */
+}
+
+.landing-angular-filter {
+  /* position: static;
+  top: 0;
+  left: 0; */
+
+  width: 100%;
+  height: 100vh;
+
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    #000000 0deg,
+    #001131 360deg
+  );
+  opacity: 0.5;
+
+  /* z-index: -1; */
+}
+
+.landing-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100vh;
+  z-index: 10;
+}
+
+/* Create a background: linear-gradient(180deg, #000000 0%, #14123C 100%) for the id about */
+
+#about {
+  background: linear-gradient(180deg, #000000 0%, #14123c 100%);
+  width: 100%;
+  height: 100vh;
+  z-index: -3;
+}
+
+/* Create a background: linear-gradient(180deg, #000000 0%, #14123C 100%) for the id achievements */
+
+#achievements {
+  background: linear-gradient(180deg, #14123c 0%, #14123c 100%);
+  width: 100%;
+  height: 100vh;
+  z-index: -3;
+}
+
+/* Create a background linear-gradient(180deg, rgba(20, 18, 60, 0.8) 0%, #000000 100%) for id footer */
+
+#footer {
+  background: linear-gradient(180deg, rgba(20, 18, 60, 0.8) 0%, #000000 100%);
+  width: 100%;
+  height: 50vh;
+  z-index: -3;
+}
+
+/* Landing Page all css */
+
+/* Nav Bar */
 
 /* Create a parent container nav with two containers with the nav-logo being smaller at 20% and nav-container at 80%, 
 have the nav-item in nav-container be a flexbox model that has all the items to the right
@@ -102,82 +201,7 @@ nav {
   color: #ffffff;
 }
 
-/* Full page */
-
-/* Set id full-page to 350vh and 100% */
-
-#full-page {
-  width: 100%;
-  height: 350vh;
-}
-
-/* Section backgrounds */
-
-/* Create a black background for the id landing */
-
-#landing {
-  background-color: black;
-  width: 100%;
-  height: 100vh;
-
-  z-index: -3;
-}
-
-/* Create class selectors for landing-city and landing-angular-filter with landing as the back layer, landing city as the middle layer, and landing angular filter as the front layer */
-
-.landing-city {
-  width: 100%;
-  height: 100vh;
-
-  background: url("../../assets/images/city.png");
-  opacity: 0.5;
-  filter: blur(50px);
-
-  z-index: -2;
-}
-
-.landing-angular-filter {
-  width: 100%;
-  height: 100vh;
-
-  background: conic-gradient(
-    from 180deg at 50% 50%,
-    #000000 0deg,
-    #001131 360deg
-  );
-  opacity: 0.5;
-
-  z-index: -1;
-}
-
-/* Create a background: linear-gradient(180deg, #000000 0%, #14123C 100%) for the id about */
-
-#about {
-  background: linear-gradient(180deg, #000000 0%, #14123c 100%);
-  width: 100%;
-  height: 100vh;
-  z-index: -3;
-}
-
-/* Create a background: linear-gradient(180deg, #000000 0%, #14123C 100%) for the id achievements */
-
-#achievements {
-  background: linear-gradient(180deg, #14123c 0%, #14123c 100%);
-  width: 100%;
-  height: 100vh;
-  z-index: -3;
-}
-
-/* Create a background linear-gradient(180deg, rgba(20, 18, 60, 0.8) 0%, #000000 100%) for id footer */
-
-#footer {
-  background: linear-gradient(180deg, rgba(20, 18, 60, 0.8) 0%, #000000 100%);
-  width: 100%;
-  height: 50vh;
-  z-index: -3;
-}
-
-/* Landing content */
+/* Landing Main */
 
 /* Create a .landing-main-center class selector that centers all elements and put them in one line and other necessary properties */
 .landing-main-center {
@@ -189,7 +213,7 @@ nav {
 }
 
 .landing-sm-handle {
-  font-size: 1.5em;
+  font-size: 2em;
   font-family: "Dual-300";
   text-align: center;
 }
@@ -201,7 +225,7 @@ nav {
   font-size: 4em;
   font-family: "Elianto";
   text-align: center;
-  padding: 0 1em;
+  padding: 0;
 }
 
 /* Create a .landing-image class selector that has a width of 20%, a height of 20%, a border-radius of 50%, and a margin of 0 1em */
@@ -216,7 +240,7 @@ nav {
 /* Create a .landing-status class selector that has a font size of 2em, a font family of Dual-300, and a color of white */
 
 .landing-status {
-  font-size: 1.25em;
+  font-size: 1.5em;
   font-family: "Dual-300";
   text-align: center;
 }
