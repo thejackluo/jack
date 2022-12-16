@@ -1,8 +1,9 @@
-<!-- 
-  Designed by Jack Luo
-  2022/12/13
-  Personal Website
- -->
+<!-- =======================================================
+  * Website Name: Jack Luo - v4.0.0
+  * Website URL: https://jack-luo.com/
+  * Author: Jack Luo
+  * License: None
+  ======================================================== -->
 
 <!DOCTYPE html>
 <html>
@@ -10,18 +11,18 @@
     <title>Jack Luo</title>
     <!-- Link to all files in lib/css including aos, fullpage, and normalize -->
     <link rel="stylesheet" href="lib/css/aos.css" />
-    <link rel="stylesheet" href="lib/css/fullpage.css" />
+    <!-- <link rel="stylesheet" href="lib/css/fullpage.css" /> -->
     <link rel="stylesheet" href="lib/css/bootstrap.css" />
     <link rel="stylesheet" href="lib/css/normalize.css" />
     <link rel="stylesheet" href="lib/css/main.css" />
 
     <!-- Link to all files in lib/css-->
+    <link rel="stylesheet" href="src/css/font.css" />
     <link rel="stylesheet" href="src/css/main.css" />
     <link rel="stylesheet" href="src/css/index.css" />
     <link rel="stylesheet" href="src/css/landing.css" />
     <link rel="stylesheet" href="src/css/about.css" />
     <link rel="stylesheet" href="src/css/footer.css" />
-    <link rel="stylesheet" href="src/css/font.css" />
 
     <!-- Create meta tags -->
     <meta charset="utf-8" />
@@ -116,9 +117,9 @@
                 <a href="#about">
                   <div class="vnav-circle"></div>
                 </a>
-                <a href="#achievements">
+                <!-- <a href="#achievements">
                   <div class="vnav-circle"></div>
-                </a>
+                </a> -->
                 <a href="#footer">
                   <div class="vnav-circle"></div>
                 </a>
@@ -217,18 +218,24 @@
               </div>
             </div>
             <div class="col-lg-3.5 col-md-3 col-sm-12">
-              <button>
-                <i class="align-middle"><img src="assets/icons/mail.png" /></i>
-                <h3 class="align-middle button-text">Email</h3>
-              </button>
+              <a href="mailto:jack@jack-luo.com">
+                <button>
+                  <i class="align-middle"
+                    ><img src="assets/icons/mail.png"
+                  /></i>
+                  <h3 class="align-middle button-text">Email</h3>
+                </button>
+              </a>
             </div>
             <div class="col-lg-3.5 col-md-3 col-sm-12">
-              <button>
-                <i class="align-middle"
-                  ><img src="assets/icons/calendar.png"
-                /></i>
-                <h3 class="align-middle button-text">Calendly</h3>
-              </button>
+              <a href="https://calendly.com/jackluo/20-minute-meeting">
+                <button>
+                  <i class="align-middle"
+                    ><img src="assets/icons/calendar.png"
+                  /></i>
+                  <h3 class="align-middle button-text">Calendly</h3>
+                </button>
+              </a>
             </div>
           </div>
           <div class="row footer-copyright">
@@ -243,7 +250,7 @@
 
     <!-- Loading libraries -->
     <script src="lib/js/aos.js"></script>
-    <script src="lib/js/fullpage.js"></script>
+    <!-- <script src="lib/js/fullpage.js"></script> -->
     <script src="lib/js/bootstrap.js"></script>
 
     <!-- Loading the script file -->
