@@ -1,5 +1,43 @@
 .footer-body {
-  font-size: 1.5em;
   padding: 1em;
   text-align: center;
+}
+
+.footer-top {
+  padding: 0;
+}
+
+.footer-encon {
+  padding: 0.5em 2em;
+  text-align: center;
+}
+
+.footer-copyright {
+  padding: 2em 0;
+}
+
+footer h4 {
+  padding: 0.5em 0;
+}
+
+@media (min-width: 576px) {
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .footer-top {
+    padding-top: 2em;
+    padding-bottom: 2em;
+  }
+
+  .footer-encon {
+    padding: 0.5em 4em;
+    text-align: left;
+  }
+}
+
+@media (min-width: 992px) {
+  .footer-body {
+    padding-top: 3em;
+  }
 }

@@ -1,6 +1,6 @@
 /* Basic elements */
 
-/*  h1 - h6, a, p*/
+/*  h1 - h6, a, p, li */
 
 h1,
 h2,
@@ -31,36 +31,42 @@ h3 {
   display: inline;
 }
 
-/* Not updated with media queries */
-
 h4 {
-  font-family: "PP Stellar";
-  font-size: 3em;
-  display: inline;
-}
-
-h5 {
-  font-family: "PP Stellar";
-  font-size: 2.25em;
-  display: inline;
-}
-
-h6 {
   font-family: "PP Stellar";
   font-size: 1.5em;
   display: inline;
 }
 
-p {
+h5 {
   font-family: "PP Stellar";
-  font-size: 2em;
-  font-weight: normal;
-  color: white;
+  font-size: 1.125em;
+  display: inline;
 }
 
+a {
+  text-decoration: none;
+  color: white;
+  display: inline;
+}
+
+a:hover {
+  transition: all 0.3s ease;
+  text-shadow: 0px 0px 20px rgba(255, 255, 255, 1);
+  color: #dddddd;
+}
+
+/* Not updated with media queries */
+
+h6 {
+  font-family: "PP Stellar";
+  font-size: 1em;
+  display: inline;
+}
+
+p,
 li {
   font-family: "PP Stellar";
-  font-size: 2em;
+  font-size: 1em;
   font-weight: normal;
   color: white;
 }
@@ -78,6 +84,19 @@ li {
   h3 {
     font-size: 1.5em;
   }
+
+  h4 {
+    font-size: 1.5em;
+  }
+
+  h5 {
+    font-size: 1.125em;
+  }
+
+  p,
+  li {
+    font-size: 1em;
+  }
 }
 
 /* Medium devices (tablets, 768px and up) */
@@ -92,6 +111,19 @@ li {
 
   h3 {
     font-size: 1.5em;
+  }
+
+  h4 {
+    font-size: 1.5em;
+  }
+
+  h5 {
+    font-size: 1.25em;
+  }
+
+  p,
+  li {
+    font-size: 1.25em;
   }
 }
 
@@ -108,6 +140,19 @@ li {
   h3 {
     font-size: 2em;
   }
+
+  h4 {
+    font-size: 2em;
+  }
+
+  h5 {
+    font-size: 1.5em;
+  }
+
+  p,
+  li {
+    font-size: 1.5em;
+  }
 }
 
 /* X-Large devices (large desktops, 1200px and up) */
@@ -123,30 +168,39 @@ li {
   h3 {
     font-size: 2em;
   }
+
+  h4 {
+    font-size: 2em;
+  }
+
+  h5 {
+    font-size: 1.5em;
+  }
+
+  p,
+  li {
+    font-size: 1.75em;
+  }
 }
 
-a {
-  text-decoration: none;
-  color: white;
-  display: inline;
-}
-
-a:hover {
-  transition: all 0.3s ease;
-  text-shadow: 0px 0px 20px rgba(255, 255, 255, 1);
-  color: #dddddd;
-}
+/* Containers */
 
 button {
-  width: 10em;
-  height: 2em;
-
   font-family: "PP Stellar";
   font-weight: normal;
   color: white;
-  padding-left: 1em;
-  padding-right: 1em;
+  padding: 1em 2em;
+  border-radius: 2em;
+  white-space: nowrap;
+  margin: 0.5em;
 
+  /* Use vertical align to align the <i> tag and text in the button */
+  vertical-align: middle;
+
+  /* remove the border of the button */
+  border: none;
+
+  /* Effects */
   background: radial-gradient(
     50% 50% at 50% 50%,
     rgba(255, 255, 255, 0) 0%,
@@ -156,19 +210,21 @@ button {
   box-shadow: inset 0px 5px 10px -5px #ffffff,
     inset 0px 98px 100px rgba(255, 255, 255, 0.1),
     inset 0px 0px 40px rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(100px);
-
   /* Note: backdrop-filter has minimal browser support */
+  backdrop-filter: blur(100px);
+}
 
-  border-radius: 2.5em;
+i {
+  filter: invert(100%);
+  display: inline;
 }
 
 button img {
   width: 1.5em;
   height: 1.5em;
-  filter: invert(100%);
-  display: inline;
 }
+
+/* Big containers */
 
 section {
   width: 100%;
@@ -184,4 +240,8 @@ footer {
 .full {
   width: 100%;
   height: 100%;
+}
+
+.button-text {
+  margin: 0em 1em;
 }

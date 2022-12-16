@@ -28,9 +28,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="This is a personal website about Jack Luo"
+      content="A personal website about Jack Luo, @thejackluo"
     />
-    <meta name="keywords" content="Jack Luo, Personal Website" />
+    <meta
+      name="keywords"
+      content="Jack Luo, Developer, Creator, Engineer, Explorer"
+    />
     <meta name="author" content="Jack Luo" />
 
     <!-- Create favicon -->
@@ -48,16 +51,16 @@
             <div class="container-fluid">
               <!-- JL -->
               <div class="nav-logo">
-                <a href="#landing">JL</a>
+                <a href="#landing"><h1>JL</h1></a>
               </div>
 
               <!-- Other Nav items -->
               <div class="nav-container">
                 <div class="nav-item">
-                  <a href="journey.html">Journey</a>
+                  <a href="journey.html"><h2>Journey</h2></a>
                 </div>
                 <div class="nav-item">
-                  <a href="writing.html">Writing</a>
+                  <a href="writing.html"><h2>Writing</h2></a>
                 </div>
               </div>
             </div>
@@ -66,22 +69,22 @@
           <!-- Landing main -->
           <div class="landing-main container-fluid">
             <div class="row landing-row">
-              <h3 class="landing-sm-handle">
-                <a href="#about">@thejackluo</a>
-              </h3>
+              <a href="#about">
+                <h2>@thejackluo</h2>
+              </a>
             </div>
 
             <div class="landing-main-center row landing-row">
-              <h1 class="landing-name col-4 col-md-3 col-sm-2">JACK</h1>
+              <h1 class="landing-name col-4-lg col-md-3 col-sm-2">JACK</h1>
               <img
-                class="landing-image col-4 col-md-6 col-sm-8"
+                class="landing-image col-4-lg col-md-6 col-sm-8"
                 src="assets/images/jack.jpg"
               />
-              <h1 class="landing-name col-4 col-md-3 col-sm-2">LUO</h1>
+              <h1 class="landing-name col-4-lg col-md-3 col-sm-2">LUO</h1>
             </div>
 
             <div class="row landing-row">
-              <h4 class="landing-status">Currently: Designing</h4>
+              <h3>Currently: Designing</h3>
             </div>
           </div>
         </div>
@@ -114,27 +117,37 @@
               </nav>
             </div>
             <div class="col-10">
-              <div class="about-main container-fluid">
-                <div class="row about-main-top">
-                  <div class="col-2 sm-circle">
-                    <img src="assets/icons/github.png" />
-                  </div>
-
-                  <div class="col-2 sm-circle">
-                    <img src="assets/icons/linkedin.png" />
-                  </div>
-
-                  <div class="col-4 img-circle">
-                    <img src="assets/images/jack.jpg" />
-                  </div>
-
-                  <div class="col-2 sm-circle">
-                    <img src="assets/icons/instagram.png" />
-                  </div>
-                  <div class="col-2 sm-circle">
-                    <img src="assets/icons/twitter.png" />
-                  </div>
+              <div class="row about-main-top">
+                <div class="col-2 glass sm-circle">
+                  <a href="https://github.com/thejackluo">
+                    <i><img src="assets/icons/github.png" /></i>
+                  </a>
                 </div>
+
+                <div class="col-2 glass sm-circle">
+                  <a href="https://linkedin.com/in/thejackluo">
+                    <i><img src="assets/icons/linkedin.png" /></i>
+                  </a>
+                </div>
+
+                <div class="col-4 glass lg-circle">
+                  <a href="#landing">
+                    <img src="assets/images/jack.jpg" />
+                  </a>
+                </div>
+
+                <div class="col-2 glass sm-circle">
+                  <a href="https://instagram.com">
+                    <i><img src="assets/icons/instagram.png" /></i>
+                  </a>
+                </div>
+                <div class="col-2 glass sm-circle">
+                  <a href="https://twitter.com/thejackluo">
+                    <i><img src="assets/icons/twitter.png" /></i>
+                  </a>
+                </div>
+              </div>
+              <div class="about-main container-fluid">
                 <div class="row">
                   <div class="col-6">
                     <div class="about-body">
@@ -186,27 +199,35 @@
       </section> -->
       <footer id="footer">
         <div class="container-fluid footer-body">
-          <div class="row">
-            <div class="col-4">
-              <h4>Have a <b>question?</b></h4>
-              <h4>Wanna work on a <b>project?</b></h4>
+          <div class="row footer-top">
+            <div class="col-lg-5 col-md-6 col-sm-12">
+              <div class="footer-encon">
+                <h4>Have a <b>question?</b></h4>
+              </div>
+              <div class="footer-encon">
+                <h4>Wanna work on a <b>project?</b></h4>
+              </div>
             </div>
-            <div class="col-4">
+            <div class="col-lg-3.5 col-md-3 col-sm-12">
               <button>
-                <img src="assets/icons/mail.png" />
-                <h3>Email</h3>
+                <i class="align-middle"><img src="assets/icons/mail.png" /></i>
+                <h3 class="align-middle button-text">Email</h3>
               </button>
             </div>
-            <div class="col-4">
+            <div class="col-lg-3.5 col-md-3 col-sm-12">
               <button>
-                <img src="assets/icons/calendar.png" />
-                <h3>Calendar</h3>
+                <i class="align-middle"
+                  ><img src="assets/icons/calendar.png"
+                /></i>
+                <h3 class="align-middle button-text">Calendar</h3>
               </button>
             </div>
           </div>
-          <div class="row"><h5>2022 All rights reserved</h5></div>
-          <div class="row">
-            <h4>Designed & Built by <b>Jack Luo</b></h4>
+          <div class="row footer-copyright">
+            <div class="row"><h5>2022 All rights reserved</h5></div>
+            <div class="row">
+              <h4>Designed & Built by <b>Jack Luo</b></h4>
+            </div>
           </div>
         </div>
       </footer>

@@ -9,16 +9,20 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  /* size */
   height: 100vh;
   width: 8.33%;
 }
 
 .vnav-circle {
+  /* size */
   width: 20px;
   height: 20px;
   display: inline-block;
-
   margin: 2em;
+
+  /* effects */
   border-radius: 50%;
   background: radial-gradient(
     50% 50% at 50% 50%,
@@ -31,6 +35,7 @@
   backdrop-filter: blur(50px);
 }
 
+/* All about containers */
 /* Create a about-main class selector */
 
 .about-main {
@@ -53,27 +58,23 @@
 /* Create about-body selector */
 
 .about-body {
-  font-size: 1.5em;
   padding: 1em;
 }
 
 .about-main-top {
-  /* Position these elements  */
-  /* position: relative; */
-  /* top: -10%; */
+  position: relative;
+  top: 80px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  z-index: 10;
 }
 
+/* All circles */
 /* Create social media circles */
 
-.sm-circle {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-
+.glass {
   background: radial-gradient(
     50% 50% at 50% 50%,
     rgba(217, 217, 217, 0.05) 0%,
@@ -83,6 +84,12 @@
     inset 0px 50px 50px rgba(255, 255, 255, 0.25),
     inset 0px 0px 40px rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(50px);
+}
+
+.sm-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
 
   /* set display flex so that any children will be centered vertically and horizontally */
   display: flex;
@@ -91,28 +98,16 @@
 }
 
 .sm-circle img {
-  filter: invert(100%);
   width: 64px;
   height: 64px;
 }
 
 /* Create img circle */
 
-.img-circle {
+.lg-circle {
   width: 160px;
   height: 160px;
   border-radius: 50%;
-
-  background: radial-gradient(
-    50% 50% at 50% 50%,
-    rgba(217, 217, 217, 0.05) 0%,
-    rgba(217, 217, 217, 0.05) 100%
-  );
-  opacity: 0.12;
-  box-shadow: inset 0px 5px 10px -5px #ffffff,
-    inset 0px 50px 50px rgba(255, 255, 255, 0.25),
-    inset 0px 0px 40px rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(50px);
 
   /* set display flex so that any children will be centered vertically and horizontally */
   display: flex;
@@ -120,8 +115,10 @@
   justify-content: center;
 }
 
-.img-circle img {
-  width: 128px;
-  height: 128px;
+.lg-circle img {
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
+
+  filter: drop-shadow(0px 0px 40px rgba(255, 255, 255, 0.5));
 }
