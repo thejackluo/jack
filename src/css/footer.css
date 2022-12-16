@@ -31,13 +31,22 @@ footer h4 {
   }
 
   .footer-encon {
-    padding: 0.5em 4em;
+    padding: 0.5em 2em;
     text-align: left;
   }
 }
 
 @media (min-width: 992px) {
+  .footer-encon {
+    padding: 0.5em 3em;
+  }
   .footer-body {
     padding-top: 3em;
+  }
+}
+
+@media (min-width: 1200px) {
+  .footer-encon {
+    padding: 0.5em 6em;
   }
 }
