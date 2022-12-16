@@ -10,6 +10,43 @@ h5,
 h6 {
   text-align: center;
   color: white;
+  font-weight: normal;
+}
+
+h1 {
+  font-family: "Elianto-Regular";
+  font-size: 4em;
+  display: inline;
+}
+
+h2 {
+  font-family: "PP Stellar";
+  font-size: 4em;
+  display: inline;
+}
+
+h3 {
+  font-family: "Dual-300";
+  font-size: 3em;
+  display: inline;
+}
+
+h4 {
+  font-family: "PP Stellar";
+  font-size: 3em;
+  display: inline;
+}
+
+h5 {
+  font-family: "PP Stellar";
+  font-size: 2.25em;
+  display: inline;
+}
+
+h6 {
+  font-family: "PP Stellar";
+  font-size: 1.5em;
+  display: inline;
 }
 
 a {
@@ -17,15 +54,17 @@ a {
   color: white;
 }
 
-p {
-  font-family: "PP Stellar";
-  font-weight: normal;
-  color: white;
+a:hover {
+  transition: all 0.3s ease;
+  text-shadow: 0px 0px 20px rgba(255, 255, 255, 1);
+  color: #dddddd;
 }
 
-b {
+p {
   font-family: "PP Stellar";
-  font-weight: bold;
+  font-size: 2em;
+  font-weight: normal;
+  color: white;
 }
 
 li {
@@ -34,12 +73,50 @@ li {
   color: white;
 }
 
-/* Create a background linear-gradient(180deg, rgba(20, 18, 60, 0.8) 0%, #000000 100%) for id footer */
+button {
+  width: 10em;
+  height: 2em;
 
-#footer {
-  background: linear-gradient(180deg, rgba(20, 18, 60, 0.8) 0%, #000000 100%),
-    #000000;
+  font-family: "PP Stellar";
+  font-weight: normal;
+  color: white;
+  padding-left: 1em;
+  padding-right: 1em;
+
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.05) 100%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  box-shadow: inset 0px 5px 10px -5px #ffffff,
+    inset 0px 98px 100px rgba(255, 255, 255, 0.1),
+    inset 0px 0px 40px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(100px);
+  /* Note: backdrop-filter has minimal browser support */
+
+  border-radius: 2.5em;
+}
+
+button img {
+  width: 1.5em;
+  height: 1.5em;
+  filter: invert(100%);
+  display: inline;
+}
+
+section {
+  width: 100%;
+  height: 100vh;
+}
+
+footer {
   width: 100%;
   height: 50vh;
-  z-index: -3;
+}
+
+/* Util classes */
+.full {
+  width: 100%;
+  height: 100%;
 }
