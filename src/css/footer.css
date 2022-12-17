@@ -23,7 +23,6 @@ footer h4 {
 @media (min-width: 576px) {
 }
 
-/* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   .footer-top {
     padding-top: 2em;

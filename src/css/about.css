@@ -1,24 +1,19 @@
 /* About page all css */
 
-/* Vertical Navigation */
-
-/* Create a vertical navigation container class selector vertical-nav that uses the flex box model to create vertical items */
+/* Vertical Navigation: Create a vertical navigation container class selector vertical-nav that uses the flex box model to create vertical item*/
 
 .vnav {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
   /* size */
   height: 100vh;
   width: 8.33%;
+
+  display: none;
 }
 
 .vnav-circle {
   /* size */
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   display: inline-block;
   margin: 2em;
 
@@ -36,10 +31,10 @@
 }
 
 /* All about containers */
-/* Create a about-main class selector */
+/* Create a about-main class selector )the whole container */
 
 .about-main {
-  height: 80vh;
+  height: 75vh;
   background: radial-gradient(
     50% 50% at 50% 50%,
     rgba(255, 255, 255, 0) 0%,
@@ -55,12 +50,6 @@
   border-radius: 120px;
 }
 
-/* Create about-body selector */
-
-.about-body {
-  padding: 1em;
-}
-
 .about-main-top {
   position: relative;
   top: 80px;
@@ -70,6 +59,26 @@
   justify-content: space-evenly;
   z-index: 10;
 }
+
+.about-main-text-body {
+  position: relative;
+  top: 80px;
+  padding: 0em 1em;
+
+  height: 60vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Create about-row selector */
+
+.about-row {
+  padding: 0.5em;
+}
+
+/* .about-interests {
+  display: none;
+} */
 
 /* All circles */
 /* Create social media circles */
@@ -87,14 +96,11 @@
 }
 
 .sm-circle {
-  width: 100px;
-  height: 100px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
 
-  /* set display flex so that any children will be centered vertically and horizontally */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: none;
 }
 
 .sm-circle img {
@@ -104,10 +110,13 @@
 
 /* Create img circle */
 
-.lg-circle {
+.lg-circle,
+.lg-circle img {
   width: 160px;
   height: 160px;
   border-radius: 50%;
+
+  filter: drop-shadow(0px 0px 40px rgba(255, 255, 255, 0.5));
 
   /* set display flex so that any children will be centered vertically and horizontally */
   display: flex;
@@ -115,10 +124,143 @@
   justify-content: center;
 }
 
-.lg-circle img {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
+.sm-sm-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
 
-  filter: drop-shadow(0px 0px 40px rgba(255, 255, 255, 0.5));
+/* Responsive design */
+
+@media (min-width: 576px) {
+  .sm-circle {
+    width: 60px;
+    height: 60px;
+  }
+
+  .lg-circle,
+  .lg-circle img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .sm-circle img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .about-main-top {
+    top: 50px;
+  }
+
+  .about-main-text-body {
+    top: 50px;
+    padding: 0em 1em;
+  }
+}
+
+@media (min-width: 768px) {
+  .sm-sm-list {
+    display: none;
+  }
+
+  .sm-circle {
+    width: 80px;
+    height: 80px;
+
+    /* set display flex so that any children will be centered vertically and horizontally */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sm-circle img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .lg-circle,
+  .lg-circle img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .about-main-top {
+    top: 60px;
+  }
+
+  .about-main-text-body {
+    top: 60px;
+    padding: 0em 1.25em;
+  }
+}
+
+@media (min-width: 992px) {
+  .vnav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sm-circle {
+    width: 100px;
+    height: 100px;
+  }
+
+  .sm-circle img {
+    width: 64px;
+    height: 64px;
+  }
+
+  .lg-circle,
+  .lg-circle img {
+    width: 160px;
+    height: 160px;
+  }
+
+  .about-main-top {
+    top: 80px;
+  }
+
+  .about-main-text-body {
+    top: 80px;
+    padding: 1em 2em;
+  }
+
+  .about-body {
+    padding: 1em;
+  }
+}
+
+@media (min-width: 1200px) {
+  .sm-circle {
+    width: 120px;
+    height: 120px;
+  }
+
+  .sm-circle img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .lg-circle,
+  .lg-circle img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .about-main-top {
+    top: 100px;
+  }
+
+  .about-main-text-body {
+    top: 100px;
+    padding: 1.5em 0.5em;
+  }
+
+  /* .about-interests {
+    display: inherit;
+  } */
 }

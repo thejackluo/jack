@@ -244,7 +244,7 @@ section {
 
 footer {
   width: 100%;
-  height: 50vh;
+  /* height: 50vh; */
 }
 
 /* Util classes */
@@ -254,5 +254,21 @@ footer {
 }
 
 .button-text {
-  margin: 0em 1em;
+  margin: 0em 0.5em;
+}
+
+/* Responsiveness */
+@media (min-width: 576px) {
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 992px) {
+}
+
+@media (min-width: 1200px) {
+  .button-text {
+    margin: 0em 1em;
+  }
 }
