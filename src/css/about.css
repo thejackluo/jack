@@ -34,7 +34,7 @@
 /* Create a about-main class selector )the whole container */
 
 .about-main {
-  height: 75vh;
+  height: 70vh;
   background: radial-gradient(
     50% 50% at 50% 50%,
     rgba(255, 255, 255, 0) 0%,
@@ -65,7 +65,7 @@
   top: 80px;
   padding: 0em 1em;
 
-  height: 60vh;
+  height: 50vh;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -166,13 +166,47 @@
   }
 
   .sm-circle {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
 
     /* set display flex so that any children will be centered vertically and horizontally */
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .sm-circle img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .lg-circle,
+  .lg-circle img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .about-main-top {
+    top: 50px;
+  }
+
+  .about-main-text-body {
+    top: 50px;
+    padding: 0em 1.25em;
+  }
+}
+
+@media (min-width: 992px) {
+  .vnav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sm-circle {
+    width: 80px;
+    height: 80px;
   }
 
   .sm-circle img {
@@ -192,18 +226,15 @@
 
   .about-main-text-body {
     top: 60px;
-    padding: 0em 1.25em;
+    padding: 1.5em;
+  }
+
+  .about-body {
+    padding: 1em;
   }
 }
 
-@media (min-width: 992px) {
-  .vnav {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
+@media (min-width: 1200px) {
   .sm-circle {
     width: 100px;
     height: 100px;
@@ -226,38 +257,7 @@
 
   .about-main-text-body {
     top: 80px;
-    padding: 1em 2em;
-  }
-
-  .about-body {
-    padding: 1em;
-  }
-}
-
-@media (min-width: 1200px) {
-  .sm-circle {
-    width: 120px;
-    height: 120px;
-  }
-
-  .sm-circle img {
-    width: 80px;
-    height: 80px;
-  }
-
-  .lg-circle,
-  .lg-circle img {
-    width: 200px;
-    height: 200px;
-  }
-
-  .about-main-top {
-    top: 100px;
-  }
-
-  .about-main-text-body {
-    top: 100px;
-    padding: 1.5em 0.5em;
+    padding: 1.5em;
   }
 
   /* .about-interests {

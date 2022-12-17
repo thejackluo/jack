@@ -257,6 +257,11 @@ footer {
   margin: 0em 0.5em;
 }
 
+.arrow-icon {
+  width: 48px;
+  height: 48px;
+}
+
 /* Responsiveness */
 @media (min-width: 576px) {
 }

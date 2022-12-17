@@ -78,6 +78,10 @@ nav {
   margin: auto;
 }
 
+#landing .arrow-icon {
+  display: none;
+}
+
 /* Create a .landing-status class selector that has a font size of 2em, a font family of Dual-300, and a color of white */
 
 /* Small devices (landscape phones, 576px and up) */
@@ -90,6 +94,10 @@ nav {
   #landing .landing-image {
     width: 35%;
     height: 35%;
+  }
+
+  #landing .arrow-icon {
+    display: inherit;
   }
 }
 
