@@ -1,7 +1,7 @@
 {
   "name": "jackluo-website-v4",
-  "version": "1.0.0",
-  "description": "personal website version 4",
+  "version": "4.1.0",
+  "description": "Personal Website V4.1.0",
   "main": "main.js",
   "directories": {
     "lib": "lib"
@@ -14,7 +14,7 @@
     "url": "git+https://github.com/thejackluo/jackluo-website-v4.git"
   },
   "author": "Jack Luo",
-  "license": "MIT",
+  "license": "none",
   "bugs": {
     "url": "https://github.com/thejackluo/jackluo-website-v4/issues"
   },
