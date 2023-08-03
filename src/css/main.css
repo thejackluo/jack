@@ -1,8 +1,13 @@
 /*
-  This is the default css file for all webpages and should be included everywhere
+  Name: main.css
+  Description: A default css file that provides basic h1 - h6, button, and other basic elements
 */
 
-/* Basic elements */
+/* 
+  ==============
+  Basic elements 
+  ==============
+*/
 
 /*  h1 - h6, a, p, li */
 
@@ -59,7 +64,7 @@ a:hover {
   color: #dddddd;
 }
 
-/* Not updated with media queries */
+/* Note: Not updated with media queries */
 
 h6 {
   font-family: "PP Stellar", "Century Gothic", sans-serif;
@@ -187,7 +192,11 @@ li {
   }
 }
 
-/* Containers */
+/* 
+  ==============
+  Containers 
+  ==============
+*/
 
 button {
   font-family: "PP Stellar", "Century Gothic", sans-serif;
@@ -282,7 +291,11 @@ footer {
   }
 }
 
-/* Custom scrollbar */
+/* 
+  ==============
+  Custom scrollbar
+  ==============
+*/
 
 ::-webkit-scrollbar {
   width: 0.5em;
