@@ -1,9 +1,9 @@
 /*
-  This is the default css file for all webpages and should be included everywhere
+  Name: font.css
+  Description: A default css file that provides custom fonts for all pages, add new fonts here.
+  Note: the fontfaces are used in the other css files in this folder
+  Current fonts: Dual-300.ttf, Elianto-Regular.ttf, PPStella-Bold.otf, and PPStella-Light.otf (fonts in ../../assets/fonts )
 */
-
-/* use this css file to create fontfaces for all the fonts (Dual-300.ttf, Elianto-Regular.ttf, PPStella-Bold.otf, and PPStella-Light.otf) from ../../assets/fonts 
-/* the fontfaces are used in the other css files in this folder */
 
 @font-face {
   font-family: "Dual-300";
