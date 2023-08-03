@@ -1,14 +1,23 @@
-/* General Website settings */
+/*
+  Name: index.css
+  Description: Main css file for index.html, contains page settings, background image settings
+*/
 
-/* Set id full-page to 350vh and 100% */
+/* 
+  ========================
+  General Website settings 
+  ========================  
+*/
 
 #full-page {
   width: 100%;
 }
 
-/* Section backgrounds */
-
-/* Create a black background for the id landing */
+/*
+  ===================
+  Section backgrounds 
+  ===================  
+*/
 
 #landing {
   background-color: black;
@@ -46,8 +55,6 @@
   /* z-index: -1; */
 }
 
-/* Create a background: linear-gradient(180deg, #000000 0%, #14123C 100%) for the id about */
-
 #about {
   background: linear-gradient(
       180deg,
@@ -58,8 +65,6 @@
   z-index: -3;
 }
 
-/* Create a background: linear-gradient(180deg, #000000 0%, #14123C 100%) for the id achievements */
-
 #achievements {
   background: linear-gradient(
       180deg,
@@ -69,8 +74,6 @@
     linear-gradient(180deg, #14123c 0%, #14123c 100%);
   z-index: -3;
 }
-
-/* Create a background linear-gradient(180deg, rgba(20, 18, 60, 0.8) 0%, #000000 100%) for id footer */
 
 #footer {
   background: linear-gradient(180deg, rgba(20, 18, 60, 0.8) 0%, #000000 100%),
