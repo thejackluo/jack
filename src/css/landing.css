@@ -45,11 +45,6 @@ nav {
   ========================  
 */
 
-/* Landing Main */
-.landing-row {
-  margin: 2em;
-}
-
 .landing-container {
   position: absolute;
   top: 0;
@@ -62,6 +57,10 @@ nav {
   text-align: center;
 }
 
+.landing-row {
+  margin: 2em;
+}
+
 /* Create a .landing-main-center class selector that centers all elements and put them in one line and other necessary properties */
 .landing-main-center {
   display: flex;
@@ -70,7 +69,11 @@ nav {
   align-items: center;
 }
 
-/* All text code */
+/* 
+  ========================
+  Landing text
+  ========================  
+*/
 /* Create a .landing-name class selector that has a font size of 4em, a font family of Elianto, and a color of white */
 
 .landing-name {
