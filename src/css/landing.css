@@ -45,6 +45,7 @@ nav {
   ========================  
 */
 
+/* Landing section of index.css */
 .landing-container {
   position: absolute;
   top: 0;
@@ -57,11 +58,12 @@ nav {
   text-align: center;
 }
 
+/* Each landing row */
 .landing-row {
   margin: 2em;
 }
 
-/* Create a .landing-main-center class selector that centers all elements and put them in one line and other necessary properties */
+/* Landing attributes */
 .landing-main-center {
   display: flex;
   flex-direction: row;
