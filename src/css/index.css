@@ -31,7 +31,7 @@
 /* Create class selectors for landing-city and landing-angular-filter with landing as the back layer, landing city as the middle layer, and landing angular filter as the front layer */
 
 .landing-city {
-  background: url("../../assets/images/city.png");
+  background: url("../../assets/images/bg/city.png");
   opacity: 0.5;
   filter: blur(50px);
 

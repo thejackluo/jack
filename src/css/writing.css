@@ -20,7 +20,7 @@
 */
 
 .landing-city {
-  background: url("../../assets/images/city5.png");
+  background: url("../../assets/images/bg/city5.png");
   opacity: 0.5;
   filter: blur(50px);
 
