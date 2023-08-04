@@ -55,6 +55,8 @@
 .blog-card {
   display: flex;
   flex-direction: row;
+  margin-top: 2em;
+  margin-bottom: 2em;
 }
 
 /* Image should be small and rounded with a hover similar to hover on Jack image in the home page */

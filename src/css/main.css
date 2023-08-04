@@ -80,12 +80,13 @@ li {
   color: white;
 }
 
-b {
+/* Conflict with bold */
+/* b {
   font-family: "PP Stellar", "Century Gothic", sans-serif;
   font-size: 1em;
   font-weight: bold;
   color: white;
-}
+} */
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
@@ -110,9 +111,7 @@ b {
   }
 
   p,
-  li,
-  b,
-  i {
+  li {
     font-size: 1em;
   }
 }
@@ -140,9 +139,7 @@ b {
   }
 
   p,
-  li,
-  b,
-  i {
+  li {
     font-size: 1.25em;
   }
 }
@@ -170,9 +167,7 @@ b {
   }
 
   p,
-  li,
-  b,
-  i {
+  li {
     font-size: 1.5em;
   }
 }
@@ -200,9 +195,7 @@ b {
   }
 
   p,
-  li,
-  b,
-  i {
+  li {
     font-size: 1.75em;
   }
 }
