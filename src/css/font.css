@@ -37,6 +37,23 @@
   font-style: normal;
 }
 
+/* Steller font face with names Stellar-Bold and Stellar-Regular */
+@font-face {
+  font-family: "Stellar";
+  src: url("../../assets/fonts/Stellar-Bold.otf") format("opentype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Stellar";
+  src: url("../../assets/fonts/Stellar-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* font family classes */
+
 .dual-300 {
   font-family: "Dual-300";
 }
@@ -52,5 +69,15 @@
 
 .ppstella-light {
   font-family: "PP Stellar";
+  font-weight: normal;
+}
+
+.stellar-bold {
+  font-family: "Stellar";
+  font-weight: bold;
+}
+
+.stellar-regular {
+  font-family: "Stellar";
   font-weight: normal;
 }

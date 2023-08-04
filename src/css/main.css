@@ -53,13 +53,13 @@ h3 {
 }
 
 h4 {
-  font-family: "PP Stellar", "Century Gothic", sans-serif;
+  font-family: "Stellar", "Century Gothic", sans-serif;
   font-size: 1.5em;
   display: inline;
 }
 
 h5 {
-  font-family: "PP Stellar", "Century Gothic", sans-serif;
+  font-family: "Stellar", "Century Gothic", sans-serif;
   font-size: 1.125em;
   display: inline;
 }
@@ -85,14 +85,14 @@ a:hover {
 /* Note: Not updated with media queries */
 
 h6 {
-  font-family: "PP Stellar", "Century Gothic", sans-serif;
+  font-family: "Stellar", "Century Gothic", sans-serif;
   font-size: 1em;
   display: inline;
 }
 
 p,
 li {
-  font-family: "PP Stellar", "Century Gothic", sans-serif;
+  font-family: "Stellar", "Century Gothic", sans-serif;
   font-size: 1em;
   font-weight: normal;
   color: white;
@@ -100,7 +100,7 @@ li {
 
 /* Conflict with bold */
 /* b {
-  font-family: "PP Stellar", "Century Gothic", sans-serif;
+  font-family: "Stellar", "Century Gothic", sans-serif;
   font-size: 1em;
   font-weight: bold;
   color: white;
@@ -225,7 +225,7 @@ li {
 */
 
 button {
-  font-family: "PP Stellar", "Century Gothic", sans-serif;
+  font-family: "Stellar", "Century Gothic", sans-serif;
   font-weight: normal;
   color: white;
   padding: 1em 2em;
