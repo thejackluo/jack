@@ -1,6 +1,13 @@
-/* Landing Page all css */
+/*
+  Name: landing.css
+  Description: index.html Landing page css and supplement for other pages
+*/
 
-/* Nav Bar */
+/* 
+  ========================
+  Nav Bar
+  ========================  
+*/
 
 /* Create a parent container nav with two containers with the nav-logo being smaller at 20% and nav-container at 80%, 
   have the nav-item in nav-container be a flexbox model that has all the items to the right
@@ -32,7 +39,12 @@ nav {
   padding: 0 1em;
 }
 
-/* All Container Code */
+/* 
+  ========================
+  Landing Container
+  ========================  
+*/
+
 /* Landing Main */
 .landing-row {
   margin: 2em;
