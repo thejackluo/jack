@@ -4,9 +4,9 @@
 */
 
 /* 
-  ==============
-  Basic elements 
-  ==============
+  ===================
+  Basic text elements
+  ===================
 */
 
 /*  h1 - h6, a, p, li */
@@ -190,6 +190,19 @@ li {
   li {
     font-size: 1.75em;
   }
+}
+
+/* 
+  ===================
+  Styling
+  ===================
+*/
+
+b {
+  font-family: "PP Stellar", "Century Gothic", sans-serif;
+  font-size: 1.125em;
+  font-weight: bold;
+  color: white;
 }
 
 /* 
