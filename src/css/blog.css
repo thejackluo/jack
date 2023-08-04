@@ -53,7 +53,8 @@
 
 /* Inactive */
 .blog-card {
-  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
 }
 
 /* Image should be small and rounded with a hover similar to hover on Jack image in the home page */
@@ -65,12 +66,17 @@
   transition: all 0.3s ease;
 }
 
-.blog-card-image:hover {
-  transform: scale(1.1);
+.blog-card-img:hover {
+  transform: scale(1.05);
 }
 
 /* The blog text should be small */
 .blog-card-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
   font-size: 0.75em;
   padding: 0.5em 0;
+  margin-left: 2em;
 }

@@ -80,6 +80,13 @@ li {
   color: white;
 }
 
+b {
+  font-family: "PP Stellar", "Century Gothic", sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+  color: white;
+}
+
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
   h1 {
@@ -103,7 +110,9 @@ li {
   }
 
   p,
-  li {
+  li,
+  b,
+  i {
     font-size: 1em;
   }
 }
@@ -131,7 +140,9 @@ li {
   }
 
   p,
-  li {
+  li,
+  b,
+  i {
     font-size: 1.25em;
   }
 }
@@ -159,7 +170,9 @@ li {
   }
 
   p,
-  li {
+  li,
+  b,
+  i {
     font-size: 1.5em;
   }
 }
@@ -187,22 +200,11 @@ li {
   }
 
   p,
-  li {
+  li,
+  b,
+  i {
     font-size: 1.75em;
   }
-}
-
-/* 
-  ===================
-  Styling
-  ===================
-*/
-
-b {
-  font-family: "PP Stellar", "Century Gothic", sans-serif;
-  font-size: 1.125em;
-  font-weight: bold;
-  color: white;
 }
 
 /* 
