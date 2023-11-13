@@ -1,14 +1,12 @@
-# Github Repo Name: jackluo-website-v4
+# Github Repo Name: jack  
+Hello everyone, this is the fourth iteration of my personal website.
+Everything is open source and free to use, just remember to contact me for author permission
+Current version: 4.3.1
 
-Fourth iteration of my personal website
-Current version: 4.2
-
-# What is this project about?
-
+# What is this project about?  
 This is the most up to date version of my [personal website](https://jack-luo.com)!
-Please check it out!
-A work in progress!
+It details my progress with discovering life, blogs, and (in the future) projects.
+A continous work in process
 
-# Authors
-
-Me! (Jack)
+# Authors  
+Jack Luo
