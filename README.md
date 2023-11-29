@@ -7,6 +7,7 @@ Current version: 4.3.1
 This is the most up to date version of my [personal website](https://jack-luo.com)!  
 It details my progress with discovering life, blogs, and (in the future) projects.  
 A continous work in process  
+Next steps, project listing!!  
 
 # Authors  
 Jack Luo  
