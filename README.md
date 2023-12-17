@@ -9,5 +9,10 @@ It details my progress with discovering life, blogs, and (in the future) project
 A continous work in process  
 Next steps, project listing!!  
 
+# Future Updates  
+- A better rendition of the journey section. Especially showing the projects
+- More blogs on the website (hosted natively)
+- Convert to Next.js
+
 # Authors  
 Jack Luo  
