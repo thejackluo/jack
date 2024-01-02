@@ -98,3 +98,15 @@ button {
     font-size: 2.5em;
   }
 }
+
+/* 
+  ========================
+  Blog List
+  ========================  
+*/
+
+.blog-list {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 65vh;
+}

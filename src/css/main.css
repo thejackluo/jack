@@ -229,7 +229,7 @@ button {
   font-weight: normal;
   color: white;
   padding: 1em 2em;
-  border-radius: 2em;
+  border-radius: 1.25em;
   white-space: nowrap;
   margin: 0.5em;
 
@@ -309,6 +309,9 @@ footer {
 }
 
 @media (min-width: 992px) {
+  button {
+    border-radius: 1.75em;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -329,10 +332,13 @@ footer {
 
 ::-webkit-scrollbar-track {
   background: #1a1a1a;
+  border-radius: 0.5em;
+  opacity: 0.25;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
+  background: #999;
+  border-radius: 0.5em;
 }
 
 ::-webkit-scrollbar-thumb:hover {
