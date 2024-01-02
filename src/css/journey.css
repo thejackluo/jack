@@ -20,7 +20,7 @@
 */
 
 .landing-city {
-  background: url("../../assets/images/bg/city3.png");
+  background: url("../../assets/images/bg/city4.png");
   opacity: 0.5;
   filter: blur(50px);
 
@@ -33,8 +33,8 @@
 .landing-angular-filter {
   background: conic-gradient(
     from 180deg at 50% 50%,
-    #000000 0deg,
-    #001131 360deg
+    #1f062a 0deg,
+    #142a53 360deg
   );
   opacity: 0.5;
 
