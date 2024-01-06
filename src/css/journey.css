@@ -79,13 +79,16 @@
   backdrop-filter: blur(100px);
   /* Note: backdrop-filter has minimal browser support */
   margin: 1em;
-  height: 50vh;
+  height: 36vh;
   border-radius: 2em;
   padding: 1.5em;
 
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 .project-header {
@@ -93,7 +96,7 @@
 }
 
 .project-image {
-  height: 30vh;
+  height: 400px;
   width: auto;
-  border-radius: 2em 2em 0em 0em;
+  border-radius: 1em;
 }
