@@ -88,8 +88,8 @@
     inset 0px 0px 40px rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(100px);
   /* Note: backdrop-filter has minimal browser support */
-  margin: 1em;
-  height: 36vh;
+  margin: 0.5em;
+  height: 75vh;
   border-radius: 2em;
   padding: 1.5em;
 
@@ -106,7 +106,7 @@
 }
 
 .project-image {
-  height: 400px;
+  height: 45vh;
   width: auto;
   border-radius: 1em;
 }
