@@ -54,6 +54,12 @@
   z-index: -3;
 }
 
+.journey-container {
+  height: 80vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
 /*
   ===================
   Project Cards
