@@ -1,0 +1,145 @@
+<!-- =======================================================
+  * Website Name: Jack Luo - v4.1.0
+  * Website URL: https://jack-luo.com/
+  * Author: Jack Luo
+  * License: None
+  ======================================================== -->
+
+<!DOCTYPE html>
+<html lang="en" class="w-full h-full">
+  <head>
+    <title>Jack Luo - Toy Product Design</title>
+    <!-- Metatags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Jack Luo's Toy Product Design projects"
+    />
+    <meta
+      name="keywords"
+      content="Jack Luo, Toy Product Design, Developer, Creator, Engineer, Explorer"
+    />
+    <meta name="author" content="Jack Luo" />
+
+    <!-- Favicon and Manifest -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="icons/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="icons/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="icons/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom CSS -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+      body {
+        font-family: 'Montserrat', sans-serif;
+      }
+
+      .colorama {
+        height: 15px;
+        width: 100%;
+        display: flex;
+      }
+
+      .colorama-segment {
+        height: 100%;
+        transition: width 0.5s ease;
+      }
+
+      .project-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+  </head>
+  <body class="w-full h-full m-0 bg-gray-100">
+    <div class="colorama"></div>
+    <div class="container mx-auto px-4 py-8">
+      <h1 class="text-4xl font-bold mb-6 text-center text-indigo-600">Jack Luo - Toy Product Design</h1>
+      <h2 class="text-2xl font-semibold mb-4 text-center text-pink-500">Week 1: Exploring Ideas</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="project-card bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="assets/toy/design1.jpg" alt="Design 1" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-semibold mb-2 text-indigo-600">Whimsical Windmill</h3>
+            <p class="text-gray-600">A colorful windmill toy that spins and plays music.</p>
+          </div>
+        </div>
+        <div class="project-card bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="assets/toy/design2.jpg" alt="Design 2" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-semibold mb-2 text-pink-500">Bouncing Buddy</h3>
+            <p class="text-gray-600">An interactive plush toy that responds to touch and movement.</p>
+          </div>
+        </div>
+        <div class="project-card bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="assets/toy/design3.jpg" alt="Design 3" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-semibold mb-2 text-yellow-500">Puzzle Pals</h3>
+            <p class="text-gray-600">A set of interlocking animal-shaped puzzles that teach problem-solving.</p>
+          </div>
+        </div>
+        <div class="project-card bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="assets/toy/design4.jpg" alt="Design 4" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-semibold mb-2 text-green-500">Eco Explorer Kit</h3>
+            <p class="text-gray-600">A nature-themed toy set that encourages outdoor exploration.</p>
+          </div>
+        </div>
+        <div class="project-card bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="assets/toy/design5.jpg" alt="Design 5" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-semibold mb-2 text-blue-500">Robo-Builder</h3>
+            <p class="text-gray-600">A modular robot kit that teaches basic programming concepts.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Colorama effect
+      const colors = ['#D00219', '#F5A623', '#F8E71C', '#B8E986', '#7ED321', '#4A90E2', '#9427FF', '#BD10E0', '#F600A8'];
+      const colorama = document.querySelector('.colorama');
+
+      function createColoramaSegments() {
+        colors.forEach(color => {
+          const segment = document.createElement('div');
+          segment.classList.add('colorama-segment');
+          segment.style.backgroundColor = color;
+          segment.style.width = `${Math.random() * 100 + 50}px`;
+          colorama.appendChild(segment);
+        });
+      }
+
+      createColoramaSegments();
+
+      setInterval(() => {
+        document.querySelectorAll('.colorama-segment').forEach(segment => {
+          segment.style.width = `${Math.random() * 100 + 50}px`;
+        });
+      }, 3000);
+    </script>
+  </body>
+</html>
