@@ -1,0 +1,201 @@
+<!-- =======================================================
+  * Website Name: Jack Luo - v4.1.0
+  * Website URL: https://jack-luo.com/
+  * Author: Jack Luo
+  * License: None
+  ======================================================== -->
+
+<!DOCTYPE html>
+<html lang="en" class="w-full h-full">
+  <head>
+    <title>Jack Luo - Toy Product Design</title>
+    <!-- Metatags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Explore Jack Luo's innovative toy product designs, showcasing creativity and engineering skills in interactive and educational toys focused on exploration."
+    />
+    <meta
+      name="keywords"
+      content="Jack Luo, Toy Product Design, Creative Engineering, Interactive Toys, Educational Toys, Exploration"
+    />
+    <meta name="author" content="Jack Luo" />
+
+    <!-- Favicon and Manifest -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="icons/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="icons/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="icons/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom CSS -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+      body {
+        font-family: 'Montserrat', sans-serif;
+      }
+
+      .colorama {
+        height: 15px;
+        width: 100%;
+        display: flex;
+      }
+
+      .colorama-segment {
+        height: 100%;
+        transition: width 0.5s ease;
+      }
+
+      .project-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+  </head>
+  <body class="w-full h-full m-0 bg-gray-100">
+    <div class="colorama"></div>
+    <div class="container mx-auto px-4 py-8">
+      <h1 class="text-4xl font-bold mb-6 text-center text-indigo-600">Jack Luo - Toy Product Design</h1>
+      
+      <!-- Updated Week 1 Section with correct image paths -->
+      <h2 class="text-3xl font-semibold mb-4 text-center text-pink-500">Week 1: Innovative Toy Concepts</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div class="project-card bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="assets/images/toy/wk1/fidget_ball.jpg" alt="Fidget Ball" class="w-full h-100 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-semibold mb-2 text-indigo-600">Fidget Ball</h3>
+            <p class="text-gray-600">Two pieces to move simultaneously towards shining LEDs within a time limit, challenging coordination and speed.</p>
+          </div>
+        </div>
+        <div class="project-card bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="assets/images/toy/wk1/double_pendulum.jpg" alt="Double Pendulum Challenge" class="w-full h-100 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-semibold mb-2 text-pink-500">Double Pendulum Challenge</h3>
+            <p class="text-gray-600">A chaotic toy using momentum to fit a two-pendulum system into a "digital mold," with adjustable game modes.</p>
+          </div>
+        </div>
+        <div class="project-card bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="assets/images/toy/wk1/rejuiced_tug.jpg" alt="Rejuiced Tug of Energy" class="w-full h-100 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-semibold mb-2 text-yellow-500">Rejuiced Tug of Energy</h3>
+            <p class="text-gray-600">Teams use water guns to generate energy and move a generator, combining strategy and summer fun.</p>
+          </div>
+        </div>
+        <div class="project-card bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="assets/images/toy/wk1/4d_hexa_blocker.jpg" alt="4D Hexa Blocker" class="w-full h-100 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-semibold mb-2 text-green-500">4D Hexa Blocker</h3>
+            <p class="text-gray-600">A mind-bending multidimensional puzzle with twists, turns, and 4D obstacles to challenge spatial thinking.</p>
+          </div>
+        </div>
+        <div class="project-card bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="assets/images/toy/wk1/polyrhythm.jpg" alt="PolyRhythm" class="w-full h-100 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-semibold mb-2 text-blue-500">PolyRhythm</h3>
+            <p class="text-gray-600">A stationary machine with a spinning outer ring and seven buttons, combining exercise and dance for fun fitness.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Week 2 Section -->
+      <h2 class="text-3xl font-semibold mb-4 text-center text-green-500">Week 2: Exploring Imagination</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="project-card bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="assets/images/toy/wk2/crazy_story_roulette.jpg" alt="Crazy Story Roulette" class="w-full h-100 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-semibold mb-2 text-indigo-600">Crazy Story Roulette</h3>
+            <p class="text-gray-600">Generate stories based on different people, places, and settings. A spinner is used to select the elements that create a unique narrative.</p>
+          </div>
+        </div>
+        <div class="project-card bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="assets/images/toy/wk2/custom_chess.jpg" alt="Custom Chess" class="w-full h-100 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-semibold mb-2 text-pink-500">Custom Chess</h3>
+            <p class="text-gray-600">Create new rules in this modern chess variant, introducing custom pieces and obstacles on the board.</p>
+          </div>
+        </div>
+        <div class="project-card bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="assets/images/toy/wk2/dual_lens_mixer.jpg" alt="Dual Lens Mixer" class="w-full h-100 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-semibold mb-2 text-yellow-500">Dual Lens Mixer</h3>
+            <p class="text-gray-600">A lens system with 16 possibilities, offering multiple perspectives through different lenses arranged in layers.</p>
+          </div>
+        </div>
+        <div class="project-card bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="assets/images/toy/wk2/lazer_maze.jpg" alt="Combining Laser Maze" class="w-full h-100 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-semibold mb-2 text-green-500">Combining Laser Maze</h3>
+            <p class="text-gray-600">Embark on a 2D adventure in optics. The laser maze involves reflecting and combining lasers to solve puzzles.</p>
+          </div>
+        </div>
+        <div class="project-card bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="assets/images/toy/wk2/music_painting.jpg" alt="Music Painting" class="w-full h-100 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-semibold mb-2 text-blue-500">Music Painting</h3>
+            <p class="text-gray-600">Draw your music out! A creative tool that lets you visualize and "paint" music using a combination of keys and a sketchpad.</p>
+          </div>
+        </div>
+        <div class="project-card bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="assets/images/toy/wk2/polygami.jpg" alt="Custom Origami" class="w-full h-100 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-semibold mb-2 text-purple-500">Custom Origami</h3>
+            <p class="text-gray-600">Experimental origami with unique designs and folding techniques, allowing for custom creations.</p>
+          </div>
+        </div>
+        <div class="project-card bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="assets/images/toy/wk2/remote_gyro_ball.jpg" alt="Remote Ball" class="w-full h-100 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-semibold mb-2 text-red-500">Remote Ball</h3>
+            <p class="text-gray-600">A ball with a gyroscope, controlled remotely, allowing the user to drive it around in different directions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Colorama effect
+      const colors = ['#D00219', '#F5A623', '#F8E71C', '#B8E986', '#7ED321', '#4A90E2', '#9427FF', '#BD10E0', '#F600A8'];
+      const colorama = document.querySelector('.colorama');
+
+      function createColoramaSegments() {
+        colors.forEach(color => {
+          const segment = document.createElement('div');
+          segment.classList.add('colorama-segment');
+          segment.style.backgroundColor = color;
+          segment.style.width = `${Math.random() * 100 + 50}px`;
+          colorama.appendChild(segment);
+        });
+      }
+
+      createColoramaSegments();
+
+      setInterval(() => {
+        document.querySelectorAll('.colorama-segment').forEach(segment => {
+          segment.style.width = `${Math.random() * 100 + 50}px`;
+        });
+      }, 3000);
+    </script>
+  </body>
+</html>
