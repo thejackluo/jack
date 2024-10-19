@@ -1,0 +1,115 @@
+<!-- =======================================================
+  * Website Name: Jack Luo - v4.1.0
+  * Website URL: https://jack-luo.com/
+  * Author: Jack Luo
+  * License: None
+  ======================================================== -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cyberpunk Bookshelf - Jack Luo</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <style>
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(to bottom right, #FF00FF, #8A2BE2);
+            color: #fff;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .bookshelf {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .book-cover {
+            position: relative;
+            width: 200px;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.5s ease-in-out;
+            cursor: pointer;
+        }
+
+        .book-cover::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: inherit;
+            background-size: cover;
+            opacity: 0.5;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .book-cover:hover {
+            transform: rotateY(10deg) translateZ(20px);
+        }
+
+        .book-description {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .book-cover:hover + .book-description {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cyberpunk Bookshelf</h1>
+        <div class="bookshelf">
+            <!-- Book items will be dynamically added here -->
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Sample book data (replace with your actual data or API call)
+        const books = [
+            { title: "Neuromancer", cover: "https://example.com/neuromancer-cover.jpg", progress: 75 },
+            { title: "Snow Crash", cover: "https://example.com/snow-crash-cover.jpg", progress: 50 },
+            // Add more books as needed
+        ];
+
+        const bookshelf = document.querySelector('.bookshelf');
+
+        books.forEach(book => {
+            const bookElement = document.createElement('div');
+            bookElement.classList.add('book-item');
+            bookElement.innerHTML = `
+                <div class="book-cover" style="background-image: url('${book.cover}')"></div>
+                <div class="book-description">
+                    <h3>${book.title}</h3>
+                    <p>Progress: ${book.progress}%</p>
+                </div>
+            `;
+            bookshelf.appendChild(bookElement);
+
+            // Set the progress bar
+            const coverElement = bookElement.querySelector('.book-cover');
+            coverElement.style.setProperty('--progress', `${book.progress}%`);
+        });
+    </script>
+</body>
+</html>
