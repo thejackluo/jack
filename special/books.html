@@ -30,15 +30,17 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <style>
+        /* Book Container */
         .book {
-            width: 200px;
-            height: 300px;
+            width: 180px;
+            height: 240px;
             position: relative;
             transform-style: preserve-3d;
             transition: transform 0.5s, box-shadow 0.5s;
         }
 
-        .book-cover, .book-back, .book-spine, .book-left, .book-right {
+        /* Common styles for all book parts */
+        .book-cover, .book-back, .book-spine, .book-pages {
             position: absolute;
             top: 0;
             left: 0;
@@ -47,20 +49,25 @@
             backface-visibility: hidden;
         }
 
+        /* Book Cover */
         .book-cover {
-            transform: rotateY(0deg);
+            transform: rotateY(-90deg) translateZ(30px);
+            background: linear-gradient(45deg, #1a1a1a, #2a2a2a, #3a3a3a);
             z-index: 2;
         }
 
+        /* Book Back */
         .book-back {
-            transform: rotateY(180deg);
+            transform: rotateY(90deg) translateZ(150px);
+            background: linear-gradient(45deg, #3a3a3a, #2a2a2a, #1a1a1a);
         }
 
+        /* Book Spine */
         .book-spine {
-            width: 40px;
-            left: -20px;
-            transform: rotateY(-90deg);
-            background: #333;
+            width: 60px;
+            height: 240px;
+            transform: rotateY(0deg) translateZ(90px);
+            background: linear-gradient(to right, #1a1a1a, #2a2a2a);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -68,47 +75,56 @@
             text-orientation: mixed;
         }
 
-        .book-left {
-            width: 40px;
-            left: -20px;
-            transform: rotateY(-90deg);
-            background: #444;
-            overflow: hidden;
+        /* Book Pages */
+        .book-pages {
+            width: 170px;  /* Slightly less than cover width */
+            height: 230px;  /* Slightly less than cover height */
+            right: -55px;  /* Aligns with right edge of cover */
+            top: 5px;  /* Small offset from top */
+            transform: rotateY(-90deg) translateZ(5px);  /* Rotates perpendicular to spine, slight offset */
+            background-color: #f1f1f1;
+            border: 1px solid #d1d1d1;
         }
 
-        .book-right {
-            width: 40px;
-            right: -20px;
-            left: auto;
-            transform: rotateY(90deg);
-            background: #444;
-            overflow: hidden;
-        }
-
+        /* Book Interactions */
         .book.open {
-            transform: rotateY(-180deg);
+            transform: rotateY(90deg);  /* Rotates to show cover */
         }
 
         .book:hover {
-            transform: rotateY(-20deg);
-            box-shadow: 20px 20px 20px rgba(0,0,0,0.5), 
-                        0 30px 30px rgba(0,0,0,0.3);
+            transform: rotateY(20deg);  /* Slight rotation on hover */
+            box-shadow: -20px 20px 20px rgba(0,0,0,0.5), 
+                        0 30px 30px rgba(0,0,0,0.3);  /* Shadow effect on hover */
         }
 
         .book.open:hover {
-            transform: rotateY(-160deg);
+            transform: rotateY(110deg);  /* Further rotation when open and hovered */
+        }
+
+        /* Book Spine Text */
+        .book-spine span {
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 2px black;
         }
 
         .rgb-strip {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
             height: 5px;
             background: linear-gradient(to right, #ff00ff, #00ffff, #ffff00);
             animation: pulse 5s infinite alternate;
+            z-index: 1000;
         }
 
         @keyframes pulse {
             0% { opacity: 0.5; }
             100% { opacity: 1; }
         }
+
     </style>
 </head>
 <body class="bg-gray-900 text-white font-['Orbitron'] overflow-hidden">
@@ -119,7 +135,7 @@
         <div id="bookshelf" class="flex flex-wrap justify-center gap-8 mb-4">
             <!-- Books will be dynamically added here -->
         </div>
-        <!-- book shelf bar (importanbt this is really important) -->
+        <!-- book shelf bar (importanbt this is really ) -->
         <div class="h-2 bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 rounded-full"></div>
 
     </div>
@@ -127,25 +143,25 @@
     <script>
         const books = [
             { title: "Where you go is not who you will be", author: "Unknown", category: "College", progress: 100, score: 5 },
-            { title: "Shadow Wave", author: "Robert Muchamore", category: "Fiction", progress: 100, score: 5 },
-            { title: "Brigrands MC", author: "Robert Muchamore", category: "Fiction", progress: 100, score: 5 },
-            { title: "The Killing", author: "Robert Muchamore", category: "Fiction", progress: 100, score: 5 },
-            { title: "Frankenstein", author: "Mary Shelley", category: "SciFi", progress: 100, score: 4 },
-            { title: "Your Name", author: "Makoto Shinkai", category: "SciFi", progress: 100, score: 4 },
-            { title: "Future is faster than you think", author: "Unknown", category: "Startup", progress: 40, score: 4 },
-            { title: "How to be a high school superstar?", author: "Unknown", category: "College", progress: 20, score: 0 },
-            { title: "50 Ivy League Essays", author: "Unknown", category: "College", progress: 15, score: 3 },
-            { title: "7 habits of highly successful people", author: "Stephen Covey", category: "Improvement", progress: 15, score: 5 },
-            { title: "How to do AI research at MIT", author: "Unknown", category: "AI", progress: 70, score: 0 },
-            { title: "Subtle Art of not giving a fuck", author: "Mark Manson", category: "Improvement", progress: 60, score: 4 },
-            { title: "How to Win Friends and Influence People", author: "Dale Carnegie", category: "Social", progress: 45, score: 5 },
-            { title: "Finish what you start", author: "Unknown", category: "Improvement", progress: 45, score: 4 },
-            { title: "The unfair advantage", author: "Unknown", category: "Improvement", progress: 30, score: 0 },
-            { title: "Homo Sapien", author: "Yuval Noah Harari", category: "History", progress: 15, score: 0 },
-            { title: "48 Laws of Power", author: "Robert Greene", category: "Business", progress: 10, score: 5 },
-            { title: "Atomic Habit", author: "James Clear", category: "Improvement", progress: 10, score: 0 },
-            { title: "Steve Jobs", author: "Walter Isaacson", category: "Biography", progress: 10, score: 0 },
-            { title: "Blockchains", author: "Unknown", category: "Startup", progress: 0, score: 0 },
+            // { title: "Shadow Wave", author: "Robert Muchamore", category: "Fiction", progress: 100, score: 5 },
+            // { title: "Brigrands MC", author: "Robert Muchamore", category: "Fiction", progress: 100, score: 5 },
+            // { title: "The Killing", author: "Robert Muchamore", category: "Fiction", progress: 100, score: 5 },
+            // { title: "Frankenstein", author: "Mary Shelley", category: "SciFi", progress: 100, score: 4 },
+            // { title: "Your Name", author: "Makoto Shinkai", category: "SciFi", progress: 100, score: 4 },
+            // { title: "Future is faster than you think", author: "Unknown", category: "Startup", progress: 40, score: 4 },
+            // { title: "How to be a high school superstar?", author: "Unknown", category: "College", progress: 20, score: 0 },
+            // { title: "50 Ivy League Essays", author: "Unknown", category: "College", progress: 15, score: 3 },
+            // { title: "7 habits of highly successful people", author: "Stephen Covey", category: "Improvement", progress: 15, score: 5 },
+            // { title: "How to do AI research at MIT", author: "Unknown", category: "AI", progress: 70, score: 0 },
+            // { title: "Subtle Art of not giving a fuck", author: "Mark Manson", category: "Improvement", progress: 60, score: 4 },
+            // { title: "How to Win Friends and Influence People", author: "Dale Carnegie", category: "Social", progress: 45, score: 5 },
+            // { title: "Finish what you start", author: "Unknown", category: "Improvement", progress: 45, score: 4 },
+            // { title: "The unfair advantage", author: "Unknown", category: "Improvement", progress: 30, score: 0 },
+            // { title: "Homo Sapien", author: "Yuval Noah Harari", category: "History", progress: 15, score: 0 },
+            // { title: "48 Laws of Power", author: "Robert Greene", category: "Business", progress: 10, score: 5 },
+            // { title: "Atomic Habit", author: "James Clear", category: "Improvement", progress: 10, score: 0 },
+            // { title: "Steve Jobs", author: "Walter Isaacson", category: "Biography", progress: 10, score: 0 },
+            // { title: "Blockchains", author: "Unknown", category: "Startup", progress: 0, score: 0 },
         ];
 
         const bookshelf = document.getElementById('bookshelf');
@@ -154,28 +170,21 @@
             const bookElement = document.createElement('div');
             bookElement.classList.add('book', 'cursor-pointer');
             bookElement.innerHTML = `
-                <div class="book-cover bg-gray-800 rounded p-4">
-                    <h3 class="text-lg font-semibold">${book.title}</h3>
+                <div class="book-cover rounded p-4">
+                    <h3 class="text-sm font-semibold">${book.title}</h3>
                     <div class="mt-2 h-2 bg-gray-700 rounded-full overflow-hidden">
                         <div class="h-full bg-cyan-500" style="width: ${book.progress}%"></div>
                     </div>
                     <p class="text-xs mt-1">Progress: ${book.progress}%</p>
-                    <p class="text-xs mt-1">Score: ${'⭐'.repeat(book.score)}</p>
                 </div>
-                <div class="book-back bg-gray-700 rounded p-4">
-                    <h3 class="text-lg font-semibold">${book.title}</h3>
-                    <p class="text-xs mt-2">Progress: ${book.progress}%</p>
+                <div class="book-back rounded p-4">
+                    <h3 class="text-sm font-semibold">Book Back</h3>
                     <p class="text-xs mt-1">Score: ${'⭐'.repeat(book.score)}</p>
                 </div>
                 <div class="book-spine">
-                    <span class="text-xs">${book.title}</span>
+                    <span>${book.title}</span>
                 </div>
-                <div class="book-left p-2">
-                    <p class="text-xs transform -rotate-90">${book.author}</p>
-                </div>
-                <div class="book-right p-2">
-                    <p class="text-xs transform -rotate-90">${book.category}</p>
-                </div>
+                <div class="book-pages"></div>
             `;
             bookshelf.appendChild(bookElement);
 
