@@ -1,5 +1,5 @@
 <!-- =======================================================
-  * Website Name: Jack Luo - v4.1.0
+  * Website Name: Jack Luo - v4.3.0
   * Website URL: https://jack-luo.com/
   * Author: Jack Luo
   * License: None
@@ -12,30 +12,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Cyberpunk Bookshelf - Jack Luo</title>
     
+    <!-- Metatags -->
+    <meta name="description" content="A cyberpunk-themed bookshelf showcasing Jack Luo's reading progress" />
+    <meta name="keywords" content="Jack Luo, Books, Cyberpunk, Reading Progress" />
+    <meta name="author" content="Jack Luo" />
+
+    <!-- Favicon and Manifest -->
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     
     <!-- CSS -->
     <style>
         body {
             font-family: 'Orbitron', sans-serif;
-            background: linear-gradient(to bottom right, #FF00FF, #8A2BE2);
+            background: linear-gradient(to bottom right, #4B0082, #FF1493);
             color: #fff;
-            min-height: 100vh;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .bookshelf {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
         }
 
         .book-cover {
@@ -75,40 +77,64 @@
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Cyberpunk Bookshelf</h1>
-        <div class="bookshelf">
+<body class="min-h-screen bg-gray-900">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold mb-8">Cyberpunk Bookshelf</h1>
+        <div id="bookshelf" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             <!-- Book items will be dynamically added here -->
         </div>
     </div>
 
     <!-- JavaScript -->
     <script>
-        // Sample book data (replace with your actual data or API call)
         const books = [
-            { title: "Neuromancer", cover: "https://example.com/neuromancer-cover.jpg", progress: 75 },
-            { title: "Snow Crash", cover: "https://example.com/snow-crash-cover.jpg", progress: 50 },
-            // Add more books as needed
+            { title: "Three Body Problem", cover: "https://example.com/three-body-problem-cover.jpg", progress: 100 },
+            { title: "Dark Forest", cover: "https://example.com/dark-forest-cover.jpg", progress: 85 },
+            { title: "34 Philosophical Story", cover: "https://example.com/34-philosophical-story-cover.jpg", progress: 56 },
         ];
 
-        const bookshelf = document.querySelector('.bookshelf');
+        const bookshelf = document.getElementById('bookshelf');
 
         books.forEach(book => {
             const bookElement = document.createElement('div');
             bookElement.classList.add('book-item');
             bookElement.innerHTML = `
                 <div class="book-cover" style="background-image: url('${book.cover}')"></div>
-                <div class="book-description">
-                    <h3>${book.title}</h3>
-                    <p>Progress: ${book.progress}%</p>
+                <div class="book-description mt-4">
+                    <h3 class="text-xl font-semibold">${book.title}</h3>
+                    <p class="text-sm">Progress: ${book.progress}%</p>
                 </div>
             `;
             bookshelf.appendChild(bookElement);
 
-            // Set the progress bar
-            const coverElement = bookElement.querySelector('.book-cover');
-            coverElement.style.setProperty('--progress', `${book.progress}%`);
+            // Set up Three.js scene for each book
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, 200 / 300, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true });
+            renderer.setSize(200, 300);
+            bookElement.querySelector('.book-cover').appendChild(renderer.domElement);
+
+            const geometry = new THREE.BoxGeometry(1, 1.5, 0.2);
+            const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
+            const cube = new THREE.Mesh(geometry, material);
+            scene.add(cube);
+
+            camera.position.z = 2;
+
+            function animate() {
+                requestAnimationFrame(animate);
+                cube.rotation.y += 0.01;
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            // Add hover effect
+            bookElement.addEventListener('mouseenter', () => {
+                cube.rotation.y = 0.3;
+            });
+            bookElement.addEventListener('mouseleave', () => {
+                cube.rotation.y = 0;
+            });
         });
     </script>
 </body>
