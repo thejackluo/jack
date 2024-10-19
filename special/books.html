@@ -29,113 +29,93 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Three.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    
-    <!-- CSS -->
     <style>
-        body {
-            font-family: 'Orbitron', sans-serif;
-            background: linear-gradient(to bottom right, #4B0082, #FF1493);
-            color: #fff;
+        @keyframes pulse {
+            0% { opacity: 0; }
+            100% { opacity: 0.1; }
+        }
+
+        .book {
+            transform-style: preserve-3d;
+            transition: all 0.5s ease;
+        }
+
+        .book-spine {
+            transform: rotateY(-90deg) translateX(-15px);
+            width: 30px;
         }
 
         .book-cover {
-            position: relative;
-            width: 200px;
-            height: 300px;
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.5s ease-in-out;
-            cursor: pointer;
+            transform: translateZ(15px);
         }
 
-        .book-cover::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: inherit;
-            background-size: cover;
-            opacity: 0.5;
-            transition: opacity 0.3s ease-in-out;
+        .book.active {
+            transform: rotateY(-90deg) translateX(100px);
         }
 
-        .book-cover:hover {
-            transform: rotateY(10deg) translateZ(20px);
-        }
-
-        .book-description {
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        .book-cover:hover + .book-description {
-            opacity: 1;
+        .book:not(.active) {
+            transform: translateX(var(--shift, 0));
         }
     </style>
 </head>
-<body class="min-h-screen bg-gray-900">
+<body class="bg-gray-900 text-white font-['Orbitron'] overflow-hidden">
+    <div class="fixed inset-0 bg-gradient-to-br from-purple-900 to-indigo-900 opacity-10 animate-pulse"></div>
+    <div class="h-1 bg-gradient-to-r from-pink-500 via-cyan-500 to-yellow-500"></div>
+    
     <div class="container mx-auto px-4 py-8">
         <h1 class="text-4xl font-bold mb-8">Cyberpunk Bookshelf</h1>
-        <div id="bookshelf" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            <!-- Book items will be dynamically added here -->
+        <div id="bookshelf" class="flex justify-center items-end space-x-4 mb-4 h-96 perspective-1000">
+            <!-- Books will be dynamically added here -->
         </div>
+        <div class="h-2 bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 rounded-full"></div>
     </div>
 
-    <!-- JavaScript -->
     <script>
         const books = [
-            { title: "Three Body Problem", cover: "https://example.com/three-body-problem-cover.jpg", progress: 100 },
-            { title: "Dark Forest", cover: "https://example.com/dark-forest-cover.jpg", progress: 85 },
-            { title: "34 Philosophical Story", cover: "https://example.com/34-philosophical-story-cover.jpg", progress: 56 },
+            { title: "Three Body Problem", author: "Cixin Liu", cover: "https://example.com/three-body-problem-cover.jpg", progress: 100 },
+            { title: "Dark Forest", author: "Cixin Liu", cover: "https://example.com/dark-forest-cover.jpg", progress: 85 },
+            { title: "34 Philosophical Story", author: "Unknown", cover: "https://example.com/34-philosophical-story-cover.jpg", progress: 56 },
         ];
 
         const bookshelf = document.getElementById('bookshelf');
 
-        books.forEach(book => {
+        books.forEach((book, index) => {
             const bookElement = document.createElement('div');
-            bookElement.classList.add('book-item');
+            bookElement.classList.add('book', 'w-24', 'h-80', 'bg-gray-800', 'rounded', 'cursor-pointer', 'relative');
             bookElement.innerHTML = `
-                <div class="book-cover" style="background-image: url('${book.cover}')"></div>
-                <div class="book-description mt-4">
-                    <h3 class="text-xl font-semibold">${book.title}</h3>
-                    <p class="text-sm">Progress: ${book.progress}%</p>
+                <div class="book-spine absolute inset-0 bg-gray-700 flex items-center justify-center">
+                    <span class="transform rotate-180 whitespace-nowrap text-xs">${book.title}</span>
+                </div>
+                <div class="book-cover absolute inset-0 bg-cover bg-center" style="background-image: url('${book.cover}')">
+                    <div class="absolute inset-x-0 bottom-0 bg-black bg-opacity-50 p-2">
+                        <h3 class="text-sm font-semibold">${book.title}</h3>
+                        <p class="text-xs">${book.author}</p>
+                        <div class="mt-1 h-1 bg-gray-300 rounded-full overflow-hidden">
+                            <div class="h-full bg-cyan-500" style="width: ${book.progress}%"></div>
+                        </div>
+                    </div>
                 </div>
             `;
             bookshelf.appendChild(bookElement);
 
-            // Set up Three.js scene for each book
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, 200 / 300, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ alpha: true });
-            renderer.setSize(200, 300);
-            bookElement.querySelector('.book-cover').appendChild(renderer.domElement);
-
-            const geometry = new THREE.BoxGeometry(1, 1.5, 0.2);
-            const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
-            const cube = new THREE.Mesh(geometry, material);
-            scene.add(cube);
-
-            camera.position.z = 2;
-
-            function animate() {
-                requestAnimationFrame(animate);
-                cube.rotation.y += 0.01;
-                renderer.render(scene, camera);
-            }
-            animate();
-
-            // Add hover effect
-            bookElement.addEventListener('mouseenter', () => {
-                cube.rotation.y = 0.3;
-            });
-            bookElement.addEventListener('mouseleave', () => {
-                cube.rotation.y = 0;
-            });
+            bookElement.addEventListener('click', () => toggleBook(bookElement, index));
         });
+
+        function toggleBook(clickedBook, clickedIndex) {
+            const allBooks = document.querySelectorAll('.book');
+            allBooks.forEach((book, index) => {
+                if (book === clickedBook) {
+                    book.classList.toggle('active');
+                } else {
+                    book.classList.remove('active');
+                    if (index < clickedIndex) {
+                        book.style.setProperty('--shift', clickedBook.classList.contains('active') ? '-100px' : '0');
+                    } else if (index > clickedIndex) {
+                        book.style.setProperty('--shift', clickedBook.classList.contains('active') ? '100px' : '0');
+                    }
+                }
+            });
+        }
     </script>
 </body>
 </html>
