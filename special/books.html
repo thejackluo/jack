@@ -37,12 +37,7 @@
             position: relative;
             transform-style: preserve-3d;
             transition: transform 0.5s;
-            animation: rotate 10s infinite linear;
-        }
-
-        @keyframes rotate {
-            0% { transform: rotateY(0deg); }
-            100% { transform: rotateY(360deg); }
+            transform: rotateY(-90deg);  /* Initial rotation to show the spine */
         }
 
         /* Common styles for all book parts */
@@ -72,7 +67,7 @@
             width: 40px;  /* The spine width */
             height: 240px;
             left: 60px;  /* (Half the cover width minus half the spine width) */
-            transform: rotateY(90deg) translateZ(80px);  /* Translate based on cover width */
+            transform: rotateY(-90deg) translateZ(80px);  /* Translate based on cover width */
             background: linear-gradient(to right, #1a1a1a, #2a2a2a);
             display: flex;
             align-items: center;
@@ -86,28 +81,35 @@
             width: 40px;
             height: 240px;
             left: 60px;  /* (Half the cover width minus half the spine width) */
-            transform: rotateY(-90deg) translateZ(80px);  /* Translate based on cover width */
+            transform: rotateY(90deg) translateZ(80px);  /* Translate based on cover width */
             background-color: #f1f1f1;
             border: 1px solid #d1d1d1;
         }
 
         /* Book Interactions */
         .book.open {
-            transform: rotateY(90deg);  /* Rotates to show cover */
+            transform: rotateY(0deg);  /* Rotates to show cover */
         }
 
         .book:hover {
-            transform: rotateY(20deg);  /* Slight rotation on hover */
+            transform: rotateY(-70deg);  /* Slight rotation on hover */
         }
 
         /* Book Spine Text */
         .book-spine span {
-            font-size: 14px;
+            font-size: 12px;  /* Smaller font size */
             font-weight: bold;
             color: white;
             text-shadow: 1px 1px 2px black;
+            padding: 4px;  /* Add padding */
+            transition: text-shadow 0.3s;  /* Transition for hover effect */
         }
 
+        .book-spine span:hover {
+            /* text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.8); */
+        }
+
+        /* RGB Strip */
         .rgb-strip {
             position: fixed;
             top: 0;
@@ -115,16 +117,15 @@
             right: 0;
             height: 5px;
             background: linear-gradient(to right, #ff00ff, #00ffff, #ffff00);
-            animation: pulse 5s infinite alternate;
+            background-size: 300% 100%;  /* Ensure the gradient is wide enough to slide */
+            animation: slide 5s linear infinite alternate;  /* Oscillate back and forth */
             z-index: 1000;
         }
 
-        @keyframes pulse {
-            0% { opacity: 0.5; }
-            100% { opacity: 1; }
+        @keyframes slide {
+            0% { background-position: 0% 0; }
+            100% { background-position: 100% 0; }
         }
-
-      
     </style>
 </head>
 <body class="bg-gray-900 text-white font-['Orbitron'] overflow-hidden">
