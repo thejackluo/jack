@@ -32,8 +32,8 @@
     <style>
         /* Book Container */
         .book {
-            width: 120px;
-            height: 240px;
+            width: 160px;  /* Width of the cover and back */
+            height: 240px;  /* Height remains the same */
             position: relative;
             transform-style: preserve-3d;
             transition: transform 0.5s;
@@ -45,19 +45,34 @@
             100% { transform: rotateY(360deg); }
         }
 
-
         /* Common styles for all book parts */
         .book-cover, .book-back, .book-spine, .book-pages {
             position: absolute;
             backface-visibility: hidden;
         }
 
+        /* Book Cover */
+        .book-cover {
+            width: 160px;
+            height: 240px;
+            transform: rotateY(0deg) translateZ(20px);  /* Half of the spine width (40px) */
+            background: linear-gradient(45deg, #1a1a1a, #2a2a2a, #3a3a3a);
+        }
+
+        /* Book Back */
+        .book-back {
+            width: 160px;
+            height: 240px;
+            transform: rotateY(180deg) translateZ(20px);  /* Half of the spine width (40px) */
+            background: linear-gradient(45deg, #3a3a3a, #2a2a2a, #1a1a1a);
+        }
+
         /* Book Spine */
         .book-spine {
-            width: 60px;
+            width: 40px;  /* The spine width */
             height: 240px;
-            left: 30px;
-            transform: rotateY(90deg) translateZ(60px);
+            left: 60px;  /* (Half the cover width minus half the spine width) */
+            transform: rotateY(90deg) translateZ(80px);  /* Translate based on cover width */
             background: linear-gradient(to right, #1a1a1a, #2a2a2a);
             display: flex;
             align-items: center;
@@ -66,28 +81,12 @@
             text-orientation: mixed;
         }
 
-        /* Book Cover */
-        .book-cover {
-            width: 120px;
-            height: 240px;
-            transform: rotateY(0deg) translateZ(30px);
-            background: linear-gradient(45deg, #1a1a1a, #2a2a2a, #3a3a3a);
-        }
-
-        /* Book Back */
-        .book-back {
-            width: 120px;
-            height: 240px;
-            transform: rotateY(180deg) translateZ(30px);
-            background: linear-gradient(45deg, #3a3a3a, #2a2a2a, #1a1a1a);
-        }
-
         /* Book Pages */
         .book-pages {
-            width: 60px;
+            width: 40px;
             height: 240px;
-            left: 30px;
-            transform: rotateY(-90deg) translateZ(60px);
+            left: 60px;  /* (Half the cover width minus half the spine width) */
+            transform: rotateY(-90deg) translateZ(80px);  /* Translate based on cover width */
             background-color: #f1f1f1;
             border: 1px solid #d1d1d1;
         }
@@ -99,13 +98,7 @@
 
         .book:hover {
             transform: rotateY(20deg);  /* Slight rotation on hover */
-            /* box-shadow: -20px 20px 20px rgba(0,0,0,0.5), 
-                        0 30px 30px rgba(0,0,0,0.3);  /* Shadow effect on hover */
         }
-
-        /* .book.open:hover {
-            transform: rotateY(110deg);  /* Further rotation when open and hovered */
-        /* } */ 
 
         /* Book Spine Text */
         .book-spine span {
