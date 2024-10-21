@@ -84,8 +84,15 @@
             height: 240px;
             left: 60px;  /* (Half the cover width minus half the spine width) */
             transform: rotateY(90deg) translateZ(80px);  /* Translate based on cover width */
-            background-color: #f1f1f1;
-            border: 1px solid #d1d1d1;
+            background-image: repeating-linear-gradient(
+                90deg,
+                #f1f1f1,  /* Light color for the page */
+                #f1f1f1 1px,  /* Repeat every 1px */
+                #e0e0e0 1px,  /* Slightly darker color for the edge */
+                #e0e0e0 2px  /* Repeat every 2px */
+            );
+            border-left: 2px solid #1a1a1a;  /* Match the book cover color */
+            border-right: 2px solid #3a3a3a;  /* Match the book back color */
         }
 
         /* Book Interactions */
@@ -106,7 +113,10 @@
             font-weight: bold;
             color: white;
             text-shadow: 1px 1px 2px black;
-            padding: 4px;  /* Add padding */
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
             transition: text-shadow 0.3s;  /* Transition for hover effect */
         }
 
@@ -149,9 +159,9 @@
     <script>
         const books = [
             { title: "Where you go is not who you will be", author: "Unknown", category: "College", progress: 100, score: 5 },
-            // { title: "Shadow Wave", author: "Robert Muchamore", category: "Fiction", progress: 100, score: 5 },
-            // { title: "Brigrands MC", author: "Robert Muchamore", category: "Fiction", progress: 100, score: 5 },
-            // { title: "The Killing", author: "Robert Muchamore", category: "Fiction", progress: 100, score: 5 },
+            { title: "Shadow Wave", author: "Robert Muchamore", category: "Fiction", progress: 100, score: 5 },
+            { title: "Brigrands MC", author: "Robert Muchamore", category: "Fiction", progress: 100, score: 5 },
+            { title: "The Killing", author: "Robert Muchamore", category: "Fiction", progress: 100, score: 5 },
             // { title: "Frankenstein", author: "Mary Shelley", category: "SciFi", progress: 100, score: 4 },
             // { title: "Your Name", author: "Makoto Shinkai", category: "SciFi", progress: 100, score: 4 },
             // { title: "Future is faster than you think", author: "Unknown", category: "Startup", progress: 40, score: 4 },
@@ -181,15 +191,15 @@
                 </div>
                 <div class="book-cover rounded p-4">
                     <h3 class="text-sm font-semibold">${book.title}</h3>
+                    <p class="text-xs mt-1">Progress: ${book.progress}%</p>
                     <div class="mt-2 h-2 bg-gray-700 rounded-full overflow-hidden">
                         <div class="h-full bg-cyan-500" style="width: ${book.progress}%"></div>
                     </div>
-                    <p class="text-xs mt-1">Progress: ${book.progress}%</p>
+                    <p class="text-xs mt-1">Score: ${'⭐'.repeat(book.score)}</p>
                 </div>
                 <div class="book-pages"></div>
                 <div class="book-back rounded p-4">
                     <h3 class="text-sm font-semibold">Book Back</h3>
-                    <p class="text-xs mt-1">Score: ${'⭐'.repeat(book.score)}</p>
                 </div>
             `;
             bookshelf.appendChild(bookElement);
