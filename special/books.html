@@ -37,7 +37,7 @@
             position: relative;
             transform-style: preserve-3d;
             transition: transform 0.5s;
-            transform: rotateY(-90deg);  /* Initial rotation to show the spine */
+            transform: rotateY(90deg);  /* Initial rotation to show the spine */
         }
 
         /* Common styles for all book parts */
@@ -69,6 +69,8 @@
             left: 60px;  /* (Half the cover width minus half the spine width) */
             transform: rotateY(-90deg) translateZ(80px);  /* Translate based on cover width */
             background: linear-gradient(to right, #1a1a1a, #2a2a2a);
+
+            /* text */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -92,7 +94,10 @@
         }
 
         .book:hover {
-            transform: rotateY(-70deg);  /* Slight rotation on hover */
+            transform: rotateY(80deg);  /* Slight rotation on hover */
+        }
+        .book.open:hover {
+            transform: rotateY(-10deg);  /* Slight rotation on hover */
         }
 
         /* Book Spine Text */
