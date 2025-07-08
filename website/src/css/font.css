@@ -1,0 +1,83 @@
+/*
+  Name: font.css
+  Description: A default css file that provides custom fonts for all pages, add new fonts here.
+  Note: the fontfaces are used in the other css files in this folder
+  Current fonts: Dual-300.ttf, Elianto-Regular.ttf, PPStella-Bold.otf, and PPStella-Light.otf (fonts in ../../assets/fonts )
+*/
+
+@font-face {
+  font-family: "Dual-300";
+  src: url("../../assets/fonts/Dual-300.ttf") format("truetype"),
+    url("../../assets/fonts/Dual-300.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Elianto-Regular";
+  src: url("../../assets/fonts/Elianto-Regular.ttf") format("truetype"),
+    url("../../assets/fonts/Elianto-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "PP Stellar";
+  src: url("../../assets/fonts/PPStella-Bold.ttf") format("truetype"),
+    url("../../assets/fonts/PPStella-Bold.otf") format("opentype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "PP Stellar";
+  src: url("../../assets/fonts/PPStella-Light.ttf") format("truetype"),
+    url("../../assets/fonts/PPStella-Light.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Steller font face with names Stellar-Bold and Stellar-Regular */
+@font-face {
+  font-family: "Stellar";
+  src: url("../../assets/fonts/Stellar-Bold.otf") format("opentype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Stellar";
+  src: url("../../assets/fonts/Stellar-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* font family classes */
+
+.dual-300 {
+  font-family: "Dual-300";
+}
+
+.elianto-regular {
+  font-family: "Elianto-Regular";
+}
+
+.ppstella-bold {
+  font-family: "PP Stellar";
+  font-weight: bold;
+}
+
+.ppstella-light {
+  font-family: "PP Stellar";
+  font-weight: normal;
+}
+
+.stellar-bold {
+  font-family: "Stellar";
+  font-weight: bold;
+}
+
+.stellar-regular {
+  font-family: "Stellar";
+  font-weight: normal;
+}

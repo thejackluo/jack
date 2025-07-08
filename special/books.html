@@ -30,9 +30,29 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <style>
+        /* Apply to the entire body for a global scrollbar */
         body {
-    overflow: auto; /* Default behavior: scrolls when content overflows */
-}
+            overflow-y: auto; /* Enables vertical scrolling */
+            overflow-x: hidden; /* Prevents horizontal scrolling */
+        }
+
+        /* Optional: Style the scrollbar for a better appearance */
+        ::-webkit-scrollbar {
+            width: 8px; /* Width of the scrollbar */
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; /* Background of the scrollbar track */
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888; /* Color of the scrollbar thumb */
+            border-radius: 4px; /* Rounded corners for the thumb */
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555; /* Darker color on hover */
+        }
         /* Book Container */
         .book {
             width: 160px;  /* Width of the cover and back */
@@ -163,23 +183,23 @@
         const books = [
             { title: "Where you go is not who you will be", author: "Unknown", category: "College", progress: 100, score: 5 },
             { title: "Shadow Wave", author: "Robert Muchamore", category: "Fiction", progress: 100, score: 5 },
-            { title: "Brigrands MC", author: "Robert Muchamore", category: "Fiction", progress: 100, score: 5 },
-            { title: "The Killing", author: "Robert Muchamore", category: "Fiction", progress: 100, score: 5 },
-            // { title: "Frankenstein", author: "Mary Shelley", category: "SciFi", progress: 100, score: 4 },
-            // { title: "Your Name", author: "Makoto Shinkai", category: "SciFi", progress: 100, score: 4 },
-            // { title: "Future is faster than you think", author: "Unknown", category: "Startup", progress: 40, score: 4 },
+            // { title: "Brigrands MC", author: "Robert Muchamore", category: "Fiction", progress: 100, score: 5 },
+            // { title: "The Killing", author: "Robert Muchamore", category: "Fiction", progress: 100, score: 5 },
+            { title: "Frankenstein", author: "Mary Shelley", category: "SciFi", progress: 100, score: 4 },
+            { title: "Your Name", author: "Makoto Shinkai", category: "SciFi", progress: 100, score: 4 },
+            { title: "Future is faster than you think", author: "Unknown", category: "Startup", progress: 40, score: 4 },
             // { title: "How to be a high school superstar?", author: "Unknown", category: "College", progress: 20, score: 0 },
             // { title: "50 Ivy League Essays", author: "Unknown", category: "College", progress: 15, score: 3 },
-            // { title: "7 habits of highly successful people", author: "Stephen Covey", category: "Improvement", progress: 15, score: 5 },
-            // { title: "How to do AI research at MIT", author: "Unknown", category: "AI", progress: 70, score: 0 },
-            // { title: "Subtle Art of not giving a fuck", author: "Mark Manson", category: "Improvement", progress: 60, score: 4 },
-            // { title: "How to Win Friends and Influence People", author: "Dale Carnegie", category: "Social", progress: 45, score: 5 },
-            // { title: "Finish what you start", author: "Unknown", category: "Improvement", progress: 45, score: 4 },
-            // { title: "The unfair advantage", author: "Unknown", category: "Improvement", progress: 30, score: 0 },
-            // { title: "Homo Sapien", author: "Yuval Noah Harari", category: "History", progress: 15, score: 0 },
-            // { title: "48 Laws of Power", author: "Robert Greene", category: "Business", progress: 10, score: 5 },
-            // { title: "Atomic Habit", author: "James Clear", category: "Improvement", progress: 10, score: 0 },
-            // { title: "Steve Jobs", author: "Walter Isaacson", category: "Biography", progress: 10, score: 0 },
+            { title: "7 habits of highly successful people", author: "Stephen Covey", category: "Improvement", progress: 15, score: 5 },
+            { title: "How to do AI research at MIT", author: "Unknown", category: "AI", progress: 70, score: 0 },
+            { title: "Subtle Art of not giving a fuck", author: "Mark Manson", category: "Improvement", progress: 60, score: 4 },
+            { title: "How to Win Friends and Influence People", author: "Dale Carnegie", category: "Social", progress: 45, score: 5 },
+            { title: "Finish what you start", author: "Unknown", category: "Improvement", progress: 45, score: 4 },
+            { title: "The unfair advantage", author: "Unknown", category: "Improvement", progress: 30, score: 0 },
+            { title: "Homo Sapien", author: "Yuval Noah Harari", category: "History", progress: 15, score: 0 },
+            { title: "48 Laws of Power", author: "Robert Greene", category: "Business", progress: 10, score: 5 },
+            { title: "Atomic Habit", author: "James Clear", category: "Improvement", progress: 10, score: 0 },
+            { title: "Steve Jobs", author: "Walter Isaacson", category: "Biography", progress: 10, score: 0 },
             // { title: "Blockchains", author: "Unknown", category: "Startup", progress: 0, score: 0 },
         ];
 
@@ -221,4 +241,5 @@ TODO
  - Use google API to determine front cover image, and also the size of the books custom
  - have a way to show the progress of the bar like water in the glass
  - have a way to show only one book display whenever
+ - Fix scrollbar issue
 -->

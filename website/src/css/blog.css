@@ -1,0 +1,129 @@
+/* 
+    Name: blog.css
+    Description: Default css file for all blog based pages
+*/
+
+/* 
+  ========================
+  General Website settings 
+  ========================  
+*/
+
+#full-page {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/*
+  ===================
+  Section backgrounds 
+  ===================  
+*/
+
+#landing {
+  background-color: black;
+  height: 100%;
+  overflow: auto;
+
+  /* position: absolute;
+      top: 0;
+      left: 0; */
+  /* z-index: -3; */
+}
+
+.landing-city {
+  background: url("../../assets/images/city.png");
+  opacity: 0.5;
+  filter: blur(50px);
+
+  /* position: static;
+      top: 0;
+      left: 0; */
+  /* z-index: -2; */
+}
+
+#footer {
+  background: linear-gradient(180deg, rgba(20, 18, 60, 0.8) 0%, #000000 100%),
+    #000000;
+}
+
+/*
+  ===================
+  Blog Card
+  ===================  
+*/
+
+/* Inactive */
+.blog-card {
+  display: flex;
+  flex-direction: row;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+/* Image should be small and rounded with a hover similar to hover on Jack image in the home page */
+.blog-card-img {
+  width: 10%;
+  height: 10%;
+  border-radius: 50%;
+  filter: drop-shadow(0px 0px 20px rgba(255, 255, 255, 0.5));
+  transition: all 0.3s ease;
+}
+
+.blog-card-img:hover {
+  transform: scale(1.05);
+}
+
+/* The blog text should be small */
+.blog-card-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 0.75em;
+  padding: 0.5em 0;
+  margin-left: 2em;
+}
+/* Media queries for images */
+
+@media (max-width: 320px) {
+  .blog-card-img {
+    width: 40%;
+    height: 40%;
+  }
+}
+
+@media (max-width: 576px) {
+  .blog-card-img {
+    width: 30%;
+    height: 30%;
+  }
+}
+
+@media (max-width: 768px) {
+  .blog-card-img {
+    width: 20%;
+    height: 20%;
+  }
+}
+
+/* Future expansion for space left and right of the body text */
+
+/* @media (max-width: 992px) {
+  toggle big and small landing row classes
+  .landing-row {
+    display: block;
+  }
+
+  .small-landing-row {
+    display: none;
+  }
+} */
+
+/* .landing-row {
+  display: none;
+}
+
+.small-landing-row {
+  display: block;
+} */
