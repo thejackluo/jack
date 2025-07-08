@@ -33,7 +33,7 @@ export function getFontUrl(path: string): string {
   return `/assets/fonts/${path}`
 }
 
-export function debounce<T extends (...args: any[]) => void>(
+export function debounce<T extends (...args: unknown[]) => void>(
   func: T,
   delay: number
 ): (...args: Parameters<T>) => void {

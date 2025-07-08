@@ -2,7 +2,6 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  cssModules: true,
   images: {
     formats: ['image/webp', 'image/avif'],
     minimumCacheTTL: 60,

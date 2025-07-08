@@ -1,0 +1,56 @@
+/* Footer Component CSS Module */
+
+.footerBody {
+  padding: 1em;
+  text-align: center;
+}
+
+.footerTop {
+  padding: 0;
+}
+
+.footerEncon {
+  padding: 0.5em 2em;
+  text-align: center;
+}
+
+.footerCopyright {
+  padding: 2em 0;
+}
+
+.footerHeading {
+  padding: 0.5em 0;
+}
+
+/* Responsive Design */
+@media (min-width: 576px) {
+  /* Small device specific styles */
+}
+
+@media (min-width: 768px) {
+  .footerTop {
+    padding-top: 2em;
+    padding-bottom: 2em;
+  }
+
+  .footerEncon {
+    padding: 0.5em 2em;
+    text-align: left;
+  }
+}
+
+@media (min-width: 992px) {
+  .footerEncon {
+    padding: 0.5em 3em;
+  }
+  
+  .footerBody {
+    padding-top: 3em;
+  }
+}
+
+@media (min-width: 1200px) {
+  .footerEncon {
+    padding: 0.5em 6em;
+  }
+} 
