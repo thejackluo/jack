@@ -53,7 +53,7 @@ const getImageUrl = (image: any): string => {
   if (!image) return '/assets/images/projects/calendai.png' // fallback
   
   // If it's a regular path (mock data), return it directly
-  if (typeof image.asset._ref === 'string' && image.asset._ref.startsWith('/')) {
+  if (image.asset && typeof image.asset._ref === 'string' && image.asset._ref.startsWith('/')) {
     return image.asset._ref
   }
   
