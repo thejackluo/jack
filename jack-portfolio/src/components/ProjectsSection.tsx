@@ -242,7 +242,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             variants={containerVariants}
           >
-            <AnimatePresence mode="wait">
+            <AnimatePresence>
               {filteredProjects.map((project, index) => (
                 <motion.div
                   key={project.slug.current}
@@ -269,7 +269,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                     <div className="aspect-video overflow-hidden">
                       <img
                         src={getImageUrl(project.image)}
-                        alt={project.image.alt || project.title}
+                        alt={project.image?.alt || project.title}
                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                       />
                     </div>
