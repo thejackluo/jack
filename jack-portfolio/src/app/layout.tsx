@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "../styles/globals.css";
+import { RouteTransition } from "@/components/animations/PageTransition";
+import { ScrollProgress } from "@/components/animations/ScrollProgress";
 
 export const metadata: Metadata = {
   title: "Jack Luo - Portfolio",
@@ -53,8 +55,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">
-        {children}
+      <body className="antialiased" suppressHydrationWarning={true}>
+        <ScrollProgress />
+        <RouteTransition>
+          {children}
+        </RouteTransition>
       </body>
     </html>
   );

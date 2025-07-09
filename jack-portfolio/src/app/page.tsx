@@ -1,145 +1,166 @@
 import React from 'react'
-import { Button } from '@/components/ui/Button'
-import { getSiteSettings } from '@/lib/sanity'
+import type { Metadata } from 'next'
+import { HeroSection } from '@/components/HeroSection'
+import { AboutSection } from '@/components/AboutSection'
+import { ProjectsSection } from '@/components/ProjectsSection'
+import { Footer } from '@/components/Footer'
+import { StructuredData } from '@/components/StructuredData'
+import { getSiteSettings, getProjects, isSanityConfigured, getMockData } from '@/lib/sanity'
+import { 
+  generateMetadata as generateSEOMetadata, 
+  generateHomepageSEO, 
+  generateHomepageStructuredData,
+  generateWebsiteStructuredData
+} from '@/lib/seo'
 import styles from '@/styles/index.module.css'
 
-export default async function HomePage() {
-  // Test Sanity data fetching
+// Generate metadata for the homepage
+export async function generateMetadata(): Promise<Metadata> {
   let siteSettings = null
+  
+  try {
+    if (isSanityConfigured()) {
+      siteSettings = await getSiteSettings()
+    }
+  } catch (error) {
+    console.log('Error fetching site settings for SEO:', error)
+  }
+
+  const seoData = generateHomepageSEO(siteSettings)
+  return generateSEOMetadata(seoData)
+}
+
+export default async function HomePage() {
+  // Fetch Sanity data with fallback to mock data
+  let siteSettings = null
+  let projects = []
+
   try {
     siteSettings = await getSiteSettings()
   } catch (error) {
     console.log('Sanity not configured yet:', error)
   }
 
+  try {
+    if (isSanityConfigured()) {
+      projects = await getProjects()
+    } else {
+      // Use mock projects when Sanity is not configured
+      projects = [
+        {
+          title: "Calend.ai - AI Scheduler",
+          slug: { current: "calendai" },
+          description: "Chrome extension that leverages modern NLP techniques and prompt engineering to automatically schedule and manage events within a user's Google calendar.",
+          longDescription: [],
+          image: { 
+            asset: { _ref: "/assets/images/projects/calendai.png" },
+            alt: "Calend.ai AI Scheduler"
+          },
+          technologies: ["TypeScript", "Chrome Extension API", "OpenAI GPT", "Google Calendar API"],
+          category: "ai",
+          status: "completed",
+          featured: true,
+          liveUrl: "https://bit.ly/calendai",
+          githubUrl: "https://github.com/thejackluo/calendai",
+          startDate: "2023-01-15",
+          endDate: "2023-06-30",
+          teamSize: 2,
+          role: "Lead Developer",
+          sortOrder: 1
+        },
+        {
+          title: "Vigama - Automation Assistant",
+          slug: { current: "vigama" },
+          description: "AI-driven productivity app that automates low-level tasks and generates schedules based on user preferences.",
+          longDescription: [],
+          image: { 
+            asset: { _ref: "/assets/images/projects/vigama.gif" },
+            alt: "Vigama Automation Assistant"
+          },
+          technologies: ["React", "Node.js", "OpenAI", "Speech Recognition"],
+          category: "ai",
+          status: "completed",
+          featured: true,
+          liveUrl: "https://vigama.tech",
+          githubUrl: "https://github.com/thejackluo/vigama",
+          startDate: "2022-09-01",
+          endDate: "2023-05-15",
+          teamSize: 3,
+          role: "Full Stack Developer",
+          sortOrder: 2
+        },
+        {
+          title: "Lingua Scan - Computer Vision",
+          slug: { current: "linguascan" },
+          description: "Innovative, immersive language learning platform that leverages computer vision to enable dynamic and nuanced language learning.",
+          longDescription: [],
+          image: { 
+            asset: { _ref: "/assets/images/projects/linguascan.png" },
+            alt: "Lingua Scan Computer Vision"
+          },
+          technologies: ["Python", "OpenCV", "TensorFlow", "React Native"],
+          category: "mobile",
+          status: "completed",
+          featured: true,
+          liveUrl: null,
+          githubUrl: "https://github.com/thejackluo/lingua-scan",
+          startDate: "2022-03-01",
+          endDate: "2022-12-15",
+          teamSize: 4,
+          role: "AI Engineer",
+          sortOrder: 3
+        },
+        {
+          title: "Q Hacker House",
+          slug: { current: "qhackerhouse" },
+          description: "Hosted a hacker house in downtown SF for 10 people to build startups, do research, and learn from others.",
+          longDescription: [],
+          image: { 
+            asset: { _ref: "/assets/images/projects/hackerhouse.jpg" },
+            alt: "Q Hacker House"
+          },
+          technologies: ["Community Building", "Event Management", "Mentorship"],
+          category: "other",
+          status: "completed",
+          featured: false,
+          liveUrl: "https://prodicity.org",
+          githubUrl: null,
+          startDate: "2023-06-01",
+          endDate: "2023-08-31",
+          teamSize: 1,
+          role: "Organizer",
+          sortOrder: 4
+        }
+      ]
+    }
+  } catch (error) {
+    console.log('Error fetching projects:', error)
+    projects = []
+  }
+
+  // Generate structured data for SEO
+  const personStructuredData = generateHomepageStructuredData(siteSettings)
+  const websiteStructuredData = generateWebsiteStructuredData()
+
   return (
-    <div className={styles.fullPage}>
-      {/* Landing Section */}
-      <section className={styles.landing}>
-        <div className={styles.landingCity} />
-        <div className={styles.landingAngularFilter} />
+    <>
+      {/* Structured Data for SEO */}
+      <StructuredData data={personStructuredData} />
+      <StructuredData data={websiteStructuredData} />
+      
+      <div id="fullpage" className={styles.fullPage}>
+        {/* Hero/Landing Section */}
+        <HeroSection siteSettings={siteSettings} className={styles.landing} />
         
-        <div className="container mx-auto px-4 h-screen flex items-center justify-center">
-          <div className="text-center">
-            <h1 className="text-6xl font-bold text-white mb-4 font-ppstellar">
-              {siteSettings?.author?.name || 'Jack Luo'}
-            </h1>
-            <p className="text-xl text-white/80 mb-8 font-elianto">
-              {siteSettings?.author?.bio || 'Frontend Developer & Designer'}
-            </p>
-            
-            {/* Test CSS Modules with Button Components */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button variant="primary" size="lg">
-                View Projects
-              </Button>
-              <Button variant="outline" size="lg">
-                Contact Me
-              </Button>
-              <Button variant="ghost" size="md">
-                Download Resume
-              </Button>
-            </div>
-            
-            {/* Test different button sizes */}
-            <div className="mt-8 flex gap-2 justify-center">
-              <Button variant="secondary" size="sm">
-                Small
-              </Button>
-              <Button variant="secondary" size="md">
-                Medium
-              </Button>
-              <Button variant="secondary" size="lg">
-                Large
-              </Button>
-            </div>
-            
-            {/* Test loading state */}
-            <div className="mt-4">
-              <Button variant="primary" loading>
-                Loading...
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      {/* About Section */}
-      <section className={styles.about}>
-        <div className="container mx-auto px-4 py-20">
-          <div className="text-center">
-            <h2 className="text-4xl font-bold text-white mb-8 font-ppstellar">
-              About Me
-            </h2>
-            <p className="text-lg text-white/80 max-w-2xl mx-auto font-elianto">
-              This is a test page to verify that CSS modules are working correctly 
-              with Tailwind CSS and that Sanity CMS integration is ready.
-            </p>
-            
-            {/* Display Sanity connection status */}
-            <div className="mt-8 p-4 bg-white/10 rounded-lg backdrop-blur-sm">
-              <h3 className="text-xl font-bold text-white mb-2">
-                Sanity CMS Status
-              </h3>
-              {siteSettings ? (
-                <div className="text-green-400">
-                  ✅ Connected - Site Title: {siteSettings.siteTitle}
-                </div>
-              ) : (
-                <div className="text-yellow-400">
-                  ⚠️ Not configured yet - Add your Sanity project ID to .env.local
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      {/* Test CSS Module Styles */}
-      <section className={styles.achievements}>
-        <div className="container mx-auto px-4 py-20">
-          <div className="text-center">
-            <h2 className="text-4xl font-bold text-white mb-8 font-ppstellar">
-              CSS Modules Test
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
-                <h3 className="text-xl font-bold text-white mb-2">
-                  Tailwind CSS
-                </h3>
-                <p className="text-white/80">
-                  Utility classes working correctly
-                </p>
-              </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
-                <h3 className="text-xl font-bold text-white mb-2">
-                  CSS Modules
-                </h3>
-                <p className="text-white/80">
-                  Component-scoped styles working
-                </p>
-              </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
-                <h3 className="text-xl font-bold text-white mb-2">
-                  Custom Fonts
-                </h3>
-                <p className="text-white/80">
-                  PP Stellar and Elianto fonts loaded
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      {/* Footer */}
-      <footer className={styles.footer}>
-        <div className="container mx-auto px-4 py-8">
-          <div className="text-center text-white/60">
-            <p>© 2024 Jack Luo. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
-    </div>
+        {/* About Section */}
+        <AboutSection siteSettings={siteSettings} className={styles.about} />
+        
+        {/* Projects Section */}
+        <ProjectsSection projects={projects} className={styles.projects} />
+        
+        {/* Footer Section */}
+        <Footer siteSettings={siteSettings} className={styles.footer} />
+      </div>
+    </>
   )
 }

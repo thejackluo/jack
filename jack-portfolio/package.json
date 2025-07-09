@@ -1,9 +1,9 @@
 {
-  "name": "jack-portfolio",
-  "version": "0.1.0",
+  "name": "jack",
+  "version": "5.0.1",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -12,10 +12,13 @@
     "sanity:deploy": "sanity deploy"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "@portabletext/react": "^3.2.1",
     "@sanity/cli": "^3.98.0",
     "@sanity/client": "^7.6.0",
     "@sanity/image-url": "^1.1.0",
     "@sanity/vision": "^3.98.0",
+    "autoprefixer": "^10.4.21",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.0",
@@ -23,7 +26,9 @@
     "next-sanity": "^9.12.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-is": "^19.1.0",
     "sanity": "^3.98.0",
+    "styled-components": "^6.1.19",
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
