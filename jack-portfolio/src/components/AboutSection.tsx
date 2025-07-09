@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { urlFor } from '@/lib/sanity'
 import type { SanitySiteSettings } from '@/lib/sanity'
 import styles from '@/styles/about.module.css'
+import Image from 'next/image';
 
 interface Skill {
   name: string
@@ -138,7 +139,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <img src="/assets/icons/sm/github.png" alt="GitHub" />
+                <Image src="/assets/icons/sm/github.png" alt="GitHub" width={24} height={24} />
               </motion.a>
             )}
             {siteSettings.socialLinks.linkedin && (
@@ -154,7 +155,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <img src="/assets/icons/sm/linkedin.png" alt="LinkedIn" />
+                <Image src="/assets/icons/sm/linkedin.png" alt="LinkedIn" width={24} height={24} />
               </motion.a>
             )}
             {siteSettings.socialLinks.twitter && (
@@ -170,7 +171,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <img src="/assets/icons/sm/twitter.png" alt="Twitter" />
+                <Image src="/assets/icons/sm/twitter.png" alt="Twitter" width={24} height={24} />
               </motion.a>
             )}
             {siteSettings.socialLinks.instagram && (
@@ -186,7 +187,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <img src="/assets/icons/sm/instagram.png" alt="Instagram" />
+                <Image src="/assets/icons/sm/instagram.png" alt="Instagram" width={24} height={24} />
               </motion.a>
             )}
           </div>

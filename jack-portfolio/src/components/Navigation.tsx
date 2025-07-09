@@ -34,6 +34,11 @@ export const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
               <h2 className="font-dual text-xl">Writing</h2>
             </Link>
           </div>
+          <div className={styles.navItem}>
+            <Link href="/contact" className={isActive('/contact') ? 'text-white' : 'text-white/80 hover:text-white'}>
+              <h2 className="font-dual text-xl">Contact</h2>
+            </Link>
+          </div>
         </div>
       </div>
     </nav>

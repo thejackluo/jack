@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/Button'
 import type { SanitySiteSettings } from '@/lib/sanity'
 import styles from '@/styles/footer.module.css'
 import indexStyles from '@/styles/index.module.css'
+import Image from 'next/image';
 
 interface FooterProps {
   siteSettings?: SanitySiteSettings | null
@@ -78,10 +79,11 @@ export const Footer: React.FC<FooterProps> = ({ siteSettings, className = '' }) 
               <a href={`mailto:${email}`} className="block">
                 <Button variant="ghost" size="lg" className="w-full">
                   <div className="flex items-center justify-center gap-3">
-                    <img 
+                    <Image 
                       src="/assets/icons/sm/mail.png" 
                       alt="Email"
-                      className="w-6 h-6"
+                      width={24}
+                      height={24}
                     />
                     <h3 className="font-stellar text-lg">Email</h3>
                   </div>
@@ -97,10 +99,11 @@ export const Footer: React.FC<FooterProps> = ({ siteSettings, className = '' }) 
               <a href={calendlyUrl} target="_blank" rel="noopener noreferrer" className="block">
                 <Button variant="ghost" size="lg" className="w-full">
                   <div className="flex items-center justify-center gap-3">
-                    <img 
+                    <Image 
                       src="/assets/icons/sm/calendar.png" 
                       alt="Calendar"
-                      className="w-6 h-6"
+                      width={24}
+                      height={24}
                     />
                     <h3 className="font-stellar text-lg">Calendly</h3>
                   </div>

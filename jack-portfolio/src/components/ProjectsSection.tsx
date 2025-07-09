@@ -48,6 +48,24 @@ const statusLabels = {
   'cancelled': 'Cancelled'
 }
 
+// Helper function to get image URL for both Sanity assets and regular paths
+const getImageUrl = (image: any): string => {
+  if (!image) return '/assets/images/projects/calendai.png' // fallback
+  
+  // If it's a regular path (mock data), return it directly
+  if (typeof image.asset._ref === 'string' && image.asset._ref.startsWith('/')) {
+    return image.asset._ref
+  }
+  
+  // If it's a Sanity asset, use urlFor
+  try {
+    return urlFor(image).url()
+  } catch (error) {
+    console.log('Error processing image:', error)
+    return '/assets/images/projects/calendai.png' // fallback
+  }
+}
+
 export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
   projects = [],
   className = ''
@@ -250,7 +268,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                     {/* Project Image */}
                     <div className="aspect-video overflow-hidden">
                       <img
-                        src={urlFor(project.image).url()}
+                        src={getImageUrl(project.image)}
                         alt={project.image.alt || project.title}
                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                       />
