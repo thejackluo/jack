@@ -1,0 +1,243 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop, v5.0-website-to-next ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: '20.x'
+  PNPM_VERSION: '8.x'
+
+jobs:
+  # Job 1: Code Quality & Security
+  code-quality:
+    name: Code Quality & Security
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: ./jack-portfolio
+
+      - name: Run ESLint
+        run: npm run lint
+        working-directory: ./jack-portfolio
+
+      - name: Run TypeScript type check
+        run: npx tsc --noEmit
+        working-directory: ./jack-portfolio
+
+      - name: Security audit
+        run: npm audit --audit-level=high
+        working-directory: ./jack-portfolio
+        continue-on-error: true
+
+      - name: Check for vulnerabilities
+        uses: actions/dependency-review-action@v4
+        if: github.event_name == 'pull_request'
+
+  # Job 2: Testing
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    needs: code-quality
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: ./jack-portfolio
+
+      - name: Run unit tests
+        run: npm run test --if-present
+        working-directory: ./jack-portfolio
+
+      - name: Run build test
+        run: npm run build
+        working-directory: ./jack-portfolio
+        env:
+          NODE_ENV: production
+
+      - name: Test production build
+        run: npm run start &
+        working-directory: ./jack-portfolio
+        env:
+          NODE_ENV: production
+
+  # Job 3: Performance & Accessibility
+  performance:
+    name: Performance & Accessibility
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: ./jack-portfolio
+
+      - name: Build project
+        run: npm run build
+        working-directory: ./jack-portfolio
+
+      - name: Start server
+        run: npm run start &
+        working-directory: ./jack-portfolio
+        env:
+          NODE_ENV: production
+
+      - name: Wait for server
+        run: sleep 10
+
+      - name: Run Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v10
+        with:
+          configPath: './jack-portfolio/.lighthouserc.js'
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+
+  # Job 4: Build and Deploy to Staging
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: [code-quality, test]
+    if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/v5.0-website-to-next'
+    environment:
+      name: staging
+      url: https://staging.jack-luo.com
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: ./jack-portfolio
+
+      - name: Build project
+        run: npm run build
+        working-directory: ./jack-portfolio
+        env:
+          NODE_ENV: production
+          NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.SANITY_PROJECT_ID }}
+          NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.SANITY_DATASET }}
+          NEXT_PUBLIC_SANITY_API_VERSION: ${{ secrets.SANITY_API_VERSION }}
+
+      - name: Deploy to Vercel (Staging)
+        uses: vercel/action@v1
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./jack-portfolio
+          vercel-args: '--prebuilt'
+
+  # Job 5: Build and Deploy to Production
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [code-quality, test, performance]
+    if: github.ref == 'refs/heads/main'
+    environment:
+      name: production
+      url: https://jack-luo.com
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: ./jack-portfolio
+
+      - name: Build project
+        run: npm run build
+        working-directory: ./jack-portfolio
+        env:
+          NODE_ENV: production
+          NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.SANITY_PROJECT_ID }}
+          NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.SANITY_DATASET }}
+          NEXT_PUBLIC_SANITY_API_VERSION: ${{ secrets.SANITY_API_VERSION }}
+
+      - name: Deploy to Vercel (Production)
+        uses: vercel/action@v1
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./jack-portfolio
+          vercel-args: '--prebuilt --prod'
+
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+  # Job 6: Cleanup and Notifications
+  cleanup:
+    name: Cleanup & Notify
+    runs-on: ubuntu-latest
+    needs: [deploy-staging, deploy-production]
+    if: always()
+    steps:
+      - name: Clean up artifacts
+        run: echo "Cleaning up temporary files and artifacts"
+
+      - name: Notify on success
+        if: ${{ needs.deploy-production.result == 'success' }}
+        run: |
+          echo "✅ Deployment successful!"
+          echo "Production URL: https://jack-luo.com"
+
+      - name: Notify on failure
+        if: ${{ contains(needs.*.result, 'failure') }}
+        run: |
+          echo "❌ Deployment failed!"
+          echo "Check the logs for more details." 
