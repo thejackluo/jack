@@ -1,0 +1,173 @@
+/* Contact Form Styles */
+.contactForm {
+  @apply max-w-2xl mx-auto p-8;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.1),
+    0 1px 0 rgba(255, 255, 255, 0.1) inset;
+}
+
+.formGroup {
+  @apply mb-6;
+}
+
+.label {
+  @apply block text-white font-stellar text-lg mb-3;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.input,
+.textarea {
+  @apply w-full px-4 py-3 rounded-xl text-white placeholder-white/50;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  font-family: 'Dual', 'system-ui', sans-serif;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.input:focus,
+.textarea:focus {
+  @apply outline-none;
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 0 20px rgba(255, 255, 255, 0.1),
+    0 1px 0 rgba(255, 255, 255, 0.1) inset;
+}
+
+.input:hover,
+.textarea:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.input:disabled,
+.textarea:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+.textarea {
+  @apply resize-none;
+  min-height: 120px;
+}
+
+.inputError {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.2) !important;
+}
+
+.errorText {
+  @apply text-red-400 text-sm mt-2 block font-dual;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.errorText::before {
+  content: '⚠';
+  font-size: 14px;
+}
+
+.characterCount {
+  @apply text-white/40 text-sm text-right mt-2 font-dual;
+}
+
+.submitContainer {
+  @apply mt-8;
+}
+
+.errorContainer {
+  @apply mt-4 p-4 rounded-xl;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.successContainer {
+  @apply text-center p-12 max-w-md mx-auto;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.1),
+    0 1px 0 rgba(255, 255, 255, 0.1) inset;
+}
+
+.successIcon {
+  @apply text-6xl mb-6 text-green-400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+.spinner {
+  @apply inline-block w-5 h-5 border-2 border-white/30 border-t-white rounded-full;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .contactForm {
+    @apply mx-4 p-6;
+    border-radius: 20px;
+  }
+  
+  .label {
+    @apply text-base mb-2;
+  }
+  
+  .input,
+  .textarea {
+    @apply px-3 py-2 text-sm;
+  }
+  
+  .successContainer {
+    @apply mx-4 p-8;
+    border-radius: 20px;
+  }
+  
+  .successIcon {
+    @apply text-4xl mb-4 w-16 h-16;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .input,
+  .textarea {
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+  
+  .input:focus,
+  .textarea:focus {
+    border-color: rgba(255, 255, 255, 0.8);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .input,
+  .textarea,
+  .spinner {
+    transition: none;
+    animation: none;
+  }
+} 
