@@ -97,3 +97,32 @@ src/
 3. Build out all necessary components
 4. Implement proper routing structure
 5. Add blog functionality with static JSON 
+
+## Known Issues / Bugs
+
+### TurboPack Compilation Issue (December 2024)
+**Issue**: Next.js project compiles successfully without the `--turbo` flag but fails when using TurboPack compilation.
+
+**Symptoms**:
+- `npm run dev` works normally
+- `npm run dev -- --turbo` or `next dev --turbo` fails with compilation errors
+- Build process works fine without TurboPack
+
+**Status**: Open  
+**Priority**: Low (workaround available)  
+**Workaround**: Use standard Next.js compilation without the `--turbo` flag
+
+**Investigation Notes**:
+- Project structure and configuration appear standard
+- Issue likely related to TurboPack's handling of:
+  - CSS modules
+  - Framer Motion dependencies
+  - Custom font imports
+  - Sanity integration
+
+**Next Steps**:
+- Monitor Next.js TurboPack updates
+- Re-test with future Next.js versions
+- Consider reporting to Next.js team if issue persists
+
+--- 

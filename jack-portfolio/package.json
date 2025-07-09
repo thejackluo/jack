@@ -1,9 +1,9 @@
 {
-  "name": "jack-portfolio",
-  "version": "0.1.0",
+  "name": "jack",
+  "version": "5.0.1",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -12,6 +12,7 @@
     "sanity:deploy": "sanity deploy"
   },
   "dependencies": {
+    "@portabletext/react": "^3.2.1",
     "@sanity/cli": "^3.98.0",
     "@sanity/client": "^7.6.0",
     "@sanity/image-url": "^1.1.0",
