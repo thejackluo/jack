@@ -1,0 +1,77 @@
+/* Blog Page CSS Module */
+
+/* Page Container */
+.fullPage {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Background Components */
+.landing {
+  background-color: black;
+  height: 100%;
+  overflow: auto;
+}
+
+.landingCity {
+  background: url("/assets/images/bg/city.png");
+  opacity: 0.5;
+  filter: blur(50px);
+}
+
+.footer {
+  background: linear-gradient(180deg, rgba(20, 18, 60, 0.8) 0%, #000000 100%),
+    #000000;
+}
+
+/* Blog Card */
+.blogCard {
+  display: flex;
+  flex-direction: row;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.blogCardImg {
+  width: 10%;
+  height: 10%;
+  border-radius: 50%;
+  filter: drop-shadow(0px 0px 20px rgba(255, 255, 255, 0.5));
+  transition: all 0.3s ease;
+}
+
+.blogCardImg:hover {
+  transform: scale(1.05);
+}
+
+.blogCardText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 0.75em;
+  padding: 0.5em 0;
+  margin-left: 2em;
+}
+
+/* Media Queries */
+@media (max-width: 320px) {
+  .blogCardImg {
+    width: 40%;
+    height: 40%;
+  }
+}
+
+@media (max-width: 576px) {
+  .blogCardImg {
+    width: 30%;
+    height: 30%;
+  }
+}
+
+@media (max-width: 768px) {
+  .blogCardImg {
+    width: 20%;
+    height: 20%;
+  }
+} 

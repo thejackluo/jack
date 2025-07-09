@@ -1,0 +1,145 @@
+/*
+  Name: landing.css
+  Description: index.html Landing page css and supplement for other pages
+*/
+
+/* 
+  ========================
+  Nav Bar
+  ========================  
+*/
+
+/* Create a parent container nav with two containers with the nav-logo being smaller at 20% and nav-container at 80%, 
+  have the nav-item in nav-container be a flexbox model that has all the items to the right
+  Have the whole nav bar has a padding of 1em and a height of 15%
+  */
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2em;
+  height: 15vh;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.nav-logo {
+  padding: 0 1em;
+  text-shadow: 4px 4px 10px rgba(255, 255, 255, 0.25);
+  /* margin: auto; */
+  /* display: none; */
+}
+
+.nav-item {
+  padding: 0 1em;
+}
+
+/* 
+  ========================
+  Landing Container
+  ========================  
+*/
+
+/* Landing section of index.css */
+.landing-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
+  width: 100%;
+  height: 100vh;
+}
+
+.horizontal-align {
+  text-align: center;
+}
+
+/* Each landing row */
+.landing-row {
+  margin: 1.5em;
+}
+
+/* Landing attributes */
+.landing-main-center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 
+  ========================
+  Landing text
+  ========================  
+*/
+/* Create a .landing-name class selector that has a font size of 4em, a font family of Elianto, and a color of white */
+
+.landing-name {
+  /* width: 40%; */
+  padding: 0;
+  margin: auto;
+  /* display: none; */
+}
+
+/* Create a .landing-image class selector that has a width of 20%, a height of 20%, a border-radius of 50%, and a margin of 0 1em */
+
+.landing-image {
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  filter: drop-shadow(0px 0px 40px rgba(255, 255, 255, 0.5));
+  margin: auto;
+}
+
+#landing .arrow-icon {
+  display: none;
+}
+
+/* Create a .landing-status class selector that has a font size of 2em, a font family of Dual-300, and a color of white */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  .nav-logo {
+    padding: 0 1em;
+    margin: initial;
+  }
+
+  #landing .landing-image {
+    width: 35%;
+    height: 35%;
+  }
+
+  #landing .arrow-icon {
+    display: inherit;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  #landing .landing-image {
+    width: 30%;
+    height: 30%;
+  }
+
+  .nav-item {
+    padding: 0 2em;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  #landing .landing-image {
+    width: 20%;
+    height: 20%;
+  }
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+}

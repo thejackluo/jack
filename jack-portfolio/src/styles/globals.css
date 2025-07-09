@@ -1,0 +1,373 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  ===================
+  Font Face Definitions
+  ===================
+*/
+
+@font-face {
+  font-family: "Dual-300";
+  src: url("/assets/fonts/Dual-300.ttf") format("truetype"),
+    url("/assets/fonts/Dual-300.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Elianto-Regular";
+  src: url("/assets/fonts/Elianto-Regular.ttf") format("truetype"),
+    url("/assets/fonts/Elianto-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "PP Stellar";
+  src: url("/assets/fonts/PPStellar-Bold.ttf") format("truetype"),
+    url("/assets/fonts/PPStellar-Bold.otf") format("opentype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "PP Stellar";
+  src: url("/assets/fonts/PPStellar-Light.ttf") format("truetype"),
+    url("/assets/fonts/PPStellar-Light.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Stellar";
+  src: url("/assets/fonts/Stellar-Bold.otf") format("opentype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Stellar";
+  src: url("/assets/fonts/Stellar-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*
+  ===================
+  Base HTML Elements
+  ===================
+*/
+
+body,
+html {
+  max-width: 100%;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-align: center;
+  color: white;
+  font-weight: normal;
+}
+
+h1 {
+  font-family: "Elianto-Regular";
+  font-size: 1.75em;
+  display: inline;
+}
+
+h2 {
+  font-family: "Dual-300";
+  font-size: 1.75em;
+  display: inline;
+}
+
+h3 {
+  font-family: "Dual-300";
+  font-size: 1.5em;
+  display: inline;
+}
+
+h4 {
+  font-family: "Stellar", "Century Gothic", sans-serif;
+  font-size: 1.5em;
+  display: inline;
+}
+
+h5 {
+  font-family: "Stellar", "Century Gothic", sans-serif;
+  font-size: 1.125em;
+  display: inline;
+}
+
+h6 {
+  font-family: "Stellar", "Century Gothic", sans-serif;
+  font-size: 1em;
+  display: inline;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  display: inline;
+}
+
+a:hover {
+  transition: all 0.3s ease;
+  text-shadow: 0px 0px 20px rgba(255, 255, 255, 1);
+  color: #dddddd;
+}
+
+p,
+li {
+  font-family: "Stellar", "Century Gothic", sans-serif;
+  font-size: 1em;
+  font-weight: normal;
+  color: white;
+}
+
+button {
+  font-family: "Stellar", "Century Gothic", sans-serif;
+  font-size: 1em;
+  font-weight: normal;
+  color: white;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0.5em 1em;
+  border-radius: 0.25em;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+button img {
+  width: 1em;
+  height: 1em;
+  margin-left: 0.5em;
+}
+
+section {
+  min-height: 100vh;
+  padding: 2em;
+}
+
+footer {
+  padding: 2em;
+  text-align: center;
+}
+
+/*
+  ===================
+  Utility Classes
+  ===================
+*/
+
+.full {
+  width: 100%;
+  height: 100%;
+}
+
+.a-underline {
+  text-decoration: underline;
+}
+
+.button-text {
+  font-family: "Stellar", "Century Gothic", sans-serif;
+}
+
+.arrow-icon {
+  width: 1em;
+  height: 1em;
+  margin-left: 0.5em;
+}
+
+/* Font family utility classes */
+.dual-300 {
+  font-family: "Dual-300";
+}
+
+.elianto-regular {
+  font-family: "Elianto-Regular";
+}
+
+.ppstella-bold {
+  font-family: "PP Stellar";
+  font-weight: bold;
+}
+
+.ppstella-light {
+  font-family: "PP Stellar";
+  font-weight: normal;
+}
+
+.stellar-bold {
+  font-family: "Stellar";
+  font-weight: bold;
+}
+
+.stellar-regular {
+  font-family: "Stellar";
+  font-weight: normal;
+}
+
+/*
+  ===================
+  Custom Scrollbar
+  ===================
+*/
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/*
+  ===================
+  Responsive Typography
+  ===================
+*/
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  h1 {
+    font-size: 3em;
+  }
+
+  h2 {
+    font-size: 2em;
+  }
+
+  h3 {
+    font-size: 1.5em;
+  }
+
+  h4 {
+    font-size: 1.5em;
+  }
+
+  h5 {
+    font-size: 1.125em;
+  }
+
+  p,
+  li {
+    font-size: 1em;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  h1 {
+    font-size: 4em;
+  }
+
+  h2 {
+    font-size: 2em;
+  }
+
+  h3 {
+    font-size: 1.5em;
+  }
+
+  h4 {
+    font-size: 1.5em;
+  }
+
+  h5 {
+    font-size: 1.25em;
+  }
+
+  p,
+  li {
+    font-size: 1.25em;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  h1 {
+    font-size: 4.5em;
+  }
+
+  h2 {
+    font-size: 2.5em;
+  }
+
+  h3 {
+    font-size: 1.75em;
+  }
+
+  h4 {
+    font-size: 1.5em;
+  }
+
+  h5 {
+    font-size: 1.375em;
+  }
+
+  p,
+  li {
+    font-size: 1.25em;
+  }
+
+  button {
+    font-size: 1.125em;
+  }
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  h1 {
+    font-size: 6em;
+  }
+
+  h2 {
+    font-size: 3em;
+  }
+
+  h3 {
+    font-size: 2em;
+  }
+
+  h4 {
+    font-size: 1.5em;
+  }
+
+  h5 {
+    font-size: 1.375em;
+  }
+
+  p,
+  li {
+    font-size: 1.25em;
+  }
+
+  .button-text {
+    font-size: 1.125em;
+  }
+} 

@@ -1,0 +1,28 @@
+/* Creative Page CSS Module */
+
+/* Background Components */
+.creativeCity {
+  background: url("/assets/images/bg/city3.png");
+  opacity: 0.5;
+  filter: blur(50px);
+}
+
+.creativeAngularFilter {
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    #1f062a 0deg,
+    #142a53 360deg
+  );
+  opacity: 0.5;
+}
+
+/* Creative Section */
+.creativeContainer {
+  position: absolute;
+  top: 100vh;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100vh;
+  margin: 2em;
+} 

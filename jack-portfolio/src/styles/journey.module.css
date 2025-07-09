@@ -1,0 +1,82 @@
+/* Journey Page CSS Module */
+
+/* Page Container */
+.fullPage {
+  width: 100%;
+}
+
+/* Background Components */
+.landingCity {
+  background: url("/assets/images/bg/city4.png");
+  opacity: 0.5;
+  filter: blur(50px);
+}
+
+.landingAngularFilter {
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    #1f062a 0deg,
+    #142a53 360deg
+  );
+  opacity: 0.5;
+}
+
+.landing {
+  background-color: black;
+}
+
+.creative {
+  background: linear-gradient(
+      180deg,
+      rgba(217, 217, 217, 0.05) 0%,
+      rgba(217, 217, 217, 0) 100%
+    ),
+    linear-gradient(180deg, #14123c 0%, #14123c 100%);
+  z-index: -3;
+}
+
+.footer {
+  background: linear-gradient(180deg, rgba(20, 18, 60, 0.8) 0%, #000000 100%),
+    #000000;
+  z-index: -3;
+}
+
+/* Journey Container */
+.journeyContainer {
+  height: 80vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Project Cards */
+.projectCard {
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.05) 100%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  box-shadow: inset 0px 5px 10px -5px #ffffff,
+    inset 0px 98px 100px rgba(255, 255, 255, 0.1),
+    inset 0px 0px 40px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(100px);
+  margin: 0.5em 0.25em;
+  height: 75vh;
+  border-radius: 2em;
+  padding: 1.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.projectHeader {
+  text-align: center;
+}
+
+.projectImage {
+  height: 45vh;
+  width: auto;
+  border-radius: 1em;
+} 
