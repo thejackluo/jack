@@ -1,9 +1,34 @@
 import React from 'react'
+import type { Metadata } from 'next'
 import { HeroSection } from '@/components/HeroSection'
 import { AboutSection } from '@/components/AboutSection'
 import { ProjectsSection } from '@/components/ProjectsSection'
 import { Footer } from '@/components/Footer'
+import { StructuredData } from '@/components/StructuredData'
 import { getSiteSettings, getProjects, isSanityConfigured, getMockData } from '@/lib/sanity'
+import { 
+  generateMetadata as generateSEOMetadata, 
+  generateHomepageSEO, 
+  generateHomepageStructuredData,
+  generateWebsiteStructuredData
+} from '@/lib/seo'
+import styles from '@/styles/index.module.css'
+
+// Generate metadata for the homepage
+export async function generateMetadata(): Promise<Metadata> {
+  let siteSettings = null
+  
+  try {
+    if (isSanityConfigured()) {
+      siteSettings = await getSiteSettings()
+    }
+  } catch (error) {
+    console.log('Error fetching site settings for SEO:', error)
+  }
+
+  const seoData = generateHomepageSEO(siteSettings)
+  return generateSEOMetadata(seoData)
+}
 
 export default async function HomePage() {
   // Fetch Sanity data with fallback to mock data
@@ -28,7 +53,7 @@ export default async function HomePage() {
           description: "Chrome extension that leverages modern NLP techniques and prompt engineering to automatically schedule and manage events within a user's Google calendar.",
           longDescription: [],
           image: { 
-            asset: { _ref: "image-calendai" },
+            asset: { _ref: "/assets/images/projects/calendai.png" },
             alt: "Calend.ai AI Scheduler"
           },
           technologies: ["TypeScript", "Chrome Extension API", "OpenAI GPT", "Google Calendar API"],
@@ -49,7 +74,7 @@ export default async function HomePage() {
           description: "AI-driven productivity app that automates low-level tasks and generates schedules based on user preferences.",
           longDescription: [],
           image: { 
-            asset: { _ref: "image-vigama" },
+            asset: { _ref: "/assets/images/projects/vigama.gif" },
             alt: "Vigama Automation Assistant"
           },
           technologies: ["React", "Node.js", "OpenAI", "Speech Recognition"],
@@ -70,7 +95,7 @@ export default async function HomePage() {
           description: "Innovative, immersive language learning platform that leverages computer vision to enable dynamic and nuanced language learning.",
           longDescription: [],
           image: { 
-            asset: { _ref: "image-linguascan" },
+            asset: { _ref: "/assets/images/projects/linguascan.png" },
             alt: "Lingua Scan Computer Vision"
           },
           technologies: ["Python", "OpenCV", "TensorFlow", "React Native"],
@@ -91,7 +116,7 @@ export default async function HomePage() {
           description: "Hosted a hacker house in downtown SF for 10 people to build startups, do research, and learn from others.",
           longDescription: [],
           image: { 
-            asset: { _ref: "image-hackerhouse" },
+            asset: { _ref: "/assets/images/projects/hackerhouse.jpg" },
             alt: "Q Hacker House"
           },
           technologies: ["Community Building", "Event Management", "Mentorship"],
@@ -113,19 +138,29 @@ export default async function HomePage() {
     projects = []
   }
 
+  // Generate structured data for SEO
+  const personStructuredData = generateHomepageStructuredData(siteSettings)
+  const websiteStructuredData = generateWebsiteStructuredData()
+
   return (
-    <div id="fullpage">
-      {/* Hero/Landing Section */}
-      <HeroSection siteSettings={siteSettings} />
+    <>
+      {/* Structured Data for SEO */}
+      <StructuredData data={personStructuredData} />
+      <StructuredData data={websiteStructuredData} />
       
-      {/* About Section */}
-      <AboutSection siteSettings={siteSettings} />
-      
-      {/* Projects Section */}
-      <ProjectsSection projects={projects} />
-      
-      {/* Footer Section */}
-      <Footer siteSettings={siteSettings} />
-    </div>
+      <div id="fullpage" className={styles.fullPage}>
+        {/* Hero/Landing Section */}
+        <HeroSection siteSettings={siteSettings} className={styles.landing} />
+        
+        {/* About Section */}
+        <AboutSection siteSettings={siteSettings} className={styles.about} />
+        
+        {/* Projects Section */}
+        <ProjectsSection projects={projects} className={styles.projects} />
+        
+        {/* Footer Section */}
+        <Footer siteSettings={siteSettings} className={styles.footer} />
+      </div>
+    </>
   )
 }

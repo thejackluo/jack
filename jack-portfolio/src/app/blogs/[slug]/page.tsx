@@ -84,15 +84,16 @@ const portableTextComponents = {
 }
 
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const { slug } = await params
   // Fetch the blog post and site settings
   const [blogPost, siteSettings] = await Promise.all([
-    getBlogPost(params.slug),
+    getBlogPost(slug),
     getSiteSettings().catch(() => null)
   ])
 
@@ -159,7 +160,8 @@ export async function generateStaticParams() {
 // Generate metadata for each blog post
 export async function generateMetadata({ params }: BlogPostPageProps) {
   try {
-    const blogPost = await getBlogPost(params.slug)
+    const { slug } = await params
+    const blogPost = await getBlogPost(slug)
     
     if (!blogPost) {
       return {
