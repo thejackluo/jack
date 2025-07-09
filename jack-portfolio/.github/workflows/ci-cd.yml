@@ -82,7 +82,36 @@ jobs:
           NODE_ENV: production
 
       - name: Test production build
-        run: npm run start &
+        run: |
+          # Start server in background
+          npm run start &
+          SERVER_PID=$!
+          
+          # Wait for server to be ready
+          echo "Testing if production build starts successfully..."
+          timeout=30
+          elapsed=0
+          server_ready=false
+          
+          while [ $elapsed -lt $timeout ]; do
+            if curl -f http://localhost:3000 >/dev/null 2>&1; then
+              echo "✅ Production build started successfully!"
+              server_ready=true
+              break
+            fi
+            echo "Waiting for server to start... ($elapsed/$timeout seconds)"
+            sleep 2
+            elapsed=$((elapsed + 2))
+          done
+          
+          # Clean up: kill the server
+          kill $SERVER_PID 2>/dev/null || true
+          wait $SERVER_PID 2>/dev/null || true
+          
+          if [ "$server_ready" = false ]; then
+            echo "❌ Server failed to start within $timeout seconds"
+            exit 1
+          fi
         working-directory: ./jack-portfolio
         env:
           NODE_ENV: production
@@ -117,8 +146,24 @@ jobs:
         env:
           NODE_ENV: production
 
-      - name: Wait for server
-        run: sleep 10
+      - name: Wait for server to be ready
+        run: |
+          echo "Waiting for server to start..."
+          timeout=60
+          elapsed=0
+          while [ $elapsed -lt $timeout ]; do
+            if curl -f http://localhost:3000 >/dev/null 2>&1; then
+              echo "Server is ready!"
+              break
+            fi
+            echo "Server not ready, waiting... ($elapsed/$timeout seconds)"
+            sleep 2
+            elapsed=$((elapsed + 2))
+          done
+          if [ $elapsed -ge $timeout ]; then
+            echo "Server failed to start within $timeout seconds"
+            exit 1
+          fi
 
       - name: Run Lighthouse CI
         uses: treosh/lighthouse-ci-action@v10
