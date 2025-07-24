@@ -1,0 +1,20 @@
+{
+  "enabled": true,
+  "name": "Changelog Tracker",
+  "description": "Monitors git commits and significant changes to automatically update and maintain a comprehensive changelog that tracks versions from MVP to production, including timestamps, contributors, and detailed change descriptions for developer reference. ",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      ".git/logs/HEAD",
+      ".git/refs/heads/*",
+      "package.json",
+      "CHANGELOG.md",
+      ".kiro/specs/equity-research-copilot/CHANGELOG.md"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A significant git change has been detected. Please analyze the recent commits and update the project changelog. Review the commit messages, identify the changes made, determine the appropriate version increment (if any), and update the changelog with:\n\n1. Version information (MVP, v1.0, v2.0, etc.)\n2. Timestamp of changes\n3. Contributors/authors involved\n4. Detailed description of changes categorized by:\n   - New Features\n   - Bug Fixes\n   - Breaking Changes\n   - Performance Improvements\n   - Documentation Updates\n   - Other Changes\n\n5. Any migration notes or important developer information\n\nEnsure the changelog follows the project's established format and maintains comprehensive tracking for future developer reference. Update both the root CHANGELOG.md and the project-specific changelog in .kiro/specs/equity-research-copilot/CHANGELOG.md if it exists."
+  }
+}

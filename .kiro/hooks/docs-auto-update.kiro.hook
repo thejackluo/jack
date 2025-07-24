@@ -1,0 +1,28 @@
+{
+  "enabled": true,
+  "name": "Documentation Auto-Update",
+  "description": "Monitors all source files in the repository and automatically updates documentation in /docs when changes are detected. Covers front-end pages, features, and application documentation to ensure comprehensive and current documentation.",
+  "version": "1",
+  "when": {
+    "type": "userTriggered",
+    "patterns": [
+      "*.ts",
+      "*.tsx",
+      "*.js",
+      "*.jsx",
+      "*.py",
+      "package.json",
+      "tsconfig.json",
+      "next.config.js",
+      "tailwind.config.js",
+      "manifest.xml",
+      "requirements.txt",
+      "Dockerfile",
+      "docker-compose.yml"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Source files have been modified in the repository. Please analyze the changes and update the documentation accordingly. Focus on:\n\nFrontend\n1. **Front-end Documentation**: Update documentation for any UI components, pages, or user-facing features that have changed\n2. **Feature Documentation**: Document new features, modified functionality, or removed capabilities\n\nBackend \n3. **API Documentation**: Update API documentation if backend services or endpoints have changed\n4. **Architecture Documentation**: Reflect any architectural changes or new technical decisions\n5. **Setup/Installation Documentation**: Update if dependencies, configuration, or setup processes have changed\n\nAI\n6. **AI Documentation**: Update if there is any AI processes that have changed\n\nPlease ensure all documentation in the /docs directory (or create it if it doesn't exist) is comprehensive and up-to-date. Include:\n- Clear descriptions of functionality\n- Usage examples where appropriate\n- Configuration details\n- Integration instructions\n- Any breaking changes or migration notes\n\nMaintain consistency with the existing documentation style and ensure technical accuracy but also concise"
+  }
+}

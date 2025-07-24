@@ -1,0 +1,23 @@
+{
+  "enabled": true,
+  "name": "Runtime Bug Detector",
+  "description": "Monitors for npm run dev, npm run build, and other application failures to automatically investigate bugs, create bug reports in the bugs folder, and sync to GitHub via MCP integration",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "package.json",
+      "*.log",
+      "npm-debug.log*",
+      "yarn-debug.log*",
+      "yarn-error.log*",
+      ".next/build-manifest.json",
+      "dist/**",
+      "build/**"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A runtime application failure has been detected. Please:\n\n1. **Investigate the failure**: Analyze error logs, stack traces, and system state to understand what went wrong\n2. **Determine root cause**: Use the 5 Whys methodology to identify the underlying cause of the runtime failure\n3. **Create bug report**: Generate a comprehensive bug report following the standardized template in `.kiro/specs/equity-research-copilot/bugs/BUG-YYYY-MM-DD-XXX.md` format\n4. **Document chain of thought**: Include your investigation reasoning and analysis process\n5. **GitHub integration**: Use the Cloud MCP integration to create a corresponding GitHub issue and link it to the bug report\n6. **Categorize appropriately**: Classify the bug by severity (Critical/High/Medium/Low) and category (Functional/Performance/Security/UI/Integration/Data/AI)\n\nFocus on runtime bugs that don't have obvious reasons for failure - these require deeper investigation and systematic analysis to prevent recurrence."
+  }
+}

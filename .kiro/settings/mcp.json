@@ -1,0 +1,56 @@
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": ""
+      },
+      "disabled": true,
+      "autoApprove": ["create_issue", "list_issues", "get_issue", "update_issue", "create_pull_request", "list_repositories", "search_repositories"]
+    },
+    "notion": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-notion"],
+      "env": {
+        "NOTION_API_KEY": "",
+        "NOTION_DATABASE_ID": ""
+      },
+      "disabled": true,
+      "autoApprove": ["query_database", "create_page", "update_page", "get_page", "list_databases"]
+    },
+    "brave-search": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-brave-search"],
+      "env": {
+        "BRAVE_API_KEY": "BSAAkUG5C8_yYd6UEkR8Q3LNq1n8517"
+      },
+      "disabled": false,
+      "autoApprove": ["brave_web_search", "brave_local_search"]
+    },
+    "aws-docs": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-aws-kb"],
+      "disabled": true,
+      "autoApprove": ["search_aws_docs", "get_aws_service_info", "list_aws_services"]
+    },
+    "postgres": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-postgres"],
+      "env": {
+        "POSTGRES_CONNECTION_STRING": "postgresql://localhost:5432/era_dev"
+      },
+      "disabled": true,
+      "autoApprove": ["query", "list_tables", "describe_table", "list_schemas"]
+    },
+    "sqlite": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-sqlite"],
+      "env": {
+        "SQLITE_DB_PATH": "./data/era.db"
+      },
+      "disabled": true,
+      "autoApprove": ["query", "list_tables", "describe_table", "read_query"]
+    }
+  }
+}

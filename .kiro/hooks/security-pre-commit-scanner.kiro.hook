@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Security Pre-Commit Scanner",
+  "description": "Automatically scans files for potential security issues including API keys, passwords, secrets, hardcoded credentials, SQL injection vulnerabilities, XSS vulnerabilities, and insecure configurations before they're committed to prevent security leaks.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "**/*"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Scan this file for potential security issues including:\n- API keys, passwords, or secrets\n- Hardcoded credentials\n- Potential SQL injection vulnerabilities\n- XSS vulnerabilities\n- Insecure configurations\n\nIf any issues are found, provide specific recommendations for fixes."
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "enabled": true,
+  "name": "Test Coverage Sync",
+  "description": "Automatically updates and enhances unit tests when source code files are changed to ensure comprehensive test coverage and current testing practices",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/**/*.ts",
+      "src/**/*.tsx",
+      "lib/**/*.ts",
+      "components/**/*.ts",
+      "components/**/*.tsx",
+      "services/**/*.ts",
+      "utils/**/*.ts",
+      "hooks/**/*.ts"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Source code files have been modified. Please analyze the changes and update the corresponding unit tests to ensure:\n\n1. **Comprehensive Coverage**: All new functions, methods, and code paths are covered by tests\n2. **Current Test Cases**: Existing tests are updated to reflect any changes in functionality\n3. **Edge Cases**: Tests include proper edge case coverage and error handling scenarios\n4. **Test Quality**: Tests follow Jest best practices with clear descriptions and proper assertions\n5. **Integration**: Tests properly mock dependencies and test components in isolation\n\nFor each modified file, identify the corresponding test file(s) and either create new tests or update existing ones. Ensure test coverage remains above 90% and all tests are meaningful and maintainable.\n\nFocus on creating good test cases that validate both happy path and error conditions, following the TypeScript strict mode requirements and ERA project testing standards."
+  }
+}
