@@ -26,14 +26,16 @@
 
 **As a** site owner, **I want** a dynamic, filterable blog system, **so that** I can easily display all 40 of my articles and allow visitors to find relevant content.
 
+**Dependencies:** Story 1.0 delivers the Markdown content inventory, templates, and copy guidelines that this story consumes.
+
 **Acceptance Criteria:**
-1.  A new `/writing` page dynamically lists all blog posts from a `/content/blogs` directory.
-2.  Each blog post is a separate Markdown (`.md`) file with frontmatter (title, date, tags).
+1.  A new `/writing` page dynamically lists all blog posts from the Astro content collection established in Story 1.0.
+2.  The listing and detail routes read the Story 1.0 blog schema (`title`, `publishDate`, `tags`, `excerpt`, `heroImage`, etc.) without requiring schema changes.
 3.  The `/writing` page includes UI controls to filter blog posts by tags or year.
 4.  Clicking a blog post navigates to its unique page (e.g., `/writing/my-first-post`).
-5.  A blog post template correctly renders Markdown content into the site's existing HTML blog style.
+5.  The blog post layout renders Markdown body content with the researched tone and structure guidance from Story 1.0 clearly represented (e.g., CTA sections, pull quotes as applicable).
 6.  A simple analytics tool is integrated to track blog post views.
-7.  All existing blog content is converted to the new Markdown format.
+7.  Rendering is validated against both migrated legacy entries and a net-new blog created via the Story 1.0 template.
 
 ---
 
