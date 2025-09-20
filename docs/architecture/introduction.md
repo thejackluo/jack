@@ -1,0 +1,4 @@
+# Introduction
+This document outlines the architectural approach for enhancing the Jack portfolio website with a modern static site generator (SSG), content-as-code workflows, and supporting analytics. It serves as the blueprint for AI-driven development while ensuring upgrades integrate cleanly with the existing static HTML/CSS/JS site.
+
+*Relationship to existing architecture:* the current site ships prebuilt HTML from the `website/` directory without a build pipeline. The modernization wraps the site in an Astro-based SSG that preserves today’s visual layer and assets while introducing structured content directories and repeatable build tooling. Where new patterns are introduced (e.g., Markdown content collections, templated layouts), this document specifies how they sit alongside legacy assets during migration.
