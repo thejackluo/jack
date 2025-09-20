@@ -1,0 +1,53 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SEO from '../components/SEO.astro';
+
+const {
+  title,
+  description,
+  keywords,
+  author,
+  currentPage,
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <SEO {title} {description} {keywords} {author} />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <link rel="stylesheet" href="/lib/css/aos.css" />
+    <link rel="stylesheet" href="/lib/css/bootstrap.css" />
+    <link rel="stylesheet" href="/lib/css/normalize.css" />
+    <link rel="stylesheet" href="/lib/css/boilerplate.css" />
+    <link rel="stylesheet" href="/src/css/font.css" />
+    <link rel="stylesheet" href="/src/css/main.css" />
+    <link rel="stylesheet" href="/src/css/index.css" />
+    <link rel="stylesheet" href="/src/css/landing.css" />
+    <link rel="stylesheet" href="/src/css/footer.css" />
+    <link rel="stylesheet" href="/src/css/about.css" />
+
+    <script defer data-domain="jack-luo.com" src="https://plausible.io/js/script.js"></script>
+  </head>
+  <body>
+    <div id="fullpage">
+      <Header currentPage={currentPage}>
+        <slot name="hero" />
+      </Header>
+      <main>
+        <slot />
+      </main>
+      <Footer />
+    </div>
+
+    <script src="/lib/js/aos.js"></script>
+    <script src="/lib/js/bootstrap.js"></script>
+    <script src="/src/js/script.js"></script>
+  </body>
+</html>

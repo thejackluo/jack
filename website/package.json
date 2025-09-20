@@ -2,12 +2,17 @@
   "name": "jackluo-website-v4",
   "version": "4.1.0",
   "description": "Personal Website V4.1.0",
+  "type": "module",
   "main": "main.js",
   "directories": {
-    "lib": "lib"
+    "lib": "public/lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "test": "astro check"
   },
   "repository": {
     "type": "git",
@@ -18,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/thejackluo/jackluo-website-v4/issues"
   },
-  "homepage": "https://github.com/thejackluo/jackluo-website-v4#readme"
+  "homepage": "https://github.com/thejackluo/jackluo-website-v4#readme",
+  "dependencies": {
+    "astro": "^5.13.9"
+  }
 }

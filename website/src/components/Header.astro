@@ -1,0 +1,35 @@
+---
+const { currentPage = 'home' } = Astro.props;
+const navLinks = [
+  { href: '/journey.html', label: 'Journey' },
+  { href: '/writing.html', label: 'Writing' },
+];
+---
+<section id="landing">
+  <div class="landing-container horizontal-align container-fluid">
+    <nav class="navbar">
+      <div class="container-fluid">
+        <div class="nav-logo">
+          <a href="/">
+            <h1>JL</h1>
+          </a>
+        </div>
+        <div class="nav-container">
+          {navLinks.map((link) => (
+            <div class="nav-item">
+              <a href={link.href} aria-current={currentPage === link.label.toLowerCase() ? 'page' : undefined}>
+                <h2>{link.label}</h2>
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </nav>
+
+    <slot />
+  </div>
+
+  <div class="landing-angular-filter full">
+    <div class="landing-city full"></div>
+  </div>
+</section>
