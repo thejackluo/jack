@@ -4,3 +4,4 @@ web-bundles/
 # BMAD (local only)
 .bmad-core/
 .bmad-*/
+_legacy_backup_pre_astro/
