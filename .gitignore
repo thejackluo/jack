@@ -1,2 +1,6 @@
-.bmad/
 .cursor/
+.claude/
+web-bundles/
+# BMAD (local only)
+.bmad-core/
+.bmad-*/
