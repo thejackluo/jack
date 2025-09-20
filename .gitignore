@@ -5,7 +5,7 @@
 /.roo
 /.claude
 /.claude-flow
-
+node_modules
 
 
 # Claude Flow generated files
