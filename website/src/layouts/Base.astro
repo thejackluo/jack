@@ -40,14 +40,12 @@ const {
       <Header currentPage={currentPage}>
         <slot name="hero" />
       </Header>
-      <main>
-        <slot />
-      </main>
+      <slot />
       <Footer />
     </div>
 
-    <script src="/lib/js/aos.js"></script>
-    <script src="/lib/js/bootstrap.js"></script>
-    <script src="/src/js/script.js"></script>
+    <script is:inline src="/lib/js/aos.js"></script>
+    <script is:inline src="/lib/js/bootstrap.js"></script>
+    <script is:inline src="/src/js/script.js"></script>
   </body>
 </html>

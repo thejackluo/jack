@@ -1,21 +1,51 @@
-# Github Repo Name: jack  
-Hello everyone, this is the fourth iteration of my personal website.  
-Everything is open source and free to use, just remember to contact me for author permission  
+# Github Repo Name: jack
+
+Hello everyone, this is the fourth iteration of my personal website.
+Everything is open source and free to use, just remember to contact me for author permission.
 Current version: 4.3.2 (planning to create a basic update log for the website).
 
-# What is this project about?  
-This is the most up-to-date version of my [personal website](https://jack-luo.com)!  
-It details my progress with discovering life, blogs, and (in the future) projects. My goal for this website is to capture who I am as a person and create a space with freedom to explore how to best arrange visual content!! 
+## Getting Started
+
+### Prerequisites
+- Node.js 18 or higher (Astro requires the modern runtime)
+
+### Installation
+```bash
+npm install
+```
+
+### Local Development
+Run the Astro dev server and open the site at the printed URL (default http://localhost:4321):
+```bash
+npm run dev
+```
+The command provides hot reloading and uses the Markdown/SSG pipeline so future content stories slot in without additional configuration.
+
+### Production Build & Preview
+```bash
+npm run build   # outputs static assets to website/dist/
+npm run preview # serves the built output for smoke testing
+```
+`npm run build` is also the command you should wire into CI to guard against regressions in the static build.
+
+## Directory Notes
+- `src/` now contains Astro components, layouts, and pages.
+- Legacy static assets (CSS, JS, HTML, images, fonts, icons) live in `public/` so they are copied verbatim into `dist/` during builds.
+- Historical static files are preserved under `_legacy_backup_pre_astro/` for reference.
+
+## What is this project about?
+This is the most up-to-date version of my [personal website](https://jack-luo.com)!
+It details my progress with discovering life, blogs, and (in the future) projects. My goal for this website is to capture who I am as a person and create a space with freedom to explore how to best arrange visual content!!
 This website is going to be a continuous process. My next steps is to put more blogs in!
 
-# Future Updates  
+## Future Updates
 - A better rendition of the journey section. Especially showing the projects (DONE)
 - More blogs on the website (hosted natively) (WIP)
 - Convert to Next.js (WIP)
 
-# Version History
+## Version History
 
-## v4.3 (October 2024) (new pages)
+### v4.3 (October 2024) (new pages)
 - Organized different files into new folders (Oct 18, 2024)
 - Added funny scenarios on personal website (Oct 18, 2024)
 - Added toy design content:
@@ -25,7 +55,7 @@ This website is going to be a continuous process. My next steps is to put more b
   - Migrated PDFs (Oct 11, 2024)
   - Set up toy design site (Oct 11, 2024)
 
-## v4.2 (September - October 2024) (2024 information update)
+### v4.2 (September - October 2024) (2024 information update)
 - Added books page (Oct 7, 2024)
 - Updated blogs (Sep 7, 2024)
 - Updated journey book list (Sep 7, 2024)
@@ -33,12 +63,12 @@ This website is going to be a continuous process. My next steps is to put more b
 - Updated website description (Sep 6, 2024)
 - Updated preliminary description (Sep 4, 2024)
 
-## v4.1 (July 2024) (minor blog updates)
+### v4.1 (July 2024) (minor blog updates)
 - Updated tagline (Jul 9, 2024)
 - Edited existing blog (Jul 9, 2024)
 - Added a new blog (Jul 8, 2024)
 
-## v4.0 (January 2024) (major page adds)
+### v4.0 (January 2024) (major page adds)
 - Major update to projects section:
   - Updated images for projects (Jan 6, 2024)
   - Finished updating project descriptions (Jan 6, 2024)
@@ -52,8 +82,8 @@ This website is going to be a continuous process. My next steps is to put more b
 - Updated main descriptions and files (Jan 2, 2024)
 - Fixed "thejackluo" link bug (Jan 2, 2024)
 
-## v3.0 (December 2023) (major page adds)
+### v3.0 (December 2023) (major page adds)
 UPDATE THIS
 
-# Author
-Jack Luo  
+## Author
+Jack Luo
