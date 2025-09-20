@@ -30,6 +30,7 @@ npm run preview # serves the built output for smoke testing
 
 ## Directory Notes
 - `src/` now contains Astro components, layouts, and pages.
+- Markdown collections live in `src/content/{blogs,projects}` with schemas defined in `src/content/config.ts`.
 - Legacy static assets (CSS, JS, HTML, images, fonts, icons) live in `public/` so they are copied verbatim into `dist/` during builds.
 - Historical static files are preserved under `_legacy_backup_pre_astro/` for reference.
 
@@ -84,6 +85,39 @@ This website is going to be a continuous process. My next steps is to put more b
 
 ### v3.0 (December 2023) (major page adds)
 UPDATE THIS
+
+## Content Collections
+- Blogs and projects are now powered by Astro content collections. Schemas live in `src/content/config.ts` to enforce required frontmatter.
+- Legacy HTML sources remain under `public/` and `_legacy_backup_pre_astro/` for reference; migrated Markdown lives in `src/content/blogs/` and `src/content/projects/`.
+
+## Authoring Workflow
+1. Generate a stub: `npm run new:blog <slug> "Title"` or `npm run new:project <slug> "Title"`. This copies the template and fills placeholders (date, hero paths).
+2. Drop supporting assets in `public/assets/blogs/<slug>/` or `public/assets/projects/` before wiring them into frontmatter.
+3. Fill in required fields (`tags`, `summary`, `description`, `tech`, etc.) and follow the style guidance below for the main body.
+4. Run `npm run validate:content` to catch schema issues early, then `npm run build` before opening a PR.
+5. Update any cross-links (e.g., README lists, nav cards) if the new entry should be surfaced elsewhere.
+
+## Style & Voice Guidelines
+Research inputs: reviewed the Medium posts listed in `ALL_BLOGS.md` (e.g., *The World Map of Higher Ed*, *Vending Machine Dreams*, *Why do people like quirky cultures?*, *Building for Decades*) and benchmarked portfolio case studies from Linear, Figma, and Superlist. Key takeaways drive the guidance below.
+
+### Blog Voice & Structure
+- **Hook fast**: open with a vivid metaphor or tension in the first 2 sentences (mirrors the high-performing Medium posts).
+- **Section the narrative**: use `##` headings every 3–4 paragraphs to alternate between story and analysis.
+- **Data + reflection pairing**: cite a stat, anecdote, or quote, then immediately unpack the personal lesson (keeps the tone honest but tactical).
+- **CTA framing**: close with a prompt—experiment to try, question to journal on, or resource to explore—to maintain the reflective yet actionable voice.
+- **Tone checklist**: curious, candid, slightly contrarian; avoid corporate jargon, prefer concrete verbs, and keep sentences under ~22 words.
+
+### Project Case Studies
+- **Hero summary**: lead with problem → solution → outcome in 2 sentences; mention differentiator (e.g., automation depth) to echo best-in-class design portfolios.
+- **Problem/Solution/Impact** headers: readers scan for the before/after quickly; use short bullet lists for key technical decisions.
+- **Surface evidence**: include metrics, user quotes, or shipped artifacts (screenshots, links) to prove traction.
+- **Tech stack clarity**: limit to 3–5 technologies, focusing on the pieces that explain how the solution works.
+- **Role transparency**: a dedicated line on what you personally owned (architecture? research? ops?) builds trust.
+
+## Validation Checklist
+- `npm run validate:content` — runs `astro check` to confirm schema + type safety.
+- `npm run build` — ensures the production content pipeline compiles without frontmatter regressions.
+- Manual spot-check: open generated Markdown in a Markdown preview (or Astro dev) to verify hero paths and internal links.
 
 ## Author
 Jack Luo

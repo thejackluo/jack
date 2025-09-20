@@ -40,4 +40,43 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { blogs, projects };
+const blogTemplateSchema = z.object({
+  title: z.string(),
+  publishDate: z.string(),
+  tags: z.array(z.string()).nonempty(),
+  excerpt: z.string(),
+  heroImage: z.string(),
+  externalUrl: z.string().optional().nullable(),
+});
+
+const projectTemplateSchema = z.object({
+  title: z.string(),
+  role: z.string(),
+  tech: z.array(z.string()).nonempty(),
+  summary: z.string(),
+  description: z.string(),
+  gallery: z
+    .array(
+      z.object({
+        src: z.string(),
+        alt: z.string().default(''),
+        caption: z.string().optional(),
+      })
+    )
+    .default([]),
+  links: z
+    .array(
+      z.object({
+        label: z.string(),
+        url: z.string().url(),
+      })
+    )
+    .default([]),
+});
+
+const templates = defineCollection({
+  type: 'content',
+  schema: z.union([blogTemplateSchema, projectTemplateSchema]),
+});
+
+export const collections = { blogs, projects, templates };

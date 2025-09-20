@@ -12,7 +12,10 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "test": "astro check"
+    "test": "astro check",
+    "new:blog": "node scripts/new-blog.mjs",
+    "new:project": "node scripts/new-project.mjs",
+    "validate:content": "astro check"
   },
   "repository": {
     "type": "git",
@@ -26,5 +29,9 @@
   "homepage": "https://github.com/thejackluo/jackluo-website-v4#readme",
   "dependencies": {
     "astro": "^5.13.9"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.8.2",
+    "typescript": "^5.6.3"
   }
 }
