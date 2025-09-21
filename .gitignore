@@ -5,3 +5,5 @@ web-bundles/
 .bmad-core/
 .bmad-*/
 _legacy_backup_pre_astro/
+.swarm/
+.claude-flow/
