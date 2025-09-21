@@ -1,0 +1,44 @@
+{
+  "mcpServers": {
+    "firecrawl": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-firecrawl"],
+      "env": {
+        "FIRECRAWL_API_KEY": "<<FIRECRAWL_API_KEY>>",
+        "FIRECRAWL_BASE_URL": "https://api.firecrawl.dev"
+      }
+    },
+    "puppeteer": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-puppeteer"],
+      "env": {
+        "MCP_SERVER_PUPPETEER_HEADLESS": "true",
+        "MCP_SERVER_PUPPETEER_NAVIGATION_TIMEOUT": "15000"
+      }
+    },
+    "exa-search": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-exa"],
+      "env": {
+        "EXA_API_KEY": "<<EXA_API_KEY>>",
+        "EXA_DEFAULT_NUM_RESULTS": "5"
+      }
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem"],
+      "env": {
+        "MCP_SERVER_FILESYSTEM_ROOT": "<<ABSOLUTE_PATH_TO_REPO>>",
+        "MCP_SERVER_FILESYSTEM_MODE": "rw"
+      }
+    },
+    "notion": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-notion"],
+      "env": {
+        "NOTION_API_KEY": "<<NOTION_API_KEY>>",
+        "NOTION_ROOT_PAGE_IDS": "<<PAGE_ID_OR_COMMA_SEPARATED_LIST>>"
+      }
+    }
+  }
+}
