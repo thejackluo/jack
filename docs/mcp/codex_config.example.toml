@@ -1,0 +1,37 @@
+# Sample Codex CLI configuration focused on MCP server setup.
+# Copy this file to your Codex config directory and replace the placeholders.
+#
+# macOS / Linux:   ~/.codex/config.toml
+# Windows:         %APPDATA%/codex/config.toml  (e.g. C:\\Users\\<you>\\AppData\\Roaming\\codex\\config.toml)
+#
+# If you already have an existing config, merge the [mcp_servers.*] tables rather than overwriting.
+
+# Optional: link to a profile where you keep other Codex defaults (model, approvals, etc.)
+# profile = "default"
+
+[mcp_servers.firecrawl]
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-firecrawl"]
+# Provide the Firecrawl API key at runtime. Keep secrets out of version control.
+env = { FIRECRAWL_API_KEY = "<<FIRECRAWL_API_KEY>>", FIRECRAWL_BASE_URL = "https://api.firecrawl.dev" }
+
+[mcp_servers.puppeteer]
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-puppeteer"]
+env = { MCP_SERVER_PUPPETEER_HEADLESS = "true", MCP_SERVER_PUPPETEER_NAVIGATION_TIMEOUT = "15000" }
+
+[mcp_servers.exa]
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-exa"]
+env = { EXA_API_KEY = "<<EXA_API_KEY>>", EXA_DEFAULT_NUM_RESULTS = "5" }
+
+[mcp_servers.filesystem]
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-filesystem"]
+# On Windows, keep the path escaped or wrap it with double backslashes.
+env = { MCP_SERVER_FILESYSTEM_ROOT = "<<ABSOLUTE_PATH_TO_REPO>>", MCP_SERVER_FILESYSTEM_MODE = "rw" }
+
+[mcp_servers.notion]
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-notion"]
+env = { NOTION_API_KEY = "<<NOTION_API_KEY>>", NOTION_ROOT_PAGE_IDS = "<<PAGE_ID_OR_COMMA_SEPARATED_LIST>>" }

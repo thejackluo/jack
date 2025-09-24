@@ -44,16 +44,29 @@ npm install --save-dev \
 
 When using Claude Desktop, `npx -y` in the configuration will automatically run the project-local copy if it exists, or fetch the package if not.
 
+## Configuration Locations
+
+- **Claude Desktop**: `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS), `%APPDATA%/Claude/claude_desktop_config.json` (Windows), or `~/.config/Claude/claude_desktop_config.json` (Linux).
+- **OpenAI Codex CLI**: `$CODEX_HOME/config.toml` where `$CODEX_HOME` defaults to `~/.codex` (Windows: `%APPDATA%/codex/config.toml`).
+
+For Codex, you can copy `docs/mcp/codex_config.example.toml` into that directory and replace the placeholder values. Merge the `[mcp_servers.*]` tables with any existing configuration instead of overwriting other settings.
+
 ## Configuration File
 
-1. Copy `docs/mcp/claude_desktop_config.example.json` to your OS-specific Claude config location:
-   - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
-   - Windows: `%APPDATA%/Claude/claude_desktop_config.json`
-   - Linux: `~/.config/Claude/claude_desktop_config.json`
+### Claude Desktop
+1. Copy `docs/mcp/claude_desktop_config.example.json` to your OS-specific Claude config location.
 2. Replace every `<<PLACEHOLDER>>` value with your real tokens, paths, or preferred options.
 3. Restart Claude Desktop (or reload your MCP client) so it rereads the config.
 
 If you already have a config file, merge the `mcpServers` entries instead of overwriting.
+
+### OpenAI Codex CLI
+1. Copy `docs/mcp/codex_config.example.toml` to `$CODEX_HOME/config.toml` (`$CODEX_HOME` defaults to `~/.codex`, Windows: `%APPDATA%/codex/config.toml`).
+2. Merge the `[mcp_servers.*]` tables with any existing configuration so you keep other preferences (models, approvals, etc.).
+3. Replace placeholder values with your real API keys, Notion page IDs, and the absolute path to this repository.
+4. Restart Codex (or run `codex mcp list`) to ensure the servers load successfully.
+
+_Current workstation:_ Codex is already pointed at `C:\Users\Jack Luo\AppData\Roaming\codex\config.toml` with these MCP blocks; only the placeholder secrets need to be filled in before use.
 
 ## Server-Specific Notes
 
@@ -95,6 +108,8 @@ If you already have a config file, merge the `mcpServers` entries instead of ove
 2. Ask Claude to run a simple tool from each server, e.g. "List files in the repo" or "Search Exa for MCP".
 3. For Puppeteer, request a navigation command (e.g. "Open example.com") to confirm the browser automation works.
 4. Monitor the Claude Desktop logs (`~/Library/Logs/Claude/` or `%APPDATA%/Claude/logs/`) if any server fails to start.
+5. For Codex CLI, run `codex mcp list` (or start a session and ask the agent to "list available MCP servers") and confirm each server reports `connected`.
+6. If a Codex server fails, rerun with `RUST_LOG=codex_core=debug codex mcp list` (or tail `~/.codex/log/codex-tui.log`) to surface the underlying error and verify that the required environment variables are set.
 
 ## Troubleshooting
 
