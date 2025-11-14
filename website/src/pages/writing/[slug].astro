@@ -112,35 +112,49 @@ const authorImage = '/assets/images/jack/main.jpg';
 </BaseLayout>
 
 <style>
+  /* Set body and html background to black to prevent white space */
+  :global(body),
+  :global(html) {
+    background-color: #000;
+    margin: 0;
+    padding: 0;
+  }
+
   /* Ensure landing section takes full viewport height */
   :global(#fullpage) {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: #000;
   }
 
   :global(#landing) {
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
     overflow-x: hidden;
+    min-height: auto;
+    background-color: #000;
+    width: 100%;
   }
 
   :global(.landing-container) {
     flex: 1;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: auto;
+    width: 100%;
+    background-color: #000;
   }
 
   .landing-main {
-    padding: 2rem 0 4rem;
+    padding: 2rem 0 6rem;
     width: 100%;
     display: flex;
     align-items: flex-start;
     justify-content: center;
     flex: 1;
+    min-height: auto;
   }
 
   .landing-main-center {
@@ -182,8 +196,8 @@ const authorImage = '/assets/images/jack/main.jpg';
   }
 
   .blog-post-title {
-    font-size: 1.5rem;
-    margin: 0 0 1.5rem;
+    font-size: 2.5rem;
+    margin: 0 0 2rem;
     color: #fff;
     line-height: 1.3;
     font-family: "Dual-300", sans-serif;
@@ -258,26 +272,26 @@ const authorImage = '/assets/images/jack/main.jpg';
   .blog-post-content :global(h3),
   .blog-post-content :global(h4) {
     color: #fff;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.25rem;
     font-family: "Dual-300", sans-serif;
     font-weight: 300;
   }
 
   .blog-post-content :global(h1) {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
   }
 
   .blog-post-content :global(h2) {
-    font-size: 1.375rem;
+    font-size: 2rem;
   }
 
   .blog-post-content :global(h3) {
-    font-size: 1.25rem;
+    font-size: 1.75rem;
   }
 
   .blog-post-content :global(h4) {
-    font-size: 1.125rem;
+    font-size: 1.5rem;
   }
 
   .blog-post-content :global(p) {
@@ -408,12 +422,11 @@ const authorImage = '/assets/images/jack/main.jpg';
   /* Responsive Design */
   @media (max-width: 768px) {
     .landing-main {
-      padding: 1.5rem 0;
-      max-height: 75vh;
+      padding: 1.5rem 0 4rem;
     }
 
     .blog-post-title {
-      font-size: 1.25rem;
+      font-size: 2rem;
     }
 
     .blog-card-img {
@@ -432,15 +445,15 @@ const authorImage = '/assets/images/jack/main.jpg';
     }
 
     .blog-post-content :global(h1) {
-      font-size: 1.25rem;
+      font-size: 2rem;
     }
 
     .blog-post-content :global(h2) {
-      font-size: 1.125rem;
+      font-size: 1.75rem;
     }
 
     .blog-post-content :global(h3) {
-      font-size: 1rem;
+      font-size: 1.5rem;
     }
 
     .blog-post-navigation {
@@ -455,7 +468,7 @@ const authorImage = '/assets/images/jack/main.jpg';
 
   @media (max-width: 576px) {
     .blog-post-title {
-      font-size: 1.125rem;
+      font-size: 1.75rem;
     }
 
     .blog-card-img {
@@ -465,6 +478,18 @@ const authorImage = '/assets/images/jack/main.jpg';
 
     .blog-post-content {
       font-size: 0.8125rem;
+    }
+
+    .blog-post-content :global(h1) {
+      font-size: 1.75rem;
+    }
+
+    .blog-post-content :global(h2) {
+      font-size: 1.5rem;
+    }
+
+    .blog-post-content :global(h3) {
+      font-size: 1.25rem;
     }
   }
 </style>
