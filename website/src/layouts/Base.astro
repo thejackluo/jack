@@ -33,7 +33,10 @@ const {
     <link rel="stylesheet" href={`${import.meta.env.BASE_URL}src/css/footer.css`} />
     <link rel="stylesheet" href={`${import.meta.env.BASE_URL}src/css/about.css`} />
     {currentPage === 'writing' && (
-      <link rel="stylesheet" href={`${import.meta.env.BASE_URL}src/css/writing.css`} />
+      <>
+        <link rel="stylesheet" href={`${import.meta.env.BASE_URL}src/css/writing.css`} />
+        <link rel="stylesheet" href={`${import.meta.env.BASE_URL}src/css/blog.css`} />
+      </>
     )}
 
     <script defer data-domain="jack-luo.com" src="https://plausible.io/js/script.js"></script>
