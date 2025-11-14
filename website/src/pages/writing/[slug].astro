@@ -34,6 +34,24 @@ const formattedDate = `${month} ${day}, ${year}`;
 
 // Render markdown content
 const { Content } = await blog.render();
+
+// Calculate reading time (average 200 words per minute)
+// Try to access raw markdown content, fallback to default
+let readingTime = 7; // Default fallback
+try {
+  // Astro content collections may have rawBody() method
+  const rawContent = typeof blog.rawBody === 'function' ? blog.rawBody() : (blog.body || '');
+  if (rawContent) {
+    const wordCount = rawContent.split(/\s+/).filter(word => word.length > 0).length;
+    readingTime = Math.max(1, Math.ceil(wordCount / 200));
+  }
+} catch (e) {
+  // If body is not accessible, use default
+  readingTime = 7;
+}
+
+// Author profile image path
+const authorImage = '/assets/images/jack/main.jpg';
 ---
 
 <BaseLayout 
@@ -50,16 +68,14 @@ const { Content } = await blog.render();
           <h2 class="blog-post-title">{blog.data.title}</h2>
           
           <div class="blog-card">
-            {blog.data.heroImage && (
-              <img
-                class="blog-card-img"
-                src={blog.data.heroImage}
-                alt="Jack Luo"
-              />
-            )}
+            <img
+              class="blog-card-img"
+              src={authorImage}
+              alt="Jack Luo"
+            />
             <div class="blog-card-text">
               <h3>Jack Luo</h3>
-              <h4>7 minute read</h4>
+              <h4>{readingTime} minute read</h4>
             </div>
           </div>
 
@@ -96,19 +112,35 @@ const { Content } = await blog.render();
 </BaseLayout>
 
 <style>
-  /* Ensure landing section takes full height */
+  /* Ensure landing section takes full viewport height */
+  :global(#fullpage) {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
   :global(#landing) {
     min-height: 100vh;
-    height: auto;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  :global(.landing-container) {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
   }
 
   .landing-main {
-    padding: 2rem 0;
-    min-height: calc(100vh - 15vh);
+    padding: 2rem 0 4rem;
     width: 100%;
     display: flex;
     align-items: flex-start;
     justify-content: center;
+    flex: 1;
   }
 
   .landing-main-center {
@@ -162,14 +194,14 @@ const { Content } = await blog.render();
   .blog-card {
     display: flex;
     flex-direction: row;
-    margin: 1.5rem 0 2rem;
+    margin: 2em 0;
     justify-content: center;
     align-items: center;
   }
 
   .blog-card-img {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     filter: drop-shadow(0px 0px 20px rgba(255, 255, 255, 0.5));
     transition: all 0.3s ease;
@@ -185,20 +217,20 @@ const { Content } = await blog.render();
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    font-size: 0.75em;
+    font-size: 1em;
     padding: 0.5em 0;
-    margin-left: 1.5em;
+    margin-left: 2em;
   }
 
   .blog-card-text h3 {
-    font-size: 1em;
+    font-size: 1.25em;
     margin: 0;
     color: #fff;
     font-family: "Dual-300", sans-serif;
   }
 
   .blog-card-text h4 {
-    font-size: 0.875em;
+    font-size: 1em;
     margin: 0.25em 0 0;
     color: rgba(255, 255, 255, 0.7);
     font-family: "PP Stellar", sans-serif;
@@ -213,6 +245,12 @@ const { Content } = await blog.render();
     font-size: 0.9375rem;
     font-family: "PP Stellar", sans-serif;
     text-align: left;
+  }
+
+  /* Hide duplicate author info from markdown content */
+  .blog-post-content :global(blockquote:first-of-type),
+  .blog-post-content :global(p:has(img[alt*="Jack"])) {
+    display: none;
   }
 
   .blog-post-content :global(h1),
