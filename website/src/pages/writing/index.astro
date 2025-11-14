@@ -71,8 +71,46 @@ const allYears = [...new Set(sortedBlogs.map(blog => blog.data.publishDate.getFu
 </BaseLayout>
 
 <style>
+  /* Ensure body/html have dark background */
+  :global(body),
+  :global(html) {
+    background-color: #000;
+  }
+
+  /* Ensure fullpage uses flexbox layout */
+  :global(#fullpage) {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #000;
+  }
+
+  /* Ensure landing section contains everything - override any global styles */
+  :global(#landing) {
+    display: flex;
+    flex-direction: column;
+    background-color: #000;
+    min-height: auto;
+    width: 100%;
+    overflow-x: hidden;
+    /* Don't use overflow-y: auto here - let page scroll naturally */
+  }
+
+  :global(.landing-container) {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: auto;
+    width: 100%;
+    background-color: #000;
+  }
+
   .landing-main {
-    padding: 2rem 0;
+    padding: 2rem 0 4rem;
+    min-height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   .landing-name {
@@ -84,6 +122,8 @@ const allYears = [...new Set(sortedBlogs.map(blog => blog.data.publishDate.getFu
     overflow-x: hidden;
     max-height: 65vh;
     padding: 0 1rem;
+    /* Ensure it scrolls within the container */
+    flex-shrink: 0;
   }
 
   .blog-card {
