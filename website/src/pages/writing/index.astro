@@ -1,0 +1,270 @@
+---
+import BaseLayout from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+// Fetch all blog posts and sort by publish date (newest first)
+const allBlogs = await getCollection('blogs');
+const sortedBlogs = allBlogs.sort((a, b) => 
+  b.data.publishDate.getTime() - a.data.publishDate.getTime()
+);
+
+// Extract unique tags and years for future filtering
+const allTags = [...new Set(sortedBlogs.flatMap(blog => blog.data.tags))].sort();
+const allYears = [...new Set(sortedBlogs.map(blog => blog.data.publishDate.getFullYear()))].sort((a, b) => b - a);
+---
+
+<BaseLayout 
+  title="Writing | Jack Luo"
+  description="Thoughts, reflections, and ideas from Jack Luo"
+  currentPage="writing"
+>
+  <div slot="hero" class="landing-main horizontal-align container-fluid">
+    <div class="landing-main-center row landing-row">
+      <h1 class="landing-name">FEATURED BLOGS</h1>
+    </div>
+    <div class="blog-list">
+      {sortedBlogs.map((blog) => {
+        const year = blog.data.publishDate.getFullYear();
+        const month = blog.data.publishDate.toLocaleString('default', { month: 'long' });
+        const day = blog.data.publishDate.getDate();
+        const formattedDate = `${month} ${day}, ${year}`;
+        
+        return (
+          <div class="row">
+            <a href={`/writing/${blog.slug}`} class="blog-card-link">
+              <article class="blog-card">
+                <div class="blog-card-content">
+                  {blog.data.heroImage && (
+                    <div class="blog-card-image-wrapper">
+                      <img 
+                        src={blog.data.heroImage} 
+                        alt={blog.data.title}
+                        class="blog-card-img"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+                  <div class="blog-card-text">
+                    <h2 class="blog-card-title">{blog.data.title}</h2>
+                    <p class="blog-card-excerpt">{blog.data.excerpt}</p>
+                    <div class="blog-card-meta">
+                      <time class="blog-card-date" datetime={blog.data.publishDate.toISOString()}>
+                        {formattedDate}
+                      </time>
+                      {blog.data.tags.length > 0 && (
+                        <div class="blog-card-tags">
+                          {blog.data.tags.map(tag => (
+                            <span class="blog-tag">{tag}</span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </a>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .landing-main {
+    padding: 2rem 0;
+  }
+
+  .landing-name {
+    margin-bottom: 2rem;
+  }
+
+  .blog-list {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 65vh;
+    padding: 0 1rem;
+  }
+
+  .blog-card {
+    margin-bottom: 1.5rem;
+  }
+
+  .blog-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    width: 100%;
+  }
+
+  .blog-card-content {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+    background: radial-gradient(
+      50% 50% at 50% 50%,
+      rgba(217, 217, 217, 0.05) 0%,
+      rgba(217, 217, 217, 0.02) 100%
+    );
+    box-shadow: inset 0px 5px 10px -5px rgba(255, 255, 255, 0.1),
+      inset 0px 50px 50px rgba(255, 255, 255, 0.05),
+      inset 0px 0px 40px rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(50px);
+    border-radius: 24px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .blog-card-content:hover {
+    background: radial-gradient(
+      50% 50% at 50% 50%,
+      rgba(217, 217, 217, 0.08) 0%,
+      rgba(217, 217, 217, 0.04) 100%
+    );
+    transform: translateY(-4px);
+    box-shadow: inset 0px 5px 10px -5px rgba(255, 255, 255, 0.15),
+      inset 0px 50px 50px rgba(255, 255, 255, 0.08),
+      inset 0px 0px 40px rgba(255, 255, 255, 0.08),
+      0px 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .blog-card-image-wrapper {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .blog-card-img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    filter: drop-shadow(0px 0px 30px rgba(255, 255, 255, 0.4));
+    transition: all 0.4s ease;
+  }
+
+  .blog-card-content:hover .blog-card-img {
+    transform: scale(1.08);
+    filter: drop-shadow(0px 0px 40px rgba(255, 255, 255, 0.6));
+  }
+
+  .blog-card-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+
+  .blog-card-title {
+    font-size: 1.5rem;
+    margin: 0;
+    color: #fff;
+    line-height: 1.3;
+    font-family: "Dual-300", sans-serif;
+    font-weight: 300;
+    transition: color 0.3s ease;
+  }
+
+  .blog-card-content:hover .blog-card-title {
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  .blog-card-excerpt {
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.6;
+    margin: 0;
+    font-family: "PP Stellar", sans-serif;
+  }
+
+  .blog-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 0.5rem;
+  }
+
+  .blog-card-date {
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.55);
+    font-family: "PP Stellar", sans-serif;
+  }
+
+  .blog-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .blog-tag {
+    font-size: 0.6875rem;
+    padding: 0.25rem 0.75rem;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    color: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+    font-family: "PP Stellar", sans-serif;
+  }
+
+  .blog-card-content:hover .blog-tag {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .blog-card-content {
+      flex-direction: column;
+      gap: 1.5rem;
+      padding: 1.5rem;
+    }
+
+    .blog-card-image-wrapper {
+      justify-content: center;
+    }
+
+    .blog-card-img {
+      width: 100px;
+      height: 100px;
+    }
+
+    .blog-card-title {
+      font-size: 1.25rem;
+      text-align: center;
+    }
+
+    .blog-card-excerpt {
+      text-align: center;
+      font-size: 0.875rem;
+    }
+
+    .blog-card-meta {
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .blog-card-content {
+      padding: 1.25rem;
+      border-radius: 16px;
+    }
+
+    .blog-card-img {
+      width: 80px;
+      height: 80px;
+    }
+
+    .blog-card-title {
+      font-size: 1.125rem;
+    }
+
+    .blog-card-excerpt {
+      font-size: 0.8125rem;
+    }
+  }
+</style>
+
