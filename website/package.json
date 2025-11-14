@@ -15,7 +15,9 @@
     "test": "astro check",
     "new:blog": "node scripts/new-blog.mjs",
     "new:project": "node scripts/new-project.mjs",
-    "validate:content": "astro check"
+    "validate:content": "astro check",
+    "format": "prettier --write \"**/*.{html,css,js,ts,json,md,astro}\"",
+    "format:check": "prettier --check \"**/*.{html,css,js,ts,json,md,astro}\""
   },
   "repository": {
     "type": "git",
@@ -32,6 +34,19 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.8.2",
+    "prettier": "^3.5.0",
     "typescript": "^5.6.3"
+  },
+  "prettier": {
+    "semi": false,
+    "printWidth": 100,
+    "tabWidth": 2,
+    "useTabs": false,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "bracketSpacing": true,
+    "arrowParens": "avoid",
+    "htmlWhitespaceSensitivity": "css",
+    "endOfLine": "lf"
   }
 }
