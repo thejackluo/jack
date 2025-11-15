@@ -1,0 +1,446 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/Base.astro';
+import { calculateReadingTime, formatReadingTime, removeCitationMarkers } from '../../utils/reading-time';
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blogs');
+
+  // Filter out draft posts
+  const draftSlugs = ['three-weeks-in-a-hacker-house', 'jack', 'luo'];
+  const publishedBlogs = blogEntries.filter(entry => !draftSlugs.includes(entry.slug));
+
+  return publishedBlogs.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'blogs'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const readingTime = calculateReadingTime(entry.body);
+
+// Format publish date
+const publishDate = entry.data.publishDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout
+  title={`${entry.data.title} - Jack Luo`}
+  description={entry.data.excerpt}
+  currentPage="writing"
+>
+  <article class="blog-post-container">
+    <!-- Back to Writing Link -->
+    <div class="back-link">
+      <a href="/writing">← Back to Writing</a>
+    </div>
+
+    <!-- Blog Header -->
+    <header class="blog-header">
+      <h1 class="blog-title">{entry.data.title}</h1>
+
+      <div class="blog-meta">
+        <time datetime={entry.data.publishDate.toISOString()}>
+          {publishDate}
+        </time>
+        <span class="meta-separator">•</span>
+        <span class="reading-time">{formatReadingTime(readingTime)}</span>
+      </div>
+
+      <div class="blog-tags">
+        {entry.data.tags.map(tag => (
+          <a href={`/writing?tag=${tag}`} class="blog-tag">
+            {tag}
+          </a>
+        ))}
+      </div>
+
+      {entry.data.heroImage && (
+        <div class="hero-image">
+          <img src={entry.data.heroImage} alt={entry.data.title} />
+        </div>
+      )}
+    </header>
+
+    <!-- Blog Content -->
+    <div class="blog-content">
+      <Content />
+    </div>
+
+    <!-- Blog Footer -->
+    <footer class="blog-footer">
+      <div class="blog-footer-divider"></div>
+
+      <div class="blog-footer-content">
+        <p>
+          Thanks for reading! If you enjoyed this post, feel free to share it or
+          <a href="mailto:jack@hexahacks.com">reach out to me</a> with your thoughts.
+        </p>
+      </div>
+
+      <div class="back-link-footer">
+        <a href="/writing">← Back to all posts</a>
+      </div>
+    </footer>
+  </article>
+</BaseLayout>
+
+<style>
+  .blog-post-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  .back-link {
+    margin-bottom: 2rem;
+  }
+
+  .back-link a,
+  .back-link-footer a {
+    color: #4a90e2;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .back-link a:hover,
+  .back-link-footer a:hover {
+    color: #357abd;
+    text-decoration: underline;
+  }
+
+  /* Blog Header */
+  .blog-header {
+    margin-bottom: 3rem;
+  }
+
+  .blog-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+  }
+
+  .blog-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+
+  .meta-separator {
+    color: #ddd;
+  }
+
+  .blog-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .blog-tag {
+    display: inline-block;
+    padding: 0.4rem 0.9rem;
+    background: #f1f3f5;
+    color: #495057;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .blog-tag:hover {
+    background: #e9ecef;
+    color: #212529;
+  }
+
+  .hero-image {
+    width: 100%;
+    margin-bottom: 2rem;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Blog Content Styles */
+  .blog-content {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #2c3e50;
+  }
+
+  /* Typography */
+  .blog-content :global(h1),
+  .blog-content :global(h2),
+  .blog-content :global(h3),
+  .blog-content :global(h4),
+  .blog-content :global(h5),
+  .blog-content :global(h6) {
+    font-weight: 700;
+    line-height: 1.3;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: #1a1a1a;
+  }
+
+  .blog-content :global(h1) {
+    font-size: 2rem;
+  }
+
+  .blog-content :global(h2) {
+    font-size: 1.75rem;
+  }
+
+  .blog-content :global(h3) {
+    font-size: 1.5rem;
+  }
+
+  .blog-content :global(h4) {
+    font-size: 1.25rem;
+  }
+
+  .blog-content :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  .blog-content :global(strong),
+  .blog-content :global(b) {
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+
+  .blog-content :global(em),
+  .blog-content :global(i) {
+    font-style: italic;
+  }
+
+  /* Links */
+  .blog-content :global(a) {
+    color: #4a90e2;
+    text-decoration: none;
+    border-bottom: 1px solid #4a90e2;
+    transition: all 0.2s;
+  }
+
+  .blog-content :global(a:hover) {
+    color: #357abd;
+    border-bottom-color: #357abd;
+  }
+
+  /* Lists */
+  .blog-content :global(ul),
+  .blog-content :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 2rem;
+  }
+
+  .blog-content :global(li) {
+    margin-bottom: 0.75rem;
+    line-height: 1.7;
+  }
+
+  .blog-content :global(ul) {
+    list-style-type: disc;
+  }
+
+  .blog-content :global(ol) {
+    list-style-type: decimal;
+  }
+
+  .blog-content :global(ul ul),
+  .blog-content :global(ol ol),
+  .blog-content :global(ul ol),
+  .blog-content :global(ol ul) {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Blockquotes */
+  .blog-content :global(blockquote) {
+    border-left: 4px solid #4a90e2;
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: #555;
+  }
+
+  .blog-content :global(blockquote p) {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Code */
+  .blog-content :global(code) {
+    background: #f5f5f5;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9em;
+    color: #e83e8c;
+  }
+
+  .blog-content :global(pre) {
+    background: #2d2d2d;
+    color: #f8f8f2;
+    padding: 1.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 2rem 0;
+  }
+
+  .blog-content :global(pre code) {
+    background: none;
+    padding: 0;
+    color: inherit;
+    font-size: 0.9rem;
+  }
+
+  /* Images */
+  .blog-content :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 2rem 0;
+    display: block;
+  }
+
+  /* Horizontal Rule */
+  .blog-content :global(hr) {
+    border: none;
+    border-top: 2px solid #e9ecef;
+    margin: 3rem 0;
+  }
+
+  /* Tables */
+  .blog-content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+  }
+
+  .blog-content :global(th),
+  .blog-content :global(td) {
+    padding: 0.75rem;
+    border: 1px solid #e9ecef;
+    text-align: left;
+  }
+
+  .blog-content :global(th) {
+    background: #f8f9fa;
+    font-weight: 600;
+  }
+
+  /* Blog Footer */
+  .blog-footer {
+    margin-top: 4rem;
+  }
+
+  .blog-footer-divider {
+    border-top: 2px solid #e9ecef;
+    margin-bottom: 2rem;
+  }
+
+  .blog-footer-content {
+    text-align: center;
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .blog-footer-content a {
+    color: #4a90e2;
+    text-decoration: none;
+    border-bottom: 1px solid #4a90e2;
+  }
+
+  .blog-footer-content a:hover {
+    color: #357abd;
+    border-bottom-color: #357abd;
+  }
+
+  .back-link-footer {
+    text-align: center;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .blog-post-container {
+      padding: 1.5rem 1rem;
+    }
+
+    .blog-title {
+      font-size: 2rem;
+    }
+
+    .blog-content {
+      font-size: 1.05rem;
+    }
+
+    .blog-content :global(h1) {
+      font-size: 1.75rem;
+    }
+
+    .blog-content :global(h2) {
+      font-size: 1.5rem;
+    }
+
+    .blog-content :global(h3) {
+      font-size: 1.25rem;
+    }
+  }
+</style>
+
+<script>
+  // Remove citation markers from the rendered content
+  function cleanCitationMarkers() {
+    const blogContent = document.querySelector('.blog-content');
+    if (blogContent) {
+      // Remove citation markers like 【772938094626183†L36-L39】
+      const walker = document.createTreeWalker(
+        blogContent,
+        NodeFilter.SHOW_TEXT,
+        null
+      );
+
+      const nodesToUpdate: { node: Text; newValue: string }[] = [];
+
+      let node: Text | null;
+      while ((node = walker.nextNode() as Text | null)) {
+        if (node.nodeValue) {
+          const cleaned = node.nodeValue.replace(/【[^】]*】/g, '');
+          if (cleaned !== node.nodeValue) {
+            nodesToUpdate.push({ node, newValue: cleaned });
+          }
+        }
+      }
+
+      // Update nodes after walking to avoid iterator issues
+      nodesToUpdate.forEach(({ node, newValue }) => {
+        node.nodeValue = newValue;
+      });
+    }
+  }
+
+  // Run on page load
+  cleanCitationMarkers();
+</script>
