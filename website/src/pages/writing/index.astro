@@ -72,77 +72,61 @@ const allYears = [...new Set(sortedBlogs.map(blog => blog.data.publishDate.getFu
 
 <style>
   /* ============================================
-     COMPREHENSIVE LAYOUT FIX
-     Structure: Nav (15vh) | Content (flex) | Footer
+     NATURAL PAGE SCROLL LAYOUT
+     Footer only visible when scrolling to bottom
      ============================================ */
 
-  /* Global layout structure */
+  /* Global layout structure - natural scroll */
   :global(body),
   :global(html) {
     background-color: #000;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    overflow-y: auto; /* Allow natural page scroll */
   }
 
-  /* Fullpage: flex container for entire page */
+  /* Fullpage: natural flow, no fixed height */
   :global(#fullpage) {
     display: flex !important;
     flex-direction: column !important;
     min-height: 100vh !important;
-    max-height: 100vh !important;
     background-color: #000;
-    overflow: hidden !important;
+    overflow: visible !important; /* Allow content to flow */
   }
 
-  /* Landing: contains nav + scrollable content */
+  /* Landing: natural height, no scrolling container */
   :global(#landing) {
-    display: flex !important;
-    flex-direction: column !important;
-    flex: 1 !important;
     background-color: #000;
-    height: auto !important; /* Override blog.css */
-    overflow: hidden !important; /* Override blog.css */
+    height: auto !important; /* Override blog.css height: 100% */
+    overflow: visible !important; /* Override blog.css overflow: auto */
     position: relative !important;
-    min-height: 0; /* Important for flex children */
   }
 
-  /* Landing container: flex layout for nav + content */
+  /* Landing container: relative positioning, natural height */
   :global(.landing-container) {
-    display: flex !important;
-    flex-direction: column !important;
-    height: 100% !important;
+    position: relative !important; /* Override landing.css absolute */
+    height: auto !important; /* Override landing.css height: 100vh */
     width: 100% !important;
     background-color: #000;
-    position: relative !important; /* Override landing.css absolute */
-    min-height: 0; /* Important for flex children */
   }
 
-  /* Nav bar: fixed height at top */
+  /* Nav bar */
   :global(nav.navbar) {
-    flex-shrink: 0 !important;
     height: 15vh !important;
-    min-height: 15vh !important;
-    max-height: 15vh !important;
   }
 
-  /* Content area: SCROLLABLE section that fills remaining space */
+  /* Content area: flows naturally, no internal scroll */
   .landing-main {
-    flex: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
     padding: 2rem 1rem 3rem;
     width: 100%;
-    min-height: 0; /* Forces flex item to respect parent */
     background-color: #000;
+    min-height: 60vh; /* Ensure some content height */
   }
 
-  /* Footer: always visible at bottom */
+  /* Footer: appears after content in document flow */
   :global(#footer) {
-    flex-shrink: 0 !important;
-    z-index: 10 !important; /* Override writing.css z-index: -3 */
+    z-index: 1 !important; /* Override writing.css z-index: -3 */
     position: relative !important;
     background: linear-gradient(180deg, rgba(20, 18, 60, 0.8) 0%, #000000 100%), #000000 !important;
   }
@@ -156,14 +140,10 @@ const allYears = [...new Set(sortedBlogs.map(blog => blog.data.publishDate.getFu
 
   .landing-name {
     margin-bottom: 2rem;
-    flex-shrink: 0;
     text-align: center;
   }
 
   .blog-list {
-    flex: 1;
-    overflow-y: visible; /* Let parent handle scroll */
-    overflow-x: hidden;
     padding: 0 1rem;
     display: flex;
     flex-direction: column;
