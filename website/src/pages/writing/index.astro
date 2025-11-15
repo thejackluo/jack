@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 
 // Fetch all blog posts and sort by publish date (newest first)
 const allBlogs = await getCollection('blogs');
-const sortedBlogs = allBlogs.sort((a, b) => 
+const sortedBlogs = allBlogs.sort((a, b) =>
   b.data.publishDate.getTime() - a.data.publishDate.getTime()
 );
 
@@ -13,7 +13,7 @@ const allTags = [...new Set(sortedBlogs.flatMap(blog => blog.data.tags))].sort()
 const allYears = [...new Set(sortedBlogs.map(blog => blog.data.publishDate.getFullYear()))].sort((a, b) => b - a);
 ---
 
-<BaseLayout 
+<BaseLayout
   title="Writing | Jack Luo"
   description="Thoughts, reflections, and ideas from Jack Luo"
   currentPage="writing"
@@ -28,7 +28,7 @@ const allYears = [...new Set(sortedBlogs.map(blog => blog.data.publishDate.getFu
         const month = blog.data.publishDate.toLocaleString('default', { month: 'long' });
         const day = blog.data.publishDate.getDate();
         const formattedDate = `${month} ${day}, ${year}`;
-        
+
         return (
           <div class="row">
             <a href={`/writing/${blog.slug}`} class="blog-card-link">
@@ -36,8 +36,8 @@ const allYears = [...new Set(sortedBlogs.map(blog => blog.data.publishDate.getFu
                 <div class="blog-card-content">
                   {blog.data.heroImage && (
                     <div class="blog-card-image-wrapper">
-                      <img 
-                        src={blog.data.heroImage} 
+                      <img
+                        src={blog.data.heroImage}
                         alt={blog.data.title}
                         class="blog-card-img"
                         loading="lazy"
@@ -71,63 +71,87 @@ const allYears = [...new Set(sortedBlogs.map(blog => blog.data.publishDate.getFu
 </BaseLayout>
 
 <style>
-  /* Ensure body/html have dark background */
+  /* ============================================
+     NATURAL PAGE SCROLL LAYOUT
+     Footer only visible when scrolling to bottom
+     ============================================ */
+
+  /* Global layout structure - natural scroll */
   :global(body),
   :global(html) {
     background-color: #000;
-  }
-
-  /* Ensure fullpage uses flexbox layout */
-  :global(#fullpage) {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    background-color: #000;
-  }
-
-  /* Ensure landing section contains everything - override any global styles */
-  :global(#landing) {
-    display: flex;
-    flex-direction: column;
-    background-color: #000;
-    min-height: auto;
-    width: 100%;
+    margin: 0;
+    padding: 0;
     overflow-x: hidden;
-    /* Don't use overflow-y: auto here - let page scroll naturally */
+    overflow-y: auto; /* Allow natural page scroll */
   }
 
+  /* Fullpage: natural flow, no fixed height */
+  :global(#fullpage) {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh !important;
+    background-color: #000;
+    overflow: visible !important; /* Allow content to flow */
+  }
+
+  /* Landing: natural height, no scrolling container */
+  :global(#landing) {
+    background-color: #000;
+    height: auto !important; /* Override blog.css height: 100% */
+    overflow: visible !important; /* Override blog.css overflow: auto */
+    position: relative !important;
+  }
+
+  /* Landing container: relative positioning, natural height */
   :global(.landing-container) {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    min-height: auto;
-    width: 100%;
+    position: relative !important; /* Override landing.css absolute */
+    height: auto !important; /* Override landing.css height: 100vh */
+    width: 100% !important;
     background-color: #000;
   }
 
+  /* Nav bar */
+  :global(nav.navbar) {
+    height: 15vh !important;
+  }
+
+  /* Content area: flows naturally, no internal scroll */
   .landing-main {
-    padding: 2rem 0 4rem;
-    min-height: auto;
+    padding: 2rem 1rem 3rem;
     width: 100%;
-    display: flex;
-    flex-direction: column;
+    background-color: #000;
+    min-height: 60vh; /* Ensure some content height */
+  }
+
+  /* Footer: appears after content in document flow */
+  :global(#footer) {
+    z-index: 1 !important; /* Override writing.css z-index: -3 */
+    position: relative !important;
+    background: linear-gradient(180deg, rgba(20, 18, 60, 0.8) 0%, #000000 100%), #000000 !important;
+  }
+
+  /* Background filters - keep behind content */
+  :global(.landing-angular-filter),
+  :global(.landing-city) {
+    position: fixed !important;
+    z-index: -1 !important;
   }
 
   .landing-name {
     margin-bottom: 2rem;
+    text-align: center;
   }
 
   .blog-list {
-    overflow-y: auto;
-    overflow-x: hidden;
-    max-height: 65vh;
     padding: 0 1rem;
-    /* Ensure it scrolls within the container */
-    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
   }
 
   .blog-card {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0; /* Handled by gap */
   }
 
   .blog-card-link {
@@ -257,6 +281,10 @@ const allYears = [...new Set(sortedBlogs.map(blog => blog.data.publishDate.getFu
 
   /* Responsive Design */
   @media (max-width: 768px) {
+    .landing-main {
+      padding: 1.5rem 1rem 2rem;
+    }
+
     .blog-card-content {
       flex-direction: column;
       gap: 1.5rem;
@@ -307,4 +335,3 @@ const allYears = [...new Set(sortedBlogs.map(blog => blog.data.publishDate.getFu
     }
   }
 </style>
-

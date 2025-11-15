@@ -17,7 +17,7 @@ const { blog } = Astro.props;
 
 // Get all blogs for navigation
 const allBlogs = await getCollection('blogs');
-const sortedBlogs = allBlogs.sort((a, b) => 
+const sortedBlogs = allBlogs.sort((a, b) =>
   b.data.publishDate.getTime() - a.data.publishDate.getTime()
 );
 
@@ -54,7 +54,7 @@ try {
 const authorImage = '/assets/images/jack/main.jpg';
 ---
 
-<BaseLayout 
+<BaseLayout
   title={`${blog.data.title} | Jack Luo`}
   description={blog.data.excerpt}
   currentPage="writing"
@@ -64,9 +64,9 @@ const authorImage = '/assets/images/jack/main.jpg';
       <div class="landing-main-center row">
         <div class="col-12">
           <a href="/writing" class="back-link">← Back to Writing</a>
-          
+
           <h2 class="blog-post-title">{blog.data.title}</h2>
-          
+
           <div class="blog-card">
             <img
               class="blog-card-img"
@@ -112,49 +112,71 @@ const authorImage = '/assets/images/jack/main.jpg';
 </BaseLayout>
 
 <style>
-  /* Set body and html background to black to prevent white space */
+  /* ============================================
+     NATURAL PAGE SCROLL LAYOUT
+     Footer only visible when scrolling to bottom
+     ============================================ */
+
+  /* Global layout structure - natural scroll */
   :global(body),
   :global(html) {
     background-color: #000;
     margin: 0;
     padding: 0;
-  }
-
-  /* Ensure landing section takes full viewport height */
-  :global(#fullpage) {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    background-color: #000;
-  }
-
-  :global(#landing) {
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
     overflow-x: hidden;
-    min-height: auto;
-    background-color: #000;
-    width: 100%;
+    overflow-y: auto; /* Allow natural page scroll */
   }
 
+  /* Fullpage: natural flow, no fixed height */
+  :global(#fullpage) {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh !important;
+    background-color: #000;
+    overflow: visible !important; /* Allow content to flow */
+  }
+
+  /* Landing: natural height, no scrolling container */
+  :global(#landing) {
+    background-color: #000;
+    height: auto !important; /* Override blog.css height: 100% */
+    overflow: visible !important; /* Override blog.css overflow: auto */
+    position: relative !important;
+  }
+
+  /* Landing container: relative positioning, natural height */
   :global(.landing-container) {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-height: auto;
-    width: 100%;
+    position: relative !important; /* Override landing.css absolute */
+    height: auto !important; /* Override landing.css height: 100vh */
+    width: 100% !important;
     background-color: #000;
   }
 
+  /* Nav bar */
+  :global(nav.navbar) {
+    height: 15vh !important;
+  }
+
+  /* Content area: flows naturally, no internal scroll */
   .landing-main {
-    padding: 2rem 0 6rem;
+    padding: 2rem 1rem 3rem;
     width: 100%;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    flex: 1;
-    min-height: auto;
+    background-color: #000;
+    min-height: 60vh; /* Ensure some content height */
+  }
+
+  /* Footer: appears after content in document flow */
+  :global(#footer) {
+    z-index: 1 !important; /* Override writing.css z-index: -3 */
+    position: relative !important;
+    background: linear-gradient(180deg, rgba(20, 18, 60, 0.8) 0%, #000000 100%), #000000 !important;
+  }
+
+  /* Background filters - keep behind content */
+  :global(.landing-angular-filter),
+  :global(.landing-city) {
+    position: fixed !important;
+    z-index: -1 !important;
   }
 
   .landing-main-center {
@@ -422,7 +444,7 @@ const authorImage = '/assets/images/jack/main.jpg';
   /* Responsive Design */
   @media (max-width: 768px) {
     .landing-main {
-      padding: 1.5rem 0 4rem;
+      padding: 1.5rem 1rem 2rem;
     }
 
     .blog-post-title {
@@ -493,4 +515,3 @@ const authorImage = '/assets/images/jack/main.jpg';
     }
   }
 </style>
-
