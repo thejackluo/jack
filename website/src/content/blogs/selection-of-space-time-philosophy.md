@@ -47,7 +47,7 @@ From this, we can infer two possibilities.
 
 1. The universe is finite.
 
-1. The universe is infinite.
+2. The universe is infinite.
 
 **Possibility 1**
 

@@ -1,5 +1,5 @@
 ---
-title: "How to get a MIT education, outside of MIT? (WeWork prologue)"
+title: "WeWork"
 publishDate: 2023-04-01
 tags:
   - "personal"
