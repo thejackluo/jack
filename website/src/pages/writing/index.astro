@@ -103,6 +103,10 @@ const allYears = [...new Set(blogs.map(blog => blog.data.publishDate.getFullYear
 
         <!-- Main Content -->
         <div class="col-12 col-lg-9 blog-content-container">
+          <div class="blog-list-header">
+            <h3>All Posts</h3>
+          </div>
+
           <div class="blog-list" id="blog-grid">
             {blogs.map(blog => (
               <article
@@ -250,10 +254,23 @@ const allYears = [...new Set(blogs.map(blog => blog.data.publishDate.getFullYear
     padding: 2rem 1rem;
   }
 
+  .blog-list-header {
+    margin-bottom: 2rem;
+  }
+
+  .blog-list-header h3 {
+    font-family: "Dual-300";
+    color: white;
+    font-size: 2rem;
+    text-align: left;
+    display: block;
+    margin: 0;
+  }
+
   .blog-list {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.25rem;
   }
 
   /* Blog Card */
