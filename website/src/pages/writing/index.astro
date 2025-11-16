@@ -34,14 +34,17 @@ const allYears = [...new Set(blogs.map(blog => blog.data.publishDate.getFullYear
   description="Essays, thoughts, and reflections on startups, technology, and life."
   currentPage="writing"
 >
-  <div slot="hero" class="landing-main container-fluid">
-    <div class="row landing-row">
-      <h1>Writing</h1>
-    </div>
-  </div>
-
   <section id="writing-section">
     <div class="container-fluid">
+      <!-- Page Title -->
+      <div class="row">
+        <div class="col-12">
+          <div class="writing-page-header">
+            <h1>All Blog Posts</h1>
+          </div>
+        </div>
+      </div>
+
       <div class="row">
         <!-- Left Sidebar -->
         <div class="col-12 col-lg-3 sidebar-container">
@@ -103,10 +106,6 @@ const allYears = [...new Set(blogs.map(blog => blog.data.publishDate.getFullYear
 
         <!-- Main Content -->
         <div class="col-12 col-lg-9 blog-content-container">
-          <div class="blog-list-header">
-            <h3>All Posts</h3>
-          </div>
-
           <div class="blog-list" id="blog-grid">
             {blogs.map(blog => (
               <article
@@ -160,6 +159,17 @@ const allYears = [...new Set(blogs.map(blog => blog.data.publishDate.getFullYear
   @import url('/src/css/writing.css');
   @import url('/src/css/blog.css');
 
+  /* Hide the default landing section for writing page */
+  :global(#landing) {
+    height: auto !important;
+    min-height: auto !important;
+  }
+
+  :global(.landing-container) {
+    height: auto !important;
+    position: relative !important;
+  }
+
   /* Writing Section */
   #writing-section {
     background: linear-gradient(
@@ -169,17 +179,36 @@ const allYears = [...new Set(blogs.map(blog => blog.data.publishDate.getFullYear
       ),
       linear-gradient(180deg, #000000 0%, #14123c 100%);
     min-height: 100vh;
-    padding: 3rem 0;
+    padding: 2rem 0 4rem 0;
+  }
+
+  /* Page Header */
+  .writing-page-header {
+    text-align: center;
+    margin: 2rem auto 3rem auto;
+    max-width: 1200px;
+  }
+
+  .writing-page-header h1 {
+    font-family: "Dual-300";
+    font-size: 3rem;
+    color: white;
+    margin: 0;
+    display: block;
+    text-align: center;
   }
 
   /* Sidebar Styling */
   .sidebar-container {
-    padding: 2rem 1rem;
+    padding: 0 1rem;
   }
 
   .sidebar-content {
+    position: -webkit-sticky;
     position: sticky;
-    top: 2rem;
+    top: 1rem;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
   }
 
   .filter-group {
@@ -251,26 +280,14 @@ const allYears = [...new Set(blogs.map(blog => blog.data.publishDate.getFullYear
 
   /* Blog Content Container */
   .blog-content-container {
-    padding: 2rem 1rem;
-  }
-
-  .blog-list-header {
-    margin-bottom: 2rem;
-  }
-
-  .blog-list-header h3 {
-    font-family: "Dual-300";
-    color: white;
-    font-size: 2rem;
-    text-align: left;
-    display: block;
-    margin: 0;
+    padding: 0 1rem;
+    max-width: 900px;
   }
 
   .blog-list {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 0.75rem;
   }
 
   /* Blog Card */
@@ -283,10 +300,11 @@ const allYears = [...new Set(blogs.map(blog => blog.data.publishDate.getFullYear
     box-shadow: inset 0px 5px 10px -5px rgba(255, 255, 255, 0.3),
       inset 0px 0px 40px rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(20px);
-    border-radius: 1rem;
-    padding: 2rem;
+    border-radius: 0.75rem;
+    padding: 1.75rem;
     transition: all 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0 1rem;
   }
 
   .blog-card:hover {
