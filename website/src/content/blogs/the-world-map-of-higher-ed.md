@@ -13,11 +13,11 @@ heroImage: ""
 
 ## Introduction
 
-Think of universities as sovereign states.  They have constitutions and tax systems (admissions and tuition), distinct export economies (research, patents and startups), and myths they tell about why they matter.  Once you see that, rankings look less like magic and more like a map you can use【750786703421728†L45-L59】.  I wrote this piece to help students and founders navigate that map without being blinded by prestige bubbles.
+Think of universities as sovereign states.  They have constitutions and tax systems (admissions and tuition), distinct export economies (research, patents and startups), and myths they tell about why they matter.  Once you see that, rankings look less like magic and more like a map you can use.  I wrote this piece to help students and founders navigate that map without being blinded by prestige bubbles.
 
 ## The superpowers
 
-Some schools resemble great powers.  **Harvard** is like a continental empire: it has a vast tax base through its endowment and alumni network, embassies in every industry and the ability to set standards because everyone already lives inside its economic orbit【750786703421728†L51-L55】.  **Stanford** feels like a rising industrial power; it sits next to the world’s most productive tech cluster and measures success in companies and patents rather than Latin mottos【750786703421728†L54-L58】.  **MIT** is the high‑tech state—small in population but immense in capability because of national R&D; **Princeton** echoes Switzerland’s quiet concentration of capital and mathematical precision; **Caltech** is a compact city‑state built for pure science【750786703421728†L54-L60】.
+Some schools resemble great powers.  **Harvard** is like a continental empire: it has a vast tax base through its endowment and alumni network, embassies in every industry and the ability to set standards because everyone already lives inside its economic orbit.  **Stanford** feels like a rising industrial power; it sits next to the world's most productive tech cluster and measures success in companies and patents rather than Latin mottos.  **MIT** is the high‑tech state—small in population but immense in capability because of national R&D; **Princeton** echoes Switzerland's quiet concentration of capital and mathematical precision; **Caltech** is a compact city‑state built for pure science.
 
 ## Why small countries win
 
@@ -25,4 +25,4 @@ Not every winner needs to be huge.  Institutions like Olin or Deep Springs show 
 
 ## What this means for you
 
-If you are choosing where to study or build, treat universities as trading partners rather than idols.  Look at their export industries and ask whether you can learn or contribute there.  Don’t conflate the map with the territory: a highly ranked institution may not have the program you need, while a smaller one might be the perfect fit.  And remember that you can build your own “country”—a community of collaborators and mentors—outside any campus.  When you view higher education as an economy of ideas instead of a hierarchy, you can navigate it on your own terms.
+If you are choosing where to study or build, treat universities as trading partners rather than idols.  Look at their export industries and ask whether you can learn or contribute there.  Don't conflate the map with the territory: a highly ranked institution may not have the program you need, while a smaller one might be the perfect fit.  And remember that you can build your own "country"—a community of collaborators and mentors—outside any campus.  When you view higher education as an economy of ideas instead of a hierarchy, you can navigate it on your own terms.
