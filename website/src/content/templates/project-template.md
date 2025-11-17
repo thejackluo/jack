@@ -7,6 +7,11 @@ tech:
   - "Tech 3"
 summary: "Short headline that captures the product's value."
 description: "Two-sentence overview summarizing the problem, solution, and result."
+startDate: "2024-01-01"
+endDate: "2024-06-30"
+status: "Ongoing"
+category: "AI & Agents"
+featured: false
 gallery:
   - src: "/assets/projects/{{SLUG}}-hero.jpg"
     alt: "Hero image for {{TITLE}}"

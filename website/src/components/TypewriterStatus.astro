@@ -1,0 +1,136 @@
+---
+// TypewriterStatus.astro - Displays a rotating typewriter effect with status messages
+---
+
+<h3>
+  <span class="typewriter-prefix">Currently </span>
+  <span class="typewriter-text"></span>
+  <span class="typewriter-cursor">|</span>
+</h3>
+
+<style>
+  .typewriter-cursor {
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 50% {
+      opacity: 1;
+    }
+    51%, 100% {
+      opacity: 0;
+    }
+  }
+
+  .typewriter-text {
+    display: inline-block;
+  }
+</style>
+
+<script>
+  // Status messages to cycle through
+  const statuses = [
+    { prefix: 'project', text: 'building strange agentic things at @ MAGK', link: 'https://magk.app' },
+    { prefix: 'personal', text: 'accidentally meeting new friends everywhere' },
+    { prefix: 'status', text: 'sleeping in a conference room again' },
+    { prefix: 'traveling', text: 'plotting a slightly unhinged trip to Europe' },
+    { prefix: 'meta', text: 'procrastinating by updating this website instead of resting' },
+    { prefix: 'technical', text: 'wiring up memory architectures so agents remember your life better than you do' },
+    { prefix: 'entertainment', text: 'playing Cyberpunk 2077 when I should be working' },
+    { prefix: 'reading', text: 'rereading "The Subtle Art of Not Giving a F*ck" and pretending it is not about me' },
+    { prefix: 'surprised', text: 'wait, you are still here scrolling this?' },
+    {
+      prefix: 'visitor',
+      text: `welcome to the chaos. you are visitor #${Math.floor(Math.random() * 1000) + 1000}`,
+      isRandom: true
+    }
+  ];
+
+  let currentStatusIndex = 0;
+  let currentCharIndex = 0;
+  let isDeleting = false;
+  let isPaused = false;
+
+  const typewriterTextElement = document.querySelector('.typewriter-text');
+
+  // Typing speed settings
+  const TYPING_SPEED = 100;        // Speed when typing
+  const DELETING_SPEED = 50;       // Speed when deleting
+  const PAUSE_AFTER_TYPE = 3000;   // Pause after typing complete message
+  const PAUSE_AFTER_DELETE = 500;  // Pause after deleting complete message
+
+  function getCurrentStatus() {
+    const status = statuses[currentStatusIndex];
+
+    // Generate new random visitor number if needed
+    if (status.isRandom) {
+      const visitorNum = Math.floor(Math.random() * 1000) + 1000;
+      return {
+        ...status,
+        text: `welcome to the chaos. you are visitor #${visitorNum}`
+      };
+    }
+
+    return status;
+  }
+
+  function updateTypewriter() {
+    if (isPaused || !typewriterTextElement) return;
+
+    const currentStatus = getCurrentStatus();
+    const fullText = currentStatus.text;
+
+    if (!isDeleting) {
+      // Typing characters
+      currentCharIndex++;
+      const displayText = fullText.substring(0, currentCharIndex);
+
+      // Update the text content
+      if (currentStatus.link && currentCharIndex === fullText.length) {
+        // If there's a link and we've finished typing, make it clickable
+        typewriterTextElement.innerHTML = `<a href="${currentStatus.link}" target="_blank">${displayText}</a>`;
+      } else {
+        typewriterTextElement.textContent = displayText;
+      }
+
+      if (currentCharIndex === fullText.length) {
+        // Finished typing, pause before deleting
+        isPaused = true;
+        setTimeout(() => {
+          isPaused = false;
+          isDeleting = true;
+          updateTypewriter();
+        }, PAUSE_AFTER_TYPE);
+        return;
+      }
+    } else {
+      // Deleting characters
+      currentCharIndex--;
+      const displayText = fullText.substring(0, currentCharIndex);
+      typewriterTextElement.textContent = displayText;
+
+      if (currentCharIndex === 0) {
+        // Finished deleting, move to next status
+        isDeleting = false;
+        currentStatusIndex = (currentStatusIndex + 1) % statuses.length;
+
+        // Pause before typing next message
+        isPaused = true;
+        setTimeout(() => {
+          isPaused = false;
+          updateTypewriter();
+        }, PAUSE_AFTER_DELETE);
+        return;
+      }
+    }
+
+    // Schedule next update
+    const speed = isDeleting ? DELETING_SPEED : TYPING_SPEED;
+    setTimeout(updateTypewriter, speed);
+  }
+
+  // Start the typewriter effect when the page loads
+  if (typewriterTextElement) {
+    updateTypewriter();
+  }
+</script>

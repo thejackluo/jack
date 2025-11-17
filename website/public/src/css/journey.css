@@ -11,6 +11,7 @@
 
 #full-page {
   width: 100%;
+  overflow-x: hidden; /* Prevent horizontal overflow */
 }
 
 /*

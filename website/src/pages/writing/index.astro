@@ -119,6 +119,7 @@ const allYears = [...new Set(blogs.map(blog => blog.data.publishDate.getFullYear
                 data-excerpt={blog.data.excerpt.toLowerCase()}
                 data-tags={blog.data.tags.join(',')}
                 data-year={blog.data.publishDate.getFullYear().toString()}
+                data-date={blog.data.publishDate.getTime().toString()}
                 data-reading-time={blog.readingTime.toString()}
               >
                 <a href={`/writing/${blog.slug}`} class="blog-card-link">
@@ -316,6 +317,8 @@ const allYears = [...new Set(blogs.map(blog => blog.data.publishDate.getFullYear
     flex-direction: column;
     gap: 0.75rem;
     padding: 1.5rem 0;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
   }
 
   /* Blog Card */
@@ -430,32 +433,83 @@ const allYears = [...new Set(blogs.map(blog => blog.data.publishDate.getFullYear
 
   /* Responsive Design */
   @media (max-width: 991px) {
-    .sidebar-content {
-      position: static;
-      margin-bottom: 2rem;
+    /* Hide sidebar on mobile/tablet */
+    .sidebar-container {
+      display: none;
+    }
+
+    .blog-content-container {
+      max-width: 100%;
+      flex: 0 0 100%;
+    }
+
+    .blog-list {
+      max-height: calc(100vh - 200px);
+      overflow-y: auto;
+      padding: 1rem 0;
     }
 
     .blog-card {
       padding: 1.5rem;
+      margin: 0 0.5rem;
     }
 
     .blog-card-title {
       font-size: 1.5rem;
     }
+
+    .content-row {
+      padding: 0 1rem;
+    }
   }
 
-  @media (max-width: 576px) {
-    #writing-section {
-      padding: 2rem 0;
+  @media (max-width: 768px) {
+    /* Ensure mobile menu is visible on blog pages */
+    :global(.mobile-nav-menu) {
+      z-index: 1000;
+    }
+
+    .writing-page-header h1 {
+      font-size: 2rem;
     }
 
     .sidebar-container,
     .blog-content-container {
-      padding: 1rem 0.5rem;
+      padding: 0 0.5rem;
+    }
+  }
+
+  @media (max-width: 576px) {
+    #writing-section {
+      padding: 1rem 0 2rem 0;
+    }
+
+    .writing-page-header {
+      margin: 1rem auto 2rem auto;
+    }
+
+    .writing-page-header h1 {
+      font-size: 2rem;
+    }
+
+    .content-row {
+      padding: 0 0.5rem;
+    }
+
+    .blog-content-container {
+      padding: 0;
+    }
+
+    .blog-list {
+      max-height: calc(100vh - 150px);
+      overflow-y: auto;
+      padding: 0.5rem 0;
+      gap: 0.5rem;
     }
 
     .blog-card {
       padding: 1.25rem;
+      margin: 0 0.25rem;
     }
 
     .blog-card-title {
@@ -469,15 +523,20 @@ const allYears = [...new Set(blogs.map(blog => blog.data.publishDate.getFullYear
     .blog-card-meta {
       font-size: 0.8rem;
     }
+
+    .blog-tag {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
+    }
   }
 </style>
 
 <script>
   // Client-side filtering and search functionality
-  const searchInput = document.getElementById('search-input') as HTMLInputElement;
-  const sortSelect = document.getElementById('sort-select') as HTMLSelectElement;
-  const tagSelect = document.getElementById('tag-select') as HTMLSelectElement;
-  const yearSelect = document.getElementById('year-select') as HTMLSelectElement;
+  const searchInput = document.getElementById('search-input');
+  const sortSelect = document.getElementById('sort-select');
+  const tagSelect = document.getElementById('tag-select');
+  const yearSelect = document.getElementById('year-select');
   const blogGrid = document.getElementById('blog-grid');
   const visibleCount = document.getElementById('visible-count');
   const noResults = document.getElementById('no-results');
@@ -487,32 +546,48 @@ const allYears = [...new Set(blogs.map(blog => blog.data.publishDate.getFullYear
   let currentYear = 'all';
   let currentSort = 'date-desc';
 
+  // Read URL parameters on page load
+  const urlParams = new URLSearchParams(window.location.search);
+  const tagParam = urlParams.get('tag');
+  if (tagParam && tagSelect) {
+    currentTag = tagParam;
+    tagSelect.value = tagParam;
+  }
+
   // Search functionality
-  searchInput?.addEventListener('input', (e) => {
-    currentSearch = (e.target as HTMLInputElement).value.toLowerCase();
-    filterAndSortBlogs();
-  });
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      currentSearch = e.target.value.toLowerCase();
+      filterAndSortBlogs();
+    });
+  }
 
   // Sort functionality
-  sortSelect?.addEventListener('change', (e) => {
-    currentSort = (e.target as HTMLSelectElement).value;
-    filterAndSortBlogs();
-  });
+  if (sortSelect) {
+    sortSelect.addEventListener('change', (e) => {
+      currentSort = e.target.value;
+      filterAndSortBlogs();
+    });
+  }
 
   // Tag filter functionality
-  tagSelect?.addEventListener('change', (e) => {
-    currentTag = (e.target as HTMLSelectElement).value;
-    filterAndSortBlogs();
-  });
+  if (tagSelect) {
+    tagSelect.addEventListener('change', (e) => {
+      currentTag = e.target.value;
+      filterAndSortBlogs();
+    });
+  }
 
   // Year filter functionality
-  yearSelect?.addEventListener('change', (e) => {
-    currentYear = (e.target as HTMLSelectElement).value;
-    filterAndSortBlogs();
-  });
+  if (yearSelect) {
+    yearSelect.addEventListener('change', (e) => {
+      currentYear = e.target.value;
+      filterAndSortBlogs();
+    });
+  }
 
   function filterAndSortBlogs() {
-    const blogCards = Array.from(document.querySelectorAll('.blog-card')) as HTMLElement[];
+    const blogCards = Array.from(document.querySelectorAll('.blog-card'));
     let visibleBlogs = 0;
 
     // Filter blogs
@@ -550,10 +625,14 @@ const allYears = [...new Set(blogs.map(blog => blog.data.publishDate.getFullYear
       const titleB = b.getAttribute('data-title') || '';
       const readingTimeA = parseInt(a.getAttribute('data-reading-time') || '0');
       const readingTimeB = parseInt(b.getAttribute('data-reading-time') || '0');
+      const dateA = parseInt(a.getAttribute('data-date') || '0');
+      const dateB = parseInt(b.getAttribute('data-date') || '0');
 
       switch (currentSort) {
         case 'date-asc':
-          return 0; // Reverse will be handled by reversing array
+          return dateA - dateB;
+        case 'date-desc':
+          return dateB - dateA;
         case 'title-asc':
           return titleA.localeCompare(titleB);
         case 'title-desc':
@@ -562,8 +641,8 @@ const allYears = [...new Set(blogs.map(blog => blog.data.publishDate.getFullYear
           return readingTimeA - readingTimeB;
         case 'reading-time-desc':
           return readingTimeB - readingTimeA;
-        default: // date-desc
-          return 0;
+        default:
+          return dateB - dateA;
       }
     });
 
@@ -581,5 +660,10 @@ const allYears = [...new Set(blogs.map(blog => blog.data.publishDate.getFullYear
     if (noResults) {
       noResults.style.display = visibleBlogs === 0 ? 'block' : 'none';
     }
+  }
+
+  // Apply filters on page load if URL params exist
+  if (tagParam) {
+    filterAndSortBlogs();
   }
 </script>

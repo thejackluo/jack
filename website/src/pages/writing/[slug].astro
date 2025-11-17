@@ -53,8 +53,10 @@ const publishDate = entry.data.publishDate.toLocaleDateString('en-US', {
           <header class="blog-header">
             <h2 class="blog-title">{entry.data.title}</h2>
 
-            <div class="blog-meta" data-publish-date={publishDate} style="display: none;">
+            <div class="blog-meta" data-publish-date={publishDate}>
               <span class="blog-meta-date">{publishDate}</span>
+              <span class="meta-separator">•</span>
+              <span class="blog-meta-reading-time">{formatReadingTime(readingTime)}</span>
             </div>
 
             <div class="blog-tags">
@@ -171,7 +173,7 @@ const publishDate = entry.data.publishDate.toLocaleDateString('en-US', {
   }
 
   .blog-meta-date,
-  .blog-meta-reading {
+  .blog-meta-reading-time {
     font-family: "Stellar", "Century Gothic", sans-serif;
     font-size: 1rem;
     color: rgba(255, 255, 255, 0.6);
@@ -531,6 +533,11 @@ const publishDate = entry.data.publishDate.toLocaleDateString('en-US', {
 
   /* Responsive Design */
   @media (max-width: 768px) {
+    /* Ensure mobile menu is visible on blog post pages */
+    :global(.mobile-nav-menu) {
+      z-index: 1000;
+    }
+
     #blog-post-section {
       padding: 2rem 0 4rem 0;
     }
