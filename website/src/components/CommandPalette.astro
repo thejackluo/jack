@@ -18,9 +18,21 @@ const searchIndex = [
   },
   {
     type: 'page',
+    title: 'Journey',
+    url: '/journey.html',
+    excerpt: 'My journey and experiences',
+  },
+  {
+    type: 'page',
     title: 'Writing',
     url: '/writing/',
     excerpt: 'Blog posts and essays',
+  },
+  {
+    type: 'page',
+    title: 'Resume',
+    url: '/resume.html',
+    excerpt: 'Professional resume and experience',
   },
   // Blogs
   ...blogs.map(blog => ({
@@ -30,7 +42,7 @@ const searchIndex = [
     excerpt: blog.data.excerpt,
     tags: blog.data.tags,
   })),
-  // Projects - link to home page since there are no dedicated project pages
+  // Projects
   ...projects.map(project => ({
     type: 'project',
     title: project.data.title,
@@ -62,6 +74,16 @@ const searchIndex = [
   </div>
 </div>
 
+<!-- Notification popup -->
+<div id="command-palette-notification" class="command-palette-notification" aria-hidden="true">
+  <div class="command-palette-notification-content">
+    <span class="command-palette-notification-text">
+      Press <kbd class="command-palette-notification-kbd">Ctrl</kbd> + <kbd class="command-palette-notification-kbd">K</kbd> to search
+    </span>
+    <button class="command-palette-notification-close" aria-label="Close notification">✕</button>
+  </div>
+</div>
+
 <style>
   .command-palette {
     display: none;
@@ -83,7 +105,7 @@ const searchIndex = [
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(4px);
     animation: fadeIn 0.2s ease-out;
   }
@@ -95,9 +117,10 @@ const searchIndex = [
     transform: translateX(-50%);
     width: 90%;
     max-width: 600px;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    background: #000000;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
     overflow: hidden;
     animation: slideIn 0.2s ease-out;
   }
@@ -106,7 +129,7 @@ const searchIndex = [
     display: flex;
     align-items: center;
     padding: 16px;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid #333333;
     gap: 12px;
   }
 
@@ -115,22 +138,23 @@ const searchIndex = [
     border: none;
     outline: none;
     font-size: 16px;
-    font-family: inherit;
+    font-family: "Stellar", "Century Gothic", sans-serif;
     background: transparent;
+    color: white;
   }
 
   .command-palette-input::placeholder {
-    color: #9ca3af;
+    color: #666666;
   }
 
   .command-palette-kbd {
     padding: 4px 8px;
-    border: 1px solid #d1d5db;
+    border: 1px solid #333333;
     border-radius: 4px;
     font-size: 12px;
     font-family: monospace;
-    color: #6b7280;
-    background: #f9fafb;
+    color: #999999;
+    background: #111111;
   }
 
   .command-palette-results {
@@ -141,8 +165,9 @@ const searchIndex = [
   .command-palette-empty {
     padding: 32px 16px;
     text-align: center;
-    color: #9ca3af;
+    color: #666666;
     font-size: 14px;
+    font-family: "Stellar", "Century Gothic", sans-serif;
   }
 
   .command-palette-item {
@@ -150,21 +175,13 @@ const searchIndex = [
     align-items: center;
     padding: 12px 16px;
     cursor: pointer;
-    border-bottom: 1px solid #f3f4f6;
-    transition: background 0.1s ease;
+    border-bottom: 1px solid #1a1a1a;
+    transition: all 0.2s ease;
   }
 
   .command-palette-item:hover,
   .command-palette-item.selected {
-    background: #f3f4f6;
-  }
-
-  .command-palette-item-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 12px;
-    flex-shrink: 0;
-    font-size: 16px;
+    background: #1a1a1a;
   }
 
   .command-palette-item-content {
@@ -175,7 +192,8 @@ const searchIndex = [
   .command-palette-item-title {
     font-size: 14px;
     font-weight: 500;
-    color: #111827;
+    font-family: "Stellar", "Century Gothic", sans-serif;
+    color: white;
     margin: 0;
     white-space: nowrap;
     overflow: hidden;
@@ -184,7 +202,8 @@ const searchIndex = [
 
   .command-palette-item-subtitle {
     font-size: 12px;
-    color: #6b7280;
+    font-family: "Stellar", "Century Gothic", sans-serif;
+    color: #888888;
     margin: 2px 0 0 0;
     white-space: nowrap;
     overflow: hidden;
@@ -196,23 +215,28 @@ const searchIndex = [
     border-radius: 4px;
     font-size: 11px;
     font-weight: 500;
+    font-family: "Stellar", "Century Gothic", sans-serif;
     text-transform: uppercase;
     margin-left: 8px;
+    border: 1px solid;
   }
 
   .command-palette-item-badge.blog {
-    background: #dbeafe;
-    color: #1e40af;
+    background: transparent;
+    color: #ffffff;
+    border-color: #666666;
   }
 
   .command-palette-item-badge.project {
-    background: #dcfce7;
-    color: #166534;
+    background: transparent;
+    color: #ffffff;
+    border-color: #666666;
   }
 
   .command-palette-item-badge.page {
-    background: #fef3c7;
-    color: #92400e;
+    background: transparent;
+    color: #ffffff;
+    border-color: #666666;
   }
 
   @keyframes fadeIn {
@@ -235,49 +259,79 @@ const searchIndex = [
     }
   }
 
-  /* Dark theme support */
-  @media (prefers-color-scheme: dark) {
-    .command-palette-modal {
-      background: #1f2937;
-    }
+  /* Notification styles */
+  .command-palette-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10000;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease-out;
+    pointer-events: none;
+  }
 
-    .command-palette-header {
-      border-bottom-color: #374151;
-    }
+  .command-palette-notification[aria-hidden="false"] {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
 
-    .command-palette-input {
-      color: #f9fafb;
-    }
+  .command-palette-notification-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: #000000;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  }
 
-    .command-palette-input::placeholder {
-      color: #6b7280;
-    }
+  .command-palette-notification-text {
+    font-family: "Stellar", "Century Gothic", sans-serif;
+    font-size: 14px;
+    color: white;
+  }
 
-    .command-palette-kbd {
-      background: #374151;
-      border-color: #4b5563;
-      color: #9ca3af;
-    }
+  .command-palette-notification-kbd {
+    padding: 2px 6px;
+    border: 1px solid #333333;
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: monospace;
+    color: #ffffff;
+    background: #111111;
+  }
 
-    .command-palette-empty {
-      color: #6b7280;
-    }
+  .command-palette-notification-close {
+    background: transparent;
+    border: none;
+    color: #999999;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+  }
 
-    .command-palette-item {
-      border-bottom-color: #374151;
-    }
+  .command-palette-notification-close:hover {
+    color: white;
+  }
 
-    .command-palette-item:hover,
-    .command-palette-item.selected {
-      background: #374151;
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
     }
-
-    .command-palette-item-title {
-      color: #f9fafb;
-    }
-
-    .command-palette-item-subtitle {
-      color: #9ca3af;
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 </style>
@@ -287,12 +341,43 @@ const searchIndex = [
   const commandPalette = document.getElementById('command-palette');
   const input = document.getElementById('command-palette-input');
   const results = document.getElementById('command-palette-results');
+  const notification = document.getElementById('command-palette-notification');
+  const notificationClose = document.querySelector('.command-palette-notification-close');
 
   let selectedIndex = 0;
   let searchResults = [];
 
   // Search index is passed from Astro component
   // searchIndex variable is available here
+
+  // Show notification on first visit
+  function showNotification() {
+    const hasSeenNotification = localStorage.getItem('command-palette-notification-seen');
+
+    if (!hasSeenNotification && notification) {
+      setTimeout(() => {
+        notification.setAttribute('aria-hidden', 'false');
+
+        // Auto-hide after 8 seconds
+        setTimeout(() => {
+          hideNotification();
+        }, 8000);
+      }, 2000); // Show after 2 seconds of page load
+    }
+  }
+
+  function hideNotification() {
+    if (notification) {
+      notification.setAttribute('aria-hidden', 'true');
+      localStorage.setItem('command-palette-notification-seen', 'true');
+    }
+  }
+
+  // Close notification on click
+  notificationClose?.addEventListener('click', hideNotification);
+
+  // Show notification when page loads
+  showNotification();
 
   // Open/Close functions
   function openCommandPalette() {
@@ -314,8 +399,15 @@ const searchIndex = [
 
   // Keyboard shortcuts
   document.addEventListener('keydown', (e) => {
-    // Ctrl+K or Cmd+K to open
+    // Ctrl+K, Cmd+K, or Ctrl+Shift+K to open
     if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      openCommandPalette();
+      return;
+    }
+
+    // Alternative: Ctrl+Shift+K
+    if (e.ctrlKey && e.shiftKey && e.key === 'K') {
       e.preventDefault();
       openCommandPalette();
       return;
@@ -396,10 +488,8 @@ const searchIndex = [
 
     results.innerHTML = items
       .map((item, index) => {
-        const icon = item.type === 'blog' ? '📝' : item.type === 'project' ? '🚀' : '📄';
         return `
           <div class="command-palette-item ${index === selectedIndex ? 'selected' : ''}" data-index="${index}">
-            <div class="command-palette-item-icon">${icon}</div>
             <div class="command-palette-item-content">
               <div class="command-palette-item-title">${item.title}</div>
               ${item.excerpt ? `<div class="command-palette-item-subtitle">${item.excerpt}</div>` : ''}
