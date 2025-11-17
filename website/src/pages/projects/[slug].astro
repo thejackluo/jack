@@ -19,31 +19,35 @@ interface Props {
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 
-// Format dates with validation
-const parseDate = (dateValue: any) => {
+// Helper function to parse dates robustly
+const parseDate = (dateValue: any): Date | null => {
   if (!dateValue) return null;
+
   // If already a Date object
-  if (dateValue instanceof Date) return dateValue;
-  // Otherwise try to parse it
+  if (dateValue instanceof Date) {
+    return !isNaN(dateValue.getTime()) ? dateValue : null;
+  }
+
+  // Try to parse as string
   const parsed = new Date(dateValue);
   return !isNaN(parsed.getTime()) ? parsed : null;
 };
 
-const startDateObj = parseDate(entry.data.startDate);
-const startDate = startDateObj
-  ? startDateObj.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-    })
-  : 'Unknown';
+// Helper to format date as "Mon YYYY"
+const formatDate = (date: Date | null): string | null => {
+  if (!date) return null;
 
-const endDateObj = parseDate(entry.data.endDate);
-const endDate = endDateObj
-  ? endDateObj.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-    })
-  : 'Present';
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+  });
+};
+
+const startDateObj = parseDate(entry.data.startDate);
+const endDateObj = entry.data.endDate ? parseDate(entry.data.endDate) : null;
+
+const startDate = startDateObj ? formatDate(startDateObj) : 'Unknown';
+const endDate = endDateObj ? formatDate(endDateObj) : 'Present';
 
 const duration = `${startDate} - ${endDate}`;
 ---
