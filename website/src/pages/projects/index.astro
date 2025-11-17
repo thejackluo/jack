@@ -679,11 +679,8 @@ const minorProjects = allProjects.filter(p => !majorProjectSlugs.includes(p.slug
   }
 
   /* Fix image sizes in modal */
-  :global(.modal) :global(.gallery-item img),
   :global(.modal) :global(.project-gallery img) {
     width: 100%;
-    height: 400px;
-    object-fit: cover;
   }
 
   :global(.modal) :global(.project-content img) {
@@ -698,6 +695,29 @@ const minorProjects = allProjects.filter(p => !majorProjectSlugs.includes(p.slug
   :global(.modal) :global(.back-link-footer-container),
   :global(.modal) :global(.project-summary-box) {
     display: none !important;
+  }
+
+  /* Fix 100vh spacing issue ONLY in modal */
+  :global(.modal) :global(#project-detail-section) {
+    min-height: auto !important;
+  }
+
+  /* Fix gallery section height - should only be as tall as images */
+  :global(.modal) :global(.project-gallery) {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+  }
+
+  :global(.modal) :global(.gallery-item) {
+    height: auto !important;
+    min-height: auto !important;
+  }
+
+  :global(.modal) :global(.gallery-item img) {
+    height: auto !important;
+    max-height: 500px;
+    object-fit: contain;
   }
 
   /* Responsive */
@@ -780,6 +800,15 @@ const minorProjects = allProjects.filter(p => !majorProjectSlugs.includes(p.slug
             modalBody.innerHTML = detailSection.innerHTML;
             if (modal) modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
+            
+            // Fix images that fail to load
+            const images = modalBody.querySelectorAll('img');
+            images.forEach((img) => {
+              img.addEventListener('error', function() {
+                console.warn('Image failed to load:', this.src);
+                this.style.display = 'none';
+              });
+            });
           }
         }
       } catch (error) {
@@ -816,5 +845,14 @@ const minorProjects = allProjects.filter(p => !majorProjectSlugs.includes(p.slug
       modal.style.display = 'none';
       document.body.style.overflow = '';
     }
+  });
+
+  // Handle image loading errors on project cards
+  const projectImages = document.querySelectorAll('.project-card img');
+  projectImages.forEach((img) => {
+    img.addEventListener('error', function() {
+      console.warn('Project card image failed to load:', this.src);
+      this.style.display = 'none';
+    });
   });
 </script>
