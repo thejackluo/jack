@@ -53,8 +53,10 @@ const publishDate = entry.data.publishDate.toLocaleDateString('en-US', {
           <header class="blog-header">
             <h2 class="blog-title">{entry.data.title}</h2>
 
-            <div class="blog-meta" data-publish-date={publishDate} style="display: none;">
+            <div class="blog-meta" data-publish-date={publishDate}>
               <span class="blog-meta-date">{publishDate}</span>
+              <span class="meta-separator">•</span>
+              <span class="blog-meta-reading-time">{formatReadingTime(readingTime)}</span>
             </div>
 
             <div class="blog-tags">
@@ -171,7 +173,7 @@ const publishDate = entry.data.publishDate.toLocaleDateString('en-US', {
   }
 
   .blog-meta-date,
-  .blog-meta-reading {
+  .blog-meta-reading-time {
     font-family: "Stellar", "Century Gothic", sans-serif;
     font-size: 1rem;
     color: rgba(255, 255, 255, 0.6);

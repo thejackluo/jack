@@ -26,7 +26,7 @@ He pushed back. He said the name that always shows up in these conversations. Wh
 
 ## The Question
 
-The conversation turned. He asked me for advice, then asked a question I did not expect from a fourteen-year-old in Phoenix. Are you content with who I am.
+The conversation turned. He asked me for advice, then asked a question I did not expect from a fourteen-year-old in Phoenix. Are you content with who you are.
 
 That is a tricky one. Happiness and contentment are cousins that do not always visit on the same day. You can be happy and restless. You can be unhappy and at peace with your direction. Right now I am neutral on the happiness dial, but I am content. I have seen enough of the landscape to know where I want to walk. The next step is not discovery, it is execution. Less noise. More focus. Contentment for me is not a finish line. It is alignment between my values and my calendar.
 
@@ -48,4 +48,4 @@ I still see his face in the glow of the laptop screen. Fourteen, bright, careful
 
 I hope he picks compounding over combustion. I hope the next time someone asks him if he is content, he can answer without flinching, not because everything is easy, but because his choices line up with his values. And I hope he finds his way into rooms where the air feels clean, where people build things that last, and where money is a byproduct of usefulness instead of a replacement for it.
 
-That is what I wanted to say. On a random night on Omegle TV, a kid from Phoenix reminded me that contentment is not the absence of hunger. It is the presence of direction.
+That is what I wanted to say. On a random night on ome.tv, a kid from Phoenix reminded me that contentment is not the absence of hunger. It is the presence of direction.
