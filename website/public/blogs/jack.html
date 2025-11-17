@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Jack Luo - Blog</title>
+    <title>Jack Luo - About</title>
     <!-- Link to all files in lib/css including aos, fullpage, and normalize -->
     <link rel="stylesheet" href="../lib/css/aos.css" />
     <link rel="stylesheet" href="../lib/css/bootstrap.css" />
@@ -24,10 +24,10 @@
     <link rel="stylesheet" href="../src/css/footer.css" />
 
     <!-- Metatags -->
-    <meta name="title" content="Jack Luo" />
+    <meta name="title" content="Jack Luo - About" />
     <meta
       name="description"
-      content="A personal website that displays projects from Jack Luo. Designed and Built by @thejackluo"
+      content="Who is Jack? Where did he come from? Where is he now? A personal story and FAQ."
     />
     <meta
       name="keywords"
@@ -57,6 +57,90 @@
       href="icons/favicon/favicon-16x16.png"
     />
     <link rel="manifest" href="/site.webmanifest" />
+
+    <style>
+      .faq-section {
+        margin-top: 3rem;
+      }
+
+      .faq-item {
+        margin-bottom: 1rem;
+        border-left: 3px solid #333;
+        padding-left: 1rem;
+      }
+
+      .faq-question {
+        cursor: pointer;
+        font-weight: bold;
+        color: #333;
+        transition: color 0.2s ease;
+        user-select: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .faq-question:hover {
+        color: #666;
+      }
+
+      .faq-question::before {
+        content: "▶";
+        display: inline-block;
+        transition: transform 0.3s ease;
+        font-size: 0.8em;
+      }
+
+      .faq-question.active::before {
+        transform: rotate(90deg);
+      }
+
+      .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, margin-top 0.3s ease;
+        margin-top: 0;
+      }
+
+      .faq-answer.active {
+        max-height: 1000px;
+        margin-top: 0.5rem;
+      }
+
+      .faq-limit-message {
+        display: none;
+        background: #f0f0f0;
+        border: 2px solid #333;
+        padding: 1.5rem;
+        margin: 2rem 0;
+        border-radius: 4px;
+      }
+
+      .faq-limit-message.active {
+        display: block;
+      }
+
+      .faq-counter {
+        position: sticky;
+        top: 1rem;
+        background: #f9f9f9;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        font-size: 0.9em;
+        color: #666;
+      }
+
+      .faq-counter.warning {
+        background: #fff3cd;
+        color: #856404;
+      }
+
+      .faq-counter.limit-reached {
+        background: #f8d7da;
+        color: #721c24;
+      }
+    </style>
   </head>
   <body>
     <div id="full-page">
@@ -95,92 +179,404 @@
                   <h4>Few minute read</h4>
                 </div>
               </div>
+
+              <!-- Main Content -->
               <div>
                 <p>
-                  <b>Who was I?</b> <br />
-                  You know, a long time ago, I was that kid who used to sit at
-                  the computer in the library and play games. And many games did
-                  I play! Minecraft, fake minecraft, all the io games possible.
-                  I was that kid who would do everything to bypass adminstrator
-                  perms, and install a whole operating system on the school
-                  chromebook, just to enjoy a game. It's crazy how much I've
-                  changed.
+                  <b>Who was I?</b><br />
+                  You know, a long time ago, I was that kid who used to sit at the computer in the library and play games.
                 </p>
                 <p>
-                  Well, I guess I'm still that kid, but I've changed a lot. Like
-                  so much I couldn't even recognize myself. So this post is
-                  dedicated to saving a record of myself on the internet. If
-                  something ever happens, I hope you know my story.
+                  And many games did I play. Minecraft, fake Minecraft, every io game on those sketchy websites. I was that kid who would do anything to bypass administrator perms, the one trying to install a whole operating system on a school Chromebook just to enjoy a game at 3 pm on a Tuesday.
                 </p>
                 <p>
-                  <b>Where was I born?</b> <br />
+                  It is crazy how much I have changed.
+                </p>
+                <p>
+                  Well, technically I am still that kid. I just upgraded the operating system in my head. So this post is dedicated to saving a record of myself on the internet. If something ever happens, I want there to be at least one place that explains what happened in my brain.
+                </p>
+
+                <p>
+                  <b>Where was I born?</b><br />
                   Singapore lah.
                 </p>
                 <p>
-                  <b>What did I do in middle school?</b> <br />
-                  Not much, I had a crush on a girl, and failed to get her
-                  attention even with all the sour patch I sold. I tried to
-                  become the "sour patch kid". Looking back, it's cringy lol. I
-                  tried creating youtube videos but the qualities are that of a
-                  middle schooler. I did first robotics which was fun. Oh and
-                  mathcounts, for the three years I have been there, I somewhat
-                  regret not trying hard enough, but I did appreciate going
-                  through the contest, helped a lot with logical skills.
+                  Then life did its thing and I ended up bouncing between Singapore and different parts of the world, eventually landing in California and later on in a mess of colleges, hacker houses and random cities.
+                </p>
+
+                <p>
+                  <b>What did I do in middle school?</b><br />
+                  Not much, but also kind of a lot.
                 </p>
                 <p>
-                  <b>What did I do in high school?</b> <br />
-                  A bit more, I started to get into programming, and learned AP
-                  CS from scratch because I couldn't get into the AP CS class
-                  (grr my high school). I tried out for symphony for clarinet
-                  and created some music.
-                  <a
-                    href="https://www.soundcloud.com/thejackluo"
-                    class="a-underline"
-                    >here</a
-                  >
-                  (the music is quite interesting to say the least).
+                  I had a crush on a girl and tried to win her over by selling Sour Patch to everyone. I basically tried to become the "Sour Patch kid". It did not work. Looking back, it is cringy lol.
                 </p>
                 <p>
-                  I invested in both main stream crypto and sh*t coins for fun
-                  and growth hacked a decent amount. I might have hit the limit
-                  on free food (especially free tpumps lo) at some point. Built
-                  an ebike from scratch with money I have earned. Once had an
-                  organization with 30 members teaching others how to do non
-                  profits and start ups (lol). Oh, I biked to many random
-                  places, within 20 miles of school. Plans to bike from south
-                  bay to sf one day (if anyone is down message me lol, we should
-                  schedule a time).
+                  I made YouTube videos with the production quality of a microwave. I did FIRST Robotics which was actually fun. I also did MathCounts for three years. I regret not trying harder, but going through those contests did a lot for my logic and pattern recognition brain.
+                </p>
+
+                <p>
+                  <b>What did I do in high school?</b><br />
+                  A bit more.
                 </p>
                 <p>
-                  <b>What did I do in college?</b> <br />
-                  Well I have started a hacker house in SF, dived into a 200ft
-                  cave, and chilled in stanford conference rooms.
+                  Got into programming and self studied AP CS because I could not get into the official AP CS class (grr my high school).
                 </p>
                 <p>
-                  <b>What do you think has changed?</b> <br />
-                  A lot to be honest. Many people thinks nothing really changed,
-                  but inside, I have changed way too much lol. I used to be
-                  carefree and very extraverted, but now adopt an mixed
-                  lifestyle. I care more about the world and enjoy the stories
-                  more. I try to appreciate what I have right now and recognize
-                  that I am not perfect. I try to do more and not get dejected
-                  by failure.
+                  Tried out for symphony on clarinet, made some questionable music and some pretty interesting pieces.
                 </p>
                 <p>
-                  <b>How do you define true happiness?</b>
-                  Do the things you want as long as it confines to the law and
-                  your values.
+                  Went down the crypto rabbit hole, from mainstream coins to complete garbage tokens for fun and learning.
                 </p>
                 <p>
-                  <b>Predetermined or free will?</b>
-                  Predetermined. It's against human will though.
+                  Abused free food events and probably hit the limit on free tpumps at some point.
                 </p>
-                <p>FAQ???</p>
-                <!-- <p>Q: Three words that describe you?</p> -->
-                <p>To be continued???</p>
                 <p>
-                  <b>Update 09/07/2024</b> <br />
-                  Hi, I am creating a new page for my <a class="a-underline" href="../readings.html">reading</a> log. Feel free to check it out!
+                  Built an e bike from scratch using money I actually earned.
+                </p>
+                <p>
+                  Ran an "organization" with around 30 members teaching people how to do nonprofit and startup projects. It was chaotic but fun.
+                </p>
+                <p>
+                  Biked to random places within about 20 miles of school, with a dream of biking from South Bay to San Francisco one day.
+                </p>
+                <p>
+                  Basically, I was half nerd, half feral, fully online.
+                </p>
+
+                <p>
+                  <b>What did I do in college?</b><br />
+                  Short answer: a lot, in a very nonlinear way.
+                </p>
+                <p>
+                  Longer answer:
+                </p>
+                <p>
+                  Went through multiple schools, including UC campuses and then Georgia Tech for AI and embedded systems.
+                </p>
+                <p>
+                  Spent time at MIT as a "special student" kind of situation where I audited classes, hung out in makerspaces and pretended I lived there more than I technically did.
+                </p>
+                <p>
+                  Started and stayed in hacker houses in San Francisco and other cities, trying to create high energy environments where people actually build things instead of just talking.
+                </p>
+                <p>
+                  Started an SF hacker house, dived into a 200 foot cave, and somehow ended up chilling in Stanford conference rooms like that was normal.
+                </p>
+                <p>
+                  Built and shipped multiple AI projects, including productivity tools, trading bots and energy optimization systems.
+                </p>
+                <p>
+                  College for me has never been just "go to lecture, go home". It is been more like "use the school as an excuse to do insane side quests".
+                </p>
+
+                <p>
+                  <b>What do you think has changed?</b><br />
+                  Honestly, a lot.
+                </p>
+                <p>
+                  From the outside, people sometimes think I am basically the same. Inside, it feels like I have lived three or four different lives already.
+                </p>
+                <p>
+                  I used to be carefree and super extroverted. Now my lifestyle is mixed. I still like chaos, but I think more about long term things. I care more about the world, about stories, about how people end up where they are.
+                </p>
+                <p>
+                  I am more aware of my flaws. I try to appreciate what I have instead of obsessing over what I do not. I try to do more and get less destroyed by failure. That does not mean I always succeed at that, but at least I know the game I am playing.
+                </p>
+
+                <p>
+                  <b>How do you define true happiness?</b><br />
+                  Do the things you actually want to do, as long as they stay within the law and your own values.
+                </p>
+                <p>
+                  If you can look at what you are doing and say "yeah, this lines up with what I believe", you are already far ahead of most people.
+                </p>
+
+                <p>
+                  <b>Predetermined or free will?</b><br />
+                  Predetermined.
+                </p>
+                <p>
+                  It is against human ego to accept that, but I lean toward the idea that a lot of things are set up by initial conditions, environment and probabilities.
+                </p>
+                <p>
+                  You still have to act like you have free will though, otherwise it gets dark fast.
+                </p>
+
+                <!-- FAQ Section -->
+                <div class="faq-section">
+                  <h2>FAQ</h2>
+                  <p>A slightly chaotic, slightly serious FAQ about me, so I do not have to explain this twenty times at every coffee chat.</p>
+
+                  <div id="faq-counter" class="faq-counter">
+                    Questions unlocked: <span id="click-count">0</span> / 10
+                  </div>
+
+                  <div id="faq-limit-message" class="faq-limit-message">
+                    <h3>You have reached the question limit!</h3>
+                    <p>You can only unlock 10 questions without hacking. If you really want to read more, you know what to do.</p>
+                    <p><i>Hint: Check localStorage, modify the JavaScript, or just open your browser console and have some fun.</i></p>
+                  </div>
+
+                  <div class="faq-item">
+                    <div class="faq-question">Have you actually slept in WeWorks for a month?</div>
+                    <div class="faq-answer">
+                      <p>Yes. I have.</p>
+                      <p>There was a period where I basically lived out of a WeWork, working late, napping in weird corners and showering in random gyms. I still cannot believe I have not written a full blog about it yet.</p>
+                    </div>
+                  </div>
+
+                  <div class="faq-item">
+                    <div class="faq-question">Did you really create an AI version of yourself?</div>
+                    <div class="faq-answer">
+                      <p>Yes.</p>
+                      <p>There is a version of "Jack" as an AI persona, including jackluoai on Instagram. It is half serious, half experiment in what it means to "clone" your thought patterns into something digital.</p>
+                    </div>
+                  </div>
+
+                  <div class="faq-item">
+                    <div class="faq-question">What is the craziest thing you have done?</div>
+                    <div class="faq-answer">
+                      <p>Ask me in person.</p>
+                      <p>Some stories do not belong on a public website. But hints include: sketchy crypto adventures, weird travel decisions, and some extremely questionable life optimization experiments.</p>
+                    </div>
+                  </div>
+
+                  <div class="faq-item">
+                    <div class="faq-question">What is your biggest failure so far?</div>
+                    <div class="faq-answer">
+                      <p>Probably not pushing myself hard enough to be consistent.</p>
+                      <p>Not talent. Not intelligence. Just failing to iterate every day on the things that mattered, which cost me a lot of compounding potential in skills, health and relationships.</p>
+                      <p>I am still fixing that one.</p>
+                    </div>
+                  </div>
+
+                  <div class="faq-item">
+                    <div class="faq-question">What is your biggest regret?</div>
+                    <div class="faq-answer">
+                      <p>Honestly, none.</p>
+                      <p>There are things I wish I had handled more maturely or earlier, but I would not erase them. A lot of what I care about now is built directly on those mistakes.</p>
+                    </div>
+                  </div>
+
+                  <div class="faq-item">
+                    <div class="faq-question">Where have you lived?</div>
+                    <div class="faq-answer">
+                      <p>Born in Singapore.</p>
+                      <p>Grew up in Asia and then California, especially the Bay Area.</p>
+                      <p>Bounced around UC schools, then landed at Georgia Tech.</p>
+                      <p>Spent long stretches in Boston, San Francisco and New York for hacker houses, internships and experiments.</p>
+                      <p>I basically treat cities as levels in a game I can unlock and revisit.</p>
+                    </div>
+                  </div>
+
+                  <div class="faq-item">
+                    <div class="faq-question">What are you doing right now?</div>
+                    <div class="faq-answer">
+                      <p>I build AI projects, push on energy and productivity tools, and try to surround myself with people who are also trying to do ridiculous things with their lives.</p>
+                      <p>Concretely, that means:</p>
+                      <ul>
+                        <li>Building Delight, an emotionally aware AI productivity companion.</li>
+                        <li>Working on Efficore, an AI system that optimizes data center energy.</li>
+                        <li>Contributing to ARK at MIT SIPB, a modular open source AI assistant platform.</li>
+                        <li>Running experiments around personal agents, multi agent systems and weird interfaces.</li>
+                      </ul>
+                      <p>Plus school, gym, and overthinking everything, of course.</p>
+                    </div>
+                  </div>
+
+                  <div class="faq-item">
+                    <div class="faq-question">Are you more "student" or "founder"?</div>
+                    <div class="faq-answer">
+                      <p>Functionally both, mentally more founder.</p>
+                      <p>School is useful for structure, signal and access to people. But most of my identity comes from building and shipping things, not grades.</p>
+                      <p>I study enough to respect the fundamentals, then spend the rest of the time using them.</p>
+                    </div>
+                  </div>
+
+                  <div class="faq-item">
+                    <div class="faq-question">How do you describe what you work on in one sentence?</div>
+                    <div class="faq-answer">
+                      <p>I build agentic AI systems that try to actually move people's lives and physical systems, not just answer questions.</p>
+                    </div>
+                  </div>
+
+                  <div class="faq-item">
+                    <div class="faq-question">Why are you so obsessed with productivity?</div>
+                    <div class="faq-answer">
+                      <p>Because I wasted a lot of time.</p>
+                      <p>I know what it feels like to be smart enough to do something big and still lose whole years to procrastination, distraction and fear. Productivity, for me, is not about "grind harder". It is about designing a life where important things actually get done without burning out or becoming a robot.</p>
+                      <p>Also, building productivity tools is the best way to expose your own bullshit.</p>
+                    </div>
+                  </div>
+
+                  <div class="faq-item">
+                    <div class="faq-question">Have you always been into energy and infrastructure?</div>
+                    <div class="faq-answer">
+                      <p>No. It came later.</p>
+                      <p>Energy started mattering when I realized how much compute, AI and data centers are constrained by boring physical things like grid capacity, transmission, and regulations. Efficore exists because someone has to actually solve that bottleneck.</p>
+                      <p>So now I care a lot about the intersection of AI, energy and infrastructure.</p>
+                    </div>
+                  </div>
+
+                  <div class="faq-item">
+                    <div class="faq-question">Did you really sneak into MIT classes?</div>
+                    <div class="faq-answer">
+                      <p>Yes, sort of.</p>
+                      <p>I spent a year around MIT, auditing classes, participating in clubs and hanging out in makerspaces. Some of it was formally allowed, some of it was just me walking in and sitting down.</p>
+                      <p>MIT is one of the few places that matched the mental image I had as a kid of what "a crazy engineering place" should feel like.</p>
+                    </div>
+                  </div>
+
+                  <div class="faq-item">
+                    <div class="faq-question">Why do you like hacker houses so much?</div>
+                    <div class="faq-answer">
+                      <p>Because environment is OP.</p>
+                      <p>In a good hacker house, the default state is "building something" instead of "scrolling something". People cook, code, argue, break things, and occasionally touch grass together. You cannot really replicate that energy alone in a dorm.</p>
+                      <p>I started and helped run hacker houses because I wanted that density of weird, ambitious people in real life, not just on Twitter.</p>
+                    </div>
+                  </div>
+
+                  <div class="faq-item">
+                    <div class="faq-question">Are you more introverted or extroverted now?</div>
+                    <div class="faq-answer">
+                      <p>Mixed.</p>
+                      <p>I used to be very outward facing, always talking to everyone. Now I am more selective. I still like meeting new people, but I also need quiet stretches to think and work.</p>
+                      <p>Big chaotic events are fun, but deep one on one conversations are where the real upgrades happen.</p>
+                    </div>
+                  </div>
+
+                  <div class="faq-item">
+                    <div class="faq-question">What kind of people do you like being around?</div>
+                    <div class="faq-answer">
+                      <p>People who are:</p>
+                      <ul>
+                        <li>Ambitious but not delusional.</li>
+                        <li>Curious and honest, even when it hurts.</li>
+                        <li>Actually building or learning something, not just optimizing their image.</li>
+                        <li>Comfortable talking about both money and meaning in the same conversation.</li>
+                      </ul>
+                      <p>If that is you, we will probably get along.</p>
+                    </div>
+                  </div>
+
+                  <div class="faq-item">
+                    <div class="faq-question">What is the most "you" type of night?</div>
+                    <div class="faq-answer">
+                      <p>Something like:</p>
+                      <ul>
+                        <li>Gym or a night walk.</li>
+                        <li>Deep conversation about life trajectories, cities, technology or relationships.</li>
+                        <li>A few hours of focused building or writing.</li>
+                        <li>Late night food.</li>
+                        <li>Maybe a weird dream to journal about the next morning.</li>
+                      </ul>
+                      <p>I am allergic to nights that end with "I do not even know what I did".</p>
+                    </div>
+                  </div>
+
+                  <div class="faq-item">
+                    <div class="faq-question">Why do you talk so much about dreams?</div>
+                    <div class="faq-answer">
+                      <p>Because my brain likes to run side quests while I am asleep.</p>
+                      <p>Dreams for me are like compressed story files. They mix childhood, current stress, future fears and random symbols into strange but meaningful images. I do not think they are magic, but I do think they are a very fast way to see what your subconscious is obsessing over.</p>
+                      <p>So I write them down and occasionally overanalyze them.</p>
+                    </div>
+                  </div>
+
+                  <div class="faq-item">
+                    <div class="faq-question">How do you think about relationships?</div>
+                    <div class="faq-answer">
+                      <p>Important, but not something you brute force.</p>
+                      <p>Friends, partners, collaborators, mentors, they are all multiplicative, not additive. The wrong people drain your trajectory, the right ones warp it upwards.</p>
+                      <p>I am still figuring it out, but in general: be honest, be kind, be clear, and do not pretend to be someone you are not just to fit a label.</p>
+                    </div>
+                  </div>
+
+                  <div class="faq-item">
+                    <div class="faq-question">Do you still game?</div>
+                    <div class="faq-answer">
+                      <p>Less, but yes.</p>
+                      <p>I do not grind games like I used to, because I already have a real life open world RPG to manage. But the gamer brain never left. It just got redirected to building, trading, lifting and trying to level up in real life.</p>
+                    </div>
+                  </div>
+
+                  <div class="faq-item">
+                    <div class="faq-question">What books or media have influenced you the most?</div>
+                    <div class="faq-answer">
+                      <p>A non exhaustive list:</p>
+                      <ul>
+                        <li>Sci fi that actually makes you think about civilization and physics.</li>
+                        <li>Startup and business writing that is brutally honest rather than hype.</li>
+                        <li>Psychology and philosophy stuff that explains why humans are weird.</li>
+                      </ul>
+                      <p>The exact titles change over time, but the pattern is always the same: things that make me question my defaults.</p>
+                    </div>
+                  </div>
+
+                  <div class="faq-item">
+                    <div class="faq-question">What is one belief you hold that often surprises people?</div>
+                    <div class="faq-answer">
+                      <p>That a lot of life is predetermined by environment, but you can still make moves that change which branch you end up on.</p>
+                      <p>So I try to hack the environment more than I try to brute force raw willpower.</p>
+                    </div>
+                  </div>
+
+                  <div class="faq-item">
+                    <div class="faq-question">What are you optimizing for long term?</div>
+                    <div class="faq-answer">
+                      <p>I am optimizing for:</p>
+                      <ul>
+                        <li>Being around extremely high quality people.</li>
+                        <li>Having the skills and leverage to build weird, high impact systems.</li>
+                        <li>Not hating myself or my life at 40.</li>
+                        <li>Keeping enough freedom to explore, relocate and restart.</li>
+                      </ul>
+                      <p>If I can do that, the details can shift.</p>
+                    </div>
+                  </div>
+
+                  <div class="faq-item">
+                    <div class="faq-question">How do you actually relax?</div>
+                    <div class="faq-answer">
+                      <p>Walks. Music. Cooking something simple. Talking to one or two people I trust. Writing fiction or essays with no external pressure.</p>
+                      <p>I am not great at "doing nothing". I relax better when my brain has a low stakes side task.</p>
+                    </div>
+                  </div>
+
+                  <div class="faq-item">
+                    <div class="faq-question">Are you okay?</div>
+                    <div class="faq-answer">
+                      <p>Most of the time, yes.</p>
+                      <p>Like everyone else, I have my spikes of chaos and my dips. But in general, I feel more grounded now than I did a few years ago. The gym, writing, building and real conversations help a lot.</p>
+                    </div>
+                  </div>
+
+                  <div class="faq-item">
+                    <div class="faq-question">Can people reach out to you?</div>
+                    <div class="faq-answer">
+                      <p>Yes.</p>
+                      <p>If you have an interesting project, want to build something, want to collaborate, or just think "hey, we might vibe", reach out.</p>
+                      <ul>
+                        <li><a href="mailto:jack@hexahacks.com" class="a-underline">Email</a></li>
+                        <li><a href="https://calendly.com/jackluo/20-minute-meeting" class="a-underline">Calendly</a></li>
+                      </ul>
+                      <p>I cannot promise I will reply instantly, but I genuinely like hearing from people who are serious about what they are doing.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <p>
+                  <b>To be continued?</b><br />
+                  Obviously.
+                </p>
+                <p>
+                  I am still figuring out who "Jack" becomes in the next five to ten years. If you want to find out in real time, stick around.
+                </p>
+
+                <p>
+                  <b>Update 09/07/2024</b><br />
+                  I am creating a new page for my <a class="a-underline" href="../readings.html">reading</a> log. Feel free to check it out if you are curious about what I am feeding my brain.
                 </p>
               </div>
             </div>
@@ -237,5 +633,84 @@
     <script src="../lib/js/aos.js"></script>
     <script src="../lib/js/bootstrap.js"></script>
     <script src="../src/js/script.js"></script>
+
+    <!-- FAQ Interactive JavaScript -->
+    <script>
+      (function() {
+        const MAX_CLICKS = 10;
+        const STORAGE_KEY = 'faq_clicks_remaining';
+
+        // Initialize or get remaining clicks from localStorage
+        let clicksRemaining = localStorage.getItem(STORAGE_KEY);
+        if (clicksRemaining === null) {
+          clicksRemaining = MAX_CLICKS;
+          localStorage.setItem(STORAGE_KEY, clicksRemaining);
+        } else {
+          clicksRemaining = parseInt(clicksRemaining, 10);
+        }
+
+        const questions = document.querySelectorAll('.faq-question');
+        const counter = document.getElementById('faq-counter');
+        const clickCount = document.getElementById('click-count');
+        const limitMessage = document.getElementById('faq-limit-message');
+
+        function updateCounter() {
+          const used = MAX_CLICKS - clicksRemaining;
+          clickCount.textContent = used;
+
+          if (clicksRemaining === 0) {
+            counter.classList.add('limit-reached');
+            counter.classList.remove('warning');
+            limitMessage.classList.add('active');
+          } else if (clicksRemaining <= 3) {
+            counter.classList.add('warning');
+          }
+        }
+
+        function toggleAnswer(question, answer) {
+          const isActive = answer.classList.contains('active');
+
+          if (!isActive) {
+            // Trying to open a new answer
+            if (clicksRemaining <= 0) {
+              // No clicks remaining
+              alert('You have reached the maximum number of questions! Time to hack it if you want more. 😉');
+              return;
+            }
+
+            // Open the answer
+            question.classList.add('active');
+            answer.classList.add('active');
+
+            // Decrease remaining clicks
+            clicksRemaining--;
+            localStorage.setItem(STORAGE_KEY, clicksRemaining);
+            updateCounter();
+          } else {
+            // Closing an answer (this doesn't restore clicks)
+            question.classList.remove('active');
+            answer.classList.remove('active');
+          }
+        }
+
+        // Set up click handlers
+        questions.forEach((question) => {
+          const answer = question.nextElementSibling;
+
+          question.addEventListener('click', () => {
+            toggleAnswer(question, answer);
+          });
+        });
+
+        // Initialize counter display
+        updateCounter();
+
+        // Easter egg: Add a console message for hackers
+        console.log('%c🎯 Nice! You opened the console.', 'font-size: 20px; color: #00ff00;');
+        console.log('%cIf you want to unlock all questions, try this:', 'font-size: 14px;');
+        console.log('%clocalStorage.setItem("faq_clicks_remaining", "999");', 'font-size: 12px; background: #222; color: #0f0; padding: 5px;');
+        console.log('%cThen refresh the page. Have fun! - Jack', 'font-size: 14px; font-style: italic;');
+      })();
+    </script>
   </body>
 </html>
