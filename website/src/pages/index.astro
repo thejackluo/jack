@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/Base.astro';
 import MusicPlayer from '../components/MusicPlayer.astro';
+import TypewriterStatus from '../components/TypewriterStatus.astro';
 ---
 <BaseLayout currentPage="home">
   <div slot="hero" class="landing-main container-fluid">
@@ -23,7 +24,7 @@ import MusicPlayer from '../components/MusicPlayer.astro';
     </div>
 
     <div class="row landing-row">
-      <h3>Currently: Building @ <a href="https://magk.app">MAGK</a></h3>
+      <TypewriterStatus />
     </div>
     <div class="row landing-row">
       <a href="#about" aria-label="Scroll to about section">
