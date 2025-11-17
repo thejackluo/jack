@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/Base.astro';
-import MusicPlayer from '../components/MusicPlayer.tsx';
+import MusicPlayer from '../components/MusicPlayer.astro';
 ---
 <BaseLayout currentPage="home">
   <div slot="hero" class="landing-main container-fluid">
@@ -15,7 +15,7 @@ import MusicPlayer from '../components/MusicPlayer.tsx';
         <a href="/blogs/jack.html">JACK</a>
       </h1>
       <div class="landing-image col-4-lg col-md-6 col-sm-8">
-        <MusicPlayer client:load />
+        <MusicPlayer />
       </div>
       <h1 class="landing-name col-4-lg col-md-3 col-sm-2 d-none d-sm-block">
         <a href="/blogs/luo.html">LUO</a>

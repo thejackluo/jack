@@ -1,0 +1,537 @@
+---
+// Pure Astro component - no React needed!
+---
+
+<div class="music-player-container">
+  <div class="music-disc" id="music-disc">
+    <!-- Music disc vinyl effect -->
+    <div class="vinyl-disc">
+      <img
+        class="disc-image"
+        src="/assets/images/jack/main.jpg"
+        alt="Portrait of Jack Luo"
+      />
+      <div class="disc-center"></div>
+      <div class="disc-rings"></div>
+    </div>
+
+    <!-- Hover overlay -->
+    <div class="hover-overlay" id="hover-overlay">
+      <div class="hover-content">
+        <svg class="music-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+        </svg>
+        <p>Want some music?</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Now Playing Display -->
+  <div class="now-playing" id="now-playing" style="display: none;">
+    <p class="now-playing-text">
+      Now playing: <span class="song-name" id="song-name"></span>
+    </p>
+    <div class="controls">
+      <button id="play-pause-btn" class="control-btn">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
+        </svg>
+      </button>
+      <button id="stop-btn" class="control-btn">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M6 6h12v12H6z" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Rare Song Message -->
+  <div class="rare-message" id="rare-message" style="display: none;">
+    <div class="rare-content">
+      <span class="sparkle">✨</span>
+      <p>Whoa! You got a rare track!</p>
+      <span class="sparkle">✨</span>
+    </div>
+  </div>
+
+  <!-- Hidden SoundCloud Widget -->
+  <iframe
+    id="soundcloud-widget"
+    width="0"
+    height="0"
+    scrolling="no"
+    frameborder="no"
+    allow="autoplay"
+    src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fthejackluo%2F015-memory-v3-part-1&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false"
+    style="display: none;"
+  ></iframe>
+</div>
+
+<style>
+  .music-player-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  /* Music Disc Container */
+  .music-disc {
+    position: relative;
+    cursor: pointer;
+    width: 80%;
+    height: auto;
+    aspect-ratio: 1;
+    transition: transform 0.3s ease;
+  }
+
+  .music-disc:hover {
+    transform: scale(1.05);
+  }
+
+  /* Vinyl Disc Styling */
+  .vinyl-disc {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: 0px 0px 40px rgba(255, 255, 255, 0.5);
+    overflow: hidden;
+  }
+
+  .disc-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Disc center (label area) */
+  .disc-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    height: 30%;
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 100%);
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    z-index: 3;
+    box-shadow:
+      0 0 20px rgba(0, 0, 0, 0.5),
+      inset 0 0 10px rgba(0, 0, 0, 0.8);
+  }
+
+  .disc-center::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20%;
+    height: 20%;
+    background: rgba(0, 0, 0, 0.9);
+    border-radius: 50%;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 1);
+  }
+
+  /* Vinyl grooves effect */
+  .disc-rings {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: repeating-radial-gradient(
+      circle at center,
+      transparent 0,
+      transparent 2px,
+      rgba(0, 0, 0, 0.03) 2px,
+      rgba(0, 0, 0, 0.03) 4px
+    );
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  /* Spinning Animation */
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .music-disc.spinning .vinyl-disc {
+    animation: spin 3s linear infinite;
+  }
+
+  .music-disc.spinning:hover {
+    transform: scale(1);
+  }
+
+  /* Hover Overlay */
+  .hover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 4;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .music-disc:hover .hover-overlay {
+    opacity: 1;
+  }
+
+  .music-disc.spinning .hover-overlay {
+    display: none;
+  }
+
+  .hover-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .music-icon {
+    width: 3rem;
+    height: 3rem;
+    color: white;
+  }
+
+  .hover-content p {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Now Playing Display */
+  .now-playing {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: slideUp 0.3s ease;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .now-playing-text {
+    margin: 0;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+  }
+
+  .song-name {
+    font-weight: 600;
+    color: white;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+
+  /* Controls */
+  .controls {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .control-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: white;
+    padding: 0.5rem;
+  }
+
+  .control-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+  }
+
+  .control-btn svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Rare Message */
+  .rare-message {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    animation: rareAppear 0.5s ease;
+  }
+
+  @keyframes rareAppear {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-20px) scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+  }
+
+  .rare-content {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 1rem;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow:
+      0 10px 40px rgba(102, 126, 234, 0.4),
+      0 0 20px rgba(118, 75, 162, 0.3);
+    animation: glow 2s ease-in-out infinite;
+  }
+
+  @keyframes glow {
+    0%, 100% {
+      box-shadow:
+        0 10px 40px rgba(102, 126, 234, 0.4),
+        0 0 20px rgba(118, 75, 162, 0.3);
+    }
+    50% {
+      box-shadow:
+        0 10px 40px rgba(102, 126, 234, 0.6),
+        0 0 30px rgba(118, 75, 162, 0.5);
+    }
+  }
+
+  .rare-content p {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .sparkle {
+    font-size: 1.5rem;
+    animation: sparkle 1s ease-in-out infinite;
+  }
+
+  @keyframes sparkle {
+    0%, 100% {
+      transform: scale(1) rotate(0deg);
+    }
+    50% {
+      transform: scale(1.2) rotate(180deg);
+    }
+  }
+
+  /* Responsive Design */
+  @media (min-width: 576px) {
+    .music-disc {
+      width: 35%;
+    }
+
+    .music-icon {
+      width: 3.5rem;
+      height: 3.5rem;
+    }
+
+    .hover-content p {
+      font-size: 1.4rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .music-disc {
+      width: 30%;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .music-disc {
+      width: 20%;
+    }
+
+    .now-playing-text {
+      font-size: 1.1rem;
+    }
+
+    .rare-content p {
+      font-size: 1.5rem;
+    }
+  }
+</style>
+
+<script>
+  // Song data with weighted probabilities
+  const songs = [
+    // Common songs - 18% each
+    { url: 'https://soundcloud.com/thejackluo/015-memory-v3-part-1', name: 'Memory V3 Part 1', probability: 0.18, isRare: false },
+    { url: 'https://soundcloud.com/thejackluo/011-mom', name: 'Mom', probability: 0.18, isRare: false },
+    { url: 'https://soundcloud.com/thejackluo/007-mirrox', name: 'Mirrox', probability: 0.18, isRare: false },
+    { url: 'https://soundcloud.com/thejackluo/005-reunion', name: 'Reunion', probability: 0.18, isRare: false },
+    { url: 'https://soundcloud.com/thejackluo/001-title', name: 'Title', probability: 0.18, isRare: false },
+    // Rare songs - 5% each
+    { url: 'https://soundcloud.com/thejackluo/memories-v2', name: 'Memories V2', probability: 0.05, isRare: true },
+    { url: 'https://soundcloud.com/thejackluo/intersection', name: 'Intersection', probability: 0.05, isRare: true },
+  ];
+
+  // Get DOM elements
+  const musicDisc = document.getElementById('music-disc');
+  const nowPlaying = document.getElementById('now-playing');
+  const songName = document.getElementById('song-name');
+  const playPauseBtn = document.getElementById('play-pause-btn');
+  const stopBtn = document.getElementById('stop-btn');
+  const rareMessage = document.getElementById('rare-message');
+  const widgetIframe = document.getElementById('soundcloud-widget');
+
+  // State
+  let isPlaying = false;
+  let currentSong = null;
+  let widget = null;
+
+  // Initialize SoundCloud Widget
+  if (window.SC && widgetIframe) {
+    widget = window.SC.Widget(widgetIframe);
+
+    // Listen for track finish
+    widget.bind(window.SC.Widget.Events.FINISH, function() {
+      isPlaying = false;
+      musicDisc?.classList.remove('spinning');
+      if (nowPlaying) nowPlaying.style.display = 'none';
+      currentSong = null;
+    });
+  }
+
+  // Weighted random song selection
+  function selectRandomSong() {
+    const random = Math.random();
+    let cumulative = 0;
+
+    for (const song of songs) {
+      cumulative += song.probability;
+      if (random <= cumulative) {
+        return song;
+      }
+    }
+
+    return songs[0]; // Fallback
+  }
+
+  // Handle disc click
+  musicDisc?.addEventListener('click', function() {
+    if (!isPlaying && widget) {
+      const selectedSong = selectRandomSong();
+      currentSong = selectedSong;
+      isPlaying = true;
+
+      // Update UI
+      musicDisc.classList.add('spinning');
+      if (nowPlaying) nowPlaying.style.display = 'flex';
+      if (songName) songName.textContent = selectedSong.name;
+
+      // Show rare message if rare track
+      if (selectedSong.isRare && rareMessage) {
+        rareMessage.style.display = 'block';
+        setTimeout(() => {
+          rareMessage.style.display = 'none';
+        }, 5000);
+      }
+
+      // Load and play the track
+      widget.load(selectedSong.url, {
+        auto_play: true,
+        visual: false,
+      });
+    }
+  });
+
+  // Play/Pause button
+  playPauseBtn?.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (widget && currentSong) {
+      if (isPlaying) {
+        widget.pause();
+        isPlaying = false;
+        musicDisc?.classList.remove('spinning');
+        // Update icon to play
+        playPauseBtn.innerHTML = `
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+        `;
+      } else {
+        widget.play();
+        isPlaying = true;
+        musicDisc?.classList.add('spinning');
+        // Update icon to pause
+        playPauseBtn.innerHTML = `
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
+          </svg>
+        `;
+      }
+    }
+  });
+
+  // Stop button
+  stopBtn?.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (widget) {
+      widget.pause();
+      widget.seekTo(0);
+      isPlaying = false;
+      currentSong = null;
+      musicDisc?.classList.remove('spinning');
+      if (nowPlaying) nowPlaying.style.display = 'none';
+      // Reset play/pause icon
+      playPauseBtn.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
+        </svg>
+      `;
+    }
+  });
+</script>
