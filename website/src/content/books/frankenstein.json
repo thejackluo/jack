@@ -1,0 +1,13 @@
+{
+  "title": "Frankenstein",
+  "author": "Mary Shelley",
+  "category": "SciFi",
+  "progress": 100,
+  "score": 4,
+  "pageCount": 280,
+  "color": "#2f5233",
+  "gradient": {
+    "start": "#2f5233",
+    "end": "#48bb78"
+  }
+}

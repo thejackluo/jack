@@ -1,0 +1,13 @@
+{
+  "title": "Your Name",
+  "author": "Makoto Shinkai",
+  "category": "SciFi",
+  "progress": 100,
+  "score": 4,
+  "pageCount": 192,
+  "color": "#742a2a",
+  "gradient": {
+    "start": "#742a2a",
+    "end": "#f56565"
+  }
+}

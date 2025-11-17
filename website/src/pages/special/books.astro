@@ -1,0 +1,450 @@
+---
+import { getCollection } from 'astro:content';
+import Book from '../../components/Book.astro';
+
+const allBooks = await getCollection('books');
+
+// Sort books by category or reading progress
+const books = allBooks.sort((a, b) => b.data.progress - a.data.progress);
+
+// Group books into shelves (6 books per shelf)
+const booksPerShelf = 6;
+const shelves = [];
+for (let i = 0; i < books.length; i += booksPerShelf) {
+  shelves.push(books.slice(i, i + booksPerShelf));
+}
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Jack Luo - Bookshelf</title>
+    <meta name="description" content="Jack Luo's personal bookshelf showcasing reading progress and collection" />
+    <meta name="keywords" content="Jack Luo, Books, Reading Progress" />
+    <meta name="author" content="Jack Luo" />
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <!-- RGB Header Strip -->
+    <div class="rgb-strip"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+      <!-- Header -->
+      <header class="header glassmorphic">
+        <h1 class="title">
+          <span class="title-main">Jack's Bookshelf</span>
+          <span class="title-glow">Jack's Bookshelf</span>
+        </h1>
+        <p class="subtitle">A curated collection of knowledge and stories</p>
+        <div class="stats">
+          <div class="stat-item">
+            <span class="stat-number">{books.length}</span>
+            <span class="stat-label">Books</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">{books.filter(b => b.data.progress === 100).length}</span>
+            <span class="stat-label">Completed</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">{books.filter(b => b.data.progress > 0 && b.data.progress < 100).length}</span>
+            <span class="stat-label">In Progress</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Bookshelf -->
+      <div class="bookshelf">
+        {shelves.map((shelf, shelfIndex) => (
+          <div class="shelf-row" data-shelf={shelfIndex}>
+            <!-- Books Container -->
+            <div class="books-container">
+              {shelf.map((book, bookIndex) => (
+                <Book
+                  title={book.data.title}
+                  author={book.data.author}
+                  category={book.data.category}
+                  progress={book.data.progress}
+                  score={book.data.score}
+                  pageCount={book.data.pageCount}
+                  color={book.data.color}
+                  gradient={book.data.gradient}
+                  index={shelfIndex * booksPerShelf + bookIndex}
+                />
+              ))}
+            </div>
+
+            <!-- Floating Shelf SVG -->
+            <svg class="floating-shelf" viewBox="0 0 1000 100" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id={`shelf-gradient-${shelfIndex}`} x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" style="stop-color:rgba(100,200,255,0.3);stop-opacity:1" />
+                  <stop offset="50%" style="stop-color:rgba(50,150,255,0.5);stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:rgba(100,200,255,0.3);stop-opacity:1" />
+                </linearGradient>
+                <filter id={`glow-${shelfIndex}`}>
+                  <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                  <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+
+              <!-- Main shelf platform -->
+              <rect
+                x="0"
+                y="30"
+                width="1000"
+                height="25"
+                fill={`url(#shelf-gradient-${shelfIndex})`}
+                rx="5"
+                filter={`url(#glow-${shelfIndex})`}
+              />
+
+              <!-- Shelf edge highlight -->
+              <rect
+                x="0"
+                y="30"
+                width="1000"
+                height="3"
+                fill="rgba(200,240,255,0.4)"
+                rx="2"
+              />
+
+              <!-- Bottom shadow -->
+              <rect
+                x="0"
+                y="52"
+                width="1000"
+                height="3"
+                fill="rgba(0,0,0,0.3)"
+                rx="2"
+              />
+
+              <!-- Floating supports -->
+              <g opacity="0.4">
+                <rect x="100" y="35" width="3" height="40" fill="rgba(100,200,255,0.6)" rx="1"/>
+                <rect x="450" y="35" width="3" height="40" fill="rgba(100,200,255,0.6)" rx="1"/>
+                <rect x="800" y="35" width="3" height="40" fill="rgba(100,200,255,0.6)" rx="1"/>
+              </g>
+            </svg>
+          </div>
+        ))}
+      </div>
+
+      <!-- Back Link -->
+      <div class="back-link-container">
+        <a href="/" class="back-link glassmorphic">
+          <span>← Back to Home</span>
+        </a>
+      </div>
+    </div>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1423 100%);
+        color: white;
+        min-height: 100vh;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image:
+          radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+          radial-gradient(circle at 80% 80%, rgba(74, 86, 226, 0.1) 0%, transparent 50%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .rgb-strip {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
+        background-size: 300% 100%;
+        animation: slide 8s linear infinite;
+        z-index: 1000;
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+      }
+
+      @keyframes slide {
+        0% { background-position: 0% 0; }
+        100% { background-position: 300% 0; }
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .glassmorphic {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow:
+          0 8px 32px 0 rgba(0, 0, 0, 0.37),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      }
+
+      .header {
+        text-align: center;
+        padding: 40px;
+        border-radius: 20px;
+        margin-bottom: 60px;
+      }
+
+      .title {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 48px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .title-main {
+        position: relative;
+        z-index: 1;
+        background: linear-gradient(135deg, #00ffff 0%, #ff00ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .title-glow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        color: #00ffff;
+        filter: blur(20px);
+        opacity: 0.5;
+        animation: glow 3s ease-in-out infinite alternate;
+      }
+
+      @keyframes glow {
+        from {
+          filter: blur(20px);
+          opacity: 0.5;
+        }
+        to {
+          filter: blur(30px);
+          opacity: 0.8;
+        }
+      }
+
+      .subtitle {
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 30px;
+      }
+
+      .stats {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin-top: 20px;
+      }
+
+      .stat-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .stat-number {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 32px;
+        font-weight: 700;
+        color: #00ffff;
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+      }
+
+      .stat-label {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: rgba(255, 255, 255, 0.5);
+        margin-top: 5px;
+      }
+
+      .bookshelf {
+        display: flex;
+        flex-direction: column;
+        gap: 120px;
+      }
+
+      .shelf-row {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .books-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 2px;
+        padding: 0 20px 20px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .floating-shelf {
+        width: 100%;
+        max-width: 900px;
+        height: 100px;
+        position: absolute;
+        bottom: -40px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+      }
+
+      .back-link-container {
+        margin-top: 80px;
+        text-align: center;
+      }
+
+      .back-link {
+        display: inline-block;
+        padding: 15px 30px;
+        border-radius: 10px;
+        text-decoration: none;
+        color: white;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .back-link:hover {
+        transform: translateY(-2px);
+        box-shadow:
+          0 8px 32px 0 rgba(0, 255, 255, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      }
+
+      @media (max-width: 768px) {
+        .title {
+          font-size: 32px;
+        }
+
+        .stats {
+          gap: 20px;
+        }
+
+        .stat-number {
+          font-size: 24px;
+        }
+
+        .books-container {
+          overflow-x: auto;
+          justify-content: flex-start;
+          padding-bottom: 40px;
+        }
+
+        .bookshelf {
+          gap: 150px;
+        }
+      }
+    </style>
+
+    <script>
+      // Book interaction logic
+      let selectedBook: HTMLElement | null = null;
+
+      function selectBook(bookContainer: HTMLElement) {
+        const bookIndex = parseInt(bookContainer.dataset.index || '0');
+        const shelfRow = bookContainer.closest('.shelf-row');
+        const allBooksInShelf = shelfRow?.querySelectorAll('.book-container') || [];
+
+        // If clicking the same book, deselect it
+        if (selectedBook === bookContainer) {
+          selectedBook.classList.remove('selected');
+          allBooksInShelf.forEach((book) => {
+            (book as HTMLElement).classList.remove('spread-left', 'spread-right');
+          });
+          selectedBook = null;
+          return;
+        }
+
+        // Deselect previous book if any
+        if (selectedBook) {
+          selectedBook.classList.remove('selected');
+          const prevShelf = selectedBook.closest('.shelf-row');
+          const prevBooks = prevShelf?.querySelectorAll('.book-container') || [];
+          prevBooks.forEach((book) => {
+            (book as HTMLElement).classList.remove('spread-left', 'spread-right');
+          });
+        }
+
+        // Select new book
+        selectedBook = bookContainer;
+        bookContainer.classList.add('selected');
+
+        // Spread books to create space
+        allBooksInShelf.forEach((book, index) => {
+          const currentBookIndex = parseInt((book as HTMLElement).dataset.index || '0');
+          const relativeIndex = currentBookIndex % 6;
+          const selectedRelativeIndex = bookIndex % 6;
+
+          if (relativeIndex < selectedRelativeIndex) {
+            (book as HTMLElement).classList.add('spread-left');
+            (book as HTMLElement).classList.remove('spread-right');
+          } else if (relativeIndex > selectedRelativeIndex) {
+            (book as HTMLElement).classList.add('spread-right');
+            (book as HTMLElement).classList.remove('spread-left');
+          } else {
+            (book as HTMLElement).classList.remove('spread-left', 'spread-right');
+          }
+        });
+      }
+
+      // Add click listeners to all books
+      document.addEventListener('DOMContentLoaded', () => {
+        const bookContainers = document.querySelectorAll('.book-container');
+        bookContainers.forEach((container) => {
+          container.addEventListener('click', () => selectBook(container as HTMLElement));
+        });
+
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && selectedBook) {
+            selectBook(selectedBook);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
