@@ -3,7 +3,7 @@
 ---
 
 <h3>
-  <span class="typewriter-prefix">Currently: </span>
+  <span class="typewriter-prefix">Currently </span>
   <span class="typewriter-text"></span>
   <span class="typewriter-cursor">|</span>
 </h3>
@@ -30,18 +30,18 @@
 <script>
   // Status messages to cycle through
   const statuses = [
-    { prefix: 'project', text: 'building @ magk', link: 'https://magk.app' },
-    { prefix: 'personal', text: 'meeting new friends' },
-    { prefix: 'funny', text: 'sleeping in a conference room' },
-    { prefix: 'traveling', text: 'trying to travel to Europe' },
-    { prefix: 'funny', text: 'updating this website' },
-    { prefix: 'technical', text: 'creating memory architecture for agents' },
-    { prefix: 'entertainment', text: 'playing cyberpunk 2077' },
-    { prefix: 'reading', text: "subtle art of not giving a f*ck" },
-    { prefix: 'surprised', text: 'how are you still here' },
+    { prefix: 'project', text: 'building strange agentic things at @ MAGK', link: 'https://magk.app' },
+    { prefix: 'personal', text: 'accidentally meeting new friends everywhere' },
+    { prefix: 'status', text: 'sleeping in a conference room again' },
+    { prefix: 'traveling', text: 'plotting a slightly unhinged trip to Europe' },
+    { prefix: 'meta', text: 'procrastinating by updating this website instead of resting' },
+    { prefix: 'technical', text: 'wiring up memory architectures so agents remember your life better than you do' },
+    { prefix: 'entertainment', text: 'playing Cyberpunk 2077 when I should be working' },
+    { prefix: 'reading', text: 'rereading "The Subtle Art of Not Giving a F*ck" and pretending it is not about me' },
+    { prefix: 'surprised', text: 'wait, you are still here scrolling this?' },
     {
-      prefix: 'random',
-      text: `you are the ${Math.floor(Math.random() * 1000) + 1000}th visitor, welcome`,
+      prefix: 'visitor',
+      text: `welcome to the chaos. you are visitor #${Math.floor(Math.random() * 1000) + 1000}`,
       isRandom: true
     }
   ];
@@ -52,7 +52,6 @@
   let isPaused = false;
 
   const typewriterTextElement = document.querySelector('.typewriter-text') as HTMLElement;
-  const typewriterPrefixElement = document.querySelector('.typewriter-prefix') as HTMLElement;
 
   // Typing speed settings
   const TYPING_SPEED = 100;        // Speed when typing
@@ -68,7 +67,7 @@
       const visitorNum = Math.floor(Math.random() * 1000) + 1000;
       return {
         ...status,
-        text: `you are the ${visitorNum}th visitor, welcome`
+        text: `welcome to the chaos. you are visitor #${visitorNum}`
       };
     }
 
@@ -93,9 +92,6 @@
       } else {
         typewriterTextElement.textContent = displayText;
       }
-
-      // Update prefix
-      typewriterPrefixElement.textContent = `Currently [${currentStatus.prefix}]: `;
 
       if (currentCharIndex === fullText.length) {
         // Finished typing, pause before deleting
