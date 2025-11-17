@@ -5,8 +5,11 @@ import BaseLayout from '../../layouts/Base.astro';
 // Get all projects
 const allProjects = await getCollection('projects');
 
+// Define major project slugs
+const majorProjectSlugs = ['delight', 'magk-excel', 'efficore', 'arkos'];
+
 // Process and sort projects
-const projects = allProjects
+const processedProjects = allProjects
   .map(project => {
     const startDate = new Date(project.data.startDate);
     const endDate = project.data.endDate ? new Date(project.data.endDate) : null;
@@ -20,6 +23,10 @@ const projects = allProjects
     };
   })
   .sort((a, b) => b.startDateObj.getTime() - a.startDateObj.getTime());
+
+// Split into major and minor projects
+const majorProjects = processedProjects.filter(p => majorProjectSlugs.includes(p.slug));
+const minorProjects = processedProjects.filter(p => !majorProjectSlugs.includes(p.slug));
 ---
 
 <BaseLayout
@@ -40,11 +47,14 @@ const projects = allProjects
           </div>
         </div>
 
-        <!-- Projects Grid -->
-        <div class="row projects-grid">
-          {projects.map((project, index) => (
+        <!-- Major Projects -->
+        <div class="section-header">
+          <h2>Major Projects</h2>
+        </div>
+        <div class="row projects-grid major-grid">
+          {majorProjects.map((project) => (
             <div class="col-12 col-md-6">
-              <article class="project-card" data-project-slug={project.slug}>
+              <article class="project-card major-card" data-project-slug={project.slug}>
                 {project.data.gallery && project.data.gallery.length > 0 && project.data.gallery[0].src && (
                   <img
                     src={project.data.gallery[0].src}
@@ -88,6 +98,51 @@ const projects = allProjects
             </div>
           ))}
         </div>
+
+        <!-- Minor Projects -->
+        {minorProjects.length > 0 && (
+          <>
+            <div class="section-header minor-header">
+              <h2>Experiments & Archive</h2>
+            </div>
+            <div class="row projects-grid minor-grid">
+              {minorProjects.map((project) => (
+                <div class="col-12 col-md-4">
+                  <article class="project-card minor-card" data-project-slug={project.slug}>
+                    {project.data.gallery && project.data.gallery.length > 0 && project.data.gallery[0].src && (
+                      <img
+                        src={project.data.gallery[0].src}
+                        alt={project.data.gallery[0].alt}
+                        class="project-image minor-image"
+                      />
+                    )}
+
+                    <div class="project-card-content">
+                      <div class="project-card-header">
+                        <h3 class="project-title minor-title">{project.data.title}</h3>
+                      </div>
+
+                      <p class="project-role minor-role">{project.data.role}</p>
+
+                      <div class="project-meta">
+                        <span class="project-duration">{project.duration}</span>
+                      </div>
+
+                      <div class="project-tech">
+                        {project.data.tech.slice(0, 3).map(tech => (
+                          <span class="tech-tag minor-tech-tag">{tech}</span>
+                        ))}
+                        {project.data.tech.length > 3 && (
+                          <span class="tech-more">+{project.data.tech.length - 3}</span>
+                        )}
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </div>
   </section>
@@ -356,6 +411,75 @@ const projects = allProjects
     font-style: italic;
   }
 
+  /* Section Headers */
+  .section-header {
+    margin: 3rem auto 2rem auto;
+    padding: 0 2rem;
+    max-width: 1400px;
+  }
+
+  .section-header h2 {
+    font-family: "Dual-300";
+    font-size: 2.5rem;
+    color: white;
+    margin: 0;
+    text-align: left;
+  }
+
+  .minor-header {
+    margin-top: 5rem;
+  }
+
+  /* Minor Project Cards - Compact Styling */
+  .minor-card {
+    background: radial-gradient(
+      50% 50% at 50% 50%,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.03) 100%
+    );
+    box-shadow: inset 0px 5px 10px -5px rgba(255, 255, 255, 0.2),
+      inset 0px 0px 30px rgba(255, 255, 255, 0.05);
+  }
+
+  .minor-card:hover {
+    transform: translateY(-4px);
+    box-shadow: inset 0px 5px 10px -5px rgba(255, 255, 255, 0.4),
+      inset 0px 0px 40px rgba(255, 255, 255, 0.1),
+      0px 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .minor-image {
+    height: 180px;
+  }
+
+  .minor-card .project-card-content {
+    padding: 1.25rem;
+  }
+
+  .minor-title {
+    font-size: 1.5rem;
+  }
+
+  .minor-role {
+    font-size: 0.85rem;
+    margin: 0 0 0.75rem 0;
+  }
+
+  .minor-card .project-meta {
+    margin-bottom: 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .minor-tech-tag {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .minor-card .tech-more {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+  }
+
   /* Modal */
   .modal {
     display: none;
@@ -454,6 +578,8 @@ const projects = allProjects
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.5rem;
+    margin-right: 1rem;
+    margin-bottom: 0.75rem;
     background: radial-gradient(
       50% 50% at 50% 50%,
       rgba(255, 255, 255, 0.1) 0%,
@@ -570,6 +696,14 @@ const projects = allProjects
 
     .project-title {
       font-size: 1.5rem;
+    }
+
+    .minor-title {
+      font-size: 1.3rem;
+    }
+
+    .section-header h2 {
+      font-size: 2rem;
     }
 
     .project-card-header {
