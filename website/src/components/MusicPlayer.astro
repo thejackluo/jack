@@ -2,6 +2,25 @@
 // Pure Astro component - no React needed!
 ---
 
+<!-- Now Playing Display - Fixed Top Bar -->
+<div class="now-playing" id="now-playing" style="display: none;">
+  <p class="now-playing-text">
+    Now playing: <span class="song-name" id="song-name"></span>
+  </p>
+  <div class="controls">
+    <button id="play-pause-btn" class="control-btn">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
+      </svg>
+    </button>
+    <button id="stop-btn" class="control-btn">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M6 6h12v12H6z" />
+      </svg>
+    </button>
+  </div>
+</div>
+
 <div class="music-player-container">
   <div class="music-disc" id="music-disc">
     <!-- Music disc vinyl effect -->
@@ -23,25 +42,6 @@
         </svg>
         <p>Want some music?</p>
       </div>
-    </div>
-  </div>
-
-  <!-- Now Playing Display -->
-  <div class="now-playing" id="now-playing" style="display: none;">
-    <p class="now-playing-text">
-      Now playing: <span class="song-name" id="song-name"></span>
-    </p>
-    <div class="controls">
-      <button id="play-pause-btn" class="control-btn">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
-        </svg>
-      </button>
-      <button id="stop-btn" class="control-btn">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <path d="M6 6h12v12H6z" />
-        </svg>
-      </button>
     </div>
   </div>
 
@@ -80,7 +80,7 @@
   .music-disc {
     position: relative;
     cursor: pointer;
-    width: 80%;
+    width: 100%;
     height: auto;
     aspect-ratio: 1;
     transition: transform 0.3s ease;
@@ -225,25 +225,30 @@
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   }
 
-  /* Now Playing Display */
+  /* Now Playing Display - Fixed Top Bar */
   .now-playing {
-    background: rgba(255, 255, 255, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 1rem;
-    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.75rem 2rem;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    gap: 0.75rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    animation: slideUp 0.3s ease;
+    justify-content: space-between;
+    gap: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    animation: slideDown 0.3s ease;
   }
 
-  @keyframes slideUp {
+  @keyframes slideDown {
     from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(-100%);
     }
     to {
       opacity: 1;
@@ -369,10 +374,6 @@
 
   /* Responsive Design */
   @media (min-width: 576px) {
-    .music-disc {
-      width: 35%;
-    }
-
     .music-icon {
       width: 3.5rem;
       height: 3.5rem;
@@ -383,17 +384,7 @@
     }
   }
 
-  @media (min-width: 768px) {
-    .music-disc {
-      width: 30%;
-    }
-  }
-
   @media (min-width: 992px) {
-    .music-disc {
-      width: 20%;
-    }
-
     .now-playing-text {
       font-size: 1.1rem;
     }
