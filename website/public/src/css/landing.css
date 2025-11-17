@@ -104,6 +104,13 @@ nav {
 
 /* Create a .landing-status class selector that has a font size of 2em, a font family of Dual-300, and a color of white */
 
+/* Mobile logo size - double the size on mobile */
+@media (max-width: 575px) {
+  .nav-logo h1 {
+    font-size: 3.5em !important; /* Double from base 1.75em */
+  }
+}
+
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
   .nav-logo {
