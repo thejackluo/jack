@@ -8,49 +8,9 @@ const allProjects = await getCollection('projects');
 // Define major project slugs
 const majorProjectSlugs = ['delight', 'magk-excel', 'efficore', 'arkos'];
 
-// Helper function to parse dates robustly
-const parseDate = (dateValue: any): Date | null => {
-  if (!dateValue) return null;
-
-  // If already a Date object
-  if (dateValue instanceof Date) {
-    return !isNaN(dateValue.getTime()) ? dateValue : null;
-  }
-
-  // Try to parse as string
-  const parsed = new Date(dateValue);
-  return !isNaN(parsed.getTime()) ? parsed : null;
-};
-
-// Helper to format year range
-const formatDuration = (startDate: Date | null, endDate: Date | null): string => {
-  if (!startDate) return 'Unknown';
-
-  const startYear = startDate.getFullYear();
-
-  if (!endDate) return `${startYear} - Present`;
-
-  const endYear = endDate.getFullYear();
-  return startYear === endYear ? `${startYear}` : `${startYear} - ${endYear}`;
-};
-
-// Process and sort projects
-const processedProjects = allProjects
-  .map(project => {
-    const startDateObj = parseDate(project.data.startDate);
-    const endDateObj = project.data.endDate ? parseDate(project.data.endDate) : null;
-
-    return {
-      ...project,
-      duration: formatDuration(startDateObj, endDateObj),
-      startDateObj: startDateObj || new Date(0), // Fallback for sorting
-    };
-  })
-  .sort((a, b) => b.startDateObj.getTime() - a.startDateObj.getTime());
-
 // Split into major and minor projects
-const majorProjects = processedProjects.filter(p => majorProjectSlugs.includes(p.slug));
-const minorProjects = processedProjects.filter(p => !majorProjectSlugs.includes(p.slug));
+const majorProjects = allProjects.filter(p => majorProjectSlugs.includes(p.slug));
+const minorProjects = allProjects.filter(p => !majorProjectSlugs.includes(p.slug));
 ---
 
 <BaseLayout
@@ -107,8 +67,6 @@ const minorProjects = processedProjects.filter(p => !majorProjectSlugs.includes(
 
                   <div class="project-meta">
                     <span class="project-category">{project.data.category}</span>
-                    <span class="meta-separator">•</span>
-                    <span class="project-duration">{project.duration}</span>
                   </div>
 
                   <div class="project-tech">
@@ -149,10 +107,6 @@ const minorProjects = processedProjects.filter(p => !majorProjectSlugs.includes(
                       </div>
 
                       <p class="project-role minor-role">{project.data.role}</p>
-
-                      <div class="project-meta">
-                        <span class="project-duration">{project.duration}</span>
-                      </div>
 
                       <div class="project-tech">
                         {project.data.tech.slice(0, 3).map(tech => (
