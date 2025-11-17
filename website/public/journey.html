@@ -23,8 +23,6 @@
     <link rel="stylesheet" href="src/css/landing.css" />
     <link rel="stylesheet" href="src/css/creative.css" />
     <link rel="stylesheet" href="src/css/footer.css" />
-    <link rel="stylesheet" href="src/css/about.css" />
-    <link rel="stylesheet" href="src/css/page-transitions.css" />
 
     <!-- Metatags -->
     <meta name="title" content="Jack Luo" />
@@ -66,21 +64,6 @@
       <section id="landing">
         <!-- Create a div with the class landing-container -->
         <div class="landing-container container-fluid">
-          <!-- Vertical Navigation -->
-          <div class="col-1">
-            <nav class="vnav">
-              <a href="#landing">
-                <div class="vnav-circle"></div>
-              </a>
-              <a href="#creative">
-                <div class="vnav-circle"></div>
-              </a>
-              <a href="#footer">
-                <div class="vnav-circle"></div>
-              </a>
-            </nav>
-          </div>
-
           <!-- Nav Bar -->
           <nav class="navbar">
             <div class="container-fluid">
@@ -326,100 +309,9 @@
       </footer>
     </div>
 
-    <!-- OS Dock Navigation -->
-    <nav class="os-dock" id="osDock">
-      <div class="os-dock-container">
-        <a href="index.html" class="os-dock-item" aria-label="Home" data-label="Home">
-          <div class="os-dock-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-              <polyline points="9 22 9 12 15 12 15 22"/>
-            </svg>
-          </div>
-          <span class="os-dock-label">Home</span>
-        </a>
-        <a href="journey.html" class="os-dock-item active" aria-label="Journey" data-label="Journey">
-          <div class="os-dock-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-            </svg>
-          </div>
-          <span class="os-dock-label">Journey</span>
-        </a>
-        <a href="writing" class="os-dock-item" aria-label="Writing" data-label="Writing">
-          <div class="os-dock-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-            </svg>
-          </div>
-          <span class="os-dock-label">Writing</span>
-        </a>
-        <a href="mailto:jack@hexahacks.com" class="os-dock-item" aria-label="Contact" data-label="Contact">
-          <div class="os-dock-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-              <polyline points="22,6 12,13 2,6"/>
-            </svg>
-          </div>
-          <span class="os-dock-label">Contact</span>
-        </a>
-      </div>
-    </nav>
-
-    <!-- Toggle Button for Mobile -->
-    <button class="os-dock-toggle" id="osDockToggle" aria-label="Toggle navigation">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="12" cy="12" r="1"/>
-        <circle cx="12" cy="5" r="1"/>
-        <circle cx="12" cy="19" r="1"/>
-      </svg>
-    </button>
-
     <!-- JS Library -->
     <script src="lib/js/aos.js"></script>
     <script src="lib/js/bootstrap.js"></script>
     <script src="src/js/script.js"></script>
-    <script src="src/js/page-transitions.js"></script>
-    <script>
-      // Dock toggle functionality
-      const dockToggle = document.getElementById('osDockToggle');
-      const dock = document.getElementById('osDock');
-
-      if (dockToggle && dock) {
-        dockToggle.addEventListener('click', () => {
-          dock.classList.toggle('hidden');
-        });
-
-        const dockItems = dock.querySelectorAll('.os-dock-item');
-        dockItems.forEach(item => {
-          item.addEventListener('click', () => {
-            if (window.innerWidth <= 768) {
-              dock.classList.add('hidden');
-            }
-          });
-        });
-      }
-
-      // Auto-hide dock on scroll
-      let lastScroll = 0;
-      const scrollThreshold = 100;
-
-      window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-
-        if (Math.abs(currentScroll - lastScroll) < scrollThreshold) {
-          return;
-        }
-
-        if (currentScroll > lastScroll && currentScroll > 200) {
-          dock?.classList.add('hidden');
-        } else {
-          dock?.classList.remove('hidden');
-        }
-
-        lastScroll = currentScroll;
-      });
-    </script>
   </body>
 </html>
