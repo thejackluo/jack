@@ -3,8 +3,7 @@ title: "The World Map of Higher Ed: Dragon Hoards, Prestige Bubbles, and Why Som
 publishDate: 2025-09-19
 tags:
   - education
-  - higher-ed
-  - strategy
+  - startups
 excerpt: "Universities behave like nations, with endowments as dragon hoards and prestige as currency; smaller institutions can still outperform by focusing on what they do best."
 heroImage: ""
 ---

@@ -2,8 +2,8 @@
 title: 'How to get a MIT education, outside of MIT?'
 publishDate: 2023-03-14
 tags:
-  - 'education'
-  - 'self-directed-learning'
+  - education
+  - reflection
 excerpt: 'Mindset shifts and tactical habits for building an MIT-caliber education without the admissions letter.'
 heroImage: '/assets/images/jack/main.jpg'
 ---

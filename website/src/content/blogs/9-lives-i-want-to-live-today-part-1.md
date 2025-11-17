@@ -3,8 +3,7 @@ title: "9 Lives I Want to Live Today (Part 1)"
 publishDate: 2025-04-15
 tags:
   - personal
-  - experiments
-  - ambition
+  - vision
 excerpt: "Exploring nine archetypal lives — creator, voyager, AI architect, world‑builder, servant and more — and challenging myself to inhabit them instead of dreaming about them."
 heroImage: ""
 ---

@@ -3,8 +3,7 @@ title: "Vending Machine Dreams: Sparks, Trains, Shields"
 publishDate: 2025-08-22
 tags:
   - reflection
-  - habits
-  - growth
+  - personal
 excerpt: "A series of vivid dreams becomes a personal operating manual: step in earlier, choose nourishment over sparks and model the pause you want others to take."
 heroImage: ""
 ---

@@ -3,8 +3,7 @@ title: "Building for Decades"
 publishDate: 2025-07-27
 tags:
   - startups
-  - innovation
-  - strategy
+  - vision
 excerpt: "How to future‑proof a company: hire for compounders, aim for orders of magnitude improvements and let product brilliance be the marketing."
 heroImage: ""
 ---

@@ -2,8 +2,8 @@
 title: 'A selection of space, time, and philosophy'
 publishDate: 2023-01-01
 tags:
-  - 'philosophy'
-  - 'reflection'
+  - philosophy
+  - reflection
 excerpt: 'A sweeping thought experiment on space, dimensions, time, existence, and the questions they raise.'
 heroImage: '/assets/images/jack/main.jpg'
 ---

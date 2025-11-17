@@ -3,8 +3,7 @@ title: "On Free Will vs Determinism"
 publishDate: 2025-06-20
 tags:
   - philosophy
-  - decision‑making
-  - agency
+  - reflection
 excerpt: "A pragmatic synthesis: why Laplace's demon doesn't matter, how unpredictability arises from limited information and how meaningful choice emerges from framing and endorsement."
 heroImage: ""
 ---

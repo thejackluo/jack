@@ -3,8 +3,7 @@ title: "20 Ideas from Y Combinator"
 publishDate: 2024-07-08
 tags:
   - startups
-  - tactics
-  - notes
+  - reflection
 excerpt: "Twenty concise lessons drawn from YC's startup wisdom: team over idea, embrace pivots, recruit well, and focus on shipping, customers and culture."
 heroImage: ""
 ---
