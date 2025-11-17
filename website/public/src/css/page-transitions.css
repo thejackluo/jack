@@ -1,0 +1,21 @@
+/*
+  Name: page-transitions.css
+  Description: Smooth scrolling and accessibility
+*/
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .os-dock-item {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}

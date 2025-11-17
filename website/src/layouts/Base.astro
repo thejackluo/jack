@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import OSDock from '../components/OSDock.astro';
 import SEO from '../components/SEO.astro';
 
 const {
@@ -50,9 +51,13 @@ const {
       <Footer />
     </div>
 
+    <!-- OS-like Dock Navigation -->
+    <OSDock currentPage={currentPage} />
+
     <script is:inline src="https://w.soundcloud.com/player/api.js"></script>
     <script is:inline src={`${import.meta.env.BASE_URL}lib/js/aos.js`}></script>
     <script is:inline src={`${import.meta.env.BASE_URL}lib/js/bootstrap.js`}></script>
     <script is:inline src={`${import.meta.env.BASE_URL}src/js/script.js`}></script>
+    <script is:inline src="/src/js/page-transitions.js"></script>
   </body>
 </html>
