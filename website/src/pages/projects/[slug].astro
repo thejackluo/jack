@@ -19,15 +19,18 @@ interface Props {
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 
-// Format dates
-const startDateObj = new Date(entry.data.startDate);
-const startDate = startDateObj.toLocaleDateString('en-US', {
-  year: 'numeric',
-  month: 'short',
-});
+// Format dates with validation
+const startDateObj = entry.data.startDate ? new Date(entry.data.startDate) : null;
+const startDate = startDateObj && !isNaN(startDateObj.getTime())
+  ? startDateObj.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+    })
+  : 'Unknown';
 
-const endDate = entry.data.endDate
-  ? new Date(entry.data.endDate).toLocaleDateString('en-US', {
+const endDateObj = entry.data.endDate ? new Date(entry.data.endDate) : null;
+const endDate = endDateObj && !isNaN(endDateObj.getTime())
+  ? endDateObj.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
     })
@@ -329,8 +332,7 @@ const duration = `${startDate} - ${endDate}`;
   .project-tech {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
-    margin: 1.5rem 0;
+    margin: 2rem 0 1.5rem 0;
   }
 
   .tech-tag {
@@ -344,7 +346,7 @@ const duration = `${startDate} - ${endDate}`;
     color: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(5px);
     transition: all 0.2s;
-    margin: 0;
+    margin: 0 0.75rem 0.75rem 0;
   }
 
   .tech-tag:hover {
@@ -355,8 +357,7 @@ const duration = `${startDate} - ${endDate}`;
   .project-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.25rem;
-    margin: 1.5rem 0;
+    margin: 2.5rem 0 2rem 0;
   }
 
   .project-link-button {
@@ -379,6 +380,7 @@ const duration = `${startDate} - ${endDate}`;
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    margin: 0 1rem 0.75rem 0;
   }
 
   .project-link-button:hover {
@@ -414,7 +416,8 @@ const duration = `${startDate} - ${endDate}`;
 
   .gallery-item img {
     width: 100%;
-    height: auto;
+    height: 400px;
+    object-fit: cover;
     border-radius: 0.75rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
     filter: drop-shadow(0px 4px 20px rgba(0, 0, 0, 0.3));
