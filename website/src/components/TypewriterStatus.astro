@@ -51,7 +51,7 @@
   let isDeleting = false;
   let isPaused = false;
 
-  const typewriterTextElement = document.querySelector('.typewriter-text') as HTMLElement;
+  const typewriterTextElement = document.querySelector('.typewriter-text');
 
   // Typing speed settings
   const TYPING_SPEED = 100;        // Speed when typing
@@ -75,7 +75,7 @@
   }
 
   function updateTypewriter() {
-    if (isPaused) return;
+    if (isPaused || !typewriterTextElement) return;
 
     const currentStatus = getCurrentStatus();
     const fullText = currentStatus.text;
