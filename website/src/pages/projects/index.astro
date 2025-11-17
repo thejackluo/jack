@@ -7,16 +7,23 @@ const allProjects = await getCollection('projects');
 
 // Process projects
 const projects = allProjects
-  .map(project => ({
-    ...project,
-    // Calculate project duration for display
-    duration: project.data.endDate
-      ? `${project.data.startDate.getFullYear()} - ${project.data.endDate.getFullYear()}`
-      : `${project.data.startDate.getFullYear()} - Present`,
-  }))
+  .map(project => {
+    const startDate = new Date(project.data.startDate);
+    const endDate = project.data.endDate ? new Date(project.data.endDate) : null;
+
+    return {
+      ...project,
+      // Calculate project duration for display
+      duration: endDate
+        ? `${startDate.getFullYear()} - ${endDate.getFullYear()}`
+        : `${startDate.getFullYear()} - Present`,
+    };
+  })
   .sort((a, b) => {
     // Sort by start date, newest first
-    return b.data.startDate.getTime() - a.data.startDate.getTime();
+    const aDate = new Date(a.data.startDate);
+    const bDate = new Date(b.data.startDate);
+    return bDate.getTime() - aDate.getTime();
   });
 
 // Get all unique categories

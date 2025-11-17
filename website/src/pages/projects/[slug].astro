@@ -20,13 +20,14 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 
 // Format dates
-const startDate = entry.data.startDate.toLocaleDateString('en-US', {
+const startDateObj = new Date(entry.data.startDate);
+const startDate = startDateObj.toLocaleDateString('en-US', {
   year: 'numeric',
   month: 'short',
 });
 
 const endDate = entry.data.endDate
-  ? entry.data.endDate.toLocaleDateString('en-US', {
+  ? new Date(entry.data.endDate).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
     })
