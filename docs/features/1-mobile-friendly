@@ -1,0 +1,21 @@
+# problem
+currently most of the web features look great and all, but on mobile, 
+the journey page for some reason is not responsive at all even though 
+it should be responsive in general (maybe look at mobile responsive stuff)
+
+the project page is responsive but the spacing is slightly off center on some pixels 
+(so perhaps always center thenm)
+
+and the blogs page just doesn't work at all and overflow and shows the blogs above the footers
+and most of the blogs are inaccessible with the thing, so perhaps a scroll container and no filter
+for the mobile version to make life easier :/
+
+also the buttons on the footer for the different pages are different sizes (index is a good regular size)
+but blogs have very small button (perhaps because the css is not dealt with properly)
+
+also another thing is, since the nav bar is smaller on mobile, its very ugly, i want a nicer menu for mobile
+where its a hamburger menu and when you check on it, a cool icon menu pops up? like floating nav glassmorphism
+instead.
+
+so i want you to think about this, and try to make the website more mobile friendly
+

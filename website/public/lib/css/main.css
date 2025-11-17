@@ -13,7 +13,6 @@ body,
 html {
   max-width: 100%;
   min-height: 100vh;
-  overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 /* 
@@ -36,31 +35,31 @@ h6 {
 }
 
 h1 {
-  font-family: "Elianto-Regular";
+  font-family: 'Elianto-Regular';
   font-size: 1.75em;
   display: inline;
 }
 
 h2 {
-  font-family: "Dual-300";
+  font-family: 'Dual-300';
   font-size: 1.75em;
   display: inline;
 }
 
 h3 {
-  font-family: "Dual-300";
+  font-family: 'Dual-300';
   font-size: 1.5em;
   display: inline;
 }
 
 h4 {
-  font-family: "Stellar", "Century Gothic", sans-serif;
+  font-family: 'Stellar', 'Century Gothic', sans-serif;
   font-size: 1.5em;
   display: inline;
 }
 
 h5 {
-  font-family: "Stellar", "Century Gothic", sans-serif;
+  font-family: 'Stellar', 'Century Gothic', sans-serif;
   font-size: 1.125em;
   display: inline;
 }
@@ -86,14 +85,14 @@ a:hover {
 /* Note: Not updated with media queries */
 
 h6 {
-  font-family: "Stellar", "Century Gothic", sans-serif;
+  font-family: 'Stellar', 'Century Gothic', sans-serif;
   font-size: 1em;
   display: inline;
 }
 
 p,
 li {
-  font-family: "Stellar", "Century Gothic", sans-serif;
+  font-family: 'Stellar', 'Century Gothic', sans-serif;
   font-size: 1em;
   font-weight: normal;
   color: white;
@@ -226,7 +225,7 @@ li {
 */
 
 button {
-  font-family: "Stellar", "Century Gothic", sans-serif;
+  font-family: 'Stellar', 'Century Gothic', sans-serif;
   font-weight: normal;
   color: white;
   padding: 1em 2em;
@@ -247,7 +246,8 @@ button {
     rgba(255, 255, 255, 0.05) 100%,
     rgba(255, 255, 255, 0.05) 100%
   );
-  box-shadow: inset 0px 5px 10px -5px #ffffff,
+  box-shadow:
+    inset 0px 5px 10px -5px #ffffff,
     inset 0px 98px 100px rgba(255, 255, 255, 0.1),
     inset 0px 0px 40px rgba(255, 255, 255, 0.1);
   /* Note: backdrop-filter has minimal browser support */

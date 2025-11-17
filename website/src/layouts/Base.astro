@@ -18,22 +18,27 @@ const {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <SEO {title} {description} {keywords} {author} />
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/favicon/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon/favicon-16x16.png" />
-    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="apple-touch-icon" sizes="180x180" href={`${import.meta.env.BASE_URL}assets/icons/favicon/apple-touch-icon.png`} />
+    <link rel="icon" type="image/png" sizes="32x32" href={`${import.meta.env.BASE_URL}assets/icons/favicon/favicon-32x32.png`} />
+    <link rel="icon" type="image/png" sizes="16x16" href={`${import.meta.env.BASE_URL}assets/icons/favicon/favicon-16x16.png`} />
+    <link rel="manifest" href={`${import.meta.env.BASE_URL}site.webmanifest`} />
 
-    <link rel="stylesheet" href="/lib/css/aos.css" />
-    <link rel="stylesheet" href="/lib/css/bootstrap.css" />
-    <link rel="stylesheet" href="/lib/css/normalize.css" />
-    <link rel="stylesheet" href="/lib/css/boilerplate.css" />
-    <link rel="stylesheet" href="/src/css/font.css" />
-    <link rel="stylesheet" href="/src/css/main.css" />
-    <link rel="stylesheet" href="/src/css/index.css" />
-    <link rel="stylesheet" href="/src/css/landing.css" />
-    <link rel="stylesheet" href="/src/css/footer.css" />
-    <link rel="stylesheet" href="/src/css/about.css" />
-    <link rel="stylesheet" href="/src/css/page-transitions.css" />
+    <link rel="stylesheet" href={`${import.meta.env.BASE_URL}lib/css/aos.css`} />
+    <link rel="stylesheet" href={`${import.meta.env.BASE_URL}lib/css/bootstrap.css`} />
+    <link rel="stylesheet" href={`${import.meta.env.BASE_URL}lib/css/normalize.css`} />
+    <link rel="stylesheet" href={`${import.meta.env.BASE_URL}lib/css/boilerplate.css`} />
+    <link rel="stylesheet" href={`${import.meta.env.BASE_URL}src/css/font.css`} />
+    <link rel="stylesheet" href={`${import.meta.env.BASE_URL}src/css/main.css`} />
+    <link rel="stylesheet" href={`${import.meta.env.BASE_URL}src/css/index.css`} />
+    <link rel="stylesheet" href={`${import.meta.env.BASE_URL}src/css/landing.css`} />
+    <link rel="stylesheet" href={`${import.meta.env.BASE_URL}src/css/footer.css`} />
+    <link rel="stylesheet" href={`${import.meta.env.BASE_URL}src/css/about.css`} />
+    {currentPage === 'writing' && (
+      <>
+        <link rel="stylesheet" href={`${import.meta.env.BASE_URL}src/css/writing.css`} />
+        <link rel="stylesheet" href={`${import.meta.env.BASE_URL}src/css/blog.css`} />
+      </>
+    )}
 
     <script defer data-domain="jack-luo.com" src="https://plausible.io/js/script.js"></script>
   </head>
@@ -49,9 +54,10 @@ const {
     <!-- OS-like Dock Navigation -->
     <OSDock currentPage={currentPage} />
 
-    <script is:inline src="/lib/js/aos.js"></script>
-    <script is:inline src="/lib/js/bootstrap.js"></script>
-    <script is:inline src="/src/js/script.js"></script>
+    <script is:inline src="https://w.soundcloud.com/player/api.js"></script>
+    <script is:inline src={`${import.meta.env.BASE_URL}lib/js/aos.js`}></script>
+    <script is:inline src={`${import.meta.env.BASE_URL}lib/js/bootstrap.js`}></script>
+    <script is:inline src={`${import.meta.env.BASE_URL}src/js/script.js`}></script>
     <script is:inline src="/src/js/page-transitions.js"></script>
   </body>
 </html>
