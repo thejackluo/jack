@@ -129,20 +129,22 @@ const searchIndex = [
   .command-palette-header {
     display: flex;
     align-items: center;
-    padding: 16px 20px;
+    padding: 18px 20px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    gap: 12px;
+    gap: 16px;
     background: rgba(0, 0, 0, 0.2);
   }
 
   .command-palette-input {
     flex: 1;
+    min-width: 0;
     border: none;
     outline: none;
-    font-size: 16px;
+    font-size: 15px;
     font-family: "Stellar", "Century Gothic", sans-serif;
     background: transparent;
     color: white;
+    line-height: 1.5;
   }
 
   .command-palette-input::placeholder {
@@ -150,13 +152,14 @@ const searchIndex = [
   }
 
   .command-palette-kbd {
-    padding: 4px 8px;
-    border: 1px solid #333333;
-    border-radius: 4px;
-    font-size: 12px;
+    padding: 3px 7px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    font-size: 11px;
     font-family: monospace;
     color: #999999;
-    background: #111111;
+    background: rgba(0, 0, 0, 0.4);
+    flex-shrink: 0;
   }
 
   .command-palette-results {
@@ -175,26 +178,31 @@ const searchIndex = [
   .command-palette-item {
     display: flex;
     align-items: center;
-    padding: 16px 20px;
+    justify-content: space-between;
+    padding: 14px 20px;
     cursor: pointer;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    transition: all 0.2s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.15s ease;
+    background: transparent;
   }
 
   .command-palette-item:hover,
   .command-palette-item.selected {
-    background: rgba(255, 255, 255, 0.05);
-    border-left: 2px solid rgba(138, 180, 248, 0.8);
-    padding-left: 18px;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-left: 3px solid rgba(138, 180, 248, 1);
+    padding-left: 17px;
   }
 
   .command-palette-item-content {
     flex: 1;
     min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
 
   .command-palette-item-title {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 400;
     font-family: "Stellar", "Century Gothic", sans-serif;
     color: #ffffff !important;
@@ -217,12 +225,12 @@ const searchIndex = [
   .command-palette-item-badge {
     padding: 2px 8px;
     border-radius: 4px;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 500;
     font-family: "Stellar", "Century Gothic", sans-serif;
     text-transform: uppercase;
-    margin-left: 8px;
     border: 1px solid;
+    flex-shrink: 0;
   }
 
   .command-palette-item-badge.blog {
@@ -513,9 +521,9 @@ const searchIndex = [
         return `
           <div class="command-palette-item ${index === selectedIndex ? 'selected' : ''}" data-index="${index}">
             <div class="command-palette-item-content">
+              <span class="command-palette-item-badge ${item.type}">${item.type}</span>
               <div class="command-palette-item-title">${item.title}</div>
             </div>
-            <span class="command-palette-item-badge ${item.type}">${item.type}</span>
           </div>
         `;
       })
