@@ -17,9 +17,9 @@ interface Props {
 const { title, author, category, progress, score, pageCount, color, gradient, index } = Astro.props;
 
 // Calculate spine width based on page count (thicker books have wider spines)
-const spineWidth = Math.max(30, Math.min(60, pageCount / 10));
-const bookWidth = 160;
-const bookHeight = 240;
+const spineWidth = Math.max(40, Math.min(80, pageCount / 8));
+const bookWidth = 220;
+const bookHeight = 320;
 
 // Use gradient if available, otherwise solid color
 const coverGradient = gradient
@@ -78,8 +78,22 @@ const backGradient = gradient
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
     margin: 0;
+    /* Ensure container height matches book height exactly */
+    box-sizing: border-box;
   }
 
+  /* Small movement on hover - reduced to 5-8px */
+  .book-container.spread-left-hover {
+    transform: translateX(-6px);
+    transition: transform 0.3s ease;
+  }
+
+  .book-container.spread-right-hover {
+    transform: translateX(6px);
+    transition: transform 0.3s ease;
+  }
+
+  /* More movement when book is selected */
   .book-container.spread-left {
     transform: translateX(-80px);
   }
@@ -88,8 +102,44 @@ const backGradient = gradient
     transform: translateX(80px);
   }
 
+  /* Fade out other books when one is selected (mobile) */
+  .book-container.fade-out {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.8);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  /* Move books completely off-screen when one is selected (desktop) */
+  .book-container.move-out-left {
+    transform: translateX(-200%);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+  }
+
+  .book-container.move-out-right {
+    transform: translateX(200%);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+  }
+
   .book-container.selected {
     z-index: 100;
+    width: var(--book-width);
+    /* Ensure selected book is fully visible */
+    position: relative;
+  }
+
+  /* On mobile, ensure selected book can be centered */
+  @media (max-width: 768px) {
+    .book-container.selected {
+      /* Allow the book to be positioned independently for centering */
+      transform: none !important;
+    }
+  }
+
+  /* Ensure consistent sizing on hover - spine and front should match */
+  .book-container:hover {
     width: var(--book-width);
   }
 
@@ -129,6 +179,7 @@ const backGradient = gradient
     transform: rotateY(0deg) translateZ(calc(var(--spine-width) / 2));
     border-radius: 8px;
     padding: 20px;
+    box-sizing: border-box; /* Include padding in height calculation */
     box-shadow:
       0 10px 30px rgba(0, 0, 0, 0.5),
       inset 0 1px 0 rgba(255, 255, 255, 0.2);
@@ -149,20 +200,23 @@ const backGradient = gradient
   }
 
   .book-title {
-    font-size: 16px;
+    font-family: "Dual-300", sans-serif;
+    font-size: 20px;
     font-weight: bold;
     margin: 0;
     line-height: 1.2;
   }
 
   .book-author {
-    font-size: 12px;
+    font-family: "Stellar", "Century Gothic", sans-serif;
+    font-size: 14px;
     opacity: 0.9;
     margin: 0;
   }
 
   .book-category {
-    font-size: 10px;
+    font-family: "Stellar", "Century Gothic", sans-serif;
+    font-size: 11px;
     opacity: 0.7;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -215,6 +269,7 @@ const backGradient = gradient
     transform: rotateY(180deg) translateZ(calc(var(--spine-width) / 2));
     border-radius: 8px;
     padding: 20px;
+    box-sizing: border-box; /* Include padding in height calculation */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -252,12 +307,15 @@ const backGradient = gradient
     box-shadow:
       inset -2px 0 5px rgba(0, 0, 0, 0.3),
       inset 2px 0 5px rgba(255, 255, 255, 0.1);
+    /* Ensure spine height matches cover height exactly */
+    box-sizing: border-box;
   }
 
   .spine-text {
     writing-mode: vertical-rl;
     text-orientation: mixed;
-    font-size: 12px;
+    font-family: "Dual-300", sans-serif;
+    font-size: 14px;
     font-weight: bold;
     color: white;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
