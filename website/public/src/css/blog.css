@@ -32,7 +32,7 @@
 }
 
 .landing-city {
-  background: url("../../assets/images/city.png");
+  background: url('../../assets/images/bg/city.png');
   opacity: 0.5;
   filter: blur(50px);
 
@@ -43,8 +43,7 @@
 }
 
 #footer {
-  background: linear-gradient(180deg, rgba(20, 18, 60, 0.8) 0%, #000000 100%),
-    #000000;
+  background: linear-gradient(180deg, rgba(20, 18, 60, 0.8) 0%, #000000 100%), #000000;
 }
 
 /*
