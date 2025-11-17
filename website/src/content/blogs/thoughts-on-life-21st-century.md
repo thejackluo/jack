@@ -2,8 +2,8 @@
 title: "Thoughts on life in 21st century"
 publishDate: 2023-07-21
 tags:
-  - "history"
-  - "philosophy"
+  - philosophy
+  - reflection
 excerpt: "Gratitude-filled reflections on humanity's slow arc of progress and what modern abundance unlocks."
 heroImage: "/assets/images/jack/main.jpg"
 ---
