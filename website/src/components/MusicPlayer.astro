@@ -63,7 +63,7 @@
     frameborder="no"
     allow="autoplay"
     src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fthejackluo%2F015-memory-v3-part-1&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false"
-    style="display: none;"
+    style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;"
   ></iframe>
 </div>
 
@@ -435,17 +435,44 @@
   let currentSong = null;
   let widget = null;
 
-  // Initialize SoundCloud Widget
-  if (window.SC && widgetIframe) {
-    widget = window.SC.Widget(widgetIframe);
+  // Wait for SoundCloud API to load before initializing
+  function initializeWidget() {
+    if (window.SC && widgetIframe && !widget) {
+      try {
+        widget = window.SC.Widget(widgetIframe);
 
-    // Listen for track finish
-    widget.bind(window.SC.Widget.Events.FINISH, function() {
-      isPlaying = false;
-      musicDisc?.classList.remove('spinning', 'paused');
-      if (nowPlaying) nowPlaying.style.display = 'none';
-      currentSong = null;
-    });
+        // Listen for track finish
+        widget.bind(window.SC.Widget.Events.FINISH, function() {
+          isPlaying = false;
+          musicDisc?.classList.remove('spinning', 'paused');
+          if (nowPlaying) nowPlaying.style.display = 'none';
+          currentSong = null;
+        });
+      } catch (error) {
+        console.error('Error initializing SoundCloud widget:', error);
+      }
+    }
+  }
+
+  // Check if SoundCloud API is loaded, wait if not
+  if (window.SC) {
+    initializeWidget();
+  } else {
+    // Wait for SoundCloud API to load
+    const checkSC = setInterval(() => {
+      if (window.SC) {
+        clearInterval(checkSC);
+        initializeWidget();
+      }
+    }, 100);
+    
+    // Timeout after 5 seconds
+    setTimeout(() => {
+      clearInterval(checkSC);
+      if (!widget) {
+        console.warn('SoundCloud API failed to load');
+      }
+    }, 5000);
   }
 
   // Weighted random song selection
@@ -463,8 +490,20 @@
     return songs[0]; // Fallback
   }
 
-  // Handle disc click
-  musicDisc?.addEventListener('click', function() {
+  // Handle disc interaction (click or touch)
+  function handleDiscInteraction(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    if (!widget) {
+      // Try to initialize widget one more time
+      initializeWidget();
+      if (!widget) {
+        console.error('SoundCloud widget not available');
+        return;
+      }
+    }
+
     if (!isPlaying && widget) {
       const selectedSong = selectRandomSong();
       currentSong = selectedSong;
@@ -489,11 +528,18 @@
         visual: false,
       });
     }
-  });
+  }
+
+  // Add both click and touch event listeners for mobile support
+  if (musicDisc) {
+    musicDisc.addEventListener('click', handleDiscInteraction);
+    musicDisc.addEventListener('touchend', handleDiscInteraction);
+  }
 
   // Play/Pause button
   playPauseBtn?.addEventListener('click', function(e) {
     e.stopPropagation();
+    e.preventDefault();
     if (widget && currentSong) {
       if (isPlaying) {
         widget.pause();
@@ -522,6 +568,7 @@
   // Stop button
   stopBtn?.addEventListener('click', function(e) {
     e.stopPropagation();
+    e.preventDefault();
     if (widget) {
       widget.pause();
       widget.seekTo(0);
