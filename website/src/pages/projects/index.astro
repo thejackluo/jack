@@ -35,7 +35,7 @@ const projects = allProjects
           <div class="col-12">
             <div class="projects-page-header">
               <h1>Projects</h1>
-              <p class="projects-subtitle">Building across AI agents, energy systems, and community</p>
+              <p class="projects-subtitle">Building across AI agents and software to improve and impact the world</p>
             </div>
           </div>
         </div>
@@ -97,7 +97,12 @@ const projects = allProjects
     <div class="modal-overlay"></div>
     <div class="modal-container">
       <div class="modal-content">
-        <button class="modal-close" aria-label="Close modal">&times;</button>
+        <button class="modal-close" aria-label="Close modal">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
         <div id="modal-body"></div>
       </div>
     </div>
@@ -221,6 +226,11 @@ const projects = allProjects
 
   .project-card-content {
     padding: 1.75rem;
+  }
+
+  /* Adjust padding when there's no image */
+  .project-card:not(:has(.project-image)) .project-card-content {
+    padding-top: 2rem;
   }
 
   .project-card-header {
@@ -395,30 +405,34 @@ const projects = allProjects
 
   .modal-close {
     position: fixed;
-    top: 5%;
-    right: 5%;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 3rem;
-    font-weight: bold;
-    border: none;
-    background: rgba(0, 0, 0, 0.5);
+    top: 2rem;
+    right: 2rem;
+    color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(0, 0, 0, 0.6);
     cursor: pointer;
-    line-height: 1;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
     z-index: 10000;
-    width: 50px;
-    height: 50px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0;
+    backdrop-filter: blur(10px);
+  }
+
+  .modal-close svg {
+    width: 20px;
+    height: 20px;
   }
 
   .modal-close:hover {
     color: white;
-    background: rgba(0, 0, 0, 0.8);
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0, 0, 0.9);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.1);
   }
 
   /* Modal Content Styles - Inherit from project detail page */
@@ -500,6 +514,44 @@ const projects = allProjects
     background: rgba(169, 169, 169, 0.15);
     border-color: rgba(169, 169, 169, 0.4);
     color: rgba(169, 169, 169, 1);
+  }
+
+  /* Fix all text colors in modal */
+  :global(.modal) :global(h1),
+  :global(.modal) :global(h2),
+  :global(.modal) :global(h3),
+  :global(.modal) :global(h4),
+  :global(.modal) :global(h5),
+  :global(.modal) :global(h6) {
+    color: white !important;
+  }
+
+  :global(.modal) :global(p),
+  :global(.modal) :global(span),
+  :global(.modal) :global(div) {
+    color: rgba(255, 255, 255, 0.85) !important;
+  }
+
+  :global(.modal) :global(.project-meta-category),
+  :global(.modal) :global(.project-meta-duration),
+  :global(.modal) :global(.project-role),
+  :global(.modal) :global(.meta-separator) {
+    color: rgba(255, 255, 255, 0.7) !important;
+  }
+
+  :global(.modal) :global(.project-summary) {
+    color: rgba(255, 255, 255, 0.9) !important;
+  }
+
+  :global(.modal) :global(a) {
+    color: rgba(255, 255, 255, 0.9) !important;
+  }
+
+  /* Hide back links and summary box in modal */
+  :global(.modal) :global(.back-link-container),
+  :global(.modal) :global(.back-link-footer-container),
+  :global(.modal) :global(.project-summary-box) {
+    display: none !important;
   }
 
   /* Responsive */
