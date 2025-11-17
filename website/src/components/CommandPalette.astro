@@ -92,7 +92,7 @@ const searchIndex = [
 </button>
 
 <style>
-  .command-palette {
+  :global(.command-palette) {
     display: none;
     position: fixed;
     top: 0;
@@ -102,11 +102,11 @@ const searchIndex = [
     z-index: 9999;
   }
 
-  .command-palette[aria-hidden="false"] {
+  :global(.command-palette[aria-hidden="false"]) {
     display: block;
   }
 
-  .command-palette-backdrop {
+  :global(.command-palette-backdrop) {
     position: absolute;
     top: 0;
     left: 0;
@@ -117,7 +117,7 @@ const searchIndex = [
     animation: fadeIn 0.2s ease-out;
   }
 
-  .command-palette-modal {
+  :global(.command-palette-modal) {
     position: absolute;
     top: 20%;
     left: 50%;
@@ -133,7 +133,7 @@ const searchIndex = [
     animation: slideIn 0.2s ease-out;
   }
 
-  .command-palette-header {
+  :global(.command-palette-header) {
     display: flex;
     align-items: center;
     padding: 18px 20px;
@@ -142,7 +142,7 @@ const searchIndex = [
     background: rgba(0, 0, 0, 0.2);
   }
 
-  .command-palette-input {
+  :global(.command-palette-input) {
     flex: 1;
     min-width: 0;
     border: none;
@@ -154,11 +154,11 @@ const searchIndex = [
     line-height: 1.5;
   }
 
-  .command-palette-input::placeholder {
+  :global(.command-palette-input::placeholder) {
     color: #666666;
   }
 
-  .command-palette-kbd {
+  :global(.command-palette-kbd) {
     padding: 3px 7px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 3px;
@@ -169,12 +169,12 @@ const searchIndex = [
     flex-shrink: 0;
   }
 
-  .command-palette-results {
+  :global(.command-palette-results) {
     max-height: 400px;
     overflow-y: auto;
   }
 
-  .command-palette-empty {
+  :global(.command-palette-empty) {
     padding: 32px 16px;
     text-align: center;
     color: #666666;
@@ -182,10 +182,10 @@ const searchIndex = [
     font-family: "Stellar", "Century Gothic", sans-serif;
   }
 
-  .command-palette-item {
+  :global(.command-palette-item) {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 12px 24px;
     padding-left: 28px;
     cursor: pointer;
@@ -193,98 +193,52 @@ const searchIndex = [
     margin-bottom: 2px;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     background: transparent;
+    border-left: 4px solid transparent;
   }
 
-  .command-palette-item:hover {
-    background: rgba(255, 255, 255, 0.18) !important;
-    border-left: 4px solid rgba(138, 180, 248, 1);
-    padding-left: 24px;
+  :global(.command-palette-item:hover) {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-left-color: rgba(138, 180, 248, 1) !important;
+    padding-left: 24px !important;
     transform: translateX(2px);
   }
 
-  .command-palette-item.selected {
+  :global(.command-palette-item.selected) {
     background: rgba(255, 255, 255, 0.15) !important;
-    border-left: 4px solid rgba(138, 180, 248, 1);
-    padding-left: 24px;
+    border-left-color: rgba(138, 180, 248, 1) !important;
+    padding-left: 24px !important;
   }
 
-  .command-palette-item-content {
+  :global(.command-palette-item-content) {
     flex: 1;
     min-width: 0;
+    display: flex;
+    align-items: center;
   }
 
-  .command-palette-item-title {
+  :global(.command-palette-item-text) {
     font-size: 1rem;
     font-weight: 400;
     font-family: "Stellar", "Century Gothic", sans-serif;
-    color: rgba(255, 255, 255, 0.9) !important;
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    transition: color 0.2s ease;
-  }
-
-  .command-palette-item:hover .command-palette-item-title {
-    color: rgba(255, 255, 255, 1) !important;
-  }
-
-  .command-palette-item-subtitle {
-    font-size: 0.875rem;
-    font-family: "Stellar", "Century Gothic", sans-serif;
-    color: rgba(255, 255, 255, 0.6);
-    margin: 2px 0 0 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .command-palette-item-badge {
-    padding: 3px 10px;
-    border-radius: 4px;
-    font-size: 0.65rem;
-    font-weight: 500;
-    font-family: "Stellar", "Century Gothic", sans-serif;
-    text-transform: uppercase;
-    border: 1px solid;
-    flex-shrink: 0;
-  }
-
-  .command-palette-item-badge.blog {
-    background: transparent;
-    color: rgba(255, 255, 255, 0.8);
-    border-color: rgba(255, 255, 255, 0.3);
-  }
-
-  .command-palette-item-badge.project {
-    background: transparent;
-    color: rgba(255, 255, 255, 0.8);
-    border-color: rgba(255, 255, 255, 0.3);
-  }
-
-  .command-palette-item-badge.page {
-    background: transparent;
-    color: rgba(255, 255, 255, 0.8);
-    border-color: rgba(255, 255, 255, 0.3);
-  }
-
-  .command-palette-item-text {
-    font-size: 1rem;
-    font-weight: 400;
-    font-family: "Stellar", "Century Gothic", sans-serif;
-    color: rgba(255, 255, 255, 0.9) !important;
+    color: rgba(255, 255, 255, 0.95) !important;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     display: block;
+    transition: color 0.2s ease;
+    line-height: 1.5;
   }
 
-  .command-palette-item:hover .command-palette-item-text {
+  :global(.command-palette-item:hover .command-palette-item-text) {
+    color: rgba(255, 255, 255, 1) !important;
+  }
+
+  :global(.command-palette-item.selected .command-palette-item-text) {
     color: rgba(255, 255, 255, 1) !important;
   }
 
   /* Mobile Floating Action Button */
-  .command-palette-fab {
+  :global(.command-palette-fab) {
     display: none;
     position: fixed;
     bottom: 20px;
@@ -301,18 +255,18 @@ const searchIndex = [
     backdrop-filter: blur(10px);
   }
 
-  .command-palette-fab:active {
+  :global(.command-palette-fab:active) {
     transform: scale(0.95);
   }
 
-  .command-palette-fab svg {
+  :global(.command-palette-fab svg) {
     width: 24px;
     height: 24px;
     color: white;
   }
 
   @media (max-width: 768px) {
-    .command-palette-fab {
+    :global(.command-palette-fab) {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -340,7 +294,7 @@ const searchIndex = [
   }
 
   /* Notification styles */
-  .command-palette-notification {
+  :global(.command-palette-notification) {
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -351,13 +305,13 @@ const searchIndex = [
     pointer-events: none;
   }
 
-  .command-palette-notification[aria-hidden="false"] {
+  :global(.command-palette-notification[aria-hidden="false"]) {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
   }
 
-  .command-palette-notification-content {
+  :global(.command-palette-notification-content) {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -369,13 +323,13 @@ const searchIndex = [
     box-shadow: 0 4px 16px rgba(0, 17, 49, 0.6);
   }
 
-  .command-palette-notification-text {
+  :global(.command-palette-notification-text) {
     font-family: "Stellar", "Century Gothic", sans-serif;
     font-size: 14px;
     color: white;
   }
 
-  .command-palette-notification-kbd {
+  :global(.command-palette-notification-kbd) {
     padding: 2px 6px;
     border: 1px solid #333333;
     border-radius: 4px;
@@ -385,7 +339,7 @@ const searchIndex = [
     background: #111111;
   }
 
-  .command-palette-notification-close {
+  :global(.command-palette-notification-close) {
     background: transparent;
     border: none;
     color: #999999;
@@ -401,7 +355,7 @@ const searchIndex = [
     transition: color 0.2s ease;
   }
 
-  .command-palette-notification-close:hover {
+  :global(.command-palette-notification-close:hover) {
     color: white;
   }
 
