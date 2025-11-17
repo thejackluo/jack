@@ -358,11 +358,15 @@ for (let i = 0; i < books.length; i += initialBooksPerShelf) {
 
       .books-container {
         display: flex;
+        flex-direction: row; /* Explicitly set to horizontal */
         justify-content: center;
         align-items: flex-end;
         gap: 20px; /* Gap between books */
-        /* Padding based on book width (220px) + gap (20px) = 240px, so padding is half = 120px */
-        padding: 0 calc((220px + 20px) / 2) 20px;
+        /* Minimal padding - just enough to prevent cutoff when book expands on hover */
+        /* Book expands from ~60px spine to 220px width = 160px expansion */
+        /* Since expansion is centered, need ~80px on each side, but gap provides some space */
+        /* Use 60px padding - enough to prevent cutoff without excessive spacing */
+        padding: 0 60px 20px;
         position: relative;
         z-index: 2;
         flex-wrap: nowrap;
@@ -380,11 +384,11 @@ for (let i = 0; i < books.length; i += initialBooksPerShelf) {
       /* On mobile, ensure proper padding and prevent cutoff */
       @media (max-width: 768px) {
         .books-container {
+          flex-direction: row; /* Explicitly ensure horizontal layout */
           gap: 8px; /* Smaller gap on mobile */
-          /* Padding based on book width (220px) + gap (8px) = 228px, so padding is half = 114px */
-          /* But also ensure minimum padding and prevent cutoff */
-          padding-left: max(calc((220px + 8px) / 2), calc(50vw - 110px));
-          padding-right: max(calc((220px + 8px) / 2), calc(50vw - 110px));
+          /* Minimal padding with cutoff prevention */
+          padding-left: max(50px, calc(50vw - 110px));
+          padding-right: max(50px, calc(50vw - 110px));
         }
       }
 
