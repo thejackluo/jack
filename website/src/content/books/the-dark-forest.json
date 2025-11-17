@@ -1,0 +1,14 @@
+{
+  "title": "The Dark Forest",
+  "author": "Cixin Liu",
+  "category": "SciFi",
+  "progress": 100,
+  "score": 5,
+  "pageCount": 512,
+  "color": "#234e52",
+  "gradient": {
+    "start": "#234e52",
+    "end": "#38b2ac"
+  }
+}
+

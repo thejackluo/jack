@@ -1,0 +1,13 @@
+{
+  "title": "How to Win Friends and Influence People",
+  "author": "Dale Carnegie",
+  "category": "Social",
+  "progress": 45,
+  "score": 5,
+  "pageCount": 320,
+  "color": "#2c5282",
+  "gradient": {
+    "start": "#2c5282",
+    "end": "#4299e1"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "title": "100 Page Machine Learning Book",
+  "author": "Andriy Burkov",
+  "category": "AI",
+  "progress": 35,
+  "score": 4,
+  "pageCount": 100,
+  "color": "#553c9a",
+  "gradient": {
+    "start": "#553c9a",
+    "end": "#9f7aea"
+  }
+}
+

@@ -84,9 +84,32 @@ const projectTemplateSchema = z.object({
     .default([]),
 });
 
+const books = defineCollection({
+  type: 'data',
+  schema: z.object({
+    title: z.string(),
+    author: z.string(),
+    category: z.string(),
+    progress: z.number().min(0).max(100),
+    score: z.number().min(0).max(5),
+    pageCount: z.number().default(300),
+    color: z.string().default('#1a1a1a'),
+    gradient: z
+      .object({
+        start: z.string(),
+        end: z.string(),
+      })
+      .optional(),
+    isbn: z.string().optional(),
+    publishedDate: z.string().optional(),
+    coverImage: z.string().optional(),
+    description: z.string().optional(),
+  }),
+});
+
 const templates = defineCollection({
   type: 'content',
   schema: z.union([blogTemplateSchema, projectTemplateSchema]),
 });
 
-export const collections = { blogs, projects, templates };
+export const collections = { blogs, projects, books, templates };

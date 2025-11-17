@@ -1,0 +1,13 @@
+{
+  "title": "Homo Sapien",
+  "author": "Yuval Noah Harari",
+  "category": "History",
+  "progress": 15,
+  "score": 0,
+  "pageCount": 464,
+  "color": "#5f370e",
+  "gradient": {
+    "start": "#5f370e",
+    "end": "#c05621"
+  }
+}

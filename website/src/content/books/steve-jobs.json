@@ -1,0 +1,13 @@
+{
+  "title": "Steve Jobs",
+  "author": "Walter Isaacson",
+  "category": "Biography",
+  "progress": 10,
+  "score": 0,
+  "pageCount": 656,
+  "color": "#4a5568",
+  "gradient": {
+    "start": "#4a5568",
+    "end": "#a0aec0"
+  }
+}

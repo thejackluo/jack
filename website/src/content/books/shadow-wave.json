@@ -1,0 +1,13 @@
+{
+  "title": "Shadow Wave",
+  "author": "Robert Muchamore",
+  "category": "Fiction",
+  "progress": 100,
+  "score": 5,
+  "pageCount": 352,
+  "color": "#1a1a1a",
+  "gradient": {
+    "start": "#1a1a1a",
+    "end": "#4a4a4a"
+  }
+}

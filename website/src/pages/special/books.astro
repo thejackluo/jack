@@ -1,0 +1,923 @@
+---
+import { getCollection } from 'astro:content';
+import Book from '../../components/Book.astro';
+
+const allBooks = await getCollection('books');
+
+// Sort books by category or reading progress
+const books = allBooks.sort((a, b) => b.data.progress - a.data.progress);
+
+// Group books into shelves - will be dynamically adjusted by JavaScript
+// Initial grouping for SSR, will be recalculated on client
+const initialBooksPerShelf = 15;
+const shelves = [];
+for (let i = 0; i < books.length; i += initialBooksPerShelf) {
+  shelves.push(books.slice(i, i + initialBooksPerShelf));
+}
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Jack Luo - Bookshelf</title>
+    <meta name="description" content="Jack Luo's personal bookshelf showcasing reading progress and collection" />
+    <meta name="keywords" content="Jack Luo, Books, Reading Progress" />
+    <meta name="author" content="Jack Luo" />
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="/src/css/font.css">
+  </head>
+  <body>
+    <!-- RGB Header Strip -->
+    <div class="rgb-strip"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+      <!-- Header -->
+      <header class="header glassmorphic">
+        <h1 class="title">
+          <span class="title-main">Jack's Bookshelf</span>
+          <span class="title-glow">Jack's Bookshelf</span>
+        </h1>
+        <p class="subtitle">A curated collection of knowledge and stories</p>
+        <div class="stats">
+          <div class="stat-item">
+            <span class="stat-number">{books.length}</span>
+            <span class="stat-label">Books</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">{books.filter(b => b.data.progress === 100).length}</span>
+            <span class="stat-label">Completed</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">{books.filter(b => b.data.progress > 0 && b.data.progress < 100).length}</span>
+            <span class="stat-label">In Progress</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Bookshelf -->
+      <div class="bookshelf">
+        {shelves.map((shelf, shelfIndex) => (
+          <div class="shelf-row" data-shelf={shelfIndex}>
+            <!-- Books Container -->
+            <div class="books-container">
+              {shelf.map((book, bookIndex) => (
+                <Book
+                  title={book.data.title}
+                  author={book.data.author}
+                  category={book.data.category}
+                  progress={book.data.progress}
+                  score={book.data.score}
+                  pageCount={book.data.pageCount}
+                  color={book.data.color}
+                  gradient={book.data.gradient}
+                  index={shelfIndex * initialBooksPerShelf + bookIndex}
+                />
+              ))}
+            </div>
+
+            <!-- Floating Shelf SVG -->
+            <svg class="floating-shelf" viewBox="0 0 1000 100" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id={`shelf-gradient-${shelfIndex}`} x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" style="stop-color:rgba(100,200,255,0.3);stop-opacity:1" />
+                  <stop offset="50%" style="stop-color:rgba(50,150,255,0.5);stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:rgba(100,200,255,0.3);stop-opacity:1" />
+                </linearGradient>
+                <filter id={`glow-${shelfIndex}`}>
+                  <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                  <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+
+              <!-- Main shelf platform -->
+              <rect
+                x="0"
+                y="30"
+                width="1000"
+                height="25"
+                fill={`url(#shelf-gradient-${shelfIndex})`}
+                rx="5"
+                filter={`url(#glow-${shelfIndex})`}
+              />
+
+              <!-- Shelf edge highlight -->
+              <rect
+                x="0"
+                y="30"
+                width="1000"
+                height="3"
+                fill="rgba(200,240,255,0.4)"
+                rx="2"
+              />
+
+              <!-- Bottom shadow -->
+              <rect
+                x="0"
+                y="52"
+                width="1000"
+                height="3"
+                fill="rgba(0,0,0,0.3)"
+                rx="2"
+              />
+
+              <!-- Floating supports - removed vertical lines to prevent hover artifacts -->
+            </svg>
+          </div>
+        ))}
+      </div>
+
+      <!-- Back Link -->
+      <div class="back-link-container">
+        <a href="/" class="back-link glassmorphic">
+          <span>← Back to Home</span>
+        </a>
+      </div>
+    </div>
+
+    <style>
+      /* Font Face Definitions */
+      @font-face {
+        font-family: "Dual-300";
+        src: url("/assets/fonts/Dual-300.ttf") format("truetype"),
+          url("/assets/fonts/Dual-300.otf") format("opentype");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Elianto-Regular";
+        src: url("/assets/fonts/Elianto-Regular.ttf") format("truetype"),
+          url("/assets/fonts/Elianto-Regular.otf") format("opentype");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Stellar";
+        src: url("/assets/fonts/Stellar-Bold.otf") format("opentype");
+        font-weight: bold;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Stellar";
+        src: url("/assets/fonts/Stellar-Regular.otf") format("opentype");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Stellar", "Century Gothic", sans-serif;
+        background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1423 100%);
+        color: white;
+        min-height: 100vh;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image:
+          radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+          radial-gradient(circle at 80% 80%, rgba(74, 86, 226, 0.1) 0%, transparent 50%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .rgb-strip {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
+        background-size: 300% 100%;
+        animation: slide 8s linear infinite;
+        z-index: 1000;
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+      }
+
+      @keyframes slide {
+        0% { background-position: 0% 0; }
+        100% { background-position: 300% 0; }
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .glassmorphic {
+        background: radial-gradient(
+          50% 50% at 50% 50%,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.05) 100%,
+          rgba(255, 255, 255, 0.05) 100%
+        );
+        backdrop-filter: blur(100px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 
+          inset 0px 5px 10px -5px #ffffff,
+          inset 0px 98px 100px rgba(255, 255, 255, 0.1),
+          inset 0px 0px 40px rgba(255, 255, 255, 0.1),
+          0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      }
+
+      .header {
+        text-align: center;
+        padding: 40px;
+        border-radius: 20px;
+        margin-bottom: 60px;
+      }
+
+      .title {
+        font-family: "Elianto-Regular", sans-serif;
+        font-size: 48px;
+        font-weight: normal;
+        margin-bottom: 10px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .title-main {
+        position: relative;
+        z-index: 1;
+        color: white;
+        text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
+      }
+
+      .title-glow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        color: white;
+        filter: blur(20px);
+        opacity: 0.3;
+        animation: glow 3s ease-in-out infinite alternate;
+      }
+
+      @keyframes glow {
+        from {
+          filter: blur(20px);
+          opacity: 0.5;
+        }
+        to {
+          filter: blur(30px);
+          opacity: 0.8;
+        }
+      }
+
+      .subtitle {
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 30px;
+      }
+
+      .stats {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin-top: 20px;
+      }
+
+      .stat-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .stat-number {
+        font-family: "Dual-300", sans-serif;
+        font-size: 32px;
+        font-weight: normal;
+        color: white;
+        text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
+      }
+
+      .stat-label {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: rgba(255, 255, 255, 0.5);
+        margin-top: 5px;
+      }
+
+      .bookshelf {
+        display: flex;
+        flex-direction: column;
+        gap: 120px;
+        /* Allow vertical scrolling on mobile */
+        min-height: 100vh;
+      }
+
+      /* On mobile, ensure vertical scrolling works */
+      @media (max-width: 768px) {
+        .bookshelf {
+          overflow-y: visible;
+        }
+        
+        body {
+          overflow-y: auto;
+        }
+      }
+
+      .shelf-row {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .books-container {
+        display: flex;
+        flex-direction: row; /* Explicitly set to horizontal */
+        justify-content: center;
+        align-items: flex-end;
+        gap: 20px; /* Gap between books */
+        /* Padding accounts for book expansion on selection (spine 40-80px → 220px width) */
+        /* Book expands from ~60px spine to 220px width = 160px expansion */
+        /* Since expansion is centered, need ~80px on each side */
+        padding: 0 110px 20px;
+        position: relative;
+        z-index: 2;
+        flex-wrap: nowrap;
+        max-width: 100%;
+        overflow-x: visible;
+        overflow-y: visible;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE/Edge */
+      }
+
+      .books-container::-webkit-scrollbar {
+        display: none; /* Chrome/Safari */
+      }
+
+      /* On mobile, ensure proper padding and prevent cutoff */
+      @media (max-width: 768px) {
+        .books-container {
+          flex-direction: row; /* Explicitly ensure horizontal layout */
+          gap: 8px; /* Smaller gap on mobile */
+          /* Padding ensures book can expand fully (220px) without clipping */
+          /* max(110px, calc(50vw - 110px)) ensures book can expand to center */
+          padding-left: max(110px, calc(50vw - 110px));
+          padding-right: max(110px, calc(50vw - 110px));
+          overflow-x: visible; /* Allow books to expand without clipping */
+        }
+      }
+
+      .floating-shelf {
+        width: 100%;
+        max-width: 1400px;
+        height: 100px;
+        position: absolute;
+        bottom: -40px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+      }
+
+      .back-link-container {
+        margin-top: 80px;
+        text-align: center;
+      }
+
+      .back-link {
+        display: inline-block;
+        padding: 15px 30px;
+        border-radius: 10px;
+        text-decoration: none;
+        color: white;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .back-link:hover {
+        transform: translateY(-2px);
+        box-shadow:
+          0 8px 32px 0 rgba(0, 255, 255, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      }
+
+      @media (max-width: 768px) {
+        .title {
+          font-size: 32px;
+        }
+
+        .stats {
+          gap: 20px;
+        }
+
+        .stat-number {
+          font-size: 24px;
+        }
+
+        .books-container {
+          justify-content: center; /* Center books on mobile */
+          padding-bottom: 40px;
+          gap: 8px;
+          max-width: 100vw;
+          overflow-x: visible; /* No horizontal scroll - books wrap to new shelves */
+          /* Ensure proper padding for book expansion */
+          padding-left: max(110px, calc(50vw - 110px));
+          padding-right: max(110px, calc(50vw - 110px));
+        }
+
+        .bookshelf {
+          gap: 150px;
+        }
+      }
+
+      /* Adjust for very small mobile devices */
+      @media (max-width: 480px) {
+        .books-container {
+          gap: 6px;
+        }
+      }
+    </style>
+
+    <script>
+      // Book interaction logic
+      let selectedBook: HTMLElement | null = null;
+      let hoverTimeout: number | null = null;
+      let currentHoveredBook: HTMLElement | null = null;
+      let isHoverTransitioning = false;
+      
+      function isMobileDevice(): boolean {
+        return window.innerWidth <= 768 || 'ontouchstart' in window;
+      }
+
+      // Calculate books per shelf based on viewport width
+      function calculateBooksPerShelf(): number {
+        const viewportWidth = window.innerWidth;
+        const containerPadding = 40; // 20px on each side
+        const availableWidth = viewportWidth - containerPadding;
+        
+        // Average spine width is ~60px (between 40-80px)
+        // Gap between books is 12px
+        // Average space per book: ~72px
+        const avgBookSpace = 72;
+        
+        if (viewportWidth <= 480) {
+          // Very small mobile: 4-6 books
+          return Math.max(4, Math.floor(availableWidth / avgBookSpace));
+        } else if (viewportWidth <= 768) {
+          // Mobile: 6-10 books
+          return Math.max(6, Math.floor(availableWidth / avgBookSpace));
+        } else if (viewportWidth <= 1200) {
+          // Tablet: 10-15 books
+          return Math.max(10, Math.floor(availableWidth / avgBookSpace));
+        } else {
+          // Desktop: 15-20 books
+          return Math.max(15, Math.floor(availableWidth / avgBookSpace));
+        }
+      }
+
+      // Create a new shelf row element
+      function createNewShelf(shelfIndex: number): HTMLElement {
+        const shelfRow = document.createElement('div');
+        shelfRow.className = 'shelf-row';
+        shelfRow.setAttribute('data-shelf', shelfIndex.toString());
+
+        const booksContainer = document.createElement('div');
+        booksContainer.className = 'books-container';
+        // Explicitly set ALL flex properties to ensure horizontal layout
+        booksContainer.style.display = 'flex';
+        booksContainer.style.flexDirection = 'row';
+        booksContainer.style.flexWrap = 'nowrap';
+        booksContainer.style.justifyContent = 'center';
+        booksContainer.style.alignItems = 'flex-end';
+        booksContainer.style.gap = '20px';
+        shelfRow.appendChild(booksContainer);
+
+        // Create floating shelf SVG
+        const shelfSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        shelfSvg.setAttribute('class', 'floating-shelf');
+        shelfSvg.setAttribute('viewBox', '0 0 1000 100');
+        shelfSvg.setAttribute('preserveAspectRatio', 'none');
+
+        const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+        const gradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+        gradient.setAttribute('id', `shelf-gradient-${shelfIndex}`);
+        gradient.setAttribute('x1', '0%');
+        gradient.setAttribute('y1', '0%');
+        gradient.setAttribute('x2', '0%');
+        gradient.setAttribute('y2', '100%');
+        
+        const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+        stop1.setAttribute('offset', '0%');
+        stop1.setAttribute('style', 'stop-color:rgba(100,200,255,0.3);stop-opacity:1');
+        const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+        stop2.setAttribute('offset', '50%');
+        stop2.setAttribute('style', 'stop-color:rgba(50,150,255,0.5);stop-opacity:1');
+        const stop3 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+        stop3.setAttribute('offset', '100%');
+        stop3.setAttribute('style', 'stop-color:rgba(100,200,255,0.3);stop-opacity:1');
+        
+        gradient.appendChild(stop1);
+        gradient.appendChild(stop2);
+        gradient.appendChild(stop3);
+        defs.appendChild(gradient);
+        shelfSvg.appendChild(defs);
+
+        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        rect.setAttribute('x', '0');
+        rect.setAttribute('y', '30');
+        rect.setAttribute('width', '1000');
+        rect.setAttribute('height', '25');
+        rect.setAttribute('fill', `url(#shelf-gradient-${shelfIndex})`);
+        rect.setAttribute('rx', '5');
+        shelfSvg.appendChild(rect);
+
+        const edgeHighlight = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        edgeHighlight.setAttribute('x', '0');
+        edgeHighlight.setAttribute('y', '30');
+        edgeHighlight.setAttribute('width', '1000');
+        edgeHighlight.setAttribute('height', '3');
+        edgeHighlight.setAttribute('fill', 'rgba(200,240,255,0.4)');
+        edgeHighlight.setAttribute('rx', '2');
+        shelfSvg.appendChild(edgeHighlight);
+
+        const shadow = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        shadow.setAttribute('x', '0');
+        shadow.setAttribute('y', '52');
+        shadow.setAttribute('width', '1000');
+        shadow.setAttribute('height', '3');
+        shadow.setAttribute('fill', 'rgba(0,0,0,0.3)');
+        shadow.setAttribute('rx', '2');
+        shelfSvg.appendChild(shadow);
+
+        shelfRow.appendChild(shelfSvg);
+        return shelfRow;
+      }
+
+      // Dynamically reorganize books into shelves - CREATE NEW SHELVES AS NEEDED
+      function reorganizeShelves() {
+        const booksPerShelf = calculateBooksPerShelf();
+        const allBooks = Array.from(document.querySelectorAll('.book-container')) as HTMLElement[];
+        const bookshelf = document.querySelector('.bookshelf');
+        if (!bookshelf) return;
+
+        // Sort books by their index to maintain order
+        allBooks.sort((a, b) => {
+          const indexA = parseInt(a.dataset.index || '0');
+          const indexB = parseInt(b.dataset.index || '0');
+          return indexA - indexB;
+        });
+
+        // Get all existing shelf rows
+        const existingShelves = Array.from(document.querySelectorAll('.shelf-row')) as HTMLElement[];
+        
+        // Group books into shelves
+        const shelves: HTMLElement[][] = [];
+        for (let i = 0; i < allBooks.length; i += booksPerShelf) {
+          shelves.push(allBooks.slice(i, i + booksPerShelf));
+        }
+
+        // Remove excess shelves if we have fewer shelves now
+        if (existingShelves.length > shelves.length) {
+          existingShelves.slice(shelves.length).forEach(shelf => shelf.remove());
+        }
+
+        // Update or create shelves
+        shelves.forEach((shelfBooks, shelfIndex) => {
+          let shelfRow: HTMLElement;
+          let booksContainer: HTMLElement | null;
+          
+          if (shelfIndex < existingShelves.length) {
+            // Update existing shelf
+            shelfRow = existingShelves[shelfIndex];
+            booksContainer = shelfRow.querySelector('.books-container');
+            if (booksContainer) {
+              // Clear existing books
+              const currentBooks = Array.from(booksContainer.querySelectorAll('.book-container'));
+              currentBooks.forEach(book => book.remove());
+            }
+          } else {
+            // Create new shelf
+            shelfRow = createNewShelf(shelfIndex);
+            booksContainer = shelfRow.querySelector('.books-container');
+            bookshelf.appendChild(shelfRow);
+          }
+
+          // Add books to this shelf
+          if (booksContainer) {
+            // Explicitly ensure ALL flex properties are set
+            booksContainer.style.display = 'flex';
+            booksContainer.style.flexDirection = 'row';
+            booksContainer.style.flexWrap = 'nowrap';
+            booksContainer.style.justifyContent = 'center';
+            booksContainer.style.alignItems = 'flex-end';
+            
+            shelfBooks.forEach(book => {
+              // Reset any transforms or positioning that might cause vertical stacking
+              const bookEl = book as HTMLElement;
+              bookEl.style.position = 'relative'; // Ensure relative positioning
+              bookEl.style.display = 'block'; // Explicit display
+              bookEl.style.float = 'none'; // No float
+              bookEl.style.clear = 'none'; // No clear
+              // Reset any transforms that might interfere
+              if (!bookEl.classList.contains('selected')) {
+                bookEl.style.transform = '';
+              }
+              
+              booksContainer!.appendChild(bookEl);
+            });
+          }
+        });
+      }
+
+      function selectBook(bookContainer: HTMLElement) {
+        const bookIndex = parseInt(bookContainer.dataset.index || '0');
+        const shelfRow = bookContainer.closest('.shelf-row');
+        const allBooksInShelf = shelfRow?.querySelectorAll('.book-container') || [];
+
+        // If clicking the same book, deselect it
+        if (selectedBook === bookContainer) {
+          selectedBook.classList.remove('selected');
+          // Reset transform on mobile
+          if (isMobileDevice()) {
+            selectedBook.style.transform = '';
+            selectedBook.style.transition = '';
+          }
+          allBooksInShelf.forEach((book) => {
+            const bookEl = book as HTMLElement;
+            bookEl.classList.remove(
+              'spread-left', 'spread-right', 
+              'spread-left-hover', 'spread-right-hover',
+              'fade-out', 'move-out-left', 'move-out-right'
+            );
+            // Reset any transforms
+            if (isMobileDevice()) {
+              bookEl.style.transform = '';
+            }
+          });
+          selectedBook = null;
+          return;
+        }
+
+        // Deselect previous book if any
+        if (selectedBook) {
+          selectedBook.classList.remove('selected');
+          // Reset transform on mobile
+          if (isMobileDevice()) {
+            selectedBook.style.transform = '';
+            selectedBook.style.transition = '';
+          }
+          const prevShelf = selectedBook.closest('.shelf-row');
+          const prevBooks = prevShelf?.querySelectorAll('.book-container') || [];
+          prevBooks.forEach((book) => {
+            const bookEl = book as HTMLElement;
+            bookEl.classList.remove(
+              'spread-left', 'spread-right',
+              'spread-left-hover', 'spread-right-hover',
+              'fade-out', 'move-out-left', 'move-out-right'
+            );
+            // Reset any transforms
+            if (isMobileDevice()) {
+              bookEl.style.transform = '';
+            }
+          });
+        }
+
+        // Select new book
+        selectedBook = bookContainer;
+        bookContainer.classList.add('selected');
+
+        // Handle other books based on device type
+        if (isMobileDevice()) {
+          // Mobile: fade out other books AND center the selected book
+          allBooksInShelf.forEach((book) => {
+            if (book !== bookContainer) {
+              (book as HTMLElement).classList.add('fade-out');
+            }
+          });
+          
+          // Center the selected book on mobile - PHYSICALLY MOVE IT TO CENTER
+          // Increased timeout to 300ms to allow width expansion and transform to finish
+          setTimeout(() => {
+            // Force reflow to ensure width has expanded
+            void bookContainer.offsetWidth;
+            
+            const rect = bookContainer.getBoundingClientRect();
+            const bookCenterX = rect.left + rect.width / 2;
+            const bookCenterY = rect.top + rect.height / 2;
+            const viewportCenterX = window.innerWidth / 2;
+            const viewportCenterY = window.innerHeight / 2;
+            
+            // Calculate transform needed to center the book
+            const deltaX = viewportCenterX - bookCenterX;
+            const deltaY = viewportCenterY - bookCenterY;
+            
+            // Apply transform to physically move the book to center
+            bookContainer.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+            bookContainer.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+          }, 300);
+        } else {
+          // Desktop: move books out of the way completely
+          allBooksInShelf.forEach((book) => {
+            const currentBookIndex = parseInt((book as HTMLElement).dataset.index || '0');
+            const relativeIndex = currentBookIndex % calculateBooksPerShelf();
+            const selectedRelativeIndex = bookIndex % calculateBooksPerShelf();
+
+            if (book !== bookContainer) {
+              if (relativeIndex < selectedRelativeIndex) {
+                (book as HTMLElement).classList.add('move-out-left');
+                (book as HTMLElement).classList.remove('move-out-right');
+              } else if (relativeIndex > selectedRelativeIndex) {
+                (book as HTMLElement).classList.add('move-out-right');
+                (book as HTMLElement).classList.remove('move-out-left');
+              }
+            }
+          });
+        }
+      }
+
+      // Handle hover effects with sequential animation (no jarring)
+      function handleBookHover(bookContainer: HTMLElement, isHovering: boolean) {
+        if (selectedBook === bookContainer || selectedBook) return; // Don't interfere if book is selected
+        
+        // Clear any pending hover timeout
+        if (hoverTimeout) {
+          clearTimeout(hoverTimeout);
+          hoverTimeout = null;
+        }
+
+        if (isHovering) {
+          // If hovering on a different book, wait for current hover to finish
+          if (currentHoveredBook && currentHoveredBook !== bookContainer && isHoverTransitioning) {
+            // Remove hover from previous book first
+            removeHoverEffects(currentHoveredBook);
+            
+            // Wait for transition to finish before starting new hover
+            hoverTimeout = window.setTimeout(() => {
+              applyHoverEffects(bookContainer);
+              currentHoveredBook = bookContainer;
+              isHoverTransitioning = false;
+            }, 300); // Match transition duration (0.3s)
+            return;
+          } else {
+            // Apply hover effects immediately
+            applyHoverEffects(bookContainer);
+            currentHoveredBook = bookContainer;
+            isHoverTransitioning = true;
+          }
+        } else {
+          // Remove hover effects
+          removeHoverEffects(bookContainer);
+          if (currentHoveredBook === bookContainer) {
+            currentHoveredBook = null;
+            isHoverTransitioning = false;
+          }
+        }
+      }
+
+      // Apply hover effects to books around the hovered book
+      function applyHoverEffects(bookContainer: HTMLElement) {
+        const bookIndex = parseInt(bookContainer.dataset.index || '0');
+        const shelfRow = bookContainer.closest('.shelf-row');
+        const allBooksInShelf = shelfRow?.querySelectorAll('.book-container') || [];
+
+        allBooksInShelf.forEach((book) => {
+          if (book === bookContainer) return;
+          
+          const currentBookIndex = parseInt((book as HTMLElement).dataset.index || '0');
+          const relativeIndex = currentBookIndex % calculateBooksPerShelf();
+          const selectedRelativeIndex = bookIndex % calculateBooksPerShelf();
+
+          if (relativeIndex < selectedRelativeIndex) {
+            (book as HTMLElement).classList.add('spread-left-hover');
+            (book as HTMLElement).classList.remove('spread-right-hover');
+          } else if (relativeIndex > selectedRelativeIndex) {
+            (book as HTMLElement).classList.add('spread-right-hover');
+            (book as HTMLElement).classList.remove('spread-left-hover');
+          }
+        });
+      }
+
+      // Remove hover effects from books
+      function removeHoverEffects(bookContainer: HTMLElement) {
+        const shelfRow = bookContainer.closest('.shelf-row');
+        const allBooksInShelf = shelfRow?.querySelectorAll('.book-container') || [];
+        allBooksInShelf.forEach((book) => {
+          (book as HTMLElement).classList.remove('spread-left-hover', 'spread-right-hover');
+        });
+      }
+
+      // Handle touch events for mobile hover simulation
+      let touchStartTime = 0;
+      let touchTarget: HTMLElement | null = null;
+      
+      function handleTouchStart(e: TouchEvent, bookContainer: HTMLElement) {
+        touchStartTime = Date.now();
+        touchTarget = bookContainer;
+        // Simulate hover on touch start
+        handleBookHover(bookContainer, true);
+      }
+      
+      function handleTouchEnd(e: TouchEvent, bookContainer: HTMLElement) {
+        const touchDuration = Date.now() - touchStartTime;
+        
+        // If it was a quick tap (< 200ms), treat as click
+        // Don't use preventDefault as it may block click events
+        if (touchDuration < 200 && touchTarget === bookContainer) {
+          // Only select if not already selected to prevent re-triggering
+          if (selectedBook !== bookContainer) {
+            selectBook(bookContainer);
+          }
+        }
+        
+        // Remove hover effect after a delay
+        setTimeout(() => {
+          if (touchTarget === bookContainer && selectedBook !== bookContainer) {
+            handleBookHover(bookContainer, false);
+          }
+        }, 100);
+        
+        touchTarget = null;
+      }
+
+      // Add event listeners
+      document.addEventListener('DOMContentLoaded', () => {
+        reorganizeShelves();
+        
+        const bookContainers = document.querySelectorAll('.book-container');
+        bookContainers.forEach((container) => {
+          const bookEl = container as HTMLElement;
+          
+          // Click to select (desktop)
+          bookEl.addEventListener('click', (e) => {
+            // Only handle click if not on mobile (mobile uses touch events)
+            if (!isMobileDevice()) {
+              selectBook(bookEl);
+            }
+          });
+          
+          // Hover for small movement (desktop)
+          bookEl.addEventListener('mouseenter', () => {
+            if (!isMobileDevice()) {
+              handleBookHover(bookEl, true);
+            }
+          });
+          bookEl.addEventListener('mouseleave', () => {
+            if (!isMobileDevice()) {
+              handleBookHover(bookEl, false);
+            }
+          });
+          
+          // Touch events for mobile hover simulation
+          bookEl.addEventListener('touchstart', (e) => handleTouchStart(e, bookEl), { passive: true });
+          bookEl.addEventListener('touchend', (e) => handleTouchEnd(e, bookEl), { passive: false });
+        });
+
+        // Reorganize on resize
+        let resizeTimeout: number;
+        window.addEventListener('resize', () => {
+          clearTimeout(resizeTimeout);
+          resizeTimeout = window.setTimeout(() => {
+            reorganizeShelves();
+            // Deselect if needed
+            if (selectedBook) {
+              selectBook(selectedBook);
+            }
+          }, 250);
+        });
+
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && selectedBook) {
+            selectBook(selectedBook);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
