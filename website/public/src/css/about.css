@@ -13,8 +13,14 @@
   left: 0;
   top: 0;
   z-index: 100;
+  opacity: 0.15;
+  transition: opacity 0.3s ease;
 
   display: none;
+}
+
+.vnav:hover {
+  opacity: 1;
 }
 
 .vnav-circle {

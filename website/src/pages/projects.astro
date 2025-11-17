@@ -5,49 +5,38 @@ import BaseLayout from '../layouts/Base.astro';
 <BaseLayout currentPage="projects" title="Projects | Jack Luo" description="Explore my portfolio of projects">
   <section id="projects" class="projects-section">
     <div class="container-fluid">
-      <div class="os-window">
-        <div class="os-window-header">
-          <div class="os-window-controls">
-            <div class="os-window-control close"></div>
-            <div class="os-window-control minimize"></div>
-            <div class="os-window-control maximize"></div>
+      <div class="projects-content">
+        <h1 class="projects-title">My Projects</h1>
+        <p class="projects-subtitle">
+          Building innovative solutions and exploring new technologies
+        </p>
+
+        <div class="projects-grid">
+          <!-- Project cards will go here -->
+          <div class="project-card">
+            <h3>MAGK</h3>
+            <p>Next generation productivity software</p>
+            <a href="https://magk.app" class="project-link">Learn more →</a>
           </div>
-          <div class="os-window-title">Projects</div>
+
+          <div class="project-card">
+            <h3>Delight</h3>
+            <p>Creating next generation productivity software</p>
+            <a href="https://github.com/magk-app/delight" class="project-link">View on GitHub →</a>
+          </div>
+
+          <div class="project-card">
+            <h3>ArkOS</h3>
+            <p>Agentic architecture at MIT SIPB Arc Project</p>
+            <a href="https://github.com/SGIARK/arkos" class="project-link">View on GitHub →</a>
+          </div>
         </div>
 
-        <div class="projects-content">
-          <h1 class="projects-title">My Projects</h1>
-          <p class="projects-subtitle">
-            Building innovative solutions and exploring new technologies
-          </p>
-
-          <div class="projects-grid">
-            <!-- Project cards will go here -->
-            <div class="os-card project-card">
-              <h3>MAGK</h3>
-              <p>Next generation productivity software</p>
-              <a href="https://magk.app" class="project-link">Learn more →</a>
-            </div>
-
-            <div class="os-card project-card">
-              <h3>Delight</h3>
-              <p>Creating next generation productivity software</p>
-              <a href="https://github.com/magk-app/delight" class="project-link">View on GitHub →</a>
-            </div>
-
-            <div class="os-card project-card">
-              <h3>ArkOS</h3>
-              <p>Agentic architecture at MIT SIPB Arc Project</p>
-              <a href="https://github.com/SGIARK/arkos" class="project-link">View on GitHub →</a>
-            </div>
-          </div>
-
-          <div class="projects-cta">
-            <p>More projects coming soon...</p>
-            <a href="/journey.html" class="cta-link">
-              See my journey →
-            </a>
-          </div>
+        <div class="projects-cta">
+          <p>More projects coming soon...</p>
+          <a href="/journey.html" class="cta-link">
+            See my journey →
+          </a>
         </div>
       </div>
     </div>
@@ -72,10 +61,6 @@ import BaseLayout from '../layouts/Base.astro';
     font-size: 3rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.7) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
   }
 
   .projects-subtitle {
@@ -97,6 +82,16 @@ import BaseLayout from '../layouts/Base.astro';
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+  }
+
+  .project-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
   }
 
   .project-card h3 {
@@ -130,7 +125,7 @@ import BaseLayout from '../layouts/Base.astro';
     text-align: center;
     padding: 2rem;
     background: rgba(255, 255, 255, 0.02);
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     border: 1px solid rgba(255, 255, 255, 0.05);
   }
 
