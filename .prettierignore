@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+dist/
+.astro/
+.next/
+.sanity/
+
+# Build outputs
+*.min.js
+*.min.css
+
+# Legacy files
+_legacy_backup_pre_astro/
+
+# Generated files
+package-lock.json
+*.log
+
+# Large generated files
+web-bundles/
+

@@ -2,8 +2,7 @@
 title: "Wow you are here?"
 publishDate: 2024-09-07
 tags:
-  - "personal"
-  - "meta"
+  - personal
 excerpt: "A short easter-egg message for curious visitors, complete with a playful update."
 heroImage: "/assets/images/jack/main.jpg"
 ---

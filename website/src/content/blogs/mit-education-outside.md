@@ -1,15 +1,16 @@
 ---
-title: "How to get a MIT education, outside of MIT?"
+title: 'How to get a MIT education, outside of MIT?'
 publishDate: 2023-03-14
 tags:
-  - "education"
-  - "self-directed-learning"
-excerpt: "Mindset shifts and tactical habits for building an MIT-caliber education without the admissions letter."
-heroImage: "/assets/images/jack/main.jpg"
+  - education
+  - reflection
+excerpt: 'Mindset shifts and tactical habits for building an MIT-caliber education without the admissions letter.'
+heroImage: '/assets/images/jack/main.jpg'
 ---
+
 ![Jack Luo](/assets/images/jack/main.jpg)
 
-> *Jack Luo — 7 minute read*
+> _Jack Luo — 7 minute read_
 
 **Prologue**
 
@@ -86,18 +87,15 @@ To obtain a MIT styled education, there are four things to
 consider.
 
 1. You should have an internet connection.
-
-1. You should have a drive to learn and curiosity about the
-world.
-
-1. You should surround yourself with great people.
-
-1. You should have an optimistic attitude.
+2. You should have a drive to learn and curiosity about the world.
+3. You should surround yourself with great people.
+4. You should have an optimistic attitude.
 
 If you are reading this article, you already met requirement
-1. We will explore point 2–4 down below. Let’s dive in.
 
-**Part 2: Drink from the right firehose **
+1. We will explore point 2–4 down below. Let's dive in.
+
+**Part 2: Drink from the right firehose**
 
 When most people hear MIT, the first thing they think of is
 the academics. Many MIT students have to choose only 2 things
@@ -141,7 +139,7 @@ Well, now you have some firehoses, go ahead and start blasting
 and remember to keep blasting consistently at a rate you
 enjoy.
 
-** Part 3: A ripple of kindness **
+**Part 3: A ripple of kindness**
 
 If you ask any MIT students what their favorite part of MIT
 is, they are most likely going to mention “the people”. This
@@ -182,8 +180,7 @@ Sooner or later, you will find yourself more engaged in the
 human experience and become like the awesome people you
 surrounded yourself with.
 
-Part 4: I hate this fu*king place / I have truly found
-paradise**
+**Part 4: I hate this fu\*king place / I have truly found paradise**
 
 MIT’s environment can be summed up in one phrase: IHTFP (I
 have truly found paradise / I hate this fucking place). This

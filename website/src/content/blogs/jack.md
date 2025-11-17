@@ -2,8 +2,7 @@
 title: "Who is Jack? Where did he come from? Where is he now?"
 publishDate: 2024-09-07
 tags:
-  - "personal"
-  - "biography"
+  - personal
 excerpt: "A playful self-introduction covering Jack's origins, experiments, and how his perspective evolved."
 heroImage: "/assets/images/jack/main.jpg"
 ---
