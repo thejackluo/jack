@@ -25,7 +25,27 @@ footer h4 {
   padding: 0.5em 0;
 }
 
+/* Ensure consistent button sizing in footer */
+footer button {
+  min-height: 3.5em;
+  padding: 1em 2em;
+  width: 100%;
+  max-width: 300px;
+}
+
+footer button img {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+footer button .button-text {
+  font-size: inherit;
+}
+
 @media (min-width: 576px) {
+  footer button {
+    min-height: 4em;
+  }
 }
 
 @media (min-width: 768px) {

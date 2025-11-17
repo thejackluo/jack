@@ -430,13 +430,25 @@ const allYears = [...new Set(blogs.map(blog => blog.data.publishDate.getFullYear
 
   /* Responsive Design */
   @media (max-width: 991px) {
-    .sidebar-content {
-      position: static;
-      margin-bottom: 2rem;
+    /* Hide sidebar on mobile/tablet */
+    .sidebar-container {
+      display: none;
+    }
+
+    .blog-content-container {
+      max-width: 100%;
+      flex: 0 0 100%;
+    }
+
+    .blog-list {
+      max-height: calc(100vh - 200px);
+      overflow-y: auto;
+      padding: 1rem 0;
     }
 
     .blog-card {
       padding: 1.5rem;
+      margin: 0 0.5rem;
     }
 
     .blog-card-title {
@@ -446,16 +458,35 @@ const allYears = [...new Set(blogs.map(blog => blog.data.publishDate.getFullYear
 
   @media (max-width: 576px) {
     #writing-section {
-      padding: 2rem 0;
+      padding: 1rem 0 2rem 0;
     }
 
-    .sidebar-container,
+    .writing-page-header {
+      margin: 1rem auto 2rem auto;
+    }
+
+    .writing-page-header h1 {
+      font-size: 2rem;
+    }
+
+    .content-row {
+      padding: 0 0.5rem;
+    }
+
     .blog-content-container {
-      padding: 1rem 0.5rem;
+      padding: 0;
+    }
+
+    .blog-list {
+      max-height: calc(100vh - 150px);
+      overflow-y: auto;
+      padding: 0.5rem 0;
+      gap: 0.5rem;
     }
 
     .blog-card {
       padding: 1.25rem;
+      margin: 0 0.25rem;
     }
 
     .blog-card-title {
@@ -468,6 +499,11 @@ const allYears = [...new Set(blogs.map(blog => blog.data.publishDate.getFullYear
 
     .blog-card-meta {
       font-size: 0.8rem;
+    }
+
+    .blog-tag {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
     }
   }
 </style>
