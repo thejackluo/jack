@@ -30,33 +30,35 @@
     <!-- Technical Details Toggle Section -->
     <div class="row footer-technical">
       <div class="col-12">
-        <a 
-          href="#"
-          id="tech-toggle-btn" 
-          class="tech-toggle-link"
-          aria-expanded="false"
-          aria-controls="tech-details"
-          onclick="event.preventDefault(); return false;"
-        >
-          <span class="tech-toggle-text">Under the hood</span>
-          <span class="tech-toggle-icon">▼</span>
-        </a>
-        <div id="tech-details" class="tech-details" hidden>
-          <div class="tech-content">
-            <div class="tech-section">
-              <h5>Stack Summary</h5>
-              <p>
-                <strong>Built with:</strong> Astro, Claude, Next.js<br>
-                <strong>Deployed on:</strong> Netlify<br>
-                <strong>All music and content written by:</strong> Jack<br>
-                <strong>Content sourced from:</strong> SoundCloud API, Medium API
-              </p>
-            </div>
-            <div class="tech-section">
-              <h5>Technical Notes</h5>
-              <p>
-                Status and bookshelf are auto-synced from my personal Notion. Posts come from Medium and native markdown.
-              </p>
+        <div class="tech-wrapper">
+          <a 
+            href="#"
+            id="tech-toggle-btn" 
+            class="tech-toggle-link"
+            aria-expanded="false"
+            aria-controls="tech-details"
+            onclick="event.preventDefault(); return false;"
+          >
+            <span class="tech-toggle-text">Under the hood</span>
+            <span class="tech-toggle-icon">▼</span>
+          </a>
+          <div id="tech-details" class="tech-details" hidden>
+            <div class="tech-content">
+              <div class="tech-section">
+                <h5>Stack Summary</h5>
+                <p>
+                  <strong>Built with:</strong> Astro, Claude, Next.js<br>
+                  <strong>Deployed on:</strong> Netlify<br>
+                  <strong>All music and content written by:</strong> Jack<br>
+                  <strong>Content sourced from:</strong> SoundCloud API, Medium API
+                </p>
+              </div>
+              <div class="tech-section">
+                <h5>Technical Notes</h5>
+                <p>
+                  Status and bookshelf are auto-synced from my personal Notion. Posts come from Medium and native markdown.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -81,6 +83,14 @@
     margin-bottom: 1rem;
     padding-top: 1rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .tech-wrapper {
+    max-width: 55%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .tech-toggle-link {
@@ -151,7 +161,7 @@
     font-size: 1.125em;
     margin-bottom: 0.75rem;
     color: white;
-    text-align: left;
+    text-align: center;
   }
 
   .tech-section p {
@@ -159,13 +169,19 @@
     font-size: 0.95em;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.9);
-    text-align: left;
+    text-align: center;
     margin: 0;
   }
 
   .tech-section strong {
     color: white;
     font-weight: 600;
+  }
+
+  @media (max-width: 767px) {
+    .tech-wrapper {
+      max-width: 90%;
+    }
   }
 
   @media (min-width: 768px) {
