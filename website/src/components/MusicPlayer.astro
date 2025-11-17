@@ -124,6 +124,13 @@
     box-shadow:
       0 0 20px rgba(0, 0, 0, 0.5),
       inset 0 0 10px rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .music-disc.spinning .disc-center,
+  .music-disc.paused .disc-center {
+    opacity: 1;
   }
 
   .disc-center::before {
@@ -172,6 +179,10 @@
     animation: spin 3s linear infinite;
   }
 
+  .music-disc.paused .vinyl-disc {
+    animation-play-state: paused;
+  }
+
   .music-disc.spinning:hover {
     transform: scale(1);
   }
@@ -198,7 +209,8 @@
     opacity: 1;
   }
 
-  .music-disc.spinning .hover-overlay {
+  .music-disc.spinning .hover-overlay,
+  .music-disc.paused .hover-overlay {
     display: none;
   }
 
@@ -430,7 +442,7 @@
     // Listen for track finish
     widget.bind(window.SC.Widget.Events.FINISH, function() {
       isPlaying = false;
-      musicDisc?.classList.remove('spinning');
+      musicDisc?.classList.remove('spinning', 'paused');
       if (nowPlaying) nowPlaying.style.display = 'none';
       currentSong = null;
     });
@@ -486,7 +498,7 @@
       if (isPlaying) {
         widget.pause();
         isPlaying = false;
-        musicDisc?.classList.remove('spinning');
+        musicDisc?.classList.add('paused');
         // Update icon to play
         playPauseBtn.innerHTML = `
           <svg viewBox="0 0 24 24" fill="currentColor">
@@ -496,7 +508,7 @@
       } else {
         widget.play();
         isPlaying = true;
-        musicDisc?.classList.add('spinning');
+        musicDisc?.classList.remove('paused');
         // Update icon to pause
         playPauseBtn.innerHTML = `
           <svg viewBox="0 0 24 24" fill="currentColor">
@@ -515,7 +527,7 @@
       widget.seekTo(0);
       isPlaying = false;
       currentSong = null;
-      musicDisc?.classList.remove('spinning');
+      musicDisc?.classList.remove('spinning', 'paused');
       if (nowPlaying) nowPlaying.style.display = 'none';
       // Reset play/pause icon
       playPauseBtn.innerHTML = `
