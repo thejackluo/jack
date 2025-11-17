@@ -45,7 +45,7 @@ const allYears = [...new Set(blogs.map(blog => blog.data.publishDate.getFullYear
         </div>
       </div>
 
-      <div class="row">
+      <div class="row content-row">
         <!-- Left Sidebar -->
         <div class="col-12 col-lg-3 sidebar-container">
           <div class="sidebar-content">
@@ -203,9 +203,16 @@ const allYears = [...new Set(blogs.map(blog => blog.data.publishDate.getFullYear
     text-align: center;
   }
 
+  /* Content Row - Center the whole row */
+  .content-row {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
   /* Sidebar Styling */
   .sidebar-container {
-    padding: 0 1rem;
+    padding: 0 1.5rem;
   }
 
   .sidebar-content {
@@ -301,9 +308,7 @@ const allYears = [...new Set(blogs.map(blog => blog.data.publishDate.getFullYear
 
   /* Blog Content Container */
   .blog-content-container {
-    padding: 0 1rem;
-    max-width: 900px;
-    margin: 0 auto;
+    padding: 0 1.5rem;
   }
 
   .blog-list {

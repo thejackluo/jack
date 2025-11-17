@@ -53,7 +53,7 @@ const publishDate = entry.data.publishDate.toLocaleDateString('en-US', {
           <header class="blog-header">
             <h2 class="blog-title">{entry.data.title}</h2>
 
-            <div class="blog-meta">
+            <div class="blog-meta" data-publish-date="{publishDate}" style="display: none;">
               <span class="blog-meta-date">{publishDate}</span>
             </div>
 
@@ -249,7 +249,7 @@ const publishDate = entry.data.publishDate.toLocaleDateString('en-US', {
   }
 
   .blog-content :global(h2) {
-    font-size: 1.75rem;
+    font-size: 2.25rem;
     font-weight: 600;
   }
 
@@ -404,12 +404,12 @@ const publishDate = entry.data.publishDate.toLocaleDateString('en-US', {
     padding: 0;
     margin: 0 0 2.5rem 0;
     font-style: normal;
-    max-width: calc(100% - 72px);
+    max-width: calc(100% - 88px);
   }
 
   .blog-content > :global(p:first-child img) {
-    width: 56px;
-    height: 56px;
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
     margin: 0;
     display: block;
@@ -427,6 +427,14 @@ const publishDate = entry.data.publishDate.toLocaleDateString('en-US', {
     font-style: normal;
   }
 
+  /* Author date styling */
+  .blog-content > :global(p:first-child:has(img) + blockquote .author-date) {
+    margin-top: 0.25rem;
+    padding: 0.25rem 0;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+  }
+
   /* When blog doesn't have author image, style blockquote normally */
   .blog-content > :global(blockquote:first-child) {
     border-left: 4px solid rgba(255, 255, 255, 0.4);
@@ -442,6 +450,13 @@ const publishDate = entry.data.publishDate.toLocaleDateString('en-US', {
 
   .blog-content > :global(blockquote:first-child em) {
     font-style: normal;
+  }
+
+  .blog-content > :global(blockquote:first-child .author-date) {
+    margin-top: 0.25rem;
+    padding: 0.25rem 0;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
   }
 
   /* Horizontal Rule */
@@ -533,7 +548,7 @@ const publishDate = entry.data.publishDate.toLocaleDateString('en-US', {
     }
 
     .blog-content :global(h2) {
-      font-size: 1.5rem;
+      font-size: 2rem;
     }
 
     .blog-content :global(h3) {
@@ -587,6 +602,42 @@ const publishDate = entry.data.publishDate.toLocaleDateString('en-US', {
     }
   }
 
+  // Move the publish date to the author section
+  function movePublishDate() {
+    const blogMeta = document.querySelector('.blog-meta');
+    const blogContent = document.querySelector('.blog-content');
+
+    if (!blogMeta || !blogContent) return;
+
+    const publishDate = blogMeta.getAttribute('data-publish-date');
+    if (!publishDate) return;
+
+    // Find the author blockquote (first blockquote that follows a paragraph with an image)
+    const firstParagraph = blogContent.querySelector('p:first-child');
+    const hasImage = firstParagraph?.querySelector('img');
+
+    if (hasImage) {
+      const authorBlockquote = blogContent.querySelector('p:first-child + blockquote');
+      if (authorBlockquote) {
+        // Add the date as a new paragraph in the blockquote
+        const dateParagraph = document.createElement('p');
+        dateParagraph.className = 'author-date';
+        dateParagraph.textContent = publishDate;
+        authorBlockquote.appendChild(dateParagraph);
+      }
+    } else {
+      // If no author image, check if first element is blockquote
+      const firstBlockquote = blogContent.querySelector('blockquote:first-child');
+      if (firstBlockquote) {
+        const dateParagraph = document.createElement('p');
+        dateParagraph.className = 'author-date';
+        dateParagraph.textContent = publishDate;
+        firstBlockquote.appendChild(dateParagraph);
+      }
+    }
+  }
+
   // Run on page load
   cleanCitationMarkers();
+  movePublishDate();
 </script>
