@@ -23,7 +23,14 @@
     if (!verticalNav) return;
 
     const navCircles = verticalNav.querySelectorAll('.vnav-circle');
-    const sections = ['landing', 'about', 'footer'];
+
+    // Determine sections based on page
+    let sections = ['landing', 'about', 'footer']; // Default for home page
+
+    // Check if we're on journey page (has #creative section)
+    if (document.getElementById('creative')) {
+      sections = ['landing', 'creative', 'footer'];
+    }
 
     // Highlight active section based on scroll
     function updateActiveSection() {
