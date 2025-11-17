@@ -30,7 +30,10 @@
   },
   "homepage": "https://github.com/thejackluo/jackluo-website-v4#readme",
   "dependencies": {
-    "astro": "^5.13.9"
+    "@astrojs/react": "^4.4.2",
+    "astro": "^5.13.9",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.8.2",
