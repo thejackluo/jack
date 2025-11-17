@@ -3,6 +3,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import OSDock from '../components/OSDock.astro';
 import SEO from '../components/SEO.astro';
+import CommandPalette from '../components/CommandPalette.astro';
 
 const {
   title,
@@ -51,6 +52,8 @@ const {
       <Footer />
     </div>
 
+    <!-- Command Palette -->
+    <CommandPalette />
     <!-- OS-like Dock Navigation -->
     <OSDock currentPage={currentPage} />
 
