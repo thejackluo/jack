@@ -80,6 +80,8 @@ const backGradient = gradient
     margin: 0;
     /* Ensure container height matches book height exactly */
     box-sizing: border-box;
+    flex-shrink: 0;
+    min-width: var(--spine-width);
   }
 
   /* Small movement on hover - reduced to 5-8px */
@@ -128,20 +130,27 @@ const backGradient = gradient
     width: var(--book-width);
     /* Ensure selected book is fully visible */
     position: relative;
+    min-width: var(--book-width);
   }
 
   /* On mobile, ensure selected book can be centered */
   @media (max-width: 768px) {
     .book-container.selected {
-      /* Allow the book to be positioned independently for centering */
-      transform: none !important;
+      /* Allow transform for physical centering */
+      min-width: var(--book-width);
+      position: relative;
     }
   }
 
-  /* Ensure consistent sizing on hover - spine and front should match */
-  .book-container:hover {
-    width: var(--book-width);
+  /* Ensure desktop books also expand properly */
+  @media (min-width: 769px) {
+    .book-container.selected {
+      min-width: var(--book-width);
+    }
   }
+
+  /* Remove width expansion on hover - only rotate book, don't expand container */
+  /* Width expansion only happens on selection, not hover */
 
   .book {
     width: var(--book-width);
@@ -305,6 +314,7 @@ const backGradient = gradient
     justify-content: center;
     border-radius: 4px;
     box-shadow:
+      0 10px 30px rgba(0, 0, 0, 0.5),
       inset -2px 0 5px rgba(0, 0, 0, 0.3),
       inset 2px 0 5px rgba(255, 255, 255, 0.1);
     /* Ensure spine height matches cover height exactly */

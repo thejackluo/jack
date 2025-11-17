@@ -362,16 +362,15 @@ for (let i = 0; i < books.length; i += initialBooksPerShelf) {
         justify-content: center;
         align-items: flex-end;
         gap: 20px; /* Gap between books */
-        /* Minimal padding - just enough to prevent cutoff when book expands on hover */
+        /* Padding accounts for book expansion on selection (spine 40-80px → 220px width) */
         /* Book expands from ~60px spine to 220px width = 160px expansion */
-        /* Since expansion is centered, need ~80px on each side, but gap provides some space */
-        /* Use 60px padding - enough to prevent cutoff without excessive spacing */
-        padding: 0 60px 20px;
+        /* Since expansion is centered, need ~80px on each side */
+        padding: 0 110px 20px;
         position: relative;
         z-index: 2;
         flex-wrap: nowrap;
         max-width: 100%;
-        overflow-x: auto;
+        overflow-x: visible;
         overflow-y: visible;
         scrollbar-width: none; /* Firefox */
         -ms-overflow-style: none; /* IE/Edge */
@@ -386,9 +385,11 @@ for (let i = 0; i < books.length; i += initialBooksPerShelf) {
         .books-container {
           flex-direction: row; /* Explicitly ensure horizontal layout */
           gap: 8px; /* Smaller gap on mobile */
-          /* Minimal padding with cutoff prevention */
-          padding-left: max(50px, calc(50vw - 110px));
-          padding-right: max(50px, calc(50vw - 110px));
+          /* Padding ensures book can expand fully (220px) without clipping */
+          /* max(110px, calc(50vw - 110px)) ensures book can expand to center */
+          padding-left: max(110px, calc(50vw - 110px));
+          padding-right: max(110px, calc(50vw - 110px));
+          overflow-x: visible; /* Allow books to expand without clipping */
         }
       }
 
@@ -445,6 +446,9 @@ for (let i = 0; i < books.length; i += initialBooksPerShelf) {
           gap: 8px;
           max-width: 100vw;
           overflow-x: visible; /* No horizontal scroll - books wrap to new shelves */
+          /* Ensure proper padding for book expansion */
+          padding-left: max(110px, calc(50vw - 110px));
+          padding-right: max(110px, calc(50vw - 110px));
         }
 
         .bookshelf {
@@ -505,6 +509,13 @@ for (let i = 0; i < books.length; i += initialBooksPerShelf) {
 
         const booksContainer = document.createElement('div');
         booksContainer.className = 'books-container';
+        // Explicitly set ALL flex properties to ensure horizontal layout
+        booksContainer.style.display = 'flex';
+        booksContainer.style.flexDirection = 'row';
+        booksContainer.style.flexWrap = 'nowrap';
+        booksContainer.style.justifyContent = 'center';
+        booksContainer.style.alignItems = 'flex-end';
+        booksContainer.style.gap = '20px';
         shelfRow.appendChild(booksContainer);
 
         // Create floating shelf SVG
@@ -619,9 +630,26 @@ for (let i = 0; i < books.length; i += initialBooksPerShelf) {
 
           // Add books to this shelf
           if (booksContainer) {
+            // Explicitly ensure ALL flex properties are set
+            booksContainer.style.display = 'flex';
+            booksContainer.style.flexDirection = 'row';
+            booksContainer.style.flexWrap = 'nowrap';
+            booksContainer.style.justifyContent = 'center';
+            booksContainer.style.alignItems = 'flex-end';
+            
             shelfBooks.forEach(book => {
-              booksContainer!.appendChild(book);
-              book.style.display = '';
+              // Reset any transforms or positioning that might cause vertical stacking
+              const bookEl = book as HTMLElement;
+              bookEl.style.position = 'relative'; // Ensure relative positioning
+              bookEl.style.display = 'block'; // Explicit display
+              bookEl.style.float = 'none'; // No float
+              bookEl.style.clear = 'none'; // No clear
+              // Reset any transforms that might interfere
+              if (!bookEl.classList.contains('selected')) {
+                bookEl.style.transform = '';
+              }
+              
+              booksContainer!.appendChild(bookEl);
             });
           }
         });
@@ -635,6 +663,11 @@ for (let i = 0; i < books.length; i += initialBooksPerShelf) {
         // If clicking the same book, deselect it
         if (selectedBook === bookContainer) {
           selectedBook.classList.remove('selected');
+          // Reset transform on mobile
+          if (isMobileDevice()) {
+            selectedBook.style.transform = '';
+            selectedBook.style.transition = '';
+          }
           allBooksInShelf.forEach((book) => {
             const bookEl = book as HTMLElement;
             bookEl.classList.remove(
@@ -642,6 +675,10 @@ for (let i = 0; i < books.length; i += initialBooksPerShelf) {
               'spread-left-hover', 'spread-right-hover',
               'fade-out', 'move-out-left', 'move-out-right'
             );
+            // Reset any transforms
+            if (isMobileDevice()) {
+              bookEl.style.transform = '';
+            }
           });
           selectedBook = null;
           return;
@@ -650,6 +687,11 @@ for (let i = 0; i < books.length; i += initialBooksPerShelf) {
         // Deselect previous book if any
         if (selectedBook) {
           selectedBook.classList.remove('selected');
+          // Reset transform on mobile
+          if (isMobileDevice()) {
+            selectedBook.style.transform = '';
+            selectedBook.style.transition = '';
+          }
           const prevShelf = selectedBook.closest('.shelf-row');
           const prevBooks = prevShelf?.querySelectorAll('.book-container') || [];
           prevBooks.forEach((book) => {
@@ -659,6 +701,10 @@ for (let i = 0; i < books.length; i += initialBooksPerShelf) {
               'spread-left-hover', 'spread-right-hover',
               'fade-out', 'move-out-left', 'move-out-right'
             );
+            // Reset any transforms
+            if (isMobileDevice()) {
+              bookEl.style.transform = '';
+            }
           });
         }
 
@@ -675,24 +721,26 @@ for (let i = 0; i < books.length; i += initialBooksPerShelf) {
             }
           });
           
-          // Center the selected book on mobile - IMPORTANT
+          // Center the selected book on mobile - PHYSICALLY MOVE IT TO CENTER
+          // Increased timeout to 300ms to allow width expansion and transform to finish
           setTimeout(() => {
+            // Force reflow to ensure width has expanded
+            void bookContainer.offsetWidth;
+            
             const rect = bookContainer.getBoundingClientRect();
             const bookCenterX = rect.left + rect.width / 2;
             const bookCenterY = rect.top + rect.height / 2;
             const viewportCenterX = window.innerWidth / 2;
             const viewportCenterY = window.innerHeight / 2;
             
-            // Calculate scroll needed to center the book
-            const scrollX = window.scrollX + bookCenterX - viewportCenterX;
-            const scrollY = window.scrollY + bookCenterY - viewportCenterY;
+            // Calculate transform needed to center the book
+            const deltaX = viewportCenterX - bookCenterX;
+            const deltaY = viewportCenterY - bookCenterY;
             
-            window.scrollTo({
-              left: Math.max(0, scrollX),
-              top: Math.max(0, scrollY),
-              behavior: 'smooth'
-            });
-          }, 100);
+            // Apply transform to physically move the book to center
+            bookContainer.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+            bookContainer.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+          }, 300);
         } else {
           // Desktop: move books out of the way completely
           allBooksInShelf.forEach((book) => {
@@ -798,10 +846,13 @@ for (let i = 0; i < books.length; i += initialBooksPerShelf) {
       function handleTouchEnd(e: TouchEvent, bookContainer: HTMLElement) {
         const touchDuration = Date.now() - touchStartTime;
         
-        // If it was a quick tap (< 300ms), treat as click
-        if (touchDuration < 300 && touchTarget === bookContainer) {
-          e.preventDefault();
-          selectBook(bookContainer);
+        // If it was a quick tap (< 200ms), treat as click
+        // Don't use preventDefault as it may block click events
+        if (touchDuration < 200 && touchTarget === bookContainer) {
+          // Only select if not already selected to prevent re-triggering
+          if (selectedBook !== bookContainer) {
+            selectBook(bookContainer);
+          }
         }
         
         // Remove hover effect after a delay
