@@ -55,8 +55,6 @@ const publishDate = entry.data.publishDate.toLocaleDateString('en-US', {
 
             <div class="blog-meta">
               <span class="blog-meta-date">{publishDate}</span>
-              <span class="meta-separator">•</span>
-              <span class="blog-meta-reading">{formatReadingTime(readingTime)}</span>
             </div>
 
             <div class="blog-tags">
@@ -100,6 +98,17 @@ const publishDate = entry.data.publishDate.toLocaleDateString('en-US', {
   @import url('/src/css/writing.css');
   @import url('/src/css/blog.css');
 
+  /* Hide the default landing section for blog pages */
+  :global(#landing) {
+    height: auto !important;
+    min-height: auto !important;
+  }
+
+  :global(.landing-container) {
+    height: auto !important;
+    position: relative !important;
+  }
+
   /* Blog Post Section */
   #blog-post-section {
     background: linear-gradient(
@@ -109,7 +118,7 @@ const publishDate = entry.data.publishDate.toLocaleDateString('en-US', {
       ),
       linear-gradient(180deg, #000000 0%, #14123c 100%);
     min-height: 100vh;
-    padding: 3rem 0 5rem 0;
+    padding: 2rem 0 5rem 0;
   }
 
   /* Back Link Container */
@@ -374,40 +383,64 @@ const publishDate = entry.data.publishDate.toLocaleDateString('en-US', {
     filter: drop-shadow(0px 0px 20px rgba(255, 255, 255, 0.1));
   }
 
-  /* Author Meta Section (Medium-style) - First image in content */
-  .blog-content > :global(p:first-child img) {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    margin: 0 1rem 0 0;
+  /* Author Meta Section (Medium-style) */
+  /* Wrapper for author section - first two elements when first is an image */
+  .blog-content:has(> :global(p:first-child img)) {
+    display: block;
+  }
+
+  /* First paragraph containing author image */
+  .blog-content > :global(p:first-child:has(img)) {
     display: inline-block;
-    vertical-align: middle;
-    filter: drop-shadow(0px 2px 8px rgba(255, 255, 255, 0.2));
+    vertical-align: top;
+    margin: 0 1rem 2.5rem 0;
+    width: auto;
   }
 
-  .blog-content > :global(p:first-child) {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.5rem;
-  }
-
-  /* Author meta blockquote styling */
-  .blog-content > :global(blockquote:first-of-type) {
+  .blog-content > :global(p:first-child:has(img) + blockquote) {
+    display: inline-block;
+    vertical-align: top;
     border: none;
     padding: 0;
     margin: 0 0 2.5rem 0;
     font-style: normal;
-    display: flex;
-    align-items: center;
+    max-width: calc(100% - 72px);
   }
 
-  .blog-content > :global(blockquote:first-of-type p) {
+  .blog-content > :global(p:first-child img) {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
     margin: 0;
-    color: rgba(255, 255, 255, 0.65);
+    display: block;
+    filter: drop-shadow(0px 2px 8px rgba(255, 255, 255, 0.2));
+  }
+
+  .blog-content > :global(p:first-child:has(img) + blockquote p) {
+    margin: 0;
+    padding: 0.5rem 0;
+    color: rgba(255, 255, 255, 0.7);
     font-size: 0.95rem;
   }
 
-  .blog-content > :global(blockquote:first-of-type em) {
+  .blog-content > :global(p:first-child:has(img) + blockquote em) {
+    font-style: normal;
+  }
+
+  /* When blog doesn't have author image, style blockquote normally */
+  .blog-content > :global(blockquote:first-child) {
+    border-left: 4px solid rgba(255, 255, 255, 0.4);
+    padding-left: 1.5rem;
+    margin: 0 0 2.5rem 0;
+    font-style: normal;
+  }
+
+  .blog-content > :global(blockquote:first-child p) {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+  }
+
+  .blog-content > :global(blockquote:first-child em) {
     font-style: normal;
   }
 
