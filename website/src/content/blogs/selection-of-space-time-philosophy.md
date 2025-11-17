@@ -1,15 +1,16 @@
 ---
-title: "A selection of space, time, and philosophy"
+title: 'A selection of space, time, and philosophy'
 publishDate: 2023-01-01
 tags:
-  - "philosophy"
-  - "reflection"
-excerpt: "A sweeping thought experiment on space, dimensions, time, existence, and the questions they raise."
-heroImage: "/assets/images/jack/main.jpg"
+  - 'philosophy'
+  - 'reflection'
+excerpt: 'A sweeping thought experiment on space, dimensions, time, existence, and the questions they raise.'
+heroImage: '/assets/images/jack/main.jpg'
 ---
+
 ![Jack Luo](/assets/images/jack/main.jpg)
 
-> *Jack Luo — 7 minute read*
+> _Jack Luo — 7 minute read_
 
 **Introduction**
 
@@ -46,7 +47,6 @@ we don’t know the true scale of how big the universe is.
 From this, we can infer two possibilities.
 
 1. The universe is finite.
-
 2. The universe is infinite.
 
 **Possibility 1**
