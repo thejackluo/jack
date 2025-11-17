@@ -1,83 +1,72 @@
 ---
-title: "Vify.ai"
-role: "AI Pipeline Engineer"
+title: 'Vify.ai'
+role: 'AI Pipeline Engineer'
 tech:
-  - "Python"
-  - "LangChain"
-  - "OpenAI API"
-  - "Multi-Agent Systems"
-  - "Classification Models"
-summary: "Multi-agent scam detection and remediation tool that uses LLM pipelines to classify fraudulent content and guide users through next steps."
-description: "Built an end-to-end scam detection system that analyzes messages, emails, and websites for fraud indicators, then provides actionable remediation steps—developed in a weekend at Berkeley's AI Hackathon."
+  - 'Python'
+  - 'LangChain'
+  - 'OpenAI API'
+  - 'Multi-Agent Systems'
+  - 'Classification Models'
+summary: 'Multi-agent scam detection and remediation tool that uses LLM pipelines to classify fraudulent content and guide users through next steps.'
+description: "Built an end-to-end scam detection system that analyzes messages, emails, and websites for fraud indicators, then provides actionable remediation steps — developed in a weekend at Berkeley's AI Hackathon."
 startDate: 2024-07-12
 endDate: 2024-07-14
-status: "Completed"
-category: "Security & Safety"
+status: 'Completed'
+category: 'Security & Safety'
 featured: false
 gallery:
-  - src: "/assets/projects/vify.png"
-    alt: "Vify.ai scam detection interface"
+  - src: '/assets/projects/vify.png'
+    alt: 'Vify.ai scam detection interface'
 links:
-  - label: "Devpost"
-    url: "https://devpost.com/software/vify-ai"
+  - label: 'Devpost'
+    url: 'https://devpost.com/software/vify-ai'
 ---
 
-Vify.ai is an AI-powered scam detector built in 48 hours at Berkeley's AI Hackathon. It tackles a real-world problem: **how do you help people who don't know how to spot scams?**
+Vify.ai is an AI-powered scam detector built in 48 hours at UC Berkeley's AI Hackathon (July 2024). It tackles a real problem: many people don't know how to spot sophisticated scams until it's too late, and even if they suspect something, they're unsure what to do next.
 
 ## The Problem
 
-Cyberfraud and scam messages are everywhere—phishing emails, fake investment schemes, romance scams, tech support fraud. Most people don't know what to look for, and by the time they realize something's wrong, it's too late.
+Cyberfraud is everywhere — phishing emails, fake "you owe money" texts, romance scams, crypto schemes, tech support pop-ups. Existing spam filters catch the obvious stuff but often miss well-crafted scams. And importantly, they don't tell victims what to do if they've interacted with a scam.
 
-Security tools exist, but they either:
-- Catch obvious spam but miss sophisticated scams
-- Require technical knowledge to use
-- Don't tell you *what to do next* if you've been scammed
+So we set out to build a tool that not only flags suspicious content, but also acts as a guide if you've been targeted or compromised.
 
 ## How Vify Works
 
-**Multi-Step Detection Pipeline**
-1. **Content Analysis**: User submits suspicious message, email, or website
-2. **Classification**: LLM-based classifier identifies scam indicators (urgency language, credential requests, suspicious links, impersonation patterns)
-3. **Risk Scoring**: Assigns a fraud probability score based on multiple signals
-4. **Explanation**: Shows *why* it's likely a scam in plain language
+**1. Multi-Step Content Analysis**: The user can submit a message, email, or website that seems suspicious. Vify runs it through a pipeline of AI classifiers:
 
-**Actionable Remediation**
-Unlike tools that just say "this is suspicious," Vify tells you **what to do next**:
-- If you gave away credentials: "Change passwords immediately on these sites..."
-- If you sent money: "Contact your bank and file a fraud report..."
-- If you clicked a link: "Run a malware scan and check for these signs..."
-- If it's unclear: "Forward this to these official reporting channels..."
+- A phishing/malware detector (fine-tuned model) looks for known scam patterns (e.g. urgent language, login links).
+- A psychological analysis agent assesses manipulative tactics (does the message pressure, fearmonger, or impersonate authority?).
+- A context reasoning agent uses an LLM (via LangChain) to consider the content holistically — for example, "Does it make sense that the IRS would email from a Gmail address?"
 
-**Multi-Agent Architecture**
-Built using a multi-agent system where different agents specialize in:
-- Text analysis (language patterns, urgency signals)
-- Link analysis (domain reputation, redirect chains)
-- Context reasoning (does this claim make sense?)
-- Action planning (what steps to take based on exposure level)
+Each agent contributes to an overall risk score for the content.
+
+**2. Explanation Generation**: If the content is likely a scam, Vify explains why in plain English. For example: "This email asks for your bank login and creates a false sense of urgency ('immediate action required'), which are strong signs of phishing." The goal is to educate users, not just flag with no context.
+
+**3. Actionable Remediation**: This is where Vify goes beyond a typical filter. Based on what type of scam it is and how far it went, the system provides next steps:
+
+- If you clicked a suspicious link: instructions to run an antivirus scan, check browser extensions, etc.
+- If you gave up personal info: steps to change passwords, contact your bank or credit bureau if needed.
+- If money was sent: advice on contacting the bank or authorities quickly, and resources for reporting the fraud.
+- Always: official resources to learn more or report (like FTC complaint links, etc.).
+
+This advice is generated by another agent in the system, which has knowledge of common mitigation steps and tailors them to the specific situation.
+
+**Multi-Agent Pipeline**: We used LangChain to orchestrate these various agents and tools. One agent does initial classification, another pulls in outside data (like checking if a URL is a known malicious domain), another handles user instructions. They pass messages back and forth (e.g., classification agent signals "phishing likely", the planning agent then says "compose guidance for a phishing scenario").
 
 ## Technical Stack
 
-**LangChain**: Multi-agent orchestration and prompt chaining
-**OpenAI API**: Classification and reasoning
-**Link Analysis**: Domain reputation checks and URL pattern matching
-**Classification Models**: Custom-tuned detectors for common scam categories
-
-## What I Learned
-
-Building Vify taught me how to design **robust safety logic under time pressure**. Scam detection isn't just "run it through a model"—you need:
-- Multi-signal validation (one indicator isn't enough)
-- Explainability (users need to understand *why* something's flagged)
-- Action-oriented output (detection without guidance doesn't help)
-- Edge case handling (false positives erode trust fast)
+- OpenAI API & custom models – for text classification and explanation.
+- LangChain – to manage the multi-step reasoning (classify → explain → advise).
+- HuggingFace & sklearn – a few lightweight models for specific signals (like a model trained on known scam vs. legit emails).
+- Backend – Python (Flask) to tie it together into a simple web app interface for the hackathon demo.
+- Browser automation – for URLs, we integrated a quick tool to fetch the page text and check if it's a known scam site (cross-referencing an open phishing database).
 
 ## Results
 
-Built in 48 hours at Berkeley's AI Hackathon. **Top 15 finish** out of 100+ teams.
+We built Vify.ai in a single weekend and it earned a Top 15 finish (out of 100+ teams) at the Berkeley AI Hackathon. The judges highlighted the importance of combining detection with user education, which was our focus.
 
-Vify demonstrated that agentic workflows can tackle cybersecurity problems in a way that's accessible to non-technical users—turning "is this a scam?" into "here's what you should do."
+While only a prototype, Vify demonstrated that multi-agent LLM systems can tackle cybersecurity tasks in a user-friendly way — turning "Is this a scam?" into "Yes, and here's why. Also, here's exactly what you should do now."
 
 ## Why This Matters
 
-Scam detection isn't sexy AI work, but it's a **real-world problem with real stakes**. People lose money, credentials, and trust because they can't tell what's legitimate.
-
-Vify showed that multi-agent systems can bridge the gap between "technically correct detection" and "actually helpful guidance"—which is the hard part of applied AI.
+Not everyone has IT support or knows a cybersecurity expert. An approachable AI tool like Vify could empower everyday people to navigate a world full of scams. It shows how AI can be applied to digital safety, not just fun or commercial domains, and how explaining & guiding is as important as detecting when it comes to user trust.
