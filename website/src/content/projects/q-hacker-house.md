@@ -8,6 +8,11 @@ tech:
   - "Zapier"
 summary: "Hosted a three-week SF hacker house that paired builders with mentorship, logistics, and shared momentum."
 description: "Coordinated housing, programming, and mentorship for a downtown SF hacker house that incubated new products and helped launch the Prodicity mentorship program."
+startDate: 2023-06-01
+endDate: 2023-08-31
+status: "Completed"
+category: "Community"
+featured: false
 gallery:
   - src: "/assets/projects/hackerhouse.jpg"
     alt: "Group photo from the Q Hacker House rooftop"

@@ -8,6 +8,11 @@ tech:
   - "Google Calendar API"
 summary: "Chrome extension that automates calendar drafting using conversational prompts and personalized heuristics."
 description: "Built an AI copilot for Google Calendar that turns free-form requests into scheduled events, learning from past edits to tailor follow-up suggestions."
+startDate: 2022-03-01
+endDate: 2023-06-30
+status: "Archived"
+category: "Archive"
+featured: false
 gallery:
   - src: "/assets/projects/calendai.png"
     alt: "Calend.ai extension auto-filling a calendar event"

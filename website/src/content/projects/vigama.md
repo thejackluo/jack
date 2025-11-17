@@ -8,6 +8,11 @@ tech:
   - "Speech Recognition"
 summary: "Voice-first productivity assistant that turns spoken intent into scheduled routines and automated follow-up tasks."
 description: "Built an AI-driven productivity companion that captures language via text or speech, generates daily plans, and executes scripted actions on behalf of busy operators."
+startDate: 2023-01-15
+endDate: 2023-08-30
+status: "Archived"
+category: "Archive"
+featured: false
 gallery:
   - src: "/assets/projects/vigama.gif"
     alt: "Vigama automation workflow preview"

@@ -8,6 +8,11 @@ tech:
   - "Translation APIs"
 summary: "Immersive language-learning tool that labels real-world objects through a camera feed and narrates contextual translations."
 description: "Prototyped a computer-vision powered tutor that helps learners associate vocabulary with their environment through live object detection and bilingual narration."
+startDate: 2022-06-01
+endDate: 2023-03-15
+status: "Archived"
+category: "Archive"
+featured: false
 gallery:
   - src: "/assets/projects/linguascan.png"
     alt: "Lingua Scan interface displaying live translations"
