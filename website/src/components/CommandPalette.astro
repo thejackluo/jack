@@ -399,15 +399,15 @@ const searchIndex = [
 
   // Keyboard shortcuts
   document.addEventListener('keydown', (e) => {
-    // Ctrl+K, Cmd+K, or Ctrl+Shift+K to open
-    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+    // Ctrl+K or Cmd+K (without Shift)
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k' && !e.shiftKey) {
       e.preventDefault();
       openCommandPalette();
       return;
     }
 
-    // Alternative: Ctrl+Shift+K
-    if (e.ctrlKey && e.shiftKey && e.key === 'K') {
+    // Alternative: Ctrl+Shift+K or Cmd+Shift+K
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'K') {
       e.preventDefault();
       openCommandPalette();
       return;
