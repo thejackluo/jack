@@ -1,0 +1,296 @@
+---
+import BaseLayout from '../layouts/Base.astro';
+---
+
+<BaseLayout
+  title="Journey - Jack Luo"
+  description="A place to showcase achievements, journey throughout different fields, and creative works."
+  currentPage="journey"
+>
+  <!-- Journey Landing Section -->
+  <div slot="hero" class="landing-main container-fluid">
+    <div class="row landing-row journey-container">
+      <h3>Projects</h3>
+      <p style="text-align: center; color: rgba(255, 255, 255, 0.8); font-style: italic; margin-bottom: 2rem;">
+        <a href="/projects" style="color: rgba(255, 255, 255, 0.9); text-decoration: underline;">
+          Projects have been moved to a new dedicated page →
+        </a>
+        <br/>
+        <span style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.6);">Updated November 2025</span>
+      </p>
+      <!-- Hidden project cards section (preserved from original) -->
+      <div class="row" style="display: none;">
+        <div class="col-sm-12 col-md-6 col-4-lg">
+          <div class="project-card">
+            <h3 class="project-header">Calend.ai - AI scheduler</h3>
+            <img
+              src="/assets/images/projects/calendai.png"
+              class="project-image"
+              alt="Calend.ai project"
+            />
+            <p>
+              <a href="https://bit.ly/calendai" class="a-underline"
+                >Calend.ai</a
+              > is a chrome extension that leverages modern nlp
+              techniques and prompt engineering to automatically
+              schedule and manage events within a user's google
+              calendar. It learns behaviors of user scheduled events and
+              provides personalized descriptions.
+            </p>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-4-lg">
+          <div class="project-card">
+            <h3 class="project-header">
+              Vigama - Automation assistant
+            </h3>
+            <img
+              src="/assets/images/projects/vigama.gif"
+              class="project-image"
+              alt="Vigama project"
+            />
+            <p>
+              <a href="https://vigama.tech" class="a-underline"
+                >Vigama</a
+              >
+              is an AI-driven productivity app that automates low level
+              tasks and generates schedule based on user preferences.
+              Vigama captures language either through text or speech
+              from the user and outputs both text/speech and executes
+              commands.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="display: none;">
+        <div class="col-sm-12 col-md-6 col-4-lg">
+          <div class="project-card">
+            <h3 class="project-header">
+              Lingua Scan - Computer Vision
+            </h3>
+            <img
+              src="/assets/images/projects/linguascan.png"
+              class="project-image"
+              alt="Lingua Scan project"
+            />
+            <p>
+              Developed
+              <a
+                href="https://github.com/thejackluo/lingua-scan"
+                class="a-underline"
+                >Lingua Scan</a
+              >, an innovative, immersive language learning platform
+              that leverages computer vision to enable dynamic and
+              nuanced language learning, bringing the power of
+              category-based learning, real-time object scanning and
+              translation.
+            </p>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-4-lg">
+          <div class="project-card">
+            <h3 class="project-header">Q Hacker House</h3>
+            <img
+              src="/assets/images/projects/hackerhouse.jpg"
+              class="project-image"
+              alt="Q Hacker House project"
+            />
+            <p>
+              In 2023 summer, hosted a hacker house in downtown SF for 10
+              people to build startups, do research, and learn from
+              others. Help coordinated logistics for the house while
+              created
+              <a href="https://prodicity.org" class="a-underline"
+                >Prodicity</a
+              >
+              - AI mentorship for 20+ high school students.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Creative Section -->
+  <section id="creative">
+    <div class="creative-container container-fluid">
+      <div class="landing-main container-fluid">
+        <div class="landing-row row">
+          <h3>Creative</h3>
+          <p>
+            From July 23 and onwards, I started writing a book about a guy
+            stuck in a limbinal space. In 'Limbinal,' I created a world
+            where reality blurs, and boundaries between dreams and waking
+            life become indistinguishable. I explore things like identity,
+            the pursuit of meaning and "robotic racism". Feel free to read a
+            sample
+            <a class="a-underline" href="/assets/pdf/limbinal-v12.03.23.pdf">here</a>
+            and let me know
+            <a href="https://instagram.com/thejackluo">here</a> any
+            feedbacks and questions about the book (bonus points if you know
+            publishers).
+            <br />
+            <br />
+
+            <b>I am currently reading</b>: the third door by Alex Banayan
+            <br />
+            <b>Past Reads</b>: Three Body Problem, Sapiens: A brief history of humankind, 
+            The Third Door, Zero to One, How to Win Friends and Influence
+            People, Where you go is not who you will be, The Future is
+            Faster than you think, Subtle art of not giving a f*ck, The
+            Unfair Advantage
+          </p>
+          <p>
+            I made music since 10th grade. Most pieces are experimental, but
+            I'd recommend you check out a few highlights here:
+            <a
+              class="a-underline"
+              href="https://soundcloud.com/thejackluo/intersection"
+              >intersection</a
+            >,
+            <a
+              class="a-underline"
+              href="https://soundcloud.com/thejackluo/memories-v2"
+              >memory v2</a
+            >,
+            <a
+              class="a-underline"
+              href="https://soundcloud.com/thejackluo/007-mirrox"
+              >007 - mirrox</a
+            >
+            <br />
+
+            To see all the music I spew on the Internet, explore my
+            soundcloud
+            <a class="a-underline" href="https://soundcloud.com/thejackluo"
+              >here</a
+            >
+            <br />
+            <br />
+            If you want some music recommendations,
+            <a
+              class="a-underline"
+              href="https://youtube.com/playlist?list=PLrrS4ML6IeMKzkGx_6o-33lMyNtH6xBdq"
+              >here</a
+            >
+            is my work playlist.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="creative-angular-filter full">
+      <div class="creative-city full"></div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Import journey-specific CSS files */
+  @import url('/src/css/journey.css');
+  @import url('/src/css/creative.css');
+
+  /* Override landing section height like other pages */
+  :global(#landing) {
+    height: auto !important;
+    min-height: auto !important;
+  }
+
+  :global(.landing-container) {
+    height: auto !important;
+    position: relative !important;
+  }
+
+  /* Prevent horizontal scrolling globally */
+  :global(html),
+  :global(body),
+  :global(#fullpage) {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  /* Ensure all containers respect viewport width */
+  :global(.container-fluid) {
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Fix journey container to prevent overflow */
+  .journey-container {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  /* Ensure rows don't overflow */
+  :global(.row) {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100%;
+  }
+
+  /* Fix project cards to prevent horizontal overflow */
+  .project-card {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .project-image {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Creative section - ensure no overflow */
+  #creative {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  .creative-container {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .journey-container {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+
+    :global(.landing-row) {
+      margin: 1rem 0.5rem;
+    }
+
+    .project-card {
+      margin: 0.5em 0;
+      padding: 1em;
+    }
+
+    .creative-container {
+      margin: 1em;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .journey-container {
+      padding-left: 0.25rem;
+      padding-right: 0.25rem;
+    }
+
+    :global(.nav-container) {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    :global(.nav-item) {
+      padding: 0 0.5em;
+    }
+  }
+</style>
+
