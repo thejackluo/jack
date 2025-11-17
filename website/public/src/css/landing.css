@@ -3,40 +3,165 @@
   Description: index.html Landing page css and supplement for other pages
 */
 
-/* 
+/*
   ========================
   Nav Bar
-  ========================  
+  ========================
 */
-
-/* Create a parent container nav with two containers with the nav-logo being smaller at 20% and nav-container at 80%, 
-  have the nav-item in nav-container be a flexbox model that has all the items to the right
-  Have the whole nav bar has a padding of 1em and a height of 15%
-  */
 
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2em;
-  height: 15vh;
+  padding: 1.5em;
+  height: auto;
+  min-height: 10vh;
+  position: relative;
+  z-index: 100;
 }
 
 .nav-container {
-  display: flex;
+  display: none;
   justify-content: flex-end;
   align-items: center;
 }
 
 .nav-logo {
-  padding: 0 1em;
+  padding: 0 0.5em;
   text-shadow: 4px 4px 10px rgba(255, 255, 255, 0.25);
-  /* margin: auto; */
-  /* display: none; */
+  z-index: 101;
 }
 
 .nav-item {
-  padding: 0 1em;
+  padding: 0 0.5em;
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 25px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 101;
+  position: relative;
+}
+
+.hamburger span {
+  width: 30px;
+  height: 3px;
+  background: white;
+  border-radius: 10px;
+  transition: all 0.3s linear;
+  position: relative;
+  transform-origin: center;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(7px, 7px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Mobile Nav Overlay */
+.mobile-nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-nav-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.mobile-nav-menu {
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  box-shadow: inset 0px 5px 10px -5px #ffffff,
+    inset 0px 98px 100px rgba(255, 255, 255, 0.1),
+    inset 0px 0px 40px rgba(255, 255, 255, 0.1),
+    0px 10px 40px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 2em;
+  padding: 3em 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  min-width: 280px;
+  transform: scale(0.8);
+  transition: transform 0.3s ease;
+}
+
+.mobile-nav-overlay.active .mobile-nav-menu {
+  transform: scale(1);
+}
+
+.mobile-nav-item {
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.mobile-nav-overlay.active .mobile-nav-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mobile-nav-overlay.active .mobile-nav-item:nth-child(1) {
+  transition-delay: 0.1s;
+}
+
+.mobile-nav-overlay.active .mobile-nav-item:nth-child(2) {
+  transition-delay: 0.2s;
+}
+
+.mobile-nav-overlay.active .mobile-nav-item:nth-child(3) {
+  transition-delay: 0.3s;
+}
+
+.mobile-nav-item a {
+  font-size: 2em;
+  font-family: "Dual-300";
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 0.5em;
+  transition: all 0.3s ease;
+}
+
+.mobile-nav-item a:hover {
+  text-shadow: 0px 0px 20px rgba(255, 255, 255, 1);
+  transform: scale(1.1);
 }
 
 /* 
@@ -128,7 +253,25 @@ nav {
   }
 
   .nav-item {
-    padding: 0 2em;
+    padding: 0 1em;
+  }
+
+  /* Show desktop nav, hide hamburger on tablets and up */
+  .hamburger {
+    display: none;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .nav-container {
+    display: flex;
+  }
+
+  nav {
+    padding: 2em;
+    height: 15vh;
   }
 }
 
@@ -137,6 +280,10 @@ nav {
   #landing .landing-image {
     width: 20%;
     height: 20%;
+  }
+
+  .nav-item {
+    padding: 0 2em;
   }
 }
 
