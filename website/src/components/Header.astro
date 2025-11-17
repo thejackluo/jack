@@ -23,8 +23,27 @@ const navLinks = [
             </div>
           ))}
         </div>
+        <button class="hamburger" aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </nav>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay">
+      <div class="mobile-nav-menu">
+        <div class="mobile-nav-item">
+          <a href="/">Home</a>
+        </div>
+        {navLinks.map((link) => (
+          <div class="mobile-nav-item">
+            <a href={link.href}>{link.label}</a>
+          </div>
+        ))}
+      </div>
+    </div>
 
     <slot />
   </div>
