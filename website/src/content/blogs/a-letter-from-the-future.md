@@ -6,8 +6,9 @@ tags:
   - personal
   - vision
 excerpt: "Future Jack writes to present Jack about seven lifetimes of projects, emotion‑capable robots, quantum moral algorithms and the importance of purpose."
-heroImage: ""
+heroImage: "/assets/images/jack/main.jpg"
 ---
+![Jack Luo](/assets/images/jack/main.jpg)
 
 > *Jack Luo — 2 minute read*
 

@@ -5,8 +5,9 @@ tags:
   - philosophy
   - reflection
 excerpt: "A pragmatic synthesis: why Laplace's demon doesn't matter, how unpredictability arises from limited information and how meaningful choice emerges from framing and endorsement."
-heroImage: ""
+heroImage: "/assets/images/jack/main.jpg"
 ---
+![Jack Luo](/assets/images/jack/main.jpg)
 
 > *Jack Luo — 4 minute read*
 

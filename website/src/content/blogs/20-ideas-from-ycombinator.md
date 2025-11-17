@@ -5,8 +5,9 @@ tags:
   - startups
   - reflection
 excerpt: "Twenty concise lessons drawn from YC's startup wisdom: team over idea, embrace pivots, recruit well, and focus on shipping, customers and culture."
-heroImage: ""
+heroImage: "/assets/images/jack/main.jpg"
 ---
+![Jack Luo](/assets/images/jack/main.jpg)
 
 > *Jack Luo — 2 minute read*
 

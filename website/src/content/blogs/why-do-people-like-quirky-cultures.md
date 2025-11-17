@@ -5,8 +5,9 @@ tags:
   - community
   - reflection
 excerpt: "A look at why unconventional communities like hacker houses and East Campus feel like home, the psychology behind self‑selection and the risks of staying too long."
-heroImage: ""
+heroImage: "/assets/images/jack/main.jpg"
 ---
+![Jack Luo](/assets/images/jack/main.jpg)
 
 > *Jack Luo — 6 minute read*
 

@@ -5,8 +5,9 @@ tags:
   - personal
   - vision
 excerpt: "Exploring nine archetypal lives — creator, voyager, AI architect, world‑builder, servant and more — and challenging myself to inhabit them instead of dreaming about them."
-heroImage: ""
+heroImage: "/assets/images/jack/main.jpg"
 ---
+![Jack Luo](/assets/images/jack/main.jpg)
 
 > *Jack Luo — 4 minute read*
 

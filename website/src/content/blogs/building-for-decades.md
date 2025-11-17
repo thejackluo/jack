@@ -5,8 +5,9 @@ tags:
   - startups
   - vision
 excerpt: "How to future‑proof a company: hire for compounders, aim for orders of magnitude improvements and let product brilliance be the marketing."
-heroImage: ""
+heroImage: "/assets/images/jack/main.jpg"
 ---
+![Jack Luo](/assets/images/jack/main.jpg)
 
 > *Jack Luo — 4 minute read*
 

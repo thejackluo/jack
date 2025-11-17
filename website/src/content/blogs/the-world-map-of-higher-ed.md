@@ -5,8 +5,9 @@ tags:
   - education
   - startups
 excerpt: "Universities behave like nations, with endowments as dragon hoards and prestige as currency; smaller institutions can still outperform by focusing on what they do best."
-heroImage: ""
+heroImage: "/assets/images/jack/main.jpg"
 ---
+![Jack Luo](/assets/images/jack/main.jpg)
 
 > *Jack Luo — 6 minute read*
 

@@ -5,8 +5,9 @@ tags:
   - reflection
   - personal
 excerpt: "A series of vivid dreams becomes a personal operating manual: step in earlier, choose nourishment over sparks and model the pause you want others to take."
-heroImage: ""
+heroImage: "/assets/images/jack/main.jpg"
 ---
+![Jack Luo](/assets/images/jack/main.jpg)
 
 > *Jack Luo — 7 minute read*
 
