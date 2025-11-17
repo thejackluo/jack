@@ -533,6 +533,11 @@ const publishDate = entry.data.publishDate.toLocaleDateString('en-US', {
 
   /* Responsive Design */
   @media (max-width: 768px) {
+    /* Ensure mobile menu is visible on blog post pages */
+    :global(.mobile-nav-menu) {
+      z-index: 1000;
+    }
+
     #blog-post-section {
       padding: 2rem 0 4rem 0;
     }
