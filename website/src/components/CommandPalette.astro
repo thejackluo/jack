@@ -1,0 +1,581 @@
+---
+// Command Palette Component
+// Provides quick search/navigation with Ctrl+K
+import { getCollection } from 'astro:content';
+
+// Fetch all content for search index
+const blogs = await getCollection('blogs');
+const projects = await getCollection('projects');
+
+// Build search index
+const searchIndex = [
+  // Static pages
+  {
+    type: 'page',
+    title: 'Home',
+    url: '/',
+    excerpt: 'Jack Luo - Personal website and portfolio',
+  },
+  {
+    type: 'page',
+    title: 'Journey',
+    url: '/journey.html',
+    excerpt: 'My journey and experiences',
+  },
+  {
+    type: 'page',
+    title: 'Writing',
+    url: '/writing/',
+    excerpt: 'Blog posts and essays',
+  },
+  {
+    type: 'page',
+    title: 'Resume',
+    url: '/resume.html',
+    excerpt: 'Professional resume and experience',
+  },
+  // Blogs
+  ...blogs.map(blog => ({
+    type: 'blog',
+    title: blog.data.title,
+    url: `/writing/${blog.slug}/`,
+    excerpt: blog.data.excerpt,
+    tags: blog.data.tags,
+  })),
+  // Projects
+  ...projects.map(project => ({
+    type: 'project',
+    title: project.data.title,
+    url: '/#about',
+    excerpt: project.data.summary,
+    tags: project.data.tech,
+  })),
+];
+---
+
+<div id="command-palette" class="command-palette" aria-hidden="true">
+  <div class="command-palette-backdrop"></div>
+  <div class="command-palette-modal" role="dialog" aria-modal="true" aria-labelledby="command-palette-title">
+    <div class="command-palette-header">
+      <input
+        type="text"
+        id="command-palette-input"
+        class="command-palette-input"
+        placeholder="Search pages, blogs, projects..."
+        autocomplete="off"
+        spellcheck="false"
+        aria-label="Command palette search"
+      />
+      <kbd class="command-palette-kbd">ESC</kbd>
+    </div>
+    <div class="command-palette-results" id="command-palette-results">
+      <div class="command-palette-empty">Type to search...</div>
+    </div>
+  </div>
+</div>
+
+<!-- Notification popup -->
+<div id="command-palette-notification" class="command-palette-notification" aria-hidden="true">
+  <div class="command-palette-notification-content">
+    <span class="command-palette-notification-text">
+      Press <kbd class="command-palette-notification-kbd">Ctrl</kbd> + <kbd class="command-palette-notification-kbd">K</kbd> to search
+    </span>
+    <button class="command-palette-notification-close" aria-label="Close notification">✕</button>
+  </div>
+</div>
+
+<!-- Mobile Floating Action Button -->
+<button id="command-palette-fab" class="command-palette-fab" aria-label="Open search">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+  </svg>
+</button>
+
+<style>
+  :global(.command-palette) {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+  }
+
+  :global(.command-palette[aria-hidden="false"]) {
+    display: block;
+  }
+
+  :global(.command-palette-backdrop) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    animation: fadeIn 0.2s ease-out;
+  }
+
+  :global(.command-palette-modal) {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 600px;
+    background: rgba(0, 8, 30, 0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 17, 49, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    animation: slideIn 0.2s ease-out;
+  }
+
+  :global(.command-palette-header) {
+    display: flex;
+    align-items: center;
+    padding: 18px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    gap: 16px;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  :global(.command-palette-input) {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    font-family: "Stellar", "Century Gothic", sans-serif;
+    background: transparent;
+    color: white;
+    line-height: 1.5;
+  }
+
+  :global(.command-palette-input::placeholder) {
+    color: #666666;
+  }
+
+  :global(.command-palette-kbd) {
+    padding: 3px 7px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    font-size: 11px;
+    font-family: monospace;
+    color: #999999;
+    background: rgba(0, 0, 0, 0.4);
+    flex-shrink: 0;
+  }
+
+  :global(.command-palette-results) {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  :global(.command-palette-empty) {
+    padding: 32px 16px;
+    text-align: center;
+    color: #666666;
+    font-size: 14px;
+    font-family: "Stellar", "Century Gothic", sans-serif;
+  }
+
+  :global(.command-palette-item) {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 12px 24px;
+    padding-left: 28px;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: 2px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    background: transparent;
+    border-left: 4px solid transparent;
+  }
+
+  :global(.command-palette-item:hover) {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-left-color: rgba(138, 180, 248, 1) !important;
+    padding-left: 24px !important;
+    transform: translateX(2px);
+  }
+
+  :global(.command-palette-item.selected) {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-left-color: rgba(138, 180, 248, 1) !important;
+    padding-left: 24px !important;
+  }
+
+  :global(.command-palette-item-content) {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  :global(.command-palette-item-text) {
+    font-size: 1rem;
+    font-weight: 400;
+    font-family: "Stellar", "Century Gothic", sans-serif;
+    color: rgba(255, 255, 255, 0.95) !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    transition: color 0.2s ease;
+    line-height: 1.5;
+  }
+
+  :global(.command-palette-item:hover .command-palette-item-text) {
+    color: rgba(255, 255, 255, 1) !important;
+  }
+
+  :global(.command-palette-item.selected .command-palette-item-text) {
+    color: rgba(255, 255, 255, 1) !important;
+  }
+
+  /* Mobile Floating Action Button */
+  :global(.command-palette-fab) {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(138, 180, 248, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    border: none;
+    cursor: pointer;
+    z-index: 9998;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+  }
+
+  :global(.command-palette-fab:active) {
+    transform: scale(0.95);
+  }
+
+  :global(.command-palette-fab svg) {
+    width: 24px;
+    height: 24px;
+    color: white;
+  }
+
+  @media (max-width: 768px) {
+    :global(.command-palette-fab) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  /* Notification styles */
+  :global(.command-palette-notification) {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10000;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease-out;
+    pointer-events: none;
+  }
+
+  :global(.command-palette-notification[aria-hidden="false"]) {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  :global(.command-palette-notification-content) {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: rgba(0, 8, 30, 0.9);
+    backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 17, 49, 0.6);
+  }
+
+  :global(.command-palette-notification-text) {
+    font-family: "Stellar", "Century Gothic", sans-serif;
+    font-size: 14px;
+    color: white;
+  }
+
+  :global(.command-palette-notification-kbd) {
+    padding: 2px 6px;
+    border: 1px solid #333333;
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: monospace;
+    color: #ffffff;
+    background: #111111;
+  }
+
+  :global(.command-palette-notification-close) {
+    background: transparent;
+    border: none;
+    color: #999999;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+  }
+
+  :global(.command-palette-notification-close:hover) {
+    color: white;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<script is:inline define:vars={{ searchIndex }}>
+  // Command Palette Logic
+  const commandPalette = document.getElementById('command-palette');
+  const input = document.getElementById('command-palette-input');
+  const results = document.getElementById('command-palette-results');
+  const notification = document.getElementById('command-palette-notification');
+  const notificationClose = document.querySelector('.command-palette-notification-close');
+  const fab = document.getElementById('command-palette-fab');
+
+  let selectedIndex = 0;
+  let searchResults = [];
+
+  // Search index is passed from Astro component
+  // searchIndex variable is available here
+
+  // Show notification on first visit
+  function showNotification() {
+    try {
+      const hasSeenNotification = localStorage.getItem('command-palette-notification-seen');
+
+      if (!hasSeenNotification) {
+        setTimeout(() => {
+          if (notification) {
+            notification.setAttribute('aria-hidden', 'false');
+
+            // Auto-hide after 8 seconds
+            setTimeout(() => {
+              hideNotification();
+            }, 8000);
+          }
+        }, 2000); // Show after 2 seconds of page load
+      }
+    } catch (e) {
+      // LocalStorage might not be available
+      console.log('localStorage not available');
+    }
+  }
+
+  function hideNotification() {
+    try {
+      if (notification) {
+        notification.setAttribute('aria-hidden', 'true');
+        localStorage.setItem('command-palette-notification-seen', 'true');
+      }
+    } catch (e) {
+      console.log('Could not save to localStorage');
+    }
+  }
+
+  // Close notification on click
+  if (notificationClose) {
+    notificationClose.addEventListener('click', hideNotification);
+  }
+
+  // Mobile FAB button click
+  if (fab) {
+    fab.addEventListener('click', () => {
+      openCommandPalette();
+    });
+  }
+
+  // Show notification when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', showNotification);
+  } else {
+    showNotification();
+  }
+
+  // Open/Close functions
+  function openCommandPalette() {
+    if (!commandPalette) return;
+    commandPalette.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    input?.focus();
+    selectedIndex = 0;
+  }
+
+  function closeCommandPalette() {
+    if (!commandPalette) return;
+    commandPalette.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (input) input.value = '';
+    searchResults = [];
+    renderResults([]);
+  }
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', (e) => {
+    // Ctrl+K or Cmd+K (without Shift)
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k' && !e.shiftKey) {
+      e.preventDefault();
+      openCommandPalette();
+      return;
+    }
+
+    // Alternative: Ctrl+Shift+K or Cmd+Shift+K
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'K') {
+      e.preventDefault();
+      openCommandPalette();
+      return;
+    }
+
+    // Only handle these if palette is open
+    const isOpen = commandPalette?.getAttribute('aria-hidden') === 'false';
+    if (!isOpen) return;
+
+    // ESC to close
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closeCommandPalette();
+      return;
+    }
+
+    // Arrow navigation
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      selectedIndex = Math.min(selectedIndex + 1, searchResults.length - 1);
+      updateSelection();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      selectedIndex = Math.max(selectedIndex - 1, 0);
+      updateSelection();
+    }
+
+    // Enter to navigate
+    if (e.key === 'Enter' && searchResults[selectedIndex]) {
+      e.preventDefault();
+      window.location.href = searchResults[selectedIndex].url;
+    }
+  });
+
+  // Click backdrop to close
+  commandPalette?.querySelector('.command-palette-backdrop')?.addEventListener('click', closeCommandPalette);
+
+  // Search functionality
+  input?.addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase().trim();
+
+    if (!query) {
+      searchResults = [];
+      renderResults([]);
+      return;
+    }
+
+    // Simple fuzzy search
+    searchResults = searchIndex
+      .map((item) => {
+        const titleMatch = item.title.toLowerCase().includes(query);
+        const excerptMatch = item.excerpt?.toLowerCase().includes(query);
+        const tagsMatch = item.tags?.some((tag) => tag.toLowerCase().includes(query));
+
+        let score = 0;
+        if (titleMatch) score += 10;
+        if (excerptMatch) score += 5;
+        if (tagsMatch) score += 3;
+
+        return { ...item, score };
+      })
+      .filter((item) => item.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 8);
+
+    selectedIndex = 0;
+    renderResults(searchResults);
+  });
+
+  // Render search results
+  function renderResults(items) {
+    if (!results) return;
+
+    if (items.length === 0) {
+      results.innerHTML = '<div class="command-palette-empty">No results found</div>';
+      return;
+    }
+
+    results.innerHTML = items
+      .map((item, index) => {
+        return `
+          <div class="command-palette-item ${index === selectedIndex ? 'selected' : ''}" data-index="${index}">
+            <div class="command-palette-item-content">
+              <span class="command-palette-item-text">${item.type} / ${item.title}</span>
+            </div>
+          </div>
+        `;
+      })
+      .join('');
+
+    // Add click handlers
+    results.querySelectorAll('.command-palette-item').forEach((el) => {
+      el.addEventListener('click', () => {
+        const index = parseInt(el.getAttribute('data-index') || '0');
+        window.location.href = searchResults[index].url;
+      });
+    });
+  }
+
+  function updateSelection() {
+    const items = results?.querySelectorAll('.command-palette-item');
+    items?.forEach((item, index) => {
+      if (index === selectedIndex) {
+        item.classList.add('selected');
+        item.scrollIntoView({ block: 'nearest' });
+      } else {
+        item.classList.remove('selected');
+      }
+    });
+  }
+</script>
