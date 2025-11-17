@@ -1,0 +1,14 @@
+{
+  "title": "The Three-Body Problem",
+  "author": "Liu Cixin",
+  "category": "SciFi",
+  "progress": 100,
+  "score": 5,
+  "pageCount": 400,
+  "color": "#234e52",
+  "gradient": {
+    "start": "#234e52",
+    "end": "#38b2ac"
+  }
+}
+

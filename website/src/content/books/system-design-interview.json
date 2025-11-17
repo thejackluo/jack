@@ -1,0 +1,14 @@
+{
+  "title": "System Design Interview",
+  "author": "Alex Xu",
+  "category": "Technical",
+  "progress": 30,
+  "score": 4,
+  "pageCount": 320,
+  "color": "#2c5282",
+  "gradient": {
+    "start": "#2c5282",
+    "end": "#4299e1"
+  }
+}
+
