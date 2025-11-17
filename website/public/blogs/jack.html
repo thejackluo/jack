@@ -85,6 +85,7 @@
         margin: 2em 0;
         opacity: 0.7;
         color: white;
+        font-style: italic;
       }
     </style>
   </head>
@@ -128,7 +129,7 @@
 
               <!-- Main Content - All FAQ -->
               <div>
-                <p class="faq-limit-note"><i>Click questions to reveal answers. Limit: 10 questions.</i></p>
+                <p class="faq-limit-note">Click questions to reveal answers. Limit: 10 questions.</p>
 
                 <!-- FAQ Items -->
                 <div class="faq-item">
@@ -537,12 +538,20 @@
       (function() {
         const MAX_CLICKS = 10;
         const STORAGE_KEY = 'faq_limit';
+        const CLICKS_KEY = 'faq_total_clicks';
 
         let remaining = localStorage.getItem(STORAGE_KEY);
         if (remaining === null) {
           remaining = MAX_CLICKS;
         } else {
           remaining = parseInt(remaining, 10);
+        }
+
+        let totalClicks = localStorage.getItem(CLICKS_KEY);
+        if (totalClicks === null) {
+          totalClicks = 0;
+        } else {
+          totalClicks = parseInt(totalClicks, 10);
         }
 
         const questions = document.querySelectorAll('.faq-question');
@@ -554,6 +563,13 @@
             const isActive = answer.classList.contains('active');
 
             if (!isActive) {
+              totalClicks++;
+              localStorage.setItem(CLICKS_KEY, totalClicks);
+
+              if (totalClicks === 3) {
+                alert('Hint: You can only open 10 questions total. Choose wisely!');
+              }
+
               if (remaining <= 0) {
                 alert('You hit the limit. Try playing with the console if you want more.');
                 return;
