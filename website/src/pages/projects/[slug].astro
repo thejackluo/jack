@@ -20,16 +20,25 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 
 // Format dates with validation
-const startDateObj = entry.data.startDate ? new Date(entry.data.startDate) : null;
-const startDate = startDateObj && !isNaN(startDateObj.getTime())
+const parseDate = (dateValue: any) => {
+  if (!dateValue) return null;
+  // If already a Date object
+  if (dateValue instanceof Date) return dateValue;
+  // Otherwise try to parse it
+  const parsed = new Date(dateValue);
+  return !isNaN(parsed.getTime()) ? parsed : null;
+};
+
+const startDateObj = parseDate(entry.data.startDate);
+const startDate = startDateObj
   ? startDateObj.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
     })
   : 'Unknown';
 
-const endDateObj = entry.data.endDate ? new Date(entry.data.endDate) : null;
-const endDate = endDateObj && !isNaN(endDateObj.getTime())
+const endDateObj = parseDate(entry.data.endDate);
+const endDate = endDateObj
   ? endDateObj.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
@@ -332,7 +341,7 @@ const duration = `${startDate} - ${endDate}`;
   .project-tech {
     display: flex;
     flex-wrap: wrap;
-    margin: 2rem 0 1.5rem 0;
+    margin: 1.25rem 0 1.25rem 0;
   }
 
   .tech-tag {
@@ -357,7 +366,7 @@ const duration = `${startDate} - ${endDate}`;
   .project-links {
     display: flex;
     flex-wrap: wrap;
-    margin: 2.5rem 0 2rem 0;
+    margin: 1.25rem 0 1.25rem 0;
   }
 
   .project-link-button {
@@ -403,7 +412,7 @@ const duration = `${startDate} - ${endDate}`;
   /* Project Gallery */
   .project-gallery {
     max-width: 900px;
-    margin: 0 auto 3rem auto;
+    margin: 0 auto 1.5rem auto;
     padding: 0 1rem;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
