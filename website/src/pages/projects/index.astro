@@ -70,9 +70,11 @@ const minorProjects = processedProjects.filter(p => !majorProjectSlugs.includes(
                       {project.data.featured && (
                         <span class="badge-featured">Featured</span>
                       )}
-                      <span class={`badge-status status-${project.data.status.toLowerCase()}`}>
-                        {project.data.status}
-                      </span>
+                      {project.data.status && (
+                        <span class={`badge-status status-${project.data.status.toLowerCase()}`}>
+                          {project.data.status}
+                        </span>
+                      )}
                     </div>
                   </div>
 

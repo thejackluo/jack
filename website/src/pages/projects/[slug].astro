@@ -60,9 +60,11 @@ const duration = `${startDate} - ${endDate}`;
                 {entry.data.featured && (
                   <span class="badge-featured">Featured</span>
                 )}
-                <span class={`badge-status status-${entry.data.status.toLowerCase()}`}>
-                  {entry.data.status}
-                </span>
+                {entry.data.status && (
+                  <span class={`badge-status status-${entry.data.status.toLowerCase()}`}>
+                    {entry.data.status}
+                  </span>
+                )}
               </div>
             </div>
 
