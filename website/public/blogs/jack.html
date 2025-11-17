@@ -84,6 +84,7 @@
       .faq-limit-note {
         margin: 2em 0;
         opacity: 0.7;
+        color: white;
       }
     </style>
   </head>
@@ -554,6 +555,7 @@
 
             if (!isActive) {
               if (remaining <= 0) {
+                alert('You hit the limit. Try playing with the console if you want more.');
                 return;
               }
               answer.classList.add('active');
