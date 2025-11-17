@@ -1,0 +1,172 @@
+---
+import BaseLayout from '../layouts/Base.astro';
+---
+
+<BaseLayout currentPage="projects" title="Projects | Jack Luo" description="Explore my portfolio of projects">
+  <section id="projects" class="projects-section">
+    <div class="container-fluid">
+      <div class="os-window">
+        <div class="os-window-header">
+          <div class="os-window-controls">
+            <div class="os-window-control close"></div>
+            <div class="os-window-control minimize"></div>
+            <div class="os-window-control maximize"></div>
+          </div>
+          <div class="os-window-title">Projects</div>
+        </div>
+
+        <div class="projects-content">
+          <h1 class="projects-title">My Projects</h1>
+          <p class="projects-subtitle">
+            Building innovative solutions and exploring new technologies
+          </p>
+
+          <div class="projects-grid">
+            <!-- Project cards will go here -->
+            <div class="os-card project-card">
+              <h3>MAGK</h3>
+              <p>Next generation productivity software</p>
+              <a href="https://magk.app" class="project-link">Learn more →</a>
+            </div>
+
+            <div class="os-card project-card">
+              <h3>Delight</h3>
+              <p>Creating next generation productivity software</p>
+              <a href="https://github.com/magk-app/delight" class="project-link">View on GitHub →</a>
+            </div>
+
+            <div class="os-card project-card">
+              <h3>ArkOS</h3>
+              <p>Agentic architecture at MIT SIPB Arc Project</p>
+              <a href="https://github.com/SGIARK/arkos" class="project-link">View on GitHub →</a>
+            </div>
+          </div>
+
+          <div class="projects-cta">
+            <p>More projects coming soon...</p>
+            <a href="/journey.html" class="cta-link">
+              See my journey →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .projects-section {
+    min-height: 100vh;
+    padding: 6rem 2rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .projects-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .projects-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.7) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .projects-subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 3rem;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .project-card {
+    padding: 2rem;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .project-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .project-card p {
+    flex: 1;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+  }
+
+  .project-link {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+  }
+
+  .project-link:hover {
+    color: rgba(255, 255, 255, 1);
+    transform: translateX(0.25rem);
+  }
+
+  .projects-cta {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .projects-cta p {
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .cta-link {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.125rem;
+    transition: all 0.2s ease;
+  }
+
+  .cta-link:hover {
+    color: rgba(255, 255, 255, 1);
+  }
+
+  @media (max-width: 768px) {
+    .projects-section {
+      padding: 4rem 1rem 3rem;
+    }
+
+    .projects-title {
+      font-size: 2rem;
+    }
+
+    .projects-subtitle {
+      font-size: 1rem;
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+</style>

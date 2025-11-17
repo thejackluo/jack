@@ -1,0 +1,230 @@
+/*
+  Name: page-transitions.css
+  Description: OS-like page transitions with directional sliding
+*/
+
+/* Page Transition Container */
+.page-container {
+  animation: slideIn var(--slide-direction, 'none') 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* Slide from Right (going forward: Home -> Journey -> Writing -> Projects) */
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(100vw);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Slide from Left (going backward: Projects -> Writing -> Journey -> Home) */
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100vw);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Slide from Bottom (going down: navigation sections) */
+@keyframes slideInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(50vh);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide from Top (going up: back to top) */
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-50vh);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Default: Fade In */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Apply transition based on data attribute */
+.page-container[data-transition="slide-right"] {
+  animation: slideInFromRight 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.page-container[data-transition="slide-left"] {
+  animation: slideInFromLeft 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.page-container[data-transition="slide-up"] {
+  animation: slideInFromTop 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.page-container[data-transition="slide-down"] {
+  animation: slideInFromBottom 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.page-container[data-transition="fade"] {
+  animation: fadeIn 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* Window-like styling for sections */
+.os-window {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px) saturate(150%);
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 1200px;
+  transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.os-window:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 12px 48px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+/* Window header with close/minimize/maximize buttons */
+.os-window-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.os-window-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.os-window-control {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.os-window-control.close {
+  background: linear-gradient(135deg, #ff5f57 0%, #ff3b30 100%);
+}
+
+.os-window-control.minimize {
+  background: linear-gradient(135deg, #ffbd2e 0%, #ffa500 100%);
+}
+
+.os-window-control.maximize {
+  background: linear-gradient(135deg, #28cd41 0%, #00c853 100%);
+}
+
+.os-window-title {
+  flex: 1;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  margin-right: auto;
+}
+
+/* Card-like containers with glass effect */
+.os-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.os-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .page-container,
+  .os-window,
+  .os-card,
+  .os-dock-item {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .os-window {
+    margin: 1rem;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+  }
+
+  .os-card {
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+
+  /* Faster animations on mobile */
+  .page-container {
+    animation-duration: 0.3s !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .os-window {
+    margin: 0.5rem;
+    padding: 1rem;
+  }
+
+  .os-window-header {
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .os-window-control {
+    width: 0.625rem;
+    height: 0.625rem;
+  }
+}

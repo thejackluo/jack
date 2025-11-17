@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import OSDock from '../components/OSDock.astro';
 import SEO from '../components/SEO.astro';
 
 const {
@@ -32,11 +33,12 @@ const {
     <link rel="stylesheet" href="/src/css/landing.css" />
     <link rel="stylesheet" href="/src/css/footer.css" />
     <link rel="stylesheet" href="/src/css/about.css" />
+    <link rel="stylesheet" href="/src/css/page-transitions.css" />
 
     <script defer data-domain="jack-luo.com" src="https://plausible.io/js/script.js"></script>
   </head>
   <body>
-    <div id="fullpage">
+    <div id="fullpage" class="page-container" data-page={currentPage || 'home'}>
       <Header currentPage={currentPage}>
         <slot name="hero" />
       </Header>
@@ -44,8 +46,12 @@ const {
       <Footer />
     </div>
 
+    <!-- OS-like Dock Navigation -->
+    <OSDock currentPage={currentPage} />
+
     <script is:inline src="/lib/js/aos.js"></script>
     <script is:inline src="/lib/js/bootstrap.js"></script>
     <script is:inline src="/src/js/script.js"></script>
+    <script is:inline src="/src/js/page-transitions.js"></script>
   </body>
 </html>

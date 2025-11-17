@@ -9,28 +9,70 @@
   /* size */
   height: 100vh;
   width: 8.33%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
 
   display: none;
 }
 
 .vnav-circle {
   /* size */
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
   display: inline-block;
-  margin: 2em;
+  margin: 1.5em;
+  position: relative;
 
   /* effects */
   border-radius: 50%;
-  background: radial-gradient(
-    50% 50% at 50% 50%,
-    rgba(217, 217, 217, 0) 0%,
-    rgba(217, 217, 217, 0.25) 100%
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+  cursor: pointer;
+}
+
+.vnav-circle:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: scale(1.3);
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.3),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4),
+    0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.vnav-circle.active {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 1);
+  transform: scale(1.4);
+  box-shadow:
+    0 6px 20px rgba(255, 255, 255, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.5),
+    0 0 30px rgba(255, 255, 255, 0.5);
+}
+
+/* Add connecting line between circles */
+.vnav::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 25%;
+  bottom: 25%;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
   );
-  box-shadow: inset 0px 5px 10px -5px #ffffff,
-    inset 0px 50px 50px rgba(255, 255, 255, 0.25),
-    inset 0px 0px 40px rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(50px);
+  transform: translateX(-50%);
+  z-index: -1;
 }
 
 /* All about containers */
