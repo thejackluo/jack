@@ -1,7 +1,7 @@
 ---
 const { currentPage = 'home' } = Astro.props;
 const navLinks = [
-  { href: '/journey.html', label: 'Journey' },
+  { href: '/journey', label: 'Journey' },
   { href: '/writing', label: 'Writing' },
 ];
 ---
@@ -111,19 +111,11 @@ const navLinks = [
   }
 
   .mobile-nav-content {
-    background: radial-gradient(
-      50% 50% at 50% 50%,
-      rgba(255, 255, 255, 0.08) 0%,
-      rgba(255, 255, 255, 0.12) 100%
-    );
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(0, 0, 0, 0.9);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 1.5rem;
     padding: 1.5rem;
-    box-shadow:
-      0 8px 32px 0 rgba(0, 0, 0, 0.37),
-      inset 0px 5px 10px -5px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
     min-width: 200px;
   }
 

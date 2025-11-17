@@ -1,0 +1,229 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/Base.astro';
+
+// Get all projects
+const allProjects = await getCollection('projects');
+const projects = allProjects.sort((a, b) => a.data.title.localeCompare(b.data.title));
+---
+
+<BaseLayout
+  title="Journey - Jack Luo"
+  description="Projects, creative work, and my journey through different fields."
+  currentPage="journey"
+>
+  <div slot="hero" class="landing-main container-fluid">
+    <div class="row landing-row journey-container">
+      <h3>Projects</h3>
+      <div class="row">
+        {projects.map(project => (
+          <div class="col-sm-12 col-md-6 col-lg-6">
+            <div class="project-card">
+              <h3 class="project-header">{project.data.title}</h3>
+              {project.data.gallery.length > 0 && (
+                <img
+                  src={project.data.gallery[0].src}
+                  alt={project.data.gallery[0].alt}
+                  class="project-image"
+                />
+              )}
+              <p>{project.data.description}</p>
+              {project.data.links.length > 0 && project.data.links[0] && (
+                <p>
+                  <a href={project.data.links[0].url} class="a-underline">
+                    {project.data.title}
+                  </a>
+                </p>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <section id="creative">
+    <div class="creative-container container-fluid">
+      <div class="landing-main container-fluid">
+        <div class="landing-row row">
+          <h3>Creative</h3>
+          <p>
+            From July 23 and onwards, I started writing a book about a guy
+            stuck in a limbinal space. In 'Limbinal,' I created a world
+            where reality blurs, and boundaries between dreams and waking
+            life become indistinguishable. I explore things like identity,
+            the pursuit of meaning and "robotic racism". Feel free to read a
+            sample
+            <a class="a-underline" href="/assets/pdf/limbinal-v12.03.23.pdf">here</a>
+            and let me know
+            <a href="https://instagram.com/thejackluo">here</a> any
+            feedbacks and questions about the book (bonus points if you know
+            publishers).
+            <br />
+            <br />
+
+            <b>I am currently reading</b>: the third door by Alex Banayan
+            <br />
+            <b>Past Reads</b>: Three Body Problem, Sapiens: A brief history of humankind,
+            The Third Door, Zero to One, How to Win Friends and Influence
+            People, Where you go is not who you will be, The Future is
+            Faster than you think, Subtle art of not giving a f*ck, The
+            Unfair Advantage
+          </p>
+          <p>
+            I made music since 10th grade. Most pieces are experimental, but
+            I'd recommend you check out a few highlights here:
+            <a
+              class="a-underline"
+              href="https://soundcloud.com/thejackluo/intersection"
+              >intersection</a
+            >,
+            <a
+              class="a-underline"
+              href="https://soundcloud.com/thejackluo/memories-v2"
+              >memory v2</a
+            >,
+            <a
+              class="a-underline"
+              href="https://soundcloud.com/thejackluo/007-mirrox"
+              >007 - mirrox</a
+            >
+            <br />
+
+            To see all the music I spew on the Internet, explore my
+            soundcloud
+            <a class="a-underline" href="https://soundcloud.com/thejackluo"
+              >here</a
+            >
+            <br />
+            <br />
+            If you want some music recommendations,
+            <a
+              class="a-underline"
+              href="https://youtube.com/playlist?list=PLrrS4ML6IeMKzkGx_6o-33lMyNtH6xBdq"
+              >here</a
+            >
+            is my work playlist.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="creative-angular-filter full">
+      <div class="creative-city full"></div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Import journey styles */
+  @import url('/src/css/journey.css');
+  @import url('/src/css/creative.css');
+
+  .journey-container {
+    margin: 2rem auto;
+    max-width: 1200px;
+  }
+
+  .journey-container h3 {
+    text-align: center;
+    margin-bottom: 2rem;
+    display: block;
+  }
+
+  .project-card {
+    background: radial-gradient(
+      50% 50% at 50% 50%,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+    box-shadow: inset 0px 5px 10px -5px rgba(255, 255, 255, 0.3),
+      inset 0px 0px 40px rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    height: 100%;
+  }
+
+  .project-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+
+  .project-image {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-card p {
+    text-align: left;
+    line-height: 1.6;
+  }
+
+  /* Creative Section */
+  #creative {
+    position: relative;
+    background: linear-gradient(
+      180deg,
+      rgba(217, 217, 217, 0.05) 0%,
+      rgba(217, 217, 217, 0) 100%
+    ),
+    linear-gradient(180deg, #000000 0%, #14123c 100%);
+    min-height: 50vh;
+    padding: 4rem 0;
+  }
+
+  .creative-container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .creative-angular-filter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+  }
+
+  .creative-city {
+    background-image: url('../../assets/images/city.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .journey-container {
+      padding: 1rem;
+    }
+
+    .project-card {
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    #creative {
+      padding: 2rem 0;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .journey-container {
+      padding: 0.5rem;
+    }
+
+    .project-card {
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .journey-container h3 {
+      font-size: 1.5rem;
+    }
+  }
+</style>
