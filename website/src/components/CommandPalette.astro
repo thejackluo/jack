@@ -84,6 +84,13 @@ const searchIndex = [
   </div>
 </div>
 
+<!-- Mobile Floating Action Button -->
+<button id="command-palette-fab" class="command-palette-fab" aria-label="Open search">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+  </svg>
+</button>
+
 <style>
   .command-palette {
     display: none;
@@ -179,18 +186,26 @@ const searchIndex = [
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 14px 20px;
+    padding: 12px 24px;
+    padding-left: 28px;
     cursor: pointer;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    transition: all 0.15s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: 2px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     background: transparent;
   }
 
-  .command-palette-item:hover,
+  .command-palette-item:hover {
+    background: rgba(255, 255, 255, 0.18) !important;
+    border-left: 4px solid rgba(138, 180, 248, 1);
+    padding-left: 24px;
+    transform: translateX(2px);
+  }
+
   .command-palette-item.selected {
-    background: rgba(255, 255, 255, 0.08) !important;
-    border-left: 3px solid rgba(138, 180, 248, 1);
-    padding-left: 17px;
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-left: 4px solid rgba(138, 180, 248, 1);
+    padding-left: 24px;
   }
 
   .command-palette-item-content {
@@ -202,20 +217,25 @@ const searchIndex = [
   }
 
   .command-palette-item-title {
-    font-size: 14px;
+    font-size: 1rem;
     font-weight: 400;
     font-family: "Stellar", "Century Gothic", sans-serif;
-    color: #ffffff !important;
+    color: rgba(255, 255, 255, 0.9) !important;
     margin: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: color 0.2s ease;
+  }
+
+  .command-palette-item:hover .command-palette-item-title {
+    color: rgba(255, 255, 255, 1) !important;
   }
 
   .command-palette-item-subtitle {
-    font-size: 12px;
+    font-size: 0.875rem;
     font-family: "Stellar", "Century Gothic", sans-serif;
-    color: #888888;
+    color: rgba(255, 255, 255, 0.6);
     margin: 2px 0 0 0;
     white-space: nowrap;
     overflow: hidden;
@@ -223,9 +243,9 @@ const searchIndex = [
   }
 
   .command-palette-item-badge {
-    padding: 2px 8px;
+    padding: 3px 10px;
     border-radius: 4px;
-    font-size: 10px;
+    font-size: 0.65rem;
     font-weight: 500;
     font-family: "Stellar", "Century Gothic", sans-serif;
     text-transform: uppercase;
@@ -235,20 +255,56 @@ const searchIndex = [
 
   .command-palette-item-badge.blog {
     background: transparent;
-    color: #ffffff;
-    border-color: #666666;
+    color: rgba(255, 255, 255, 0.8);
+    border-color: rgba(255, 255, 255, 0.3);
   }
 
   .command-palette-item-badge.project {
     background: transparent;
-    color: #ffffff;
-    border-color: #666666;
+    color: rgba(255, 255, 255, 0.8);
+    border-color: rgba(255, 255, 255, 0.3);
   }
 
   .command-palette-item-badge.page {
     background: transparent;
-    color: #ffffff;
-    border-color: #666666;
+    color: rgba(255, 255, 255, 0.8);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  /* Mobile Floating Action Button */
+  .command-palette-fab {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(138, 180, 248, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    border: none;
+    cursor: pointer;
+    z-index: 9998;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+  }
+
+  .command-palette-fab:active {
+    transform: scale(0.95);
+  }
+
+  .command-palette-fab svg {
+    width: 24px;
+    height: 24px;
+    color: white;
+  }
+
+  @media (max-width: 768px) {
+    .command-palette-fab {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   @keyframes fadeIn {
@@ -356,6 +412,7 @@ const searchIndex = [
   const results = document.getElementById('command-palette-results');
   const notification = document.getElementById('command-palette-notification');
   const notificationClose = document.querySelector('.command-palette-notification-close');
+  const fab = document.getElementById('command-palette-fab');
 
   let selectedIndex = 0;
   let searchResults = [];
@@ -400,6 +457,13 @@ const searchIndex = [
   // Close notification on click
   if (notificationClose) {
     notificationClose.addEventListener('click', hideNotification);
+  }
+
+  // Mobile FAB button click
+  if (fab) {
+    fab.addEventListener('click', () => {
+      openCommandPalette();
+    });
   }
 
   // Show notification when DOM is ready
