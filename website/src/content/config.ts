@@ -20,6 +20,11 @@ const projects = defineCollection({
     tech: z.array(z.string()).nonempty(),
     summary: z.string(),
     description: z.string(),
+    startDate: z.date(),
+    endDate: z.date().optional(),
+    status: z.enum(['Ongoing', 'Completed', 'Archived']).default('Completed'),
+    category: z.enum(['AI & Agents', 'Energy & Infrastructure', 'Security & Safety', 'Productivity', 'Community', 'Research', 'Archive']).default('Archive'),
+    featured: z.boolean().default(false),
     gallery: z
       .array(
         z.object({
@@ -55,6 +60,11 @@ const projectTemplateSchema = z.object({
   tech: z.array(z.string()).nonempty(),
   summary: z.string(),
   description: z.string(),
+  startDate: z.string(),
+  endDate: z.string().optional(),
+  status: z.enum(['Ongoing', 'Completed', 'Archived']).default('Completed'),
+  category: z.enum(['AI & Agents', 'Energy & Infrastructure', 'Security & Safety', 'Productivity', 'Community', 'Research', 'Archive']).default('Archive'),
+  featured: z.boolean().default(false),
   gallery: z
     .array(
       z.object({
