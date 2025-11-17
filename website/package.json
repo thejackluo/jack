@@ -1,7 +1,7 @@
 {
-  "name": "jackluo-website-v4",
-  "version": "4.1.0",
-  "description": "Personal Website V4.1.0",
+  "name": "jackluo-website-v5",
+  "version": "5.0.1",
+  "description": "Personal Website v5.0.1 - Astro-powered portfolio and blog platform",
   "type": "module",
   "main": "main.js",
   "directories": {
