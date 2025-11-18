@@ -4,6 +4,7 @@ import Footer from '../components/Footer.astro';
 import OSDock from '../components/OSDock.astro';
 import SEO from '../components/SEO.astro';
 import CommandPalette from '../components/CommandPalette.astro';
+import ProjectModal from '../components/ProjectModal.astro';
 
 const {
   title,
@@ -54,6 +55,8 @@ const {
 
     <!-- Command Palette -->
     <CommandPalette />
+    <!-- Project Modal -->
+    <ProjectModal />
     <!-- OS-like Dock Navigation -->
     <OSDock currentPage={currentPage} />
 

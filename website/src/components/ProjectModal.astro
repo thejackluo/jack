@@ -1,0 +1,311 @@
+---
+// Project Modal Component
+// Displays project details in a modal popup
+---
+
+<div id="project-modal" class="project-modal" aria-hidden="true">
+  <div class="project-modal-backdrop"></div>
+  <div class="project-modal-container" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
+    <button class="project-modal-close" aria-label="Close modal">✕</button>
+    <div class="project-modal-content" id="project-modal-content">
+      <!-- Content will be injected dynamically -->
+    </div>
+  </div>
+</div>
+
+<style>
+  :global(.project-modal) {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+  }
+
+  :global(.project-modal[aria-hidden="false"]) {
+    display: block;
+  }
+
+  :global(.project-modal-backdrop) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  :global(.project-modal-container) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 800px;
+    max-height: 85vh;
+    background: rgba(0, 8, 30, 0.95);
+    backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+    animation: slideUp 0.3s ease-out;
+  }
+
+  :global(.project-modal-close) {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  :global(.project-modal-close:hover) {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+  }
+
+  :global(.project-modal-content) {
+    padding: 40px;
+    overflow-y: auto;
+    max-height: 85vh;
+  }
+
+  :global(.project-modal-content::-webkit-scrollbar) {
+    width: 8px;
+  }
+
+  :global(.project-modal-content::-webkit-scrollbar-track) {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  :global(.project-modal-content::-webkit-scrollbar-thumb) {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+  }
+
+  :global(.project-modal-header) {
+    margin-bottom: 24px;
+  }
+
+  :global(.project-modal-title) {
+    font-family: "Elianto", serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  :global(.project-modal-summary) {
+    font-family: "Stellar", "Century Gothic", sans-serif;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  :global(.project-modal-meta) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  :global(.project-modal-badge) {
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+    font-family: "Dual", monospace;
+  }
+
+  :global(.project-modal-tech) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  :global(.project-modal-tech-tag) {
+    padding: 8px 16px;
+    background: rgba(138, 180, 248, 0.15);
+    border: 1px solid rgba(138, 180, 248, 0.3);
+    border-radius: 8px;
+    font-size: 14px;
+    color: rgba(138, 180, 248, 1);
+    font-family: "Dual", monospace;
+    transition: all 0.2s ease;
+  }
+
+  :global(.project-modal-tech-tag:hover) {
+    background: rgba(138, 180, 248, 0.25);
+    transform: translateY(-2px);
+  }
+
+  :global(.project-modal-description) {
+    font-family: "Stellar", "Century Gothic", sans-serif;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+
+  :global(.project-modal-description p) {
+    margin-bottom: 16px;
+  }
+
+  :global(.project-modal-links) {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  :global(.project-modal-link) {
+    padding: 12px 24px;
+    background: rgba(138, 180, 248, 0.2);
+    border: 1px solid rgba(138, 180, 248, 0.4);
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+    font-family: "Stellar", "Century Gothic", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  :global(.project-modal-link:hover) {
+    background: rgba(138, 180, 248, 0.3);
+    transform: translateY(-2px);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -45%);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  @media (max-width: 768px) {
+    :global(.project-modal-container) {
+      width: 95%;
+      max-height: 90vh;
+    }
+
+    :global(.project-modal-content) {
+      padding: 32px 24px;
+    }
+
+    :global(.project-modal-title) {
+      font-size: 24px;
+    }
+
+    :global(.project-modal-summary) {
+      font-size: 16px;
+    }
+  }
+</style>
+
+<script is:inline>
+  // Project Modal Logic
+  const projectModal = document.getElementById('project-modal');
+  const projectModalContent = document.getElementById('project-modal-content');
+  const projectModalClose = document.querySelector('.project-modal-close');
+
+  window.openProjectModal = function(projectData) {
+    if (!projectModal || !projectModalContent) return;
+
+    // Build modal content
+    const content = `
+      <div class="project-modal-header">
+        <h2 class="project-modal-title" id="project-modal-title">${projectData.title}</h2>
+        <p class="project-modal-summary">${projectData.summary}</p>
+
+        ${projectData.period || projectData.status ? `
+          <div class="project-modal-meta">
+            ${projectData.period ? `<span class="project-modal-badge">📅 ${projectData.period}</span>` : ''}
+            ${projectData.status ? `<span class="project-modal-badge">🚀 ${projectData.status}</span>` : ''}
+          </div>
+        ` : ''}
+      </div>
+
+      ${projectData.tech && projectData.tech.length > 0 ? `
+        <div class="project-modal-tech">
+          ${projectData.tech.map(t => `<span class="project-modal-tech-tag">${t}</span>`).join('')}
+        </div>
+      ` : ''}
+
+      ${projectData.description ? `
+        <div class="project-modal-description">
+          ${projectData.description}
+        </div>
+      ` : ''}
+
+      ${projectData.links && projectData.links.length > 0 ? `
+        <div class="project-modal-links">
+          ${projectData.links.map(link => `
+            <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="project-modal-link">
+              ${link.icon || '🔗'} ${link.label}
+            </a>
+          `).join('')}
+        </div>
+      ` : ''}
+    `;
+
+    projectModalContent.innerHTML = content;
+    projectModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeProjectModal = function() {
+    if (!projectModal) return;
+    projectModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  // Close button
+  projectModalClose?.addEventListener('click', window.closeProjectModal);
+
+  // Backdrop click
+  projectModal?.querySelector('.project-modal-backdrop')?.addEventListener('click', window.closeProjectModal);
+
+  // ESC key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && projectModal?.getAttribute('aria-hidden') === 'false') {
+      window.closeProjectModal();
+    }
+  });
+</script>

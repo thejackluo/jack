@@ -15,24 +15,75 @@ const searchIndex = [
     title: 'Home',
     url: '/',
     excerpt: 'Jack Luo - Personal website and portfolio',
+    icon: '🏠',
   },
   {
     type: 'page',
     title: 'Journey',
     url: '/journey.html',
     excerpt: 'My journey and experiences',
+    icon: '🚀',
   },
   {
     type: 'page',
     title: 'Writing',
     url: '/writing/',
     excerpt: 'Blog posts and essays',
+    icon: '✍️',
   },
   {
     type: 'page',
     title: 'Resume',
     url: '/resume.html',
     excerpt: 'Professional resume and experience',
+    icon: '📄',
+  },
+  {
+    type: 'page',
+    title: 'Books',
+    url: '/special/books.html',
+    excerpt: 'My reading list and book recommendations',
+    icon: '📚',
+  },
+  {
+    type: 'page',
+    title: 'Toys',
+    url: '/special/toy.html',
+    excerpt: 'Fun experiments and side projects',
+    icon: '🎮',
+  },
+  // Social Media
+  {
+    type: 'social',
+    title: 'GitHub',
+    url: 'https://github.com/thejackluo',
+    excerpt: 'View my code and projects on GitHub',
+    icon: '💻',
+    external: true,
+  },
+  {
+    type: 'social',
+    title: 'LinkedIn',
+    url: 'https://linkedin.com/in/thejackluo',
+    excerpt: 'Connect with me on LinkedIn',
+    icon: '💼',
+    external: true,
+  },
+  {
+    type: 'social',
+    title: 'Instagram',
+    url: 'https://instagram.com/thejackluo',
+    excerpt: 'Follow me on Instagram',
+    icon: '📸',
+    external: true,
+  },
+  {
+    type: 'social',
+    title: 'Twitter',
+    url: 'https://twitter.com/thejackluo',
+    excerpt: 'Follow me on Twitter',
+    icon: '🐦',
+    external: true,
   },
   // Blogs
   ...blogs.map(blog => ({
@@ -41,14 +92,26 @@ const searchIndex = [
     url: `/writing/${blog.slug}/`,
     excerpt: blog.data.excerpt,
     tags: blog.data.tags,
+    icon: '📝',
   })),
-  // Projects
+  // Projects (will open in modal)
   ...projects.map(project => ({
     type: 'project',
     title: project.data.title,
-    url: '/#about',
+    url: '#project-modal', // Will be handled by modal
     excerpt: project.data.summary,
     tags: project.data.tech,
+    icon: '⚡',
+    isProjectModal: true,
+    projectData: {
+      title: project.data.title,
+      summary: project.data.summary,
+      description: project.body,
+      tech: project.data.tech,
+      status: project.data.status,
+      period: project.data.startDate ? new Date(project.data.startDate).getFullYear().toString() : null,
+      links: project.data.links || [],
+    },
   })),
 ];
 ---
@@ -498,7 +561,17 @@ const searchIndex = [
     // Enter to navigate
     if (e.key === 'Enter' && searchResults[selectedIndex]) {
       e.preventDefault();
-      window.location.href = searchResults[selectedIndex].url;
+      const item = searchResults[selectedIndex];
+
+      // Check if it's a project that should open in modal
+      if (item.isProjectModal && item.projectData && window.openProjectModal) {
+        closeCommandPalette();
+        window.openProjectModal(item.projectData);
+      } else if (item.external) {
+        window.open(item.url, '_blank', 'noopener,noreferrer');
+      } else {
+        window.location.href = item.url;
+      }
     }
   });
 
@@ -548,9 +621,11 @@ const searchIndex = [
 
     results.innerHTML = items
       .map((item, index) => {
+        const icon = item.icon || '📄';
         return `
           <div class="command-palette-item ${index === selectedIndex ? 'selected' : ''}" data-index="${index}">
             <div class="command-palette-item-content">
+              <span style="margin-right: 12px; font-size: 18px;">${icon}</span>
               <span class="command-palette-item-text">${item.type} / ${item.title}</span>
             </div>
           </div>
@@ -562,7 +637,17 @@ const searchIndex = [
     results.querySelectorAll('.command-palette-item').forEach((el) => {
       el.addEventListener('click', () => {
         const index = parseInt(el.getAttribute('data-index') || '0');
-        window.location.href = searchResults[index].url;
+        const item = searchResults[index];
+
+        // Check if it's a project that should open in modal
+        if (item.isProjectModal && item.projectData && window.openProjectModal) {
+          closeCommandPalette();
+          window.openProjectModal(item.projectData);
+        } else if (item.external) {
+          window.open(item.url, '_blank', 'noopener,noreferrer');
+        } else {
+          window.location.href = item.url;
+        }
       });
     });
   }
