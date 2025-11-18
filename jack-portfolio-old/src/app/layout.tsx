@@ -2,6 +2,13 @@ import type { Metadata, Viewport } from "next";
 import "../styles/globals.css";
 import { RouteTransition } from "@/components/animations/PageTransition";
 import { ScrollProgress } from "@/components/animations/ScrollProgress";
+import { CommandPaletteProvider } from "@/components/CommandPaletteProvider";
+import {
+  getProjects,
+  getBlogPosts,
+  getToyProjects,
+  getSiteSettings
+} from "@/lib/sanity";
 
 export const metadata: Metadata = {
   title: "Jack Luo - Portfolio",
@@ -48,18 +55,33 @@ export const viewport: Viewport = {
   maximumScale: 1,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Fetch data for command palette
+  const [projects, blogPosts, toyProjects, siteSettings] = await Promise.all([
+    getProjects(),
+    getBlogPosts(),
+    getToyProjects(),
+    getSiteSettings(),
+  ]);
+
   return (
     <html lang="en">
       <body className="antialiased" suppressHydrationWarning={true}>
         <ScrollProgress />
-        <RouteTransition>
-          {children}
-        </RouteTransition>
+        <CommandPaletteProvider
+          projects={projects}
+          blogPosts={blogPosts}
+          toyProjects={toyProjects}
+          siteSettings={siteSettings}
+        >
+          <RouteTransition>
+            {children}
+          </RouteTransition>
+        </CommandPaletteProvider>
       </body>
     </html>
   );
