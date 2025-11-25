@@ -22,7 +22,7 @@ links:
   - label: 'GitHub'
     url: 'https://github.com/magk-app/delight'
   - label: 'Live Site'
-    url: 'https://delight.magk.app'
+    url: 'https://magk.app'
 ---
 
 Delight is an AI companion for ambitious people who keep dropping their biggest goals once life gets chaotic. Instead of being another rigid task app, it starts with how you feel, then turns your long-term goals into small, energy-matched missions and tracks them across four life pillars: health, craft, growth, and relationships.
