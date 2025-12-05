@@ -30,21 +30,35 @@
 <script>
   // Status messages to cycle through
   const statuses = [
-    { prefix: 'project', text: 'building strange agentic things at @ MAGK', link: 'https://magk.app' },
-    { prefix: 'personal', text: 'accidentally meeting new friends everywhere' },
-    { prefix: 'status', text: 'sleeping in a conference room again' },
-    { prefix: 'traveling', text: 'plotting a slightly unhinged trip to Europe' },
-    { prefix: 'meta', text: 'procrastinating by updating this website instead of resting' },
-    { prefix: 'technical', text: 'wiring up memory architectures so agents remember your life better than you do' },
-    { prefix: 'entertainment', text: 'playing Cyberpunk 2077 when I should be working' },
-    { prefix: 'reading', text: 'rereading "The Subtle Art of Not Giving a F*ck" and pretending it is not about me' },
-    { prefix: 'surprised', text: 'wait, you are still here scrolling this?' },
-    {
-      prefix: 'visitor',
-      text: `welcome to the chaos. you are visitor #${Math.floor(Math.random() * 1000) + 1000}`,
-      isRandom: true
-    }
-  ];
+  { prefix: 'project', text: 'building strange agentic things at @ MAGK', link: 'https://magk.app' },
+  { prefix: 'personal', text: 'accidentally meeting new friends everywhere' },
+  { prefix: 'status', text: 'sleeping in a conference room again' },
+  { prefix: 'traveling', text: 'plotting a slightly unhinged trip to Europe' },
+  { prefix: 'meta', text: 'procrastinating by updating this website instead of resting' },
+  { prefix: 'technical', text: 'wiring up memory architectures so agents remember your life better than you do' },
+  { prefix: 'entertainment', text: 'playing Cyberpunk 2077 when I should be working' },
+  { prefix: 'reading', text: 'rereading "The Subtle Art of Not Giving a F*ck" and pretending it is not about me' },
+  { prefix: 'surprised', text: 'wait, you are still here scrolling this?' },
+  {
+    prefix: 'visitor',
+    text: `welcome to the chaos. you are visitor #${Math.floor(Math.random() * 1000) + 1000}`,
+    isRandom: true
+  },
+
+  // new ones
+  {
+    prefix: 'connection',
+    text: 'quietly looking for a partner in crime who thinks late night bug hunting counts as a date :p'
+  },
+  {
+    prefix: 'habits',
+    text: 'trying this radical new thing called being consistent with my day to day work'
+  },
+  {
+    prefix: 'networking',
+    text: 'easing off the networking gas pedal so I can actually deepen the connections I already have'
+  }
+];
 
   let currentStatusIndex = 0;
   let currentCharIndex = 0;
