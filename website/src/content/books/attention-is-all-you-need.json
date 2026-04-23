@@ -1,0 +1,13 @@
+{
+  "title": "Attention Is All You Need",
+  "author": "Vaswani et al.",
+  "category": "AI Research",
+  "progress": 10,
+  "score": 0,
+  "pageCount": 15,
+  "color": "#44337a",
+  "gradient": {
+    "start": "#44337a",
+    "end": "#805ad5"
+  }
+}

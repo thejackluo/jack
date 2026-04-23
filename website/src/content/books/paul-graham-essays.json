@@ -1,0 +1,13 @@
+{
+  "title": "Paul Graham Essays",
+  "author": "Paul Graham",
+  "category": "Entrepreneurship",
+  "progress": 60,
+  "score": 5,
+  "pageCount": 400,
+  "color": "#744210",
+  "gradient": {
+    "start": "#744210",
+    "end": "#d69e2e"
+  }
+}

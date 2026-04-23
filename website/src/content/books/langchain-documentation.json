@@ -1,0 +1,13 @@
+{
+  "title": "LangChain Documentation",
+  "author": "LangChain",
+  "category": "Technical",
+  "progress": 25,
+  "score": 0,
+  "pageCount": 300,
+  "color": "#1c4532",
+  "gradient": {
+    "start": "#1c4532",
+    "end": "#38a169"
+  }
+}

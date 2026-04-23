@@ -1,0 +1,13 @@
+{
+  "title": "CS229 Machine Learning",
+  "author": "Andrew Ng",
+  "category": "AI",
+  "progress": 40,
+  "score": 5,
+  "pageCount": 500,
+  "color": "#1a365d",
+  "gradient": {
+    "start": "#1a365d",
+    "end": "#3182ce"
+  }
+}
