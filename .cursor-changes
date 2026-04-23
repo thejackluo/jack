@@ -1,0 +1,5 @@
+# Change log (agent)
+
+## 2026-04-23 — Liminal web reader
+- **Prior:** Journey page had Limbinal book text + PDF sample only; no manga assets in repo.
+- **Now:** `website/public/assets/manga/liminal/` contains 34 PNGs (main reading order) copied from Desktop `liminal manga`; `manifest.json` lists page order. New `public/liminal-reader.html` fetches the manifest and stacks images for vertical scroll; `public/src/css/liminal-reader.css` styles reader. `journey.html` Creative section links to the reader.
