@@ -1,0 +1,573 @@
+---
+// Full-screen horizontal ebook reader for Liminal manga
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Liminal — Jack Luo</title>
+    <meta name="description" content="Read Liminal, a liminal-space manga by Jack Luo." />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon/favicon-32x32.png" />
+    <link rel="stylesheet" href="/src/css/font.css" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      :root {
+        --hud-h: 52px;
+        --bar-h: 44px;
+        --bg: #0a0610;
+        --accent: #c4a8d4;
+        --accent-dim: rgba(196,168,212,0.5);
+        --dur: 380ms;
+        --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      html, body {
+        width: 100%; height: 100%;
+        overflow: hidden;
+        background: var(--bg);
+        color: #f0e8f4;
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      /* ── Stage ─────────────────────────────────────────── */
+      #stage {
+        position: fixed;
+        inset: var(--hud-h) 0 var(--bar-h);  /* shrink away from HUD + bottombar */
+        overflow: hidden;
+        background: var(--bg);
+      }
+
+      /* ── Slides ─────────────────────────────────────────── */
+      .slide {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* No CSS transition here — we set it via JS to avoid race conditions */
+      }
+
+      .slide img {
+        display: block;
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        box-shadow: 0 8px 40px rgba(0,0,0,0.75);
+        pointer-events: none;
+        -webkit-user-drag: none;
+      }
+
+      /* ── HUD (top bar) ──────────────────────────────────── */
+      #hud {
+        position: fixed;
+        inset: 0 0 auto;
+        height: var(--hud-h);
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 1rem;
+        gap: 1rem;
+        background: linear-gradient(180deg, rgba(10,6,16,0.95) 60%, transparent 100%);
+        transition: opacity 0.35s;
+      }
+      #hud.hide { opacity: 0; pointer-events: none; }
+
+      .hud-back {
+        color: var(--accent);
+        text-decoration: none;
+        font-size: 0.85rem;
+        letter-spacing: 0.04em;
+        padding: 0.3rem 0.7rem;
+        border-radius: 6px;
+        border: 1px solid var(--accent-dim);
+        background: rgba(10,6,16,0.6);
+        backdrop-filter: blur(6px);
+        white-space: nowrap;
+        transition: background 0.2s, color 0.2s;
+      }
+      .hud-back:hover { background: rgba(31,6,42,0.9); color: #fff; }
+
+      #hud-title {
+        font-size: 0.9rem;
+        letter-spacing: 0.1em;
+        opacity: 0.7;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      /* ── Bottom bar ─────────────────────────────────────── */
+      #bottombar {
+        position: fixed;
+        inset: auto 0 0;
+        height: var(--bar-h);
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        padding: 0 1rem;
+        gap: 0.75rem;
+        background: linear-gradient(0deg, rgba(10,6,16,0.95) 60%, transparent 100%);
+        transition: opacity 0.35s;
+      }
+      #bottombar.hide { opacity: 0; pointer-events: none; }
+
+      #progress-track {
+        flex: 1;
+        height: 3px;
+        border-radius: 2px;
+        background: rgba(255,255,255,0.12);
+        cursor: pointer;
+        position: relative;
+      }
+      #progress-fill {
+        height: 100%;
+        border-radius: 2px;
+        background: var(--accent);
+        min-width: 3px;
+        transition: width var(--dur) var(--ease);
+      }
+
+      #page-counter {
+        font-size: 0.78rem;
+        opacity: 0.6;
+        white-space: nowrap;
+        min-width: 55px;
+        text-align: right;
+      }
+
+      #thumb-toggle {
+        font-size: 0.75rem;
+        color: var(--accent-dim);
+        cursor: pointer;
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        border: 1px solid var(--accent-dim);
+        background: transparent;
+        transition: color 0.2s, border-color 0.2s;
+        letter-spacing: 0.05em;
+      }
+      #thumb-toggle:hover { color: var(--accent); border-color: var(--accent); }
+
+      /* ── Click zones ────────────────────────────────────── */
+      .click-zone {
+        position: fixed;
+        top: var(--hud-h);
+        bottom: var(--bar-h);
+        width: 18%;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.25s;
+      }
+      .click-zone:hover { opacity: 1; }
+
+      #zone-prev {
+        left: 0;
+        justify-content: flex-start;
+        padding-left: 1rem;
+        background: linear-gradient(to right, rgba(10,6,16,0.2), transparent);
+      }
+      #zone-next {
+        right: 0;
+        justify-content: flex-end;
+        padding-right: 1rem;
+        background: linear-gradient(to left, rgba(10,6,16,0.2), transparent);
+      }
+
+      .zone-icon {
+        width: 42px; height: 42px;
+        border-radius: 50%;
+        background: rgba(10,6,16,0.7);
+        border: 1px solid var(--accent-dim);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1rem; color: var(--accent);
+        backdrop-filter: blur(8px);
+        transition: transform 0.15s, background 0.2s;
+      }
+      .click-zone:hover .zone-icon {
+        transform: scale(1.1);
+        background: rgba(31,6,42,0.9);
+        border-color: var(--accent);
+      }
+
+      /* ── Thumbnail strip ────────────────────────────────── */
+      #thumb-strip {
+        position: fixed;
+        bottom: var(--bar-h);
+        left: 0; right: 0;
+        z-index: 25;
+        background: rgba(10,6,16,0.96);
+        backdrop-filter: blur(12px);
+        border-top: 1px solid rgba(255,255,255,0.07);
+        padding: 0.6rem 0.75rem;
+        display: flex;
+        gap: 0.45rem;
+        overflow-x: auto;
+        overflow-y: hidden;
+        transform: translateY(100%);
+        transition: transform 0.3s var(--ease);
+        scrollbar-width: thin;
+        scrollbar-color: var(--accent-dim) transparent;
+        height: 90px;
+      }
+      #thumb-strip.open { transform: translateY(0); }
+
+      .thumb {
+        flex: 0 0 auto;
+        width: 64px; height: 64px;
+        border-radius: 4px;
+        overflow: hidden;
+        cursor: pointer;
+        border: 2px solid transparent;
+        opacity: 0.55;
+        transition: opacity 0.2s, border-color 0.2s, transform 0.15s;
+      }
+      .thumb:hover { opacity: 0.9; transform: translateY(-2px); }
+      .thumb.active { border-color: var(--accent); opacity: 1; }
+      .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+      /* ── Keyboard hint ──────────────────────────────────── */
+      #kbd-hint {
+        position: fixed;
+        bottom: calc(var(--bar-h) + 14px);
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 30;
+        background: rgba(10,6,16,0.8);
+        border: 1px solid var(--accent-dim);
+        border-radius: 20px;
+        padding: 0.35rem 0.9rem;
+        font-size: 0.72rem;
+        color: rgba(240,232,244,0.7);
+        backdrop-filter: blur(10px);
+        white-space: nowrap;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.4s;
+      }
+      #kbd-hint.show { opacity: 1; }
+
+      /* ── Loader ─────────────────────────────────────────── */
+      #loader {
+        position: fixed; inset: 0; z-index: 50;
+        background: var(--bg);
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        gap: 1.2rem;
+        transition: opacity 0.5s;
+      }
+      #loader.out { opacity: 0; pointer-events: none; }
+
+      .loader-title {
+        font-size: 1.4rem;
+        letter-spacing: 0.22em;
+        color: var(--accent);
+      }
+      .loader-track {
+        width: 160px; height: 2px;
+        border-radius: 2px;
+        background: rgba(255,255,255,0.1);
+        overflow: hidden;
+      }
+      #loader-fill {
+        height: 100%;
+        background: var(--accent);
+        border-radius: 2px;
+        width: 0%;
+        transition: width 0.3s ease;
+      }
+
+      /* ── Skip link ──────────────────────────────────────── */
+      .skip { position: fixed; top: -100%; left: 1rem; z-index: 999; }
+      .skip:focus { top: 0.5rem; }
+    </style>
+  </head>
+  <body>
+    <a class="skip" href="#stage">Skip to reader</a>
+
+    <div id="loader">
+      <div class="loader-title">LIMINAL</div>
+      <div class="loader-track"><div id="loader-fill"></div></div>
+    </div>
+
+    <div id="hud">
+      <a class="hud-back" href="/journey">← Journey</a>
+      <span id="hud-title">Liminal</span>
+      <button id="thumb-toggle" aria-label="Toggle thumbnails">Pages</button>
+    </div>
+
+    <div id="stage" role="main" aria-label="Liminal manga reader"></div>
+
+    <div id="zone-prev" class="click-zone" role="button" tabindex="0" aria-label="Previous spread">
+      <div class="zone-icon">&#8592;</div>
+    </div>
+    <div id="zone-next" class="click-zone" role="button" tabindex="0" aria-label="Next spread">
+      <div class="zone-icon">&#8594;</div>
+    </div>
+
+    <div id="bottombar">
+      <div id="progress-track" role="progressbar" aria-label="Reading progress">
+        <div id="progress-fill"></div>
+      </div>
+      <div id="page-counter">—</div>
+    </div>
+
+    <div id="kbd-hint">← → to flip &nbsp;·&nbsp; G for page list</div>
+    <div id="thumb-strip" aria-label="Page thumbnails"></div>
+
+    <script>
+    (function () {
+      var BASE = '/assets/manga/liminal/';
+      var DUR = 380; // ms — must match --dur in CSS
+      var IDLE = 3000;
+
+      var stage      = document.getElementById('stage');
+      var hud        = document.getElementById('hud');
+      var bottombar  = document.getElementById('bottombar');
+      var progFill   = document.getElementById('progress-fill');
+      var counter    = document.getElementById('page-counter');
+      var loader     = document.getElementById('loader');
+      var loaderFill = document.getElementById('loader-fill');
+      var thumbStrip = document.getElementById('thumb-strip');
+      var thumbBtn   = document.getElementById('thumb-toggle');
+      var kbdHint    = document.getElementById('kbd-hint');
+      var zonePrev   = document.getElementById('zone-prev');
+      var zoneNext   = document.getElementById('zone-next');
+
+      var pages       = [];
+      var slides      = [];
+      var thumbEls    = [];
+      var current     = 0;
+      var busy        = false;
+      var thumbsOpen  = false;
+      var idleTimer   = null;
+
+      // ── Idle ────────────────────────────────────────────
+      function wake() {
+        clearTimeout(idleTimer);
+        hud.classList.remove('hide');
+        bottombar.classList.remove('hide');
+        idleTimer = setTimeout(function () {
+          if (!thumbsOpen) {
+            hud.classList.add('hide');
+            bottombar.classList.add('hide');
+          }
+        }, IDLE);
+      }
+      document.addEventListener('mousemove', wake, { passive: true });
+      document.addEventListener('keydown',   wake, { passive: true });
+      document.addEventListener('touchstart', wake, { passive: true });
+      document.addEventListener('click', wake, { passive: true });
+
+      // ── Build DOM ────────────────────────────────────────
+      function build(list) {
+        var frag = document.createDocumentFragment();
+        list.forEach(function (name, i) {
+          // Slide
+          var div = document.createElement('div');
+          div.className = 'slide';
+          div.style.cssText = 'transform:translateX(100%);opacity:0;';
+
+          var img = document.createElement('img');
+          img.src     = BASE + encodeURIComponent(name);
+          img.alt     = 'Liminal spread ' + (i + 1) + ' of ' + list.length;
+          img.decoding = 'async';
+          img.loading  = i < 2 ? 'eager' : 'lazy';
+          img.draggable = false;
+
+          div.appendChild(img);
+          frag.appendChild(div);
+          slides.push(div);
+
+          // Thumb
+          var t = document.createElement('div');
+          t.className = 'thumb';
+          var ti = document.createElement('img');
+          ti.src     = BASE + encodeURIComponent(name);
+          ti.alt     = 'Spread ' + (i + 1);
+          ti.loading = 'lazy';
+          ti.decoding = 'async';
+          t.appendChild(ti);
+          t.addEventListener('click', (function (idx) {
+            return function () { goTo(idx); toggleThumbs(false); };
+          })(i));
+          thumbStrip.appendChild(t);
+          thumbEls.push(t);
+        });
+        stage.appendChild(frag);
+      }
+
+      // ── Thumbnail strip ──────────────────────────────────
+      function toggleThumbs(force) {
+        thumbsOpen = (force !== undefined) ? !!force : !thumbsOpen;
+        thumbStrip.classList.toggle('open', thumbsOpen);
+        thumbBtn.textContent = thumbsOpen ? 'Close' : 'Pages';
+        if (thumbsOpen) {
+          wake();
+          var el = thumbEls[current];
+          if (el) el.scrollIntoView({ inline: 'center', behavior: 'smooth' });
+        }
+      }
+      thumbBtn.addEventListener('click', function () { toggleThumbs(); });
+
+      // ── UI sync ──────────────────────────────────────────
+      function syncUI() {
+        var pct = pages.length > 1 ? (current / (pages.length - 1)) * 100 : 100;
+        progFill.style.width = pct + '%';
+        counter.textContent  = (current + 1) + ' / ' + pages.length;
+        thumbEls.forEach(function (t, i) { t.classList.toggle('active', i === current); });
+      }
+
+      // ── Core transition ──────────────────────────────────
+      //
+      // Uses inline styles exclusively so there are NO CSS-class vs
+      // inline-style conflicts.  Pattern:
+      //   1. position the incoming slide off-screen (no transition)
+      //   2. force a reflow so the browser commits the position
+      //   3. add transition + move to final position  →  animation fires
+      //
+      function goTo(index) {
+        if (busy) return;
+        if (index < 0 || index >= pages.length || index === current) return;
+
+        busy = true;
+        var forward = index > current;
+        var prev = slides[current];
+        var next = slides[index];
+        current  = index;
+
+        // 1. Snap next slide to its off-screen start (no transition)
+        next.style.transition = 'none';
+        next.style.transform  = forward ? 'translateX(100%)' : 'translateX(-100%)';
+        next.style.opacity    = '0';
+        next.style.zIndex     = '1';
+
+        // 2. Force reflow — the browser paints the off-screen position
+        void next.offsetWidth;
+
+        // 3. Enable transitions, animate both slides
+        var T = 'transform ' + DUR + 'ms cubic-bezier(0.4,0,0.2,1), ' +
+                'opacity '   + DUR + 'ms cubic-bezier(0.4,0,0.2,1)';
+
+        next.style.transition = T;
+        next.style.transform  = 'translateX(0)';
+        next.style.opacity    = '1';
+
+        prev.style.transition = T;
+        prev.style.transform  = forward ? 'translateX(-100%)' : 'translateX(100%)';
+        prev.style.opacity    = '0';
+        prev.style.zIndex     = '0';
+
+        syncUI();
+
+        // Cleanup after animation
+        setTimeout(function () {
+          prev.style.transition = 'none';
+          prev.style.transform  = forward ? 'translateX(-100%)' : 'translateX(100%)'; // keep off-screen
+          busy = false;
+        }, DUR + 20);
+      }
+
+      function next() { goTo(current + 1); }
+      function prev() { goTo(current - 1); }
+
+      // ── Keyboard ─────────────────────────────────────────
+      document.addEventListener('keydown', function (e) {
+        switch (e.key) {
+          case 'ArrowRight': case 'ArrowDown': e.preventDefault(); next(); break;
+          case ' ':          if (!thumbsOpen) { e.preventDefault(); next(); } break;
+          case 'ArrowLeft':  case 'ArrowUp':  e.preventDefault(); prev(); break;
+          case 'Home':  e.preventDefault(); goTo(0); break;
+          case 'End':   e.preventDefault(); goTo(pages.length - 1); break;
+          case 'g': case 'G': toggleThumbs(); break;
+          case 'Escape': if (thumbsOpen) toggleThumbs(false); break;
+        }
+      });
+
+      // ── Click zones ───────────────────────────────────────
+      zoneNext.addEventListener('click', next);
+      zonePrev.addEventListener('click', prev);
+      zoneNext.addEventListener('keydown', function (e) { if (e.key === 'Enter') next(); });
+      zonePrev.addEventListener('keydown', function (e) { if (e.key === 'Enter') prev(); });
+
+      // ── Touch swipe ───────────────────────────────────────
+      var tx = 0, ty = 0;
+      document.addEventListener('touchstart', function (e) {
+        tx = e.touches[0].clientX;
+        ty = e.touches[0].clientY;
+      }, { passive: true });
+      document.addEventListener('touchend', function (e) {
+        var dx = e.changedTouches[0].clientX - tx;
+        var dy = e.changedTouches[0].clientY - ty;
+        if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+          if (dx < 0) next(); else prev();
+        }
+      }, { passive: true });
+
+      // ── Progress bar seek ─────────────────────────────────
+      document.getElementById('progress-track').addEventListener('click', function (e) {
+        var r = this.getBoundingClientRect();
+        goTo(Math.round(((e.clientX - r.left) / r.width) * (pages.length - 1)));
+      });
+
+      // ── Preload neighbours ────────────────────────────────
+      function preload() {
+        [current - 1, current + 1, current + 2].forEach(function (i) {
+          if (i >= 0 && i < slides.length) {
+            var img = slides[i].querySelector('img');
+            if (img && img.loading === 'lazy') img.loading = 'eager';
+          }
+        });
+      }
+
+      // ── Init ─────────────────────────────────────────────
+      fetch(BASE + 'manifest.json')
+        .then(function (r) { if (!r.ok) throw new Error('manifest'); return r.json(); })
+        .then(function (data) {
+          pages = data.pages || [];
+          if (!pages.length) throw new Error('empty');
+
+          build(pages);
+
+          // Show first slide immediately (no transition)
+          var first = slides[0];
+          first.style.transition = 'none';
+          first.style.transform  = 'translateX(0)';
+          first.style.opacity    = '1';
+          first.style.zIndex     = '1';
+
+          syncUI();
+          loaderFill.style.width = '80%';
+
+          var img = first.querySelector('img');
+          function reveal() {
+            loaderFill.style.width = '100%';
+            setTimeout(function () {
+              loader.classList.add('out');
+              setTimeout(function () { loader.style.display = 'none'; }, 520);
+              wake();
+              kbdHint.classList.add('show');
+              setTimeout(function () { kbdHint.classList.remove('show'); }, 3500);
+              preload();
+            }, 180);
+          }
+          if (img.complete) reveal();
+          else { img.addEventListener('load', reveal); img.addEventListener('error', reveal); }
+        })
+        .catch(function (err) {
+          console.error('Liminal reader:', err);
+          loader.innerHTML = '<p style="color:#e8a0a0;padding:2rem;text-align:center;font-family:sans-serif">Could not load pages.<br>Run <code>npm run dev</code> in the website folder.</p>';
+        });
+    })();
+    </script>
+  </body>
+</html>
