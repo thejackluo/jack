@@ -1,6 +1,6 @@
 {
   "title": "Liminal",
-  "description": "Main reading order (cover, spreads through page 63–64).",
+  "description": "Main reading order (cover, spreads through page 69–70).",
   "pages": [
     "00_cover.png",
     "00_inner-cover_toc.png",
@@ -35,6 +35,9 @@
     "page_57-58.png",
     "page_59-60.png",
     "page_61-62.png",
-    "page_63-64.png"
+    "page_63-64.png",
+    "page_65-66.png",
+    "page_67-68.png",
+    "page_69-70.png"
   ]
 }
