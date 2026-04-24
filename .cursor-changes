@@ -9,6 +9,10 @@
 - **Rolo:** Added real app screenshots (`rolo.png`, `rolo-profile-timeline.png`) and updated `rolo.md` gallery + status to reflect the app is launched (not waitlist-only).
 - **Weave:** Added prototype screenshot (`weave.webp`) + 16:9 hero crop (`weave-hero.webp`) and updated `weave.md` gallery.
 
+## 2026-04-23 — Projects page rendering fixes
+- **Prior:** Major projects rendered in collection order (not `majorProjectSlugs` order); command palette project results navigated to `/#about` instead of the actual project detail page.
+- **Now:** Major grid is rendered in `majorProjectSlugs` order, and command palette project results navigate to `/projects/<slug>/`.
+
 ## 2026-04-23 — Liminal web reader
 - **Prior:** Journey page had Limbinal book text + PDF sample only; no manga assets in repo.
 - **Now:** `website/public/assets/manga/liminal/` contains 34 PNGs (main reading order) copied from Desktop `liminal manga`; `manifest.json` lists page order. New `public/liminal-reader.html` fetches the manifest and stacks images for vertical scroll; `public/src/css/liminal-reader.css` styles reader. `journey.html` Creative section links to the reader.

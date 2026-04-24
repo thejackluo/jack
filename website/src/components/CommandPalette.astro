@@ -46,7 +46,7 @@ const searchIndex = [
   ...projects.map(project => ({
     type: 'project',
     title: project.data.title,
-    url: '/#about',
+    url: `/projects/${project.slug}/`,
     excerpt: project.data.summary,
     tags: project.data.tech,
   })),
