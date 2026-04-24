@@ -15,12 +15,9 @@ status: 'Ongoing'
 category: 'AI & Agents'
 featured: true
 gallery:
-  - src: '/assets/projects/agent-school-hero.webp'
-    alt: 'Agent School website hero section: “We Automate Your Business Operations.” with feature tiles below'
-    caption: 'Site — home hero and positioning'
   - src: '/assets/projects/agent-school.webp'
-    alt: 'Agent School website screenshot (full): navigation, hero headline, and feature tiles'
-    caption: 'Site — full screenshot'
+    alt: 'Agent School website screenshot: navigation, hero headline, and feature tiles'
+    caption: 'Site — homepage'
 links:
   - label: 'Website'
     url: 'https://agentschool.io'

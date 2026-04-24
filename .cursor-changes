@@ -5,7 +5,7 @@
 - **Now:** Added new project entries (`agent-school.md`, `rolo.md`, `weave.md`) and updated `projects/index.astro` major ordering so these appear first.
 
 ## 2026-04-23 — Project screenshots (real UI)
-- **Agent School:** Swapped generated art for a real homepage screenshot (`agent-school.webp`) + 16:9 hero crop (`agent-school-hero.webp`) and updated `agent-school.md` gallery.
+- **Agent School:** Swapped generated art for a real homepage screenshot (`agent-school.webp`) and updated `agent-school.md` gallery.
 - **Rolo:** Added real app screenshots (`rolo.png`, `rolo-profile-timeline.png`) and updated `rolo.md` gallery + status to reflect the app is launched (not waitlist-only).
 - **Weave:** Added prototype screenshot (`weave.webp`) + 16:9 hero crop (`weave-hero.webp`) and updated `weave.md` gallery.
 
