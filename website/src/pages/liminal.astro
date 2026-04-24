@@ -304,6 +304,64 @@
       /* ── Skip link ──────────────────────────────────────── */
       .skip { position: fixed; top: -100%; left: 1rem; z-index: 999; }
       .skip:focus { top: 0.5rem; }
+
+      /* ── Mobile horizontal reader (half-pages) ─────────── */
+      body.reader-mobile #stage {
+        position: fixed;
+        top: 52px;
+        left: 0;
+        right: 0;
+        bottom: 48px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
+        overscroll-behavior-y: none;
+        scroll-snap-type: x mandatory;
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        touch-action: pan-x;
+      }
+
+      body.reader-mobile .mobile-page {
+        flex: 0 0 100%;
+        width: 100%;
+        height: 100%;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg);
+      }
+
+      body.reader-mobile .mobile-page.cover { padding: 0.75rem 0.65rem; }
+      body.reader-mobile .mobile-page.cover .full-img {
+        width: 100%;
+        max-width: 100%;
+        max-height: calc(100svh - var(--hud-h) - var(--bar-h) - 24px);
+        object-fit: contain;
+        object-position: center center;
+        box-shadow: 0 6px 28px rgba(0,0,0,0.65);
+        pointer-events: none;
+        -webkit-user-drag: none;
+      }
+
+      /* “Zoomed” half-pages: fill height, keep true 50/50 split */
+      body.reader-mobile .half-bg {
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: 200% 100%;
+        background-position-y: 50%;
+        box-shadow: 0 6px 28px rgba(0,0,0,0.65);
+      }
+      body.reader-mobile .half-bg.half-bg-left  { background-position-x: 0%; }
+      body.reader-mobile .half-bg.half-bg-right { background-position-x: 100%; }
+
+      body.reader-mobile .click-zone { display: none; }
+      @media (min-width: 641px) { body:not(.reader-mobile) .click-zone { display: flex; } }
     </style>
   </head>
   <body>
@@ -342,8 +400,9 @@
     <script>
     (function () {
       var BASE = '/assets/manga/liminal/';
-      var DUR = 380; // ms — must match --dur in CSS
+      var DUR = 380;
       var IDLE = 3000;
+      var MQ_MOBILE = '(max-width: 640px)';
 
       var stage      = document.getElementById('stage');
       var hud        = document.getElementById('hud');
@@ -358,24 +417,35 @@
       var zonePrev   = document.getElementById('zone-prev');
       var zoneNext   = document.getElementById('zone-next');
 
-      var pages       = [];
-      var slides      = [];
-      var thumbEls    = [];
-      var current     = 0;
-      var busy        = false;
-      var thumbsOpen  = false;
-      var idleTimer   = null;
+      var pages            = [];
+      var slides           = [];
+      var mobilePanels     = [];
+      var fileStartLogical = [];
+      var logicalToFile    = [];
+      var thumbEls         = [];
+      var current          = 0;
+      var busy             = false;
+      var thumbsOpen       = false;
+      var idleTimer        = null;
+      var mobileMode       = false;
+      var scrollNavLock    = false;
+      var io               = null;
+      var mobileTouch = { x0: 0, t0: 0, idx0: 0, active: false };
 
-      // ── Idle ────────────────────────────────────────────
+      function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+      function logicalCount() { return mobileMode ? mobilePanels.length : pages.length; }
+
+      function setMobileClass(on) {
+        document.documentElement.classList.toggle('reader-mobile', on);
+        document.body.classList.toggle('reader-mobile', on);
+      }
+
       function wake() {
         clearTimeout(idleTimer);
         hud.classList.remove('hide');
         bottombar.classList.remove('hide');
         idleTimer = setTimeout(function () {
-          if (!thumbsOpen) {
-            hud.classList.add('hide');
-            bottombar.classList.add('hide');
-          }
+          if (!thumbsOpen) { hud.classList.add('hide'); bottombar.classList.add('hide'); }
         }, IDLE);
       }
       document.addEventListener('mousemove', wake, { passive: true });
@@ -383,11 +453,41 @@
       document.addEventListener('touchstart', wake, { passive: true });
       document.addEventListener('click', wake, { passive: true });
 
-      // ── Build DOM ────────────────────────────────────────
-      function build(list) {
+      function clearStageAndState() {
+        stage.innerHTML = '';
+        slides = [];
+        mobilePanels = [];
+        fileStartLogical = [];
+        logicalToFile = [];
+        thumbEls = [];
+        while (thumbStrip.firstChild) thumbStrip.removeChild(thumbStrip.firstChild);
+        if (io) { io.disconnect(); io = null; }
+      }
+
+      function assetUrl(name) { return BASE + encodeURIComponent(name); }
+      function cssUrl(u) { return 'url(' + JSON.stringify(u) + ')'; }
+
+      function buildThumbnails(list) {
+        list.forEach(function (name, i) {
+          var t = document.createElement('div');
+          t.className = 'thumb';
+          var ti = document.createElement('img');
+          ti.src     = BASE + encodeURIComponent(name);
+          ti.alt     = 'Spread ' + (i + 1);
+          ti.loading = 'lazy';
+          ti.decoding = 'async';
+          t.appendChild(ti);
+          t.addEventListener('click', (function (fileIdx) {
+            return function () { goToFile(fileIdx); toggleThumbs(false); };
+          })(i));
+          thumbStrip.appendChild(t);
+          thumbEls.push(t);
+        });
+      }
+
+      function buildDesktop(list) {
         var frag = document.createDocumentFragment();
         list.forEach(function (name, i) {
-          // Slide
           var div = document.createElement('div');
           div.className = 'slide';
           div.style.cssText = 'transform:translateX(100%);opacity:0;';
@@ -402,74 +502,158 @@
           div.appendChild(img);
           frag.appendChild(div);
           slides.push(div);
-
-          // Thumb
-          var t = document.createElement('div');
-          t.className = 'thumb';
-          var ti = document.createElement('img');
-          ti.src     = BASE + encodeURIComponent(name);
-          ti.alt     = 'Spread ' + (i + 1);
-          ti.loading = 'lazy';
-          ti.decoding = 'async';
-          t.appendChild(ti);
-          t.addEventListener('click', (function (idx) {
-            return function () { goTo(idx); toggleThumbs(false); };
-          })(i));
-          thumbStrip.appendChild(t);
-          thumbEls.push(t);
         });
         stage.appendChild(frag);
+        list.forEach(function (_, i) { fileStartLogical[i] = i; logicalToFile[i] = i; });
       }
 
-      // ── Thumbnail strip ──────────────────────────────────
+      function buildMobile(list) {
+        var frag = document.createDocumentFragment();
+        var logical = 0;
+
+        list.forEach(function (name, fileIdx) {
+          fileStartLogical[fileIdx] = logical;
+
+          function pushPanel(el) {
+            el.dataset.logical = String(logical);
+            el.dataset.file = String(fileIdx);
+            frag.appendChild(el);
+            mobilePanels.push(el);
+            logicalToFile[logical] = fileIdx;
+            logical++;
+          }
+
+          if (fileIdx === 0) {
+            var cover = document.createElement('div');
+            cover.className = 'mobile-page cover';
+            var cimg = document.createElement('img');
+            cimg.className = 'full-img';
+            cimg.src = assetUrl(name);
+            cimg.alt = 'Liminal cover';
+            cimg.decoding = 'async';
+            cimg.loading = 'eager';
+            cimg.draggable = false;
+            cover.appendChild(cimg);
+            pushPanel(cover);
+            return;
+          }
+
+          var bg = cssUrl(assetUrl(name));
+
+          var left = document.createElement('div');
+          left.className = 'mobile-page';
+          var leftBg = document.createElement('div');
+          leftBg.className = 'half-bg half-bg-left';
+          leftBg.style.backgroundImage = bg;
+          leftBg.setAttribute('role', 'img');
+          leftBg.setAttribute('aria-label', 'Liminal page ' + (fileIdx + 1) + ' — left half');
+          left.appendChild(leftBg);
+          pushPanel(left);
+
+          var right = document.createElement('div');
+          right.className = 'mobile-page';
+          var rightBg = document.createElement('div');
+          rightBg.className = 'half-bg half-bg-right';
+          rightBg.style.backgroundImage = bg;
+          rightBg.setAttribute('role', 'img');
+          rightBg.setAttribute('aria-label', 'Liminal page ' + (fileIdx + 1) + ' — right half');
+          right.appendChild(rightBg);
+          pushPanel(right);
+        });
+
+        stage.appendChild(frag);
+
+        io = new IntersectionObserver(
+          function (entries) {
+            if (scrollNavLock || busy) return;
+            var best = null;
+            var bestRatio = 0;
+            entries.forEach(function (en) {
+              if (en.isIntersecting && en.intersectionRatio > bestRatio) {
+                bestRatio = en.intersectionRatio;
+                best = en.target;
+              }
+            });
+            if (!best || bestRatio < 0.45) return;
+            var idx = parseInt(best.dataset.logical, 10);
+            if (idx !== current && !isNaN(idx)) {
+              current = idx;
+              syncUI();
+              preload();
+            }
+          },
+          { root: stage, threshold: [0, 0.25, 0.5, 0.75, 1] }
+        );
+        mobilePanels.forEach(function (p) { io.observe(p); });
+      }
+
+      function build(list, useMobile) {
+        clearStageAndState();
+        mobileMode = useMobile;
+        setMobileClass(useMobile);
+        buildThumbnails(list);
+        if (useMobile) buildMobile(list);
+        else buildDesktop(list);
+      }
+
       function toggleThumbs(force) {
         thumbsOpen = (force !== undefined) ? !!force : !thumbsOpen;
         thumbStrip.classList.toggle('open', thumbsOpen);
         thumbBtn.textContent = thumbsOpen ? 'Close' : 'Pages';
         if (thumbsOpen) {
           wake();
-          var el = thumbEls[current];
+          var fi = logicalToFile[current];
+          var el = thumbEls[fi];
           if (el) el.scrollIntoView({ inline: 'center', behavior: 'smooth' });
         }
       }
       thumbBtn.addEventListener('click', function () { toggleThumbs(); });
 
-      // ── UI sync ──────────────────────────────────────────
       function syncUI() {
-        var pct = pages.length > 1 ? (current / (pages.length - 1)) * 100 : 100;
+        var n = logicalCount();
+        var pct = n > 1 ? (current / (n - 1)) * 100 : 100;
         progFill.style.width = pct + '%';
-        counter.textContent  = (current + 1) + ' / ' + pages.length;
-        thumbEls.forEach(function (t, i) { t.classList.toggle('active', i === current); });
+        counter.textContent  = (current + 1) + ' / ' + n;
+        var activeFile = logicalToFile[current];
+        thumbEls.forEach(function (t, i) { t.classList.toggle('active', i === activeFile); });
       }
 
-      // ── Core transition ──────────────────────────────────
-      //
-      // Uses inline styles exclusively so there are NO CSS-class vs
-      // inline-style conflicts.  Pattern:
-      //   1. position the incoming slide off-screen (no transition)
-      //   2. force a reflow so the browser commits the position
-      //   3. add transition + move to final position  →  animation fires
-      //
-      function goTo(index) {
-        if (busy) return;
-        if (index < 0 || index >= pages.length || index === current) return;
+      function goToFile(fileIndex) {
+        if (fileIndex < 0 || fileIndex >= pages.length) return;
+        goTo(fileStartLogical[fileIndex] || 0);
+      }
 
+      function goTo(index) {
+        var n = logicalCount();
+        if (index < 0 || index >= n || index === current) return;
+        if (!mobileMode && busy) return;
+
+        if (mobileMode) {
+          busy = true;
+          scrollNavLock = true;
+          current = index;
+          var panel = mobilePanels[current];
+          if (panel) stage.scrollTo({ left: panel.offsetLeft, behavior: 'smooth' });
+          syncUI();
+          preload();
+          setTimeout(function () { busy = false; scrollNavLock = false; }, 420);
+          return;
+        }
+
+        if (busy) return;
         busy = true;
         var forward = index > current;
         var prev = slides[current];
         var next = slides[index];
         current  = index;
 
-        // 1. Snap next slide to its off-screen start (no transition)
         next.style.transition = 'none';
         next.style.transform  = forward ? 'translateX(100%)' : 'translateX(-100%)';
         next.style.opacity    = '0';
         next.style.zIndex     = '1';
 
-        // 2. Force reflow — the browser paints the off-screen position
         void next.offsetWidth;
 
-        // 3. Enable transitions, animate both slides
         var T = 'transform ' + DUR + 'ms cubic-bezier(0.4,0,0.2,1), ' +
                 'opacity '   + DUR + 'ms cubic-bezier(0.4,0,0.2,1)';
 
@@ -484,43 +668,44 @@
 
         syncUI();
 
-        // Cleanup after animation
         setTimeout(function () {
           prev.style.transition = 'none';
-          prev.style.transform  = forward ? 'translateX(-100%)' : 'translateX(100%)'; // keep off-screen
+          prev.style.transform  = forward ? 'translateX(-100%)' : 'translateX(100%)';
           busy = false;
         }, DUR + 20);
+        preload();
       }
 
       function next() { goTo(current + 1); }
       function prev() { goTo(current - 1); }
 
-      // ── Keyboard ─────────────────────────────────────────
       document.addEventListener('keydown', function (e) {
+        var maxIdx = logicalCount() - 1;
         switch (e.key) {
           case 'ArrowRight': case 'ArrowDown': e.preventDefault(); next(); break;
           case ' ':          if (!thumbsOpen) { e.preventDefault(); next(); } break;
           case 'ArrowLeft':  case 'ArrowUp':  e.preventDefault(); prev(); break;
           case 'Home':  e.preventDefault(); goTo(0); break;
-          case 'End':   e.preventDefault(); goTo(pages.length - 1); break;
+          case 'End':   e.preventDefault(); goTo(maxIdx); break;
           case 'g': case 'G': toggleThumbs(); break;
           case 'Escape': if (thumbsOpen) toggleThumbs(false); break;
         }
       });
 
-      // ── Click zones ───────────────────────────────────────
       zoneNext.addEventListener('click', next);
       zonePrev.addEventListener('click', prev);
       zoneNext.addEventListener('keydown', function (e) { if (e.key === 'Enter') next(); });
       zonePrev.addEventListener('keydown', function (e) { if (e.key === 'Enter') prev(); });
 
-      // ── Touch swipe ───────────────────────────────────────
+      // Desktop swipe only (mobile uses native scroll + snap)
       var tx = 0, ty = 0;
       document.addEventListener('touchstart', function (e) {
+        if (mobileMode) return;
         tx = e.touches[0].clientX;
         ty = e.touches[0].clientY;
       }, { passive: true });
       document.addEventListener('touchend', function (e) {
+        if (mobileMode) return;
         var dx = e.changedTouches[0].clientX - tx;
         var dy = e.changedTouches[0].clientY - ty;
         if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.4) {
@@ -528,14 +713,56 @@
         }
       }, { passive: true });
 
-      // ── Progress bar seek ─────────────────────────────────
+      function logicalIndexFromScroll() {
+        var w = stage.getBoundingClientRect().width || 1;
+        return clamp(Math.round(stage.scrollLeft / w), 0, logicalCount() - 1);
+      }
+
+      // One page per swipe (mobile)
+      stage.addEventListener('touchstart', function (e) {
+        if (!mobileMode) return;
+        mobileTouch.active = true;
+        mobileTouch.x0 = e.touches[0].clientX;
+        mobileTouch.t0 = Date.now();
+        mobileTouch.idx0 = logicalIndexFromScroll();
+        scrollNavLock = true;
+      }, { passive: true });
+
+      stage.addEventListener('touchend', function (e) {
+        if (!mobileMode || !mobileTouch.active) return;
+        mobileTouch.active = false;
+        var x1 = e.changedTouches[0].clientX;
+        var dt = Math.max(1, Date.now() - mobileTouch.t0);
+        var dx = x1 - mobileTouch.x0;
+        var v = dx / dt;
+        var dir = 0;
+        if (Math.abs(dx) > 48 || Math.abs(v) > 0.45) dir = dx < 0 ? 1 : -1;
+        var target = dir !== 0 ? clamp(mobileTouch.idx0 + dir, 0, logicalCount() - 1)
+                               : clamp(logicalIndexFromScroll(), 0, logicalCount() - 1);
+        goTo(target);
+      }, { passive: true });
+
       document.getElementById('progress-track').addEventListener('click', function (e) {
         var r = this.getBoundingClientRect();
-        goTo(Math.round(((e.clientX - r.left) / r.width) * (pages.length - 1)));
+        var n = logicalCount();
+        goTo(Math.round(((e.clientX - r.left) / r.width) * (n - 1)));
       });
 
-      // ── Preload neighbours ────────────────────────────────
       function preload() {
+        if (mobileMode) {
+          var seen = {};
+          [current - 1, current, current + 1, current + 2].forEach(function (i) {
+            if (i < 0 || i >= mobilePanels.length) return;
+            var fi = logicalToFile[i];
+            if (seen[fi]) return;
+            seen[fi] = true;
+            var name = pages[fi];
+            if (!name) return;
+            var im = new Image();
+            im.src = assetUrl(name);
+          });
+          return;
+        }
         [current - 1, current + 1, current + 2].forEach(function (i) {
           if (i >= 0 && i < slides.length) {
             var img = slides[i].querySelector('img');
@@ -544,43 +771,73 @@
         });
       }
 
-      // ── Init ─────────────────────────────────────────────
       fetch(BASE + 'manifest.json')
         .then(function (r) { if (!r.ok) throw new Error('manifest'); return r.json(); })
         .then(function (data) {
           pages = data.pages || [];
           if (!pages.length) throw new Error('empty');
 
-          build(pages);
+          build(pages, window.matchMedia(MQ_MOBILE).matches);
+          current = 0;
 
-          // Show first slide immediately (no transition)
-          var first = slides[0];
-          first.style.transition = 'none';
-          first.style.transform  = 'translateX(0)';
-          first.style.opacity    = '1';
-          first.style.zIndex     = '1';
+          if (!mobileMode) {
+            var first = slides[0];
+            first.style.transition = 'none';
+            first.style.transform  = 'translateX(0)';
+            first.style.opacity    = '1';
+            first.style.zIndex     = '1';
+          }
 
           syncUI();
           loaderFill.style.width = '80%';
 
-          var img = first.querySelector('img');
+          var firstImg = mobileMode
+            ? (stage.querySelector('.mobile-page.cover img') || stage.querySelector('.mobile-page img'))
+            : slides[0].querySelector('img');
+
           function reveal() {
             loaderFill.style.width = '100%';
             setTimeout(function () {
               loader.classList.add('out');
               setTimeout(function () { loader.style.display = 'none'; }, 520);
               wake();
+              kbdHint.textContent = mobileMode ? 'Swipe / scroll → · G for page list' : '← → to flip \u00a0·\u00a0 G for page list';
               kbdHint.classList.add('show');
               setTimeout(function () { kbdHint.classList.remove('show'); }, 3500);
               preload();
             }, 180);
           }
-          if (img.complete) reveal();
-          else { img.addEventListener('load', reveal); img.addEventListener('error', reveal); }
+          if (firstImg && firstImg.complete) reveal();
+          else if (firstImg) { firstImg.addEventListener('load', reveal); firstImg.addEventListener('error', reveal); }
+          else reveal();
+
+          var resizeTimer = null;
+          window.addEventListener('resize', function () {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function () {
+              var m = window.matchMedia(MQ_MOBILE).matches;
+              if (m === mobileMode) return;
+              var preserveFile = logicalToFile[current] != null ? logicalToFile[current] : 0;
+              build(pages, m);
+              current = fileStartLogical[preserveFile] || 0;
+              syncUI();
+              preload();
+              if (mobileMode) {
+                var p = mobilePanels[current];
+                if (p) stage.scrollTo({ left: p.offsetLeft, behavior: 'auto' });
+              } else {
+                slides.forEach(function (s, i) {
+                  s.style.transition = 'none';
+                  if (i === current) { s.style.transform = 'translateX(0)'; s.style.opacity = '1'; s.style.zIndex = '1'; }
+                  else { s.style.transform = i < current ? 'translateX(-100%)' : 'translateX(100%)'; s.style.opacity = '0'; s.style.zIndex = '0'; }
+                });
+              }
+            }, 220);
+          });
         })
         .catch(function (err) {
           console.error('Liminal reader:', err);
-          loader.innerHTML = '<p style="color:#e8a0a0;padding:2rem;text-align:center;font-family:sans-serif">Could not load pages.<br>Run <code>npm run dev</code> in the website folder.</p>';
+          loader.innerHTML = '<p style=\"color:#e8a0a0;padding:2rem;text-align:center;font-family:sans-serif\">Could not load pages.<br>Run <code>npm run dev</code> in the website folder.</p>';
         });
     })();
     </script>
