@@ -312,7 +312,7 @@
         left: 0;
         right: 0;
         bottom: 48px;
-        overflow-x: auto;
+        overflow-x: hidden;
         overflow-y: hidden;
         -webkit-overflow-scrolling: touch;
         overscroll-behavior-x: contain;
@@ -623,6 +623,12 @@
         goTo(fileStartLogical[fileIndex] || 0);
       }
 
+      function snapMobile(index, behavior) {
+        var panel = mobilePanels[index];
+        if (!panel) return;
+        stage.scrollTo({ left: panel.offsetLeft, behavior: behavior || 'auto' });
+      }
+
       function goTo(index) {
         var n = logicalCount();
         if (index < 0 || index >= n || index === current) return;
@@ -632,8 +638,7 @@
           busy = true;
           scrollNavLock = true;
           current = index;
-          var panel = mobilePanels[current];
-          if (panel) stage.scrollTo({ left: panel.offsetLeft, behavior: 'smooth' });
+          snapMobile(current, 'smooth');
           syncUI();
           preload();
           setTimeout(function () { busy = false; scrollNavLock = false; }, 420);
@@ -721,26 +726,38 @@
       // One page per swipe (mobile)
       stage.addEventListener('touchstart', function (e) {
         if (!mobileMode) return;
+        // Take over scrolling to avoid iOS momentum “jiggle” + multi-snap skips.
+        if (e.cancelable) e.preventDefault();
         mobileTouch.active = true;
         mobileTouch.x0 = e.touches[0].clientX;
         mobileTouch.t0 = Date.now();
         mobileTouch.idx0 = logicalIndexFromScroll();
+        mobileTouch.scroll0 = stage.scrollLeft;
         scrollNavLock = true;
-      }, { passive: true });
+      }, { passive: false });
+
+      stage.addEventListener('touchmove', function (e) {
+        if (!mobileMode || !mobileTouch.active) return;
+        if (e.cancelable) e.preventDefault();
+        var dx = e.touches[0].clientX - mobileTouch.x0;
+        stage.scrollLeft = mobileTouch.scroll0 - dx;
+      }, { passive: false });
 
       stage.addEventListener('touchend', function (e) {
         if (!mobileMode || !mobileTouch.active) return;
+        if (e.cancelable) e.preventDefault();
         mobileTouch.active = false;
         var x1 = e.changedTouches[0].clientX;
         var dt = Math.max(1, Date.now() - mobileTouch.t0);
         var dx = x1 - mobileTouch.x0;
         var v = dx / dt;
+
         var dir = 0;
-        if (Math.abs(dx) > 48 || Math.abs(v) > 0.45) dir = dx < 0 ? 1 : -1;
-        var target = dir !== 0 ? clamp(mobileTouch.idx0 + dir, 0, logicalCount() - 1)
-                               : clamp(logicalIndexFromScroll(), 0, logicalCount() - 1);
-        goTo(target);
-      }, { passive: true });
+        if (Math.abs(dx) > 40 || Math.abs(v) > 0.35) dir = dx < 0 ? 1 : -1;
+        var target = clamp(mobileTouch.idx0 + dir, 0, logicalCount() - 1);
+        goTo(target); // smooth snap under our control
+        setTimeout(function () { scrollNavLock = false; }, 0);
+      }, { passive: false });
 
       document.getElementById('progress-track').addEventListener('click', function (e) {
         var r = this.getBoundingClientRect();
