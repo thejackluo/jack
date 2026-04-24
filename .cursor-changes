@@ -21,6 +21,10 @@
 - **Prior:** Reader ended at `page_63-64.png`; older spreads for 51–64.
 - **Now:** Re-copied all PNGs from Desktop `liminal manga` (overwrites). Manifest includes `page_65-66.png`, `page_67-68.png`, `page_69-70.png`; spreads `page_51-52` through `page_69-70` match current Desktop exports (37 PNGs + manifest in folder).
 
+## 2026-04-23 — Vivarium manga reader + social links
+- **Prior:** Only `/liminal` reader existed; no Vivarium reader/assets. Index “3 million+ views” bullet linked TikToks only.
+- **Now:** Added `/vivarium` reader (`website/src/pages/vivarium.astro`) and assets under `website/public/assets/manga/vivarium/` with `manifest.json`. `journey.astro` links to both readers and mentions Instagram story performance + the 1M reel. `index.astro` adds the Instagram reel link alongside TikToks and notes the 30+ one‑minute story series.
+
 ## 2026-04-23 — Liminal reader mobile (horizontal half-pages)
 - **Prior:** Mobile used the same horizontal slide animation as desktop, shrinking spreads and making text hard to read.
 - **Now:** At `max-width: 640px`, the reader becomes a **horizontal scroll-snap** track. The cover is shown as a contained single page; every following asset is rendered as **two snap pages** (left half then right half) using `background-size: 200%` + `background-position: 0%/100%` so the split is a true 50/50 vertical cut. Progress/keyboard/swipe/thumbnail navigation map to the new logical page indices; resizing rebuilds layout and preserves the current file.
