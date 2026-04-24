@@ -1,5 +1,14 @@
 # Change log (agent)
 
+## 2026-04-23 — Projects page: Agent School, Rolo, Weave
+- **Prior:** `/projects` major grid listed Delight, MAGK Excel, Efficore, ARKOS only; no entries for Agent School, Rolo, or Weave.
+- **Now:** Added new project entries (`agent-school.md`, `rolo.md`, `weave.md`) and updated `projects/index.astro` major ordering so these appear first.
+
+## 2026-04-23 — Project screenshots (real UI)
+- **Agent School:** Swapped generated art for a real homepage screenshot (`agent-school.webp`) + 16:9 hero crop (`agent-school-hero.webp`) and updated `agent-school.md` gallery.
+- **Rolo:** Added real app screenshots (`rolo.png`, `rolo-profile-timeline.png`) and updated `rolo.md` gallery + status to reflect the app is launched (not waitlist-only).
+- **Weave:** Added prototype screenshot (`weave.webp`) + 16:9 hero crop (`weave-hero.webp`) and updated `weave.md` gallery.
+
 ## 2026-04-23 — Liminal web reader
 - **Prior:** Journey page had Limbinal book text + PDF sample only; no manga assets in repo.
 - **Now:** `website/public/assets/manga/liminal/` contains 34 PNGs (main reading order) copied from Desktop `liminal manga`; `manifest.json` lists page order. New `public/liminal-reader.html` fetches the manifest and stacks images for vertical scroll; `public/src/css/liminal-reader.css` styles reader. `journey.html` Creative section links to the reader.
@@ -7,3 +16,7 @@
 ## 2026-04-23 — Liminal manga re-import (pages 51–70)
 - **Prior:** Reader ended at `page_63-64.png`; older spreads for 51–64.
 - **Now:** Re-copied all PNGs from Desktop `liminal manga` (overwrites). Manifest includes `page_65-66.png`, `page_67-68.png`, `page_69-70.png`; spreads `page_51-52` through `page_69-70` match current Desktop exports (37 PNGs + manifest in folder).
+
+## 2026-04-23 — Liminal reader mobile (horizontal half-pages)
+- **Prior:** Mobile used the same horizontal slide animation as desktop, shrinking spreads and making text hard to read.
+- **Now:** At `max-width: 640px`, the reader becomes a **horizontal scroll-snap** track. The cover is shown as a contained single page; every following asset is rendered as **two snap pages** (left half then right half) using `background-size: 200%` + `background-position: 0%/100%` so the split is a true 50/50 vertical cut. Progress/keyboard/swipe/thumbnail navigation map to the new logical page indices; resizing rebuilds layout and preserves the current file.

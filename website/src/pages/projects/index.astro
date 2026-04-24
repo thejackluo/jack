@@ -5,8 +5,16 @@ import BaseLayout from '../../layouts/Base.astro';
 // Get all projects
 const allProjects = await getCollection('projects');
 
-// Define major project slugs
-const majorProjectSlugs = ['delight', 'magk-excel', 'efficore', 'arkos'];
+// Define major project slugs (order = display order on the page)
+const majorProjectSlugs = [
+  'agent-school',
+  'rolo',
+  'weave',
+  'delight',
+  'magk-excel',
+  'efficore',
+  'arkos',
+];
 
 // Split into major and minor projects
 const majorProjects = allProjects.filter(p => majorProjectSlugs.includes(p.slug));
