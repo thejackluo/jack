@@ -1,0 +1,10 @@
+# Astro site lives in /website; build runs from that directory.
+# https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  base = "website"
+  command = "npm ci && npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
