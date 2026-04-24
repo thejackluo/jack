@@ -1,0 +1,825 @@
+---
+// Full-screen reader for Vivarium manga — horizontal spreads on desktop;
+// on narrow viewports, horizontal swipe with each spread split into two half-pages.
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vivarium — Jack Luo</title>
+    <meta name="description" content="Read Vivarium, a manga by Jack Luo." />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon/favicon-32x32.png" />
+    <link rel="stylesheet" href="/src/css/font.css" />
+    <style is:global>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      :root {
+        --hud-h: 52px;
+        --bar-h: 48px;
+        --bg: #000;
+        --bg2: #0d0d0d;
+        --accent: #ffffff;
+        --accent-dim: rgba(255,255,255,0.3);
+        --dur: 380ms;
+        --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      html, body {
+        width: 100%; height: 100%;
+        overflow: hidden;
+        background: var(--bg);
+        color: #fff;
+        font-family: 'Stellar', 'Century Gothic', 'Helvetica Neue', sans-serif;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      /* ── Stage ─────────────────────────────────────────── */
+      #stage {
+        position: fixed;
+        top: 52px;
+        left: 0;
+        right: 0;
+        bottom: 48px;
+        overflow: hidden;
+        background: var(--bg);
+      }
+
+      /* ── Slides (desktop) ───────────────────────────────── */
+      .slide {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .slide img {
+        display: block;
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        box-shadow: 0 8px 40px rgba(0,0,0,0.75);
+        pointer-events: none;
+        -webkit-user-drag: none;
+      }
+
+      /* ── HUD (top bar) ─────────────────────────────────── */
+      #hud {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        height: 52px;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 1rem;
+        gap: 1rem;
+        background: rgba(0,0,0,0.88);
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        backdrop-filter: blur(8px);
+        transition: opacity 0.35s;
+      }
+      #hud.hide { opacity: 0; pointer-events: none; }
+
+      .hud-back {
+        color: rgba(255,255,255,0.8);
+        text-decoration: none;
+        font-size: 0.8rem;
+        letter-spacing: 0.08em;
+        padding: 0.3rem 0.7rem;
+        border-radius: 4px;
+        border: 1px solid rgba(255,255,255,0.2);
+        background: transparent;
+        white-space: nowrap;
+        transition: color 0.2s, border-color 0.2s;
+        font-family: 'Stellar', 'Century Gothic', sans-serif;
+      }
+      .hud-back:hover { color: #fff; border-color: rgba(255,255,255,0.6); }
+
+      #hud-title {
+        font-size: 0.85rem;
+        letter-spacing: 0.18em;
+        opacity: 0.65;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-family: 'Elianto-Regular', 'Stellar', sans-serif;
+        text-transform: uppercase;
+      }
+
+      /* ── Bottom bar ─────────────────────────────────────── */
+      #bottombar {
+        position: fixed;
+        left: 0; right: 0; bottom: 0;
+        height: 48px;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        padding: 0 1rem;
+        gap: 0.75rem;
+        background: rgba(0,0,0,0.88);
+        border-top: 1px solid rgba(255,255,255,0.08);
+        backdrop-filter: blur(8px);
+        transition: opacity 0.35s;
+      }
+      #bottombar.hide { opacity: 0; pointer-events: none; }
+
+      #progress-track {
+        flex: 1;
+        height: 3px;
+        border-radius: 2px;
+        background: rgba(255,255,255,0.12);
+        cursor: pointer;
+        position: relative;
+      }
+      #progress-fill {
+        height: 100%;
+        border-radius: 2px;
+        background: #fff;
+        min-width: 3px;
+        transition: width var(--dur) var(--ease);
+      }
+
+      #page-counter {
+        font-size: 0.8rem;
+        letter-spacing: 0.08em;
+        opacity: 0.75;
+        white-space: nowrap;
+        min-width: 62px;
+        text-align: right;
+        font-family: 'Stellar', 'Century Gothic', sans-serif;
+      }
+
+      #thumb-toggle {
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        color: rgba(255,255,255,0.6);
+        cursor: pointer;
+        padding: 0.25rem 0.65rem;
+        border-radius: 4px;
+        border: 1px solid rgba(255,255,255,0.25);
+        background: transparent;
+        transition: color 0.2s, border-color 0.2s;
+        font-family: 'Stellar', 'Century Gothic', sans-serif;
+      }
+      #thumb-toggle:hover { color: #fff; border-color: rgba(255,255,255,0.7); }
+
+      /* ── Click zones (desktop only) ─────────────────────── */
+      .click-zone {
+        position: fixed;
+        top: 52px;
+        bottom: 48px;
+        width: 18%;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.25s;
+      }
+      .click-zone:hover { opacity: 1; }
+
+      #zone-prev {
+        left: 0;
+        justify-content: flex-start;
+        padding-left: 1rem;
+        background: linear-gradient(to right, rgba(10,6,16,0.2), transparent);
+      }
+      #zone-next {
+        right: 0;
+        justify-content: flex-end;
+        padding-right: 1rem;
+        background: linear-gradient(to left, rgba(10,6,16,0.2), transparent);
+      }
+
+      .zone-icon {
+        width: 42px; height: 42px;
+        border-radius: 50%;
+        background: rgba(10,6,16,0.7);
+        border: 1px solid var(--accent-dim);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1rem; color: var(--accent);
+        backdrop-filter: blur(8px);
+        transition: transform 0.15s, background 0.2s;
+      }
+      .click-zone:hover .zone-icon {
+        transform: scale(1.1);
+        background: rgba(31,6,42,0.9);
+        border-color: var(--accent);
+      }
+
+      /* ── Thumbnail strip ────────────────────────────────── */
+      #thumb-strip {
+        position: fixed;
+        bottom: 48px;
+        left: 0; right: 0;
+        z-index: 25;
+        background: rgba(0,0,0,0.96);
+        backdrop-filter: blur(12px);
+        border-top: 1px solid rgba(255,255,255,0.08);
+        padding: 0.6rem 0.75rem;
+        display: flex;
+        gap: 0.45rem;
+        overflow-x: auto;
+        overflow-y: hidden;
+        transform: translateY(calc(100% + 48px));
+        transition: transform 0.3s var(--ease);
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255,255,255,0.2) transparent;
+        height: 90px;
+      }
+      #thumb-strip.open { transform: translateY(0); }
+
+      .thumb {
+        flex: 0 0 auto;
+        width: 64px; height: 64px;
+        border-radius: 4px;
+        overflow: hidden;
+        cursor: pointer;
+        border: 2px solid transparent;
+        opacity: 0.55;
+        transition: opacity 0.2s, border-color 0.2s, transform 0.15s;
+      }
+      .thumb:hover { opacity: 0.9; transform: translateY(-2px); }
+      .thumb.active { border-color: var(--accent); opacity: 1; }
+      .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+      /* ── Keyboard hint ──────────────────────────────────── */
+      #kbd-hint {
+        position: fixed;
+        bottom: calc(var(--bar-h) + 14px);
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 30;
+        background: rgba(10,6,16,0.8);
+        border: 1px solid var(--accent-dim);
+        border-radius: 20px;
+        padding: 0.35rem 0.9rem;
+        font-size: 0.72rem;
+        color: rgba(240,232,244,0.7);
+        backdrop-filter: blur(10px);
+        white-space: nowrap;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.4s;
+      }
+      #kbd-hint.show { opacity: 1; }
+
+      /* ── Loader ─────────────────────────────────────────── */
+      #loader {
+        position: fixed; inset: 0; z-index: 50;
+        background: #000;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        gap: 1.2rem;
+        transition: opacity 0.5s;
+      }
+      #loader.out { opacity: 0; pointer-events: none; }
+
+      .loader-title {
+        font-size: 1.4rem;
+        letter-spacing: 0.28em;
+        color: #fff;
+        font-family: 'Elianto-Regular', 'Stellar', sans-serif;
+      }
+      .loader-track {
+        width: 160px; height: 1px;
+        border-radius: 1px;
+        background: rgba(255,255,255,0.15);
+        overflow: hidden;
+      }
+      #loader-fill {
+        height: 100%;
+        background: #fff;
+        border-radius: 1px;
+        width: 0%;
+        transition: width 0.3s ease;
+      }
+
+      /* ── Skip link ──────────────────────────────────────── */
+      .skip { position: fixed; top: -100%; left: 1rem; z-index: 999; }
+      .skip:focus { top: 0.5rem; }
+
+      /* ── Mobile horizontal reader (half-pages) ─────────── */
+      body.reader-mobile #stage {
+        overflow-x: hidden;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
+        overscroll-behavior-y: none;
+        scroll-snap-type: x mandatory;
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        touch-action: pan-x;
+      }
+      body.reader-mobile .mobile-page {
+        flex: 0 0 100%;
+        width: 100%;
+        height: 100%;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg);
+      }
+      body.reader-mobile .mobile-page.cover { padding: 0.75rem 0.65rem; }
+      body.reader-mobile .mobile-page.cover .full-img {
+        width: 100%;
+        max-width: 100%;
+        max-height: calc(100svh - var(--hud-h) - var(--bar-h) - 24px);
+        object-fit: contain;
+        object-position: center center;
+        box-shadow: 0 6px 28px rgba(0,0,0,0.65);
+        pointer-events: none;
+        -webkit-user-drag: none;
+      }
+      body.reader-mobile .half-bg {
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: 200% auto;
+        background-position-y: 50%;
+        box-shadow: 0 6px 28px rgba(0,0,0,0.65);
+      }
+      body.reader-mobile .half-bg.half-bg-left  { background-position-x: 0%; }
+      body.reader-mobile .half-bg.half-bg-right { background-position-x: 100%; }
+      body.reader-mobile .click-zone { display: none; }
+      @media (min-width: 641px) { body:not(.reader-mobile) .click-zone { display: flex; } }
+    </style>
+  </head>
+  <body>
+    <a class="skip" href="#stage">Skip to reader</a>
+
+    <div id="loader">
+      <div class="loader-title">VIVARIUM</div>
+      <div class="loader-track"><div id="loader-fill"></div></div>
+    </div>
+
+    <div id="hud">
+      <a class="hud-back" href="/journey">← Journey</a>
+      <span id="hud-title">Vivarium</span>
+      <button id="thumb-toggle" aria-label="Toggle thumbnails">Pages</button>
+    </div>
+
+    <div id="stage" role="main" aria-label="Vivarium manga reader"></div>
+
+    <div id="zone-prev" class="click-zone" role="button" tabindex="0" aria-label="Previous spread">
+      <div class="zone-icon">&#8592;</div>
+    </div>
+    <div id="zone-next" class="click-zone" role="button" tabindex="0" aria-label="Next spread">
+      <div class="zone-icon">&#8594;</div>
+    </div>
+
+    <div id="bottombar">
+      <div id="progress-track" role="progressbar" aria-label="Reading progress">
+        <div id="progress-fill"></div>
+      </div>
+      <div id="page-counter">—</div>
+    </div>
+
+    <div id="kbd-hint">← → to flip &nbsp;·&nbsp; G for page list</div>
+    <div id="thumb-strip" aria-label="Page thumbnails"></div>
+
+    <script>
+    (function () {
+      var BASE = '/assets/manga/vivarium/';
+      var DUR = 380;
+      var IDLE = 3000;
+      var MQ_MOBILE = '(max-width: 640px)';
+
+      var stage      = document.getElementById('stage');
+      var hud        = document.getElementById('hud');
+      var bottombar  = document.getElementById('bottombar');
+      var progFill   = document.getElementById('progress-fill');
+      var counter    = document.getElementById('page-counter');
+      var loader     = document.getElementById('loader');
+      var loaderFill = document.getElementById('loader-fill');
+      var thumbStrip = document.getElementById('thumb-strip');
+      var thumbBtn   = document.getElementById('thumb-toggle');
+      var kbdHint    = document.getElementById('kbd-hint');
+      var zonePrev   = document.getElementById('zone-prev');
+      var zoneNext   = document.getElementById('zone-next');
+
+      var pages            = [];
+      var slides           = [];
+      var mobilePanels     = [];
+      var fileStartLogical = [];
+      var logicalToFile    = [];
+      var thumbEls         = [];
+      var current          = 0;
+      var busy             = false;
+      var thumbsOpen       = false;
+      var idleTimer        = null;
+      var mobileMode       = false;
+      var scrollNavLock    = false;
+      var io               = null;
+      var mobileTouch = { x0: 0, t0: 0, idx0: 0, active: false, scroll0: 0 };
+
+      function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+      function logicalCount() { return mobileMode ? mobilePanels.length : pages.length; }
+      function setMobileClass(on) {
+        document.documentElement.classList.toggle('reader-mobile', on);
+        document.body.classList.toggle('reader-mobile', on);
+      }
+
+      function wake() {
+        clearTimeout(idleTimer);
+        hud.classList.remove('hide');
+        bottombar.classList.remove('hide');
+        idleTimer = setTimeout(function () {
+          if (!thumbsOpen) { hud.classList.add('hide'); bottombar.classList.add('hide'); }
+        }, IDLE);
+      }
+      document.addEventListener('mousemove', wake, { passive: true });
+      document.addEventListener('keydown',   wake, { passive: true });
+      document.addEventListener('touchstart', wake, { passive: true });
+      document.addEventListener('click', wake, { passive: true });
+
+      function clearStageAndState() {
+        stage.innerHTML = '';
+        slides = [];
+        mobilePanels = [];
+        fileStartLogical = [];
+        logicalToFile = [];
+        thumbEls = [];
+        while (thumbStrip.firstChild) thumbStrip.removeChild(thumbStrip.firstChild);
+        if (io) { io.disconnect(); io = null; }
+      }
+
+      function assetUrl(name) { return BASE + encodeURIComponent(name); }
+      function cssUrl(u) { return 'url(' + JSON.stringify(u) + ')'; }
+
+      function buildThumbnails(list) {
+        list.forEach(function (name, i) {
+          var t = document.createElement('div');
+          t.className = 'thumb';
+          var ti = document.createElement('img');
+          ti.src     = BASE + encodeURIComponent(name);
+          ti.alt     = 'Spread ' + (i + 1);
+          ti.loading = 'lazy';
+          ti.decoding = 'async';
+          t.appendChild(ti);
+          t.addEventListener('click', (function (fileIdx) {
+            return function () { goToFile(fileIdx); toggleThumbs(false); };
+          })(i));
+          thumbStrip.appendChild(t);
+          thumbEls.push(t);
+        });
+      }
+
+      function buildDesktop(list) {
+        var frag = document.createDocumentFragment();
+        list.forEach(function (name, i) {
+          var div = document.createElement('div');
+          div.className = 'slide';
+          div.style.cssText = 'transform:translateX(100%);opacity:0;';
+
+          var img = document.createElement('img');
+          img.src     = BASE + encodeURIComponent(name);
+          img.alt     = 'Vivarium spread ' + (i + 1) + ' of ' + list.length;
+          img.decoding = 'async';
+          img.loading  = i < 2 ? 'eager' : 'lazy';
+          img.draggable = false;
+
+          div.appendChild(img);
+          frag.appendChild(div);
+          slides.push(div);
+        });
+        stage.appendChild(frag);
+        list.forEach(function (_, i) { fileStartLogical[i] = i; logicalToFile[i] = i; });
+      }
+
+      function buildMobile(list) {
+        var frag = document.createDocumentFragment();
+        var logical = 0;
+
+        list.forEach(function (name, fileIdx) {
+          fileStartLogical[fileIdx] = logical;
+
+          function pushPanel(el) {
+            el.dataset.logical = String(logical);
+            el.dataset.file = String(fileIdx);
+            frag.appendChild(el);
+            mobilePanels.push(el);
+            logicalToFile[logical] = fileIdx;
+            logical++;
+          }
+
+          if (fileIdx === 0) {
+            var cover = document.createElement('div');
+            cover.className = 'mobile-page cover';
+            var cimg = document.createElement('img');
+            cimg.className = 'full-img';
+            cimg.src = assetUrl(name);
+            cimg.alt = 'Vivarium cover';
+            cimg.decoding = 'async';
+            cimg.loading = 'eager';
+            cimg.draggable = false;
+            cover.appendChild(cimg);
+            pushPanel(cover);
+            return;
+          }
+
+          var bg = cssUrl(assetUrl(name));
+
+          var left = document.createElement('div');
+          left.className = 'mobile-page';
+          var leftBg = document.createElement('div');
+          leftBg.className = 'half-bg half-bg-left';
+          leftBg.style.backgroundImage = bg;
+          leftBg.setAttribute('role', 'img');
+          leftBg.setAttribute('aria-label', 'Vivarium page ' + (fileIdx + 1) + ' — left half');
+          left.appendChild(leftBg);
+          pushPanel(left);
+
+          var right = document.createElement('div');
+          right.className = 'mobile-page';
+          var rightBg = document.createElement('div');
+          rightBg.className = 'half-bg half-bg-right';
+          rightBg.style.backgroundImage = bg;
+          rightBg.setAttribute('role', 'img');
+          rightBg.setAttribute('aria-label', 'Vivarium page ' + (fileIdx + 1) + ' — right half');
+          right.appendChild(rightBg);
+          pushPanel(right);
+        });
+
+        stage.appendChild(frag);
+
+        io = new IntersectionObserver(
+          function (entries) {
+            if (scrollNavLock || busy) return;
+            var best = null;
+            var bestRatio = 0;
+            entries.forEach(function (en) {
+              if (en.isIntersecting && en.intersectionRatio > bestRatio) {
+                bestRatio = en.intersectionRatio;
+                best = en.target;
+              }
+            });
+            if (!best || bestRatio < 0.45) return;
+            var idx = parseInt(best.dataset.logical, 10);
+            if (idx !== current && !isNaN(idx)) {
+              current = idx;
+              syncUI();
+              preload();
+            }
+          },
+          { root: stage, threshold: [0, 0.25, 0.5, 0.75, 1] }
+        );
+        mobilePanels.forEach(function (p) { io.observe(p); });
+      }
+
+      function build(list, useMobile) {
+        clearStageAndState();
+        mobileMode = useMobile;
+        setMobileClass(useMobile);
+        buildThumbnails(list);
+        if (useMobile) buildMobile(list);
+        else buildDesktop(list);
+      }
+
+      function toggleThumbs(force) {
+        thumbsOpen = (force !== undefined) ? !!force : !thumbsOpen;
+        thumbStrip.classList.toggle('open', thumbsOpen);
+        thumbBtn.textContent = thumbsOpen ? 'Close' : 'Pages';
+        if (thumbsOpen) {
+          wake();
+          var fi = logicalToFile[current];
+          var el = thumbEls[fi];
+          if (el) el.scrollIntoView({ inline: 'center', behavior: 'smooth' });
+        }
+      }
+      thumbBtn.addEventListener('click', function () { toggleThumbs(); });
+
+      function syncUI() {
+        var n = logicalCount();
+        var pct = n > 1 ? (current / (n - 1)) * 100 : 100;
+        progFill.style.width = pct + '%';
+        counter.textContent  = (current + 1) + ' / ' + n;
+        var activeFile = logicalToFile[current];
+        thumbEls.forEach(function (t, i) { t.classList.toggle('active', i === activeFile); });
+      }
+
+      function goToFile(fileIndex) {
+        if (fileIndex < 0 || fileIndex >= pages.length) return;
+        goTo(fileStartLogical[fileIndex] || 0);
+      }
+
+      function snapMobile(index, behavior) {
+        var panel = mobilePanels[index];
+        if (!panel) return;
+        stage.scrollTo({ left: panel.offsetLeft, behavior: behavior || 'auto' });
+      }
+
+      function goTo(index) {
+        var n = logicalCount();
+        if (index < 0 || index >= n || index === current) return;
+        if (!mobileMode && busy) return;
+
+        if (mobileMode) {
+          busy = true;
+          scrollNavLock = true;
+          current = index;
+          snapMobile(current, 'smooth');
+          syncUI();
+          preload();
+          setTimeout(function () { busy = false; scrollNavLock = false; }, 420);
+          return;
+        }
+
+        if (busy) return;
+        busy = true;
+        var forward = index > current;
+        var prev = slides[current];
+        var next = slides[index];
+        current  = index;
+
+        next.style.transition = 'none';
+        next.style.transform  = forward ? 'translateX(100%)' : 'translateX(-100%)';
+        next.style.opacity    = '0';
+        next.style.zIndex     = '1';
+
+        void next.offsetWidth;
+
+        var T = 'transform ' + DUR + 'ms cubic-bezier(0.4,0,0.2,1), ' +
+                'opacity '   + DUR + 'ms cubic-bezier(0.4,0,0.2,1)';
+
+        next.style.transition = T;
+        next.style.transform  = 'translateX(0)';
+        next.style.opacity    = '1';
+
+        prev.style.transition = T;
+        prev.style.transform  = forward ? 'translateX(-100%)' : 'translateX(100%)';
+        prev.style.opacity    = '0';
+        prev.style.zIndex     = '0';
+
+        syncUI();
+        setTimeout(function () {
+          prev.style.transition = 'none';
+          prev.style.transform  = forward ? 'translateX(-100%)' : 'translateX(100%)';
+          busy = false;
+        }, DUR + 20);
+        preload();
+      }
+
+      function next() { goTo(current + 1); }
+      function prev() { goTo(current - 1); }
+
+      document.addEventListener('keydown', function (e) {
+        var maxIdx = logicalCount() - 1;
+        switch (e.key) {
+          case 'ArrowRight': case 'ArrowDown': e.preventDefault(); next(); break;
+          case ' ':          if (!thumbsOpen) { e.preventDefault(); next(); } break;
+          case 'ArrowLeft':  case 'ArrowUp':  e.preventDefault(); prev(); break;
+          case 'Home':  e.preventDefault(); goTo(0); break;
+          case 'End':   e.preventDefault(); goTo(maxIdx); break;
+          case 'g': case 'G': toggleThumbs(); break;
+          case 'Escape': if (thumbsOpen) toggleThumbs(false); break;
+        }
+      });
+
+      zoneNext.addEventListener('click', next);
+      zonePrev.addEventListener('click', prev);
+      zoneNext.addEventListener('keydown', function (e) { if (e.key === 'Enter') next(); });
+      zonePrev.addEventListener('keydown', function (e) { if (e.key === 'Enter') prev(); });
+
+      // Desktop swipe only
+      var tx = 0, ty = 0;
+      document.addEventListener('touchstart', function (e) {
+        if (mobileMode) return;
+        tx = e.touches[0].clientX;
+        ty = e.touches[0].clientY;
+      }, { passive: true });
+      document.addEventListener('touchend', function (e) {
+        if (mobileMode) return;
+        var dx = e.changedTouches[0].clientX - tx;
+        var dy = e.changedTouches[0].clientY - ty;
+        if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+          if (dx < 0) next(); else prev();
+        }
+      }, { passive: true });
+
+      function logicalIndexFromScroll() {
+        var w = stage.getBoundingClientRect().width || 1;
+        return clamp(Math.round(stage.scrollLeft / w), 0, logicalCount() - 1);
+      }
+
+      // Mobile: take over scrolling for smooth, deterministic paging
+      stage.addEventListener('touchstart', function (e) {
+        if (!mobileMode) return;
+        if (e.cancelable) e.preventDefault();
+        mobileTouch.active = true;
+        mobileTouch.x0 = e.touches[0].clientX;
+        mobileTouch.t0 = Date.now();
+        mobileTouch.idx0 = logicalIndexFromScroll();
+        mobileTouch.scroll0 = stage.scrollLeft;
+        scrollNavLock = true;
+      }, { passive: false });
+
+      stage.addEventListener('touchmove', function (e) {
+        if (!mobileMode || !mobileTouch.active) return;
+        if (e.cancelable) e.preventDefault();
+        var dx = e.touches[0].clientX - mobileTouch.x0;
+        stage.scrollLeft = mobileTouch.scroll0 - dx;
+      }, { passive: false });
+
+      stage.addEventListener('touchend', function (e) {
+        if (!mobileMode || !mobileTouch.active) return;
+        if (e.cancelable) e.preventDefault();
+        mobileTouch.active = false;
+        var x1 = e.changedTouches[0].clientX;
+        var dt = Math.max(1, Date.now() - mobileTouch.t0);
+        var dx = x1 - mobileTouch.x0;
+        var v = dx / dt;
+
+        var dir = 0;
+        if (Math.abs(dx) > 40 || Math.abs(v) > 0.35) dir = dx < 0 ? 1 : -1;
+        var target = clamp(mobileTouch.idx0 + dir, 0, logicalCount() - 1);
+        goTo(target);
+        setTimeout(function () { scrollNavLock = false; }, 0);
+      }, { passive: false });
+
+      document.getElementById('progress-track').addEventListener('click', function (e) {
+        var r = this.getBoundingClientRect();
+        var n = logicalCount();
+        goTo(Math.round(((e.clientX - r.left) / r.width) * (n - 1)));
+      });
+
+      function preload() {
+        if (mobileMode) {
+          var seen = {};
+          [current - 1, current, current + 1, current + 2].forEach(function (i) {
+            if (i < 0 || i >= mobilePanels.length) return;
+            var fi = logicalToFile[i];
+            if (seen[fi]) return;
+            seen[fi] = true;
+            var name = pages[fi];
+            if (!name) return;
+            var im = new Image();
+            im.src = assetUrl(name);
+          });
+          return;
+        }
+        [current - 1, current + 1, current + 2].forEach(function (i) {
+          if (i >= 0 && i < slides.length) {
+            var img = slides[i].querySelector('img');
+            if (img && img.loading === 'lazy') img.loading = 'eager';
+          }
+        });
+      }
+
+      fetch(BASE + 'manifest.json')
+        .then(function (r) { if (!r.ok) throw new Error('manifest'); return r.json(); })
+        .then(function (data) {
+          pages = data.pages || [];
+          if (!pages.length) throw new Error('empty');
+
+          build(pages, window.matchMedia(MQ_MOBILE).matches);
+          current = 0;
+
+          if (!mobileMode) {
+            var first = slides[0];
+            first.style.transition = 'none';
+            first.style.transform  = 'translateX(0)';
+            first.style.opacity    = '1';
+            first.style.zIndex     = '1';
+          }
+
+          syncUI();
+          loaderFill.style.width = '80%';
+
+          var firstImg = mobileMode
+            ? (stage.querySelector('.mobile-page.cover img') || stage.querySelector('.mobile-page img'))
+            : slides[0].querySelector('img');
+
+          function reveal() {
+            loaderFill.style.width = '100%';
+            setTimeout(function () {
+              loader.classList.add('out');
+              setTimeout(function () { loader.style.display = 'none'; }, 520);
+              wake();
+              kbdHint.textContent = mobileMode ? 'Swipe → · G for page list' : '← → to flip \u00a0·\u00a0 G for page list';
+              kbdHint.classList.add('show');
+              setTimeout(function () { kbdHint.classList.remove('show'); }, 3500);
+              preload();
+            }, 180);
+          }
+          if (firstImg && firstImg.complete) reveal();
+          else if (firstImg) { firstImg.addEventListener('load', reveal); firstImg.addEventListener('error', reveal); }
+          else reveal();
+        })
+        .catch(function (err) {
+          console.error('Vivarium reader:', err);
+          loader.innerHTML = '<p style=\"color:#e8a0a0;padding:2rem;text-align:center;font-family:sans-serif\">Could not load pages.<br>Run <code>npm run dev</code> in the website folder.</p>';
+        });
+    })();
+    </script>
+  </body>
+</html>
+
