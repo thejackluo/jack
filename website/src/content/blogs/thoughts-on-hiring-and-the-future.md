@@ -5,11 +5,8 @@ tags:
   - startups
   - vision
 excerpt: 'Four traits for day‑one hires, and a twenty‑year lens on where leverage concentrates in AI and beyond.'
-heroImage: "/assets/images/jack/main.jpg"
+heroImage: '/assets/images/jack/main.jpg'
 ---
-![Jack Luo](/assets/images/jack/main.jpg)
-
-> _Jack Luo — 4 minute read_
 
 ## Introduction
 

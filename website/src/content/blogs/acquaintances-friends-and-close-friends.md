@@ -1,23 +1,21 @@
 ---
-title: "Acquaintances, Friends, and Close Friends"
+title: 'Acquaintances, Friends, and Close Friends'
 publishDate: 2025-11-19
 tags:
   - reflection
   - community
-excerpt: "A framework for sorting people into acquaintances, friends, and close friends, four common social builds, and the configuration I want."
-heroImage: "/assets/images/jack/main.jpg"
-externalUrl: "https://medium.com/@thejackluo8/acquaintances-friends-and-close-friends-6bb85e766484"
+excerpt: 'A framework for sorting people into acquaintances, friends, and close friends, four common social builds, and the configuration I want.'
+heroImage: '/assets/images/jack/main.jpg'
+externalUrl: 'https://medium.com/@thejackluo8/acquaintances-friends-and-close-friends-6bb85e766484'
 readingMinutes: 15
 ---
-![Jack Luo](/assets/images/jack/main.jpg)
-
-> *Jack Luo — 15 minute read*
 
 ## A framework for thinking about people
 
 This is not a universal law of human relationships. It is just my current way of organizing how I think about people in my life. Your circumstances might be completely different. Treat this as a framework to think about, push back on, or discuss with someone, not as something everyone has to follow.
 
 When I zoom out and look at my life, almost everyone around me falls into three categories:
+
 - Acquaintances
 - Friends
 - Close friends
@@ -131,6 +129,7 @@ This is the person who does not really talk to anyone at all besides customer se
 For people in this category, the first thing that matters is environment. Are you alone because your surroundings are genuinely bad for you, or because you are scared, or because you do not know where to start socially. Those are different cases.
 
 In my head there are three stages here:
+
 - Bad acquaintances and bad friends
 - Being alone
 - Good acquaintances and good friends
@@ -197,4 +196,4 @@ If you put this all together, the ideal configuration for me looks like a set of
 
 You do not have to copy this. You might be more introverted, more extroverted, more career focused, more family focused. The details will shift based on your values. But I think it is worth at least asking yourself where your current life fits in this picture, and whether the way you spend time with people matches what actually makes you feel alive.
 
-*Originally published on [Medium](https://medium.com/@thejackluo8/acquaintances-friends-and-close-friends-6bb85e766484).*
+_Originally published on [Medium](https://medium.com/@thejackluo8/acquaintances-friends-and-close-friends-6bb85e766484)._

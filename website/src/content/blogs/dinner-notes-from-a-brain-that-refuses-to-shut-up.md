@@ -1,16 +1,13 @@
 ---
-title: "Dinner Notes from a brain that refuses to shut up"
+title: 'Dinner Notes from a brain that refuses to shut up'
 publishDate: 2025-12-12
 tags:
   - reflection
-excerpt: "A dinner conversation about who gets credit, eighty-year historical cycles, power, and desperation as jet fuel."
-heroImage: "/assets/images/jack/main.jpg"
-externalUrl: "https://medium.com/@thejackluo8/dinner-notes-from-a-brain-that-refuses-to-shut-up-f8992602690c"
+excerpt: 'A dinner conversation about who gets credit, eighty-year historical cycles, power, and desperation as jet fuel.'
+heroImage: '/assets/images/jack/main.jpg'
+externalUrl: 'https://medium.com/@thejackluo8/dinner-notes-from-a-brain-that-refuses-to-shut-up-f8992602690c'
 readingMinutes: 10
 ---
-![Jack Luo](/assets/images/jack/main.jpg)
-
-> *Jack Luo — 10 minute read*
 
 Tonight was one of those nights where my brain just refused to shut up, so I might as well turn it into a private blog entry instead of letting it dissolve into the void.
 
@@ -50,4 +47,4 @@ So yeah. That was the dinner. Summed up in too many words. History runs in cycle
 
 Future me, if you are reading this months from now and you are drifting again, remember the feeling of tonight. Remember that you literally opened your laptop mid conversation and applied to an MIT summit because a part of you still believes you should be in those rooms. Then act like someone who is actually willing to pay the cost of being there.
 
-*Originally published on [Medium](https://medium.com/@thejackluo8/dinner-notes-from-a-brain-that-refuses-to-shut-up-f8992602690c).*
+_Originally published on [Medium](https://medium.com/@thejackluo8/dinner-notes-from-a-brain-that-refuses-to-shut-up-f8992602690c)._

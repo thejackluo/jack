@@ -1,16 +1,13 @@
 ---
-title: "Slime, Deadlines, And Trying Not To Explode"
+title: 'Slime, Deadlines, And Trying Not To Explode'
 publishDate: 2025-12-06
 tags:
   - personal
-excerpt: "On being curious about everything: why generalists get stuck, and how containers, deadlines, and constraints let the slime harden."
-heroImage: "/assets/images/jack/main.jpg"
-externalUrl: "https://medium.com/@thejackluo8/slime-deadlines-and-trying-not-to-explode-4951b8cbd51a"
+excerpt: 'On being curious about everything: why generalists get stuck, and how containers, deadlines, and constraints let the slime harden.'
+heroImage: '/assets/images/jack/main.jpg'
+externalUrl: 'https://medium.com/@thejackluo8/slime-deadlines-and-trying-not-to-explode-4951b8cbd51a'
 readingMinutes: 8
 ---
-![Jack Luo](/assets/images/jack/main.jpg)
-
-> *Jack Luo — 8 minute read*
 
 If you watched all the reels I filmed that night, in order, you would see a guy slowly falling apart.
 
@@ -23,6 +20,7 @@ Underneath that slow collapse though, there was a real idea I was trying to get 
 Without deadlines, I am slime.
 
 If there is no pressure, I do not move in a straight line. I just slowly spread into whatever cracks are available. I pick up every little bit of dust on the floor. In human terms, that looks like:
+
 - fictional philosophy rabbit holes
 - card shuffling tricks
 - sci fi deep dives
@@ -106,6 +104,7 @@ That is not inspiring. That is just quiz bowl club with a body.
 I also do not think I am wired to be a pure narrow specialist who spends twenty years on one micro topic and is happy in that lane forever.
 
 The version that makes sense to me is something like:
+
 - Go very deep in one thing at a time.
 - Stay in that depth long enough to actually build competence, reputation, and results.
 - Then later, repeat in a different area, stacking those specialties until you look like a generalist from the outside, but you know you earned each layer by suffering in it for a while.
@@ -157,6 +156,7 @@ That is how slime gradually gets a shape.
 ## What I Am Actually Trying To Do With My Own Life
 
 If I apply this to myself, the things that survive after cutting are probably:
+
 - one or two relationships I care about and actually invest in
 - AI as the main technical spine
 - a small number of serious projects that tie into that, like school and something startup shaped
@@ -177,4 +177,4 @@ Maybe I will choose a container in the shape of a cat next time.
 
 [1] maybe I will quote the term decision insecurity next time
 
-*Originally published on [Medium](https://medium.com/@thejackluo8/slime-deadlines-and-trying-not-to-explode-4951b8cbd51a).*
+_Originally published on [Medium](https://medium.com/@thejackluo8/slime-deadlines-and-trying-not-to-explode-4951b8cbd51a)._

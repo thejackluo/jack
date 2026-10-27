@@ -8,10 +8,6 @@ excerpt: 'Eighteen bite-sized lessons on relationships, focus, urgency, and owni
 heroImage: '/assets/images/jack/main.jpg'
 ---
 
-![Jack Luo](/assets/images/jack/main.jpg)
-
-> _Jack Luo — 2 minute read_
-
 1. It's okay to leave relationships! Only stay in relationships that are mutually beneficial, awesome, and necessary!
 2. Waking up early is one of the best ways to change your routine, lifestyle, and productivity.
 3. When you turn 18, open a bank account, stocks account, and a crypto account. Start investing early so you can attain maximum return on investment.

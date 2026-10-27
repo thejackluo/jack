@@ -1,17 +1,14 @@
 ---
-title: "2025 Recap"
+title: '2025 Recap'
 publishDate: 2025-12-08
 tags:
   - reflection
   - personal
-excerpt: "2025 on 2x speed: work vs love, the fast food decision that never ended, a generalist brain in a specialist world, and what I am carrying into 2026."
-heroImage: "/assets/images/jack/main.jpg"
-externalUrl: "https://medium.com/@thejackluo8/2025-recap-b734a8433778"
+excerpt: '2025 on 2x speed: work vs love, the fast food decision that never ended, a generalist brain in a specialist world, and what I am carrying into 2026.'
+heroImage: '/assets/images/jack/main.jpg'
+externalUrl: 'https://medium.com/@thejackluo8/2025-recap-b734a8433778'
 readingMinutes: 8
 ---
-![Jack Luo](/assets/images/jack/main.jpg)
-
-> *Jack Luo — 8 minute read*
 
 ## 2025: Trying To Choose A Life On 2x Speed
 
@@ -77,4 +74,4 @@ When I look back on this year, the thing I am most grateful for is not any singl
 
 If next December arrives and I can say that I picked a few paths, walked them far enough to see real consequences, and stayed honest with myself and the people around me, I will call that a good year. Everything else is just different background music.
 
-*Originally published on [Medium](https://medium.com/@thejackluo8/2025-recap-b734a8433778).*
+_Originally published on [Medium](https://medium.com/@thejackluo8/2025-recap-b734a8433778)._

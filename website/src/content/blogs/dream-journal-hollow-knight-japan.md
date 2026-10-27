@@ -1,12 +1,12 @@
 ---
-title: "Dream journal 11/07/25"
+title: 'Dream journal 11/07/25'
 publishDate: 2025-11-07
 tags:
-  - "dreams"
-  - "personal"
-  - "reflection"
-excerpt: "A strange dream with two parts that somehow connected: starting in the world of Hollow Knight and ending in Japan, exploring themes of transition and borders."
-heroImage: "/assets/images/jack/main.jpg"
+  - 'dreams'
+  - 'personal'
+  - 'reflection'
+excerpt: 'A strange dream with two parts that somehow connected: starting in the world of Hollow Knight and ending in Japan, exploring themes of transition and borders.'
+heroImage: '/assets/images/jack/main.jpg'
 ---
 
 Last night I had a strange dream with two parts that somehow connected. It started in the world of Hollow Knight and ended in Japan.
