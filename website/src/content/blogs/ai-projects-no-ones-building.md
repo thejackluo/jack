@@ -11,6 +11,10 @@ excerpt: 'A dialogue between two builders exploring the overlooked frontiers of 
 heroImage: '/assets/images/jack/main.jpg'
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 13 min read_
+
 > _A Conversation About the Future of Creative Technology_
 >
 > _A dialogue between two builders exploring the overlooked frontiers of artificial intelligence_

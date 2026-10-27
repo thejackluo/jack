@@ -8,6 +8,10 @@ excerpt: "Twenty concise lessons drawn from YC's startup wisdom: team over idea,
 heroImage: '/assets/images/jack/main.jpg'
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 2 min read_
+
 In July 2024 I compiled twenty takeaways from Y Combinator that I found particularly resonant. These notes are terse by design; return to them when you need a quick reset.
 
 1. **Team trumps idea.** Your co‑founders and early hires matter more than the initial concept.

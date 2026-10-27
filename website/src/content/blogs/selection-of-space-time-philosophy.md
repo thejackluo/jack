@@ -8,6 +8,10 @@ excerpt: 'A sweeping thought experiment on space, dimensions, time, existence, a
 heroImage: '/assets/images/jack/main.jpg'
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 7 min read_
+
 ## Introduction
 
 This is a selection of discussions about space, time, and philosophy underlying these principles. Over the course of this year, we have engaged in hour-long discussions in an attempt to understand the nature of our world and the possibilities that lie beyond our imagination.

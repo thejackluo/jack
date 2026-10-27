@@ -8,6 +8,10 @@ excerpt: 'How to future‑proof a company: hire for compounders, aim for orders 
 heroImage: '/assets/images/jack/main.jpg'
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 4 min read_
+
 ## Introduction
 
 In **Zero to One** Peter Thiel asks: what will the world look like in 20 years? That question is not just academic; for founders it determines whether the company you are building will survive the hype cycles and still matter decades from now. Here I share my own reflections on future‑proofing innovation.

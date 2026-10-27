@@ -10,6 +10,10 @@ excerpt: 'A dream about adopting a cat from Instagram, the practical challenges 
 heroImage: '/assets/images/jack/main.jpg'
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 3 min read_
+
 I saw an Instagram story of a cat for adoption. the tabby cat in the photo looked gentle in that way that makes you think your life might soften a little if you just said yes (or nya). I decided to open myself up to it. At pickup the woman asked whether I had a pet permit. For a second I tried to remember what kind of permit that even is. I heard myself say yeah. She did not check anything. We chatted for a moment and then I walked out with the cat like that was the most normal thing in the world.
 
 I carried it back to student housing. The place is a small two bedroom with an open kitchen in the middle. The hall light is a little too bright. There is a bed pushed to the wall, a couple of pillows that are too flat, a small black beanbag near the window. It is clean but it feels temporary. No bowls. No litter. No sign that an animal belongs here.

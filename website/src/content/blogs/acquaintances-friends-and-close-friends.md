@@ -10,7 +10,11 @@ externalUrl: 'https://medium.com/@thejackluo8/acquaintances-friends-and-close-fr
 readingMinutes: 15
 ---
 
-## A framework for thinking about people
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 15 min read_
+
+> A framework for thinking about people
 
 This is not a universal law of human relationships. It is just my current way of organizing how I think about people in my life. Your circumstances might be completely different. Treat this as a framework to think about, push back on, or discuss with someone, not as something everyone has to follow.
 
@@ -21,6 +25,8 @@ When I zoom out and look at my life, almost everyone around me falls into three 
 - Close friends
 
 The labels themselves are common, but the way you treat each category, and how much time you feed into each, has a huge impact on how your life feels. That is what I want to unpack.
+
+---
 
 ## Acquaintances: The surface network that actually matters
 
@@ -56,6 +62,8 @@ This middle category is also where most people pour a lot of time, especially at
 
 The problem is what happens later. If you have been interacting with someone for a long time and things are not really progressing, if you are not becoming closer or talking about deeper things, and you are just looping the same surface level hangouts, then I think it is better to be honest and make a choice.
 
+![](https://miro.medium.com/v2/resize:fit:1400/1*3G4C8b-gByJDu1_8WjLAXg@2x.jpeg)
+
 Either you demote them to acquaintance in your own mind, or you actively see if there is potential to upgrade them to close friend. What you do not want is permanent “medium.” You keep investing time because you do not want to lose them, but you are not getting much long term fulfillment out of it. It is like eating a bag of chips. You get short term happiness. If you keep doing that as your main diet, you feel worse over time.
 
 A lot of friend tier interactions are like that. Parties, superficial club stuff, going out just for the sake of it. You get dopamine. You do not always get deep emotional nourishment.
@@ -80,7 +88,9 @@ I also think of close friendships as a compounding habit. Just like lifting or w
 
 At the end of the day a close friendship should be nourishing. You should walk away feeling happier, more grounded, and more understood. From a pure utility theory perspective, time spent here is some of the best “relationship time” you can invest. Beyond utility, it is also one of the most fulfilling things a person can do: choose a small number of people and go very deep.
 
-How cults and gangs hack the close friend wiring
+---
+
+### How cults and gangs hack the close friend wiring
 
 There is also a darker side to all of this.
 
@@ -94,6 +104,8 @@ Gangs work in a similar way. People who join often start from a place of lonelin
 
 So the same wiring that makes close friendships incredibly positive can also be used against you when you are desperate. That is another reason to be deliberate about who you let into that inner circle.
 
+---
+
 ## How to treat each category
 
 At this point the question is what to do with this framework in practice.
@@ -104,11 +116,13 @@ For friends, you have to be more ruthless. At the beginning of a new phase in li
 
 For close friends, I think you should unapologetically overinvest. Spend time. Rearrange things sometimes. Talk about real topics. Do meaningful or even slightly absurd things together. Check in when they are struggling. Support their ambitions. Let the relationship compound over time. It is one of the few places where being “inefficient” with your time is actually rational.
 
+---
+
 ## Four common social builds
 
 There are infinitely many ways to arrange your social life, but I keep noticing four common patterns. Think of them as different builds in a game. Different stats, different tradeoffs. This is not scientific, just patterns I keep seeing.
 
-## Type 1: The community build
+### Type 1: The community build
 
 The first type is the person who orbits a community most of the time.
 
@@ -120,7 +134,7 @@ The downside is that depth does not happen automatically. It is much easier to s
 
 If you are in this build, I would not tell you to leave your community. I would encourage you to look carefully at who you actually vibe with, who you respect, and who you would want as a close friend if things lined up. Then invest more in those people and slightly less in low value, short term fun that you already know will not matter in a year.
 
-## Type 2: The loner build
+### Type 2: The loner build
 
 The second type is the loner.
 
@@ -140,7 +154,7 @@ So if you are in the loner build, step one is not to throw yourself into any gro
 
 I see this build as an intermediate stage that can be useful. Long term, most people are better off with at least a few good acquaintances and a handful of close friends.
 
-## Type 3: The over networked superconnector
+### Type 3: The over networked superconnector
 
 Type three is the over networked person, the superconnector.
 
@@ -156,7 +170,7 @@ Relationships are amplifiers. Good ones make you a better person. Bad ones push 
 
 If you are over networked, I do not think you need more people. You need to rebalance. Keep the network if you like it, but consciously pull some time out of the “everyone” bucket and pour it into a few people who actually could be close friends. Say no a bit more often to random events, and yes a bit more often to slower, deeper time with a small core.
 
-## Type 4: The close friend core
+### Type 4: The close friend core
 
 Type four is the person who has a small set of close friends and spends most free time with them.
 
@@ -169,6 +183,8 @@ You could live a long life with this setup and feel quite fulfilled.
 I still think there are ways to improve it. Just having close friends is not enough. You also want a ring of acquaintances for business and small things, and you want some friend level people and maybe a group to add variety. I see it as concentric circles. The close friends are the foundation. Around them are friends and friend groups. Around that, acquaintances.
 
 If you are already in type four, your main job is maintenance and balance. Protect and deepen the core, keep acquaintances alive, and occasionally let new people move inward if it makes sense.
+
+---
 
 ## The ideal configuration, for me
 

@@ -8,6 +8,10 @@ excerpt: "A pragmatic synthesis: why Laplace's demon doesn't matter, how unpredi
 heroImage: '/assets/images/jack/main.jpg'
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 4 min read_
+
 ## Introduction
 
 Philosophers have wrestled with free will and predeterminism for centuries. On one side is the idea that every event, from galaxies spinning to neurons firing, follows inviolable laws; on the other is the sense that we shape our own destinies. This essay is not a final answer but an attempt to reconcile the two views in a way that is useful for daily life.

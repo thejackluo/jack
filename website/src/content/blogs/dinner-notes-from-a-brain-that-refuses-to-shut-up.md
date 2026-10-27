@@ -9,6 +9,10 @@ externalUrl: 'https://medium.com/@thejackluo8/dinner-notes-from-a-brain-that-ref
 readingMinutes: 10
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 10 min read_
+
 Tonight was one of those nights where my brain just refused to shut up, so I might as well turn it into a private blog entry instead of letting it dissolve into the void.
 
 So, context. I was literally in the middle of talking about dinner, opened my laptop, and impulsively applied to this “IIA Summit” thing at MIT in January. I’m reading the site and it is like a Pokémon card pack of people I care about. Andrew from DeepLearning.AI, Demis Hassabis from DeepMind, some big-name AI researchers, some Boston University guy whose name I have already forgotten, and apparently even Hans Zimmer? It feels fake, but apparently not. I caught myself mid conversation just thinking, yeah, of course I am going to Boston. Worst case, they reject me. Best case, I am sitting in a room with half the people who shaped the last decade of my brain. So I hit apply. They will decide if they choose me, and honestly I also get to decide if I choose them. That is the energy I want to hold.

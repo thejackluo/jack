@@ -10,6 +10,10 @@ externalUrl: 'https://medium.com/@thejackluo8/credibility-debt-a874e177cb57'
 readingMinutes: 10
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 10 min read_
+
 > This post is inspired by real credit card debt, don’t fuck around with credit cards
 
 I want to talk about credibility debt, which is something that a growing number of Americans have a crippling problem with.
@@ -24,11 +28,14 @@ Credibility debt is the gap between the credibility you have borrowed and the cr
 
 Startups claim that they are projected to reach $100 million in ARR when their actual contract states a real revenue 50 times smaller, or when a Stanford freshman who has barely graduated from high school receives $750,000 pre-idea funding towards their B2B AI SaaS idea because they are rumored by powerful silicon valley folks to be the next Mark Zuckerberg or Steve Jobs. Or companies announcing plans to build hotels on the moon because they believe their success is inevitable.
 
-![](https://cdn-images-1.medium.com/max/554/0*x7It8uFWOm76_RHs)
-
-_a 22 year old is attempting to build a hotel on the moon_
+<figure>
+  <img src="https://miro.medium.com/v2/resize:fit:1400/0*x7It8uFWOm76_RHs" alt="" />
+  <figcaption>a 22 year old is attempting to build a hotel on the moon</figcaption>
+</figure>
 
 There has been an unprecedented amount of funding thrown around by investors over the past few years especially to AI companies. The interesting part is that investor returns have also been at an all-time low. So where did all the money go? _What happens when a company has borrowed more credibility than its underlying business can repay?_
+
+---
 
 Like financial debt, credibility debt accumulates interest. A startup that calls itself the fastest-growing company in an industry, with a barely working product, must eventually keep producing increasingly impressive claims before reality catches up.
 
@@ -36,9 +43,10 @@ I’ve known Delve since 2024, when it was just three people working out of a do
 
 In 2025, Delve began to market by sending 10,000 doughnuts to offices around San Francisco, sending FREE doormats to startups through their investment fund, and wrapping dozens of buses around the area. The visibility made Delve appear rather ubiquitous and inevitable and created an expectation that they were going to become the largest company in the world. I have to admit that it was incredible to watch that growth happen in real time.
 
-![](https://cdn-images-1.medium.com/max/1024/0*NJ8VsL_Td_Qchy-e.jpg)
-
-_The craziest part is that the TSA bins in SJC were wrapped with Delve logos._
+<figure>
+  <img src="https://miro.medium.com/v2/resize:fit:1400/0*NJ8VsL_Td_Qchy-e.jpg" alt="" />
+  <figcaption>The craziest part is that the TSA bins in SJC were wrapped with Delve logos.</figcaption>
+</figure>
 
 In March of 2026, the pseudonymous Substack writer [DeepDelver](https://techcrunch.com/2026/03/22/delve-accused-of-misleading-customers-with-fake-compliance/) published a series of serious allegations about Delve, which alleged that Delve’s compliance-as-a-service system relied on improper or misleading auditing practices. They allegedly used outside compliance firms to both certify and audit the same report, which is a clear violation as auditing should be an independent third party. Mercor used a service called LiteLLM, which did compliance through Delve, and due to the weak security, was involved in a supply-chain attack involving compromised LiteLLM packages. Mercor’s entire eval, models, and data were leaked onto the dark web and sold to bidders in an auction.
 
@@ -48,15 +56,18 @@ It’s hard to place all the blame on the founders, even though they’ve done a
 
 _In Silicon Valley, if you fail, no one will remember you. You only have one shot. If you win, you can get away with anything._
 
+---
+
 The pressure to succeed at all costs, preached by Silicon Valley investors, is genuinely diabolical, especially when people believed to be the next generation of unicorn founders receive millions, if not tens of millions of dollars despite having no business validation or experience. _That is more money than most people will ever see in their entire lives_, handed to teenagers with nothing to show for it. What do you expect them to do? How can you expect them to use that money properly when they have no experience in the industry?
 
 There’s a belief in Silicon Valley that dropping out is the ultimate status symbol. Investors look for it. Accelerators love it and might even give you one more interview because of it. But investors benefit from a level of diversification that individual founders do not have.
 
 My favorite analogy is that an accelerator or VC firm is a diamond-mining company. They’re trying to mine diamonds during a speculative diamond rush. You, as a founder building a startup, are a miner whose job is to dig as deeply as possible until you find a diamond for the company. You get a 10% share of any diamond you find, but you’re told that you should specialize in drilling the hole as deep as possible.
 
-![](https://cdn-images-1.medium.com/max/523/1*EatCUghvywUQW3I_qcyT_A.png)
-
-_Ninety-five percent of diamond miners will never find a diamond._
+<figure>
+  <img src="https://miro.medium.com/v2/resize:fit:1400/1*EatCUghvywUQW3I_qcyT_A.png" alt="" />
+  <figcaption>Ninety-five percent of diamond miners will never find a diamond.</figcaption>
+</figure>
 
 Most college dropouts do not have any industry experience and are forced to build in industries where they have no domain expertise (because it sounds good). Because of that, they take far longer to acquire customers and can spend months pivoting through pivot hell. Even if they eventually find success, domain professionals can easily swoop in and and take majority market share
 
@@ -72,6 +83,8 @@ From a purely money making perspective, most people would probably be better off
 
 _So why mine diamonds?_
 
+---
+
 Right now, college students increasingly believe that the job market is terrible, and many of them see a startup as an escape: a way to reach financial freedom, avoid becoming a corporate slave, and never get trapped by golden handcuffs.
 
 It feels sooooo nice!
@@ -82,9 +95,10 @@ I’ve noticed far more founders and influencers leaning heavily on marketing bo
 
 It’s so diabolical! Ultimately, what is the point of all of this?
 
-![](https://cdn-images-1.medium.com/max/218/1*iUTNBckg0MfAwLe7R-P7Pw.png)
-
-_Ditto rented yachts to promote its dating app._
+<figure>
+  <img src="https://miro.medium.com/v2/resize:fit:1400/1*iUTNBckg0MfAwLe7R-P7Pw.png" alt="" />
+  <figcaption>Ditto rented yachts to promote its dating app.</figcaption>
+</figure>
 
 Giving away all this free stuff does not make your business model any better. Having fourteen-year-olds write $25,000 angel checks does not make the ecosystem healthier either.
 
@@ -96,13 +110,16 @@ Every stunt raises expectations among friends, customers, investors, and the pub
 
 During this process, they might give up real-life relationships and sacrifice everything else for an elusive dream that may never have existed in the first place.
 
+---
+
 One of the most memorable quotes from Dropout Graduation was simply: “Go back to college.”
 
 Far too many people are throwing their entire life savings into the black hole of Silicon Valley. Personally seeing friends go through this makes the warning feel even more real.
 
-![](https://cdn-images-1.medium.com/max/636/1*zMeUwN8prir2viGU1ye6uQ.png)
-
-_More than 200 people attended a graduation for dropouts hosted by Z Fellows._
+<figure>
+  <img src="https://miro.medium.com/v2/resize:fit:1400/1*zMeUwN8prir2viGU1ye6uQ.png" alt="" />
+  <figcaption>More than 200 people attended a graduation for dropouts hosted by Z Fellows.</figcaption>
+</figure>
 
 For some reason, there is a growing sentiment that 17-year-olds are the next billion-dollar startup founders. I am not saying that young founders cannot succeed, but at the same time, Stripe, Airbnb, and Meta are memorable exceptions.
 
@@ -124,6 +141,8 @@ But to be honest there us still so much I’ve not figured out.
 It was tempting to just call myself a CEO but that’s where credibility debt begins: when what you say you are starts to outrun what you have actually built. That’s when your reputation begins to be more and more unstable. Building something worthy of the founder title is genuinely much harder than LARPing as a successful founder.
 
 Perhaps it will be far easier to do a startup in the future when you have grown more as a person and accumulated domain experience. You can learn how customers decide what to purchase, how to hire and fire people, how features are scoped and abandoned, and most importantly how to make decisions with incomplete information without resorting to shortcuts.
+
+---
 
 If you’re a student, graduate, or founder right now, here are a few ideas to consider. As always, these are just my opinion. Take 95% of all startup advice with a grain of salt, including mine.
 

@@ -7,6 +7,10 @@ excerpt: "A playful self-introduction covering Jack's origins, experiments, and 
 heroImage: '/assets/images/jack/main.jpg'
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 3 min read_
+
 ## Who was I?
 
 You know, a long time ago, I was that kid who used to sit at the computer in the library and play games. And many games did I play! Minecraft, fake minecraft, all the io games possible. I was that kid who would do everything to bypass adminstrator perms, and install a whole operating system on the school chromebook, just to enjoy a game. It's crazy how much I've changed.

@@ -10,6 +10,10 @@ externalUrl: 'https://medium.com/@thejackluo8/philmont-a-journey-of-hiking-throu
 readingMinutes: 18
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 18 min read_
+
 > “Ahhhh, Philmont, a place where you heal using Sriracha Peanut Butter, also another place to climb 45 degree mountains and lighting position” — Jack Luo
 
 If anyone asks me what my greatest achievement is, I probably will say Philmont, a few reasons. First, in the 12 day trek, we had backpacked 65 miles with 40+ pounds, and we had 11k feet elevation change which means we hiked through big mountains and valleys. Second, we learned a lot about conserving nature. We did a lot of conservation work by cutting down tree(It helps the environment) and building log cabins. Also importantly, how to survive in the outdoors, like going to the restroom out there, how to do your laundry, how to eat good food out there, and magic healing powers of siracha peanut butter. we and good cooperation techniques with the teams. But also I learned many life long lessons throughout the trek and met new people there.

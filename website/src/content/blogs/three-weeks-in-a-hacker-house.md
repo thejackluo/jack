@@ -8,6 +8,10 @@ excerpt: 'Notes from forming a hacker house, the people it attracted, and what t
 heroImage: '/assets/images/jack/main.jpg'
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 2 min read_
+
 ## How did this start?
 
 It all started in a small twitter post made by [@kevinzhangkjz](https://twitter.com/kevinzhangkjz/status/1648569715063676928) on twitter. I have interacted with Kevin a few times through twitter comments, but not officially talked until this tweet. I consider this to be the catalyst of the whole hacker house.

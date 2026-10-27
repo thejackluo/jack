@@ -8,6 +8,10 @@ excerpt: 'A look at why unconventional communities like hacker houses and East C
 heroImage: '/assets/images/jack/main.jpg'
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 6 min read_
+
 ## Section 1 – It begins when you are born
 
 Many of us who end up in quirky subcultures did not quite fit in growing up. Whether we were exceptionally intellectual, neurodivergent or simply weird, our formative years came with a feeling of otherness. That creates a deep yearning to find people who resonate on the same frequency. When we arrive at a place like MIT's East Campus, we recognise each other instantly and bond over shared experiences. Psychologists call this homophily: the tendency to associate with people like ourselves.

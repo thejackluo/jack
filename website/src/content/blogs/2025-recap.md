@@ -10,6 +10,10 @@ externalUrl: 'https://medium.com/@thejackluo8/2025-recap-b734a8433778'
 readingMinutes: 8
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 8 min read_
+
 ## 2025: Trying To Choose A Life On 2x Speed
 
 2025 felt like someone took my life, hit 2x playback, and then kept adding decisions on top. School or startup. My own thing or someone else’s thing. Stay put or move again. Say yes to another opportunity or finally sit still and build one thing properly. If I strip away the noise, most of the year kept circling around the same uncomfortable question: what am I actually optimizing for, and what am I willing to sacrifice to get there.

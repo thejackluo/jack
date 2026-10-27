@@ -11,6 +11,10 @@ excerpt: 'Exploring how deep reinforcement learning and memory systems can make 
 heroImage: '/assets/images/jack/main.jpg'
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 4 min read_
+
 As we enter the age of web agents, we are bombarded with new software releases every few days like Comet, Composite, and Fellou. These apps promise to automate everyday tasks, with travel planning as the overused demo. In practice, current approaches are slow. Large language models often take five or more seconds to perform a single action such as a click or scroll.
 
 In this article, I propose improvements in four areas. First, how large language models can achieve more accurate System 1 thinking using deep reinforcement learning. Second, how to mix classical deterministic search with probabilistic search framed as a Markov Decision Process. Third, how agents can learn over time by asking the right questions to better understand user intent. Finally, how to create dynamic templates for workflow automation over time.

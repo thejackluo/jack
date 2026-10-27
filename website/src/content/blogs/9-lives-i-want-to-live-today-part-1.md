@@ -8,6 +8,10 @@ excerpt: 'Exploring nine archetypal lives — creator, voyager, AI architect, wo
 heroImage: '/assets/images/jack/main.jpg'
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 4 min read_
+
 ## Introduction
 
 Inspired by a lecture from investor Graham Weaver, I started to explore the idea of living multiple "lives" within one. Rather than waiting for the perfect moment, I decided to try on nine identities over the next few years and see which ones give me energy and purpose. Here are the first five.

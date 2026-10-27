@@ -8,6 +8,10 @@ excerpt: "Gratitude-filled reflections on humanity's slow arc of progress and wh
 heroImage: '/assets/images/jack/main.jpg'
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 6 min read_
+
 Take a moment, I want you to look around and observe your environment. Whether it be the desk you are doing work on, or the bed you are laying on, or the infrastructure beside you. Let’s say I give you 10 years of uninterrupted, independent time. Would you be able to build that thing?
 
 Most infrastructure or material items you see around us nowadays is a culmination of the work that the human race has put in years, and years of effort to ideate, create, refine, and repeat. Almost everything you have, takes an unbelievable amount of work to create. The fact that we have all of these things is simply amazing!

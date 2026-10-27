@@ -8,6 +8,10 @@ excerpt: 'A series of vivid dreams becomes a personal operating manual: step in 
 heroImage: '/assets/images/jack/main.jpg'
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 7 min read_
+
 ## Introduction
 
 I keep a dream journal because my morning brain likes to pretend the night was just noise. Those messy notes, written half awake, remind me who I said I wanted to be when I was too tired to perform. In this essay I turn three recurring dreams into three simple rules for living.

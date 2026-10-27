@@ -9,11 +9,19 @@ externalUrl: 'https://medium.com/@thejackluo8/slime-deadlines-and-trying-not-to-
 readingMinutes: 8
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 8 min read_
+
+![](https://miro.medium.com/v2/resize:fit:1400/1*i4G5LcKn3Hs-U3C9m4pmYQ@2x.jpeg)
+
 If you watched all the reels I filmed that night, in order, you would see a guy slowly falling apart.
 
 The first clip is me, bright and awake, talking like life is full of possibilities. By the last one, I look like someone who has survived three midterms, a breakup, and an airport layover in one night. The energy graph just goes straight down.
 
 Underneath that slow collapse though, there was a real idea I was trying to get at. It is about people who are curious about everything, who want to do everything, and who end up stuck, because life is not Delta First Class, it is more like a strict carry-on baggage policy from Frontier.
+
+---
 
 ## I Am Basically Slime
 
@@ -37,6 +45,8 @@ But here is the problem with slime: it is everywhere and nowhere at the same tim
 
 If everything pulls you a little, your net movement is close to zero. You end up tired, overstimulated, and weirdly stuck.
 
+---
+
 ## The Fast Food Disaster That Exposed My Brain
 
 This is not just some abstract metaphor. I have been like this for a long time.
@@ -55,6 +65,8 @@ It was funny then, but when I look back, it shows something I am still fighting 
 
 Fast food is whatever. When you scale that up to choices about school, startups, relationships, or what to work on for the next five years, it becomes a problem.
 
+---
+
 ## Random Exploration Is Better Than Nothing, But Not Enough
 
 If you look at life outcomes in a brutally simple way, there is a rough hierarchy.
@@ -68,6 +80,8 @@ But above that, there are the people who pick fewer things and go hard on them o
 So yes, if you are doing “random interesting things,” you are doing better than a lot of people. But you are still going to lose to someone who took that curiosity and aimed it at something real for long enough.
 
 The world does not reward curiosity by itself. It rewards curiosity that got trapped in a box because that packaging makes the slime look like a cute cube.
+
+---
 
 ## The Generalist vs Specialist Problem
 
@@ -94,6 +108,8 @@ So I think there are roughly two categories at the top:
 2. People who coordinate others and move big groups, the generalist leaders.
 
 Both are necessary. But the second category tends to be more visible. They are often the ones whose names you remember.
+
+---
 
 ## The Generalist I Actually Want To Be
 
@@ -129,6 +145,8 @@ So if I want to actually get somewhere, robotics probably cannot be my main ques
 
 Interests are allowed to just be interests. Not every spark has to become a startup, a degree, or a career move.
 
+---
+
 ## Constraints, Confidence, And Cutting Things Out
 
 So how do you actually choose a path when your brain wants to do everything?
@@ -152,6 +170,8 @@ Finally, you need to cut.
 You cannot keep saying yes to every cool field. You cannot adopt every stray idea that walks up to you. Over time, you will need to look at your life and say, “These three things matter, these seven can wait, these five need to go.”
 
 That is how slime gradually gets a shape.
+
+---
 
 ## What I Am Actually Trying To Do With My Own Life
 

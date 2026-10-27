@@ -9,6 +9,10 @@ externalUrl: 'https://medium.com/@thejackluo8/ces-2026-nvidia-keynote-33960ee9fb
 readingMinutes: 7
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 7 min read_
+
 NVIDIA’s CES 2026 keynote framed AI as the next foundational computing platform, arguing that we are in the midst of overlapping platform shifts. Historically, computing has progressed from mainframes to PCs, the Internet, cloud, mobile, and now AI. What’s different in this era is that applications are no longer just “using” AI as a feature; they are increasingly _built on top of_ AI models as the core runtime. This is driving a reinvention of the entire five‑layer computing stack: software is trained rather than hand‑programmed, GPUs replace CPUs as the primary compute engine, and applications generate outputs (tokens, pixels, decisions) dynamically based on context rather than executing pre‑compiled logic.
 
 Economically, NVIDIA positioned this as a wholesale modernization of roughly $10T of existing compute infrastructure toward AI‑centric architectures. The company pointed to hundreds of billions of dollars in annual venture funding and a $100T global industry that is re‑allocating a meaningful portion of its R&D budgets away from classical methods toward AI‑driven approaches. This capital shift is what NVIDIA claims is fueling both the rapid advancement of AI and the intense demand for accelerated computing.

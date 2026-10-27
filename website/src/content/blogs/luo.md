@@ -7,6 +7,10 @@ excerpt: 'A short easter-egg message for curious visitors, complete with a playf
 heroImage: '/assets/images/jack/main.jpg'
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 1 min read_
+
 ## Hello
 
 I didn't expect you to be here lol. Well this page is still in progress, so is the journey page. I would stay tuned can wait till in the future. Oh, and don't click on this [link](https://www.youtube.com/watch?v=uD4izuDMUQA) lol.

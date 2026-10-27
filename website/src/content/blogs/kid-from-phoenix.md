@@ -10,6 +10,10 @@ excerpt: 'I met him on ome.tv: a fourteen-year-old kid from Phoenix who wanted t
 heroImage: '/assets/images/jack/main.jpg'
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 5 min read_
+
 I met him on ome.tv: that odd little roulette wheel of faces where you can crash into a stranger's life for a few minutes and try to leave it better than you found it. He popped up shy and watchful, the way some kids do when they are deciding whether the adult on the other side is safe. I told him I was on a college campus. He asked what college feels like. I said what I believe: college can be a place to explore, to get good at something real, to find people who stretch you.
 
 He said he was not going.

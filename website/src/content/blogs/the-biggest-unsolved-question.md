@@ -10,6 +10,10 @@ externalUrl: 'https://medium.com/@thejackluo8/the-biggest-unsolved-question-c8ba
 readingMinutes: 1
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 1 min read_
+
 For me, the biggest unsolved question is: how do you surround yourself with a lot of people in elite colleges? When you ask them what is the number one reason why they love to be in that environment, they always answer something along the lines of ‘people are the people that make institutions amazing.’ I agree with you: people teach classes, people do the research, and it’s that idea that you’re compressing some of the most exceptional people in such a small space that makes it powerful.
 
 In conferences like Davos, CES, and elite institutions, and in YC, it’s around some of the best people for three months, in a few years, in a few days. That is really powerful. I personally experienced firsthand. I’ve learned more, probably ten times more, in a few days in these elite environments than I’ve learned in many, many weeks in non-elite environments.

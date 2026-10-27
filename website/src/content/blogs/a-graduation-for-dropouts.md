@@ -10,6 +10,10 @@ externalUrl: 'https://medium.com/@thejackluo8/a-graduation-for-dropouts-9a6f2a6c
 readingMinutes: 4
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 4 min read_
+
 ## ZFellows graduation
 
 If you ask me what direction and what intuition I have about the future, I think it’s about creating swarm intelligence, or intelligence that’s more closely coupled to the knowledge that exists in the phone you use day to day, like a secretary, making it intuitive and easy to use.
@@ -74,7 +78,7 @@ Cameron (Whoo — $1.6B company, high school dropout at 15.5)
 
 I also want to acknowledge the fact that most of these speakers had an immense amount of luck and support to build their companies. Know that some of this is also survivorship bias but nonetheless I still believe that this advice holds pretty steadily over the years from my own experience in startups as well.
 
-![](https://cdn-images-1.medium.com/max/1024/1*M9E-KVZg4_0mV6zBlQSftA@2x.jpeg)
+![](https://miro.medium.com/v2/resize:fit:1400/1*M9E-KVZg4_0mV6zBlQSftA@2x.jpeg)
 
 A speaker at dropout graduation
 

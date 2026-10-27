@@ -9,6 +9,10 @@ excerpt: 'Future Jack writes to present Jack about seven lifetimes of projects, 
 heroImage: '/assets/images/jack/main.jpg'
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 2 min read_
+
 ## Dear Jack
 
 It has been thirty‑five years since I last saw you. By now you have lived seven different lives, each marked by its own projects and experiments. The person who writes this letter has built the first commercially available robot that can understand and respond to human emotions, and a quantum computing algorithm that helps artificial intelligence simulate moral reasoning. You have also spent years designing a new city with decentralised governance and universal basic income so people can unleash their creativity without being shackled by mundane tasks.

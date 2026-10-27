@@ -9,6 +9,10 @@ excerpt: 'A strange dream with two parts that somehow connected: starting in the
 heroImage: '/assets/images/jack/main.jpg'
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 3 min read_
+
 Last night I had a strange dream with two parts that somehow connected. It started in the world of Hollow Knight and ended in Japan.
 
 ## Part One: Hollow Knight and Silksong

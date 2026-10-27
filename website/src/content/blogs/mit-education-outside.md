@@ -8,6 +8,10 @@ excerpt: 'Mindset shifts and tactical habits for building an MIT-caliber educati
 heroImage: '/assets/images/jack/main.jpg'
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 7 min read_
+
 ## Prologue
 
 03/14 (π day) is a big day for 45,000 people: it is the day when MIT decisions are coming out. On this day, almost 43,000 of them are met with disappointment as they see the “We have regret to inform you…” on their screens. The letter was short, a block of text that seemingly “determine your future forever”.

@@ -8,6 +8,10 @@ excerpt: 'Four traits for day‑one hires, and a twenty‑year lens on where lev
 heroImage: '/assets/images/jack/main.jpg'
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 4 min read_
+
 ## Introduction
 
 What makes a great first hire? And how should we think about a world that will look radically different two decades from now? Drawing inspiration from **Zero to One** and my own experience, this piece outlines the qualities to look for in early employees and the forces that will shape the future of technology and work.

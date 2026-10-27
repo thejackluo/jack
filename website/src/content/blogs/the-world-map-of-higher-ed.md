@@ -8,6 +8,10 @@ excerpt: 'Universities behave like nations, with endowments as dragon hoards and
 heroImage: '/assets/images/jack/main.jpg'
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 6 min read_
+
 ## Introduction
 
 Think of universities as sovereign states. They have constitutions and tax systems (admissions and tuition), distinct export economies (research, patents and startups), and myths they tell about why they matter. Once you see that, rankings look less like magic and more like a map you can use. I wrote this piece to help students and founders navigate that map without being blinded by prestige bubbles.

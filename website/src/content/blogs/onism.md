@@ -10,6 +10,10 @@ externalUrl: 'https://medium.com/@thejackluo8/onism-37db34c5b531'
 readingMinutes: 8
 ---
 
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 8 min read_
+
 The first warning came at the Banana Lounge.
 
 I was messing around with Chopin, mostly the pieces a normal semi-classical person recognizes: the Ocean Etude, the Revolutionary Etude, the dramatic ones that make piano feel like a sport where the instrument might win.
@@ -18,7 +22,7 @@ A guy came over and listened. His name was Patrick. He was one of those MIT-type
 
 Chopin’s Ballade No. 4.
 
-![](https://cdn-images-1.medium.com/max/1024/1*yeFbOSc3LvyvHGwZV2fS2Q@2x.jpeg)
+![](https://miro.medium.com/v2/resize:fit:1400/1*yeFbOSc3LvyvHGwZV2fS2Q@2x.jpeg)
 
 I had no idea Chopin wrote ballades.
 
@@ -28,9 +32,11 @@ Later, I tried to find Patrick online and learned he apparently had no social me
 
 That was the crack in the wall.
 
+---
+
 A few days later, I decided on a whim to go to a classical concert in Boston. This city is ridiculous for music. Berklee is here. New England Conservatory is here. The Boston Symphony Orchestra is here. Half the time you are probably standing next to someone who can play Rachmaninoff before lunch and argue about tone production after dinner.
 
-![](https://cdn-images-1.medium.com/max/1024/1*FYqJbu9tSu3bn9e5yEClBA@2x.jpeg)
+![](https://miro.medium.com/v2/resize:fit:1400/1*FYqJbu9tSu3bn9e5yEClBA@2x.jpeg)
 
 I asked my AI assistant, Poke, to rank concerts for me using Michelin stars.
 
@@ -86,9 +92,11 @@ For a second, I did not move. Then it clicked. I was the last person. The person
 
 Later I heard some of them got into the second half after people left during intermission. Good. They deserved it. Probably more than I did.
 
+---
+
 The hall felt grand the moment I entered.
 
-![](https://cdn-images-1.medium.com/max/1024/1*qenzav2p4t1gDFpCfCWqsQ@2x.jpeg)
+![](https://miro.medium.com/v2/resize:fit:1400/1*qenzav2p4t1gDFpCfCWqsQ@2x.jpeg)
 
 I know we were in Boston, but it felt like I had stepped into Vienna for a night. The room had that old concert-hall seriousness: high ceiling, warm light, people lowering their voices without being asked. Even the air felt trained.
 
@@ -98,7 +106,7 @@ At first, rules like that feel a little ridiculous. Then you sit there and under
 
 When Yunchan Lim started playing, I had no idea what to listen for.
 
-![](https://cdn-images-1.medium.com/max/585/1*VHnlPNKtJE5qqQuNynt9Dg@2x.jpeg)
+![](https://miro.medium.com/v2/resize:fit:1400/1*VHnlPNKtJE5qqQuNynt9Dg@2x.jpeg)
 
 I tried listening to the whole piece at once, which is like trying to understand a city by staring at the skyline. Then I started hearing layers. A melody on top, something moving underneath, a third voice slipping between them. The voices kept crossing and dissolving. One phrase would turn, melt, and become the next. The transition between movements felt almost like water finding a path downhill.
 
@@ -126,6 +134,8 @@ And somehow it was free.
 
 The seat felt like it should have cost $150. Maybe more. The value was not comfort or status. The value was that I walked out wanting to hear differently.
 
+---
+
 Since then, I have been looking up more Chopin: the etudes, the ballades, the sonatas, the concertos, the nocturnes. I started paying attention to performers too. Hayato Sumino is especially interesting to me because he lives between serious classical technique and the internet world I understand. That bridge matters. It makes the whole tradition feel reachable.
 
 I also started thinking about piano again.
@@ -134,7 +144,7 @@ For years, piano felt like an old part of my life that I could admire from a dis
 
 I came because Poke gave the concert three stars.
 
-![](https://cdn-images-1.medium.com/max/585/1*rb4un_Mj-6WinR3cDMVsDQ@2x.jpeg)
+![](https://miro.medium.com/v2/resize:fit:1400/1*rb4un_Mj-6WinR3cDMVsDQ@2x.jpeg)
 
 I left thinking about Patrick disappearing from the internet, Chopin’s Ballade No. 4, the last standby seat, a Vienna-feeling hall in Boston, and a bird failing upward inside my head.
 
