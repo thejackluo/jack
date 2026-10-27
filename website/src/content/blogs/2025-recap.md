@@ -20,6 +20,8 @@ readingMinutes: 8
 
 At some point it stopped feeling like “which class should I take next semester” and started feeling more like “what kind of life am I building without quite admitting it to myself”. That shift is subtle. You still go to lectures, send emails, and debug code like before, but suddenly every small choice carries this faint pressure of “is this the fork that changes the whole tree”.
 
+---
+
 ## Track 1: Work vs Love, Or What Actually Matters
 
 A lot of late night conversations this year collapsed into a very simple frame in my head: work and love. What you pour your time into, and who you are doing it for. Everything else is kind of a side effect. Hobbies, cities, status, even travel all sit downstream of those two sliders. What surprised me is not that they both matter, but how violently they can pull against each other once you stop hand waving.
@@ -27,6 +29,8 @@ A lot of late night conversations this year collapsed into a very simple frame i
 If I tilt the slider toward work, I get this intoxicating picture: deep technical skills, a product that actually ships, a weird little company that might matter someday, a version of myself who is undeniably useful. But I also see the cost. Fewer long calls. Fewer quiet nights where I am just present with someone instead of half checking my inbox. Less emotional bandwidth for people who are not “on the critical path” for my current project, which sounds terrible when you say it out loud but is how a lot of highly productive people actually live.
 
 If I tilt the slider toward love, it is the opposite. The picture is warmer. More dinners where time disappears. More patience for someone else’s chaos. More attention on a small circle instead of on “impact” for nameless strangers. But then the other cost shows up. I know I am the kind of person who will notice every opportunity I am not taking. If I am too far on the love side, I will look at my career in five or ten years and quietly ask, “You could have done more, why did you stop there.” There is no categorical right answer here. This year I mostly sat with the discomfort and admitted that any real life I choose will hurt somewhere.
+
+---
 
 ## Track 2: The Fast Food Decision That Never Ended
 
@@ -36,6 +40,8 @@ The dumbest story that kept haunting me this year is still that middle school ro
 
 The useful piece from that realization is not some perfect framework. It is simply this: at some point you have to let constraints hit you. A decision is valuable precisely because it closes doors and forces you to grow along a narrower path. That is true for what you study, who you work with, and who you choose to keep in your inner circle. This year I did not solve my indecision problem, but I stopped pretending it was a cute personality quirk.
 
+---
+
 ## Track 3: Generalist Brain, Specialist World
 
 Another big theme this year was wrestling with the generalist versus specialist thing. I am clearly not built to stare at a single micro topic for twenty years. At the same time, I have seen enough now to know that the people who really move the needle in any field are terrifyingly deep somewhere. You cannot network your way around competence forever.
@@ -43,6 +49,8 @@ Another big theme this year was wrestling with the generalist versus specialist 
 So I started thinking about my life less like a random cloud of interests and more like a sequence of focused arcs. One deep technical arc where I actually ship serious work in AI instead of just vibing with models. One arc where I get better at building products and leading people, not just being the “ideas” person. Maybe later, another arc that leans into robotics or something more physical. From the outside that looks like a generalist. From the inside it is just a stack of scars from different seasons where I was willing to suffer for one thing at a time.
 
 This year, the honest answer is that I was still in between arcs. I tasted multiple paths, met people at very different levels of the game, and saw both the upside and the cost of each lane. The important shift though is that I finally accepted a boring truth: depth is not optional. If I want to be the kind of generalist who can actually build and coordinate, not just talk, I have to earn it one painful focus block at a time.
+
+---
 
 ## Track 4: Conversations, Collabs, And All The Quiet Influence
 
@@ -52,6 +60,8 @@ I noticed how much my trajectory bends around certain people without any officia
 
 Instead of forcing everything into “networking” or “relationship goals”, I started to see these as overlapping circles of influence. Some are loud and intense, like short campaigns. Others are quiet, long term fields that shape who I become just by existing in the background. I am still bad at explicitly managing any of this, but I am at least less naive about how much it matters.
 
+---
+
 ## Track 5: The Boring Systems That Kept Me From Crashing
 
 A less glamorous but very real part of this year was realizing how fragile everything is when my base systems fall apart. Sleep, food, movement, basic admin. When those are off, all the talk about “impact” and “meaning” becomes pretty useless. The version of me that has not slept and has five unanswered serious emails is not exactly a moral philosopher. He is just a slightly more eloquent raccoon.
@@ -60,6 +70,8 @@ So 2025 became a quiet experiment in building just enough structure to not implo
 
 A big realization here is that “systems” are not just for output. They also create space for reflection. When the basics are handled, I actually have mental room to think about whether I am living according to my own beliefs or just reacting. That upstream stability is probably the only reason I could even have half the conversations that turned into the blogs I wrote.
 
+---
+
 ## Track 6: Cities, Side Quests, And The Feeling Of Elsewhere
 
 Even when I am physically in one place, my brain is always halfway packed. Part of me is here, writing, coding, handling whatever is immediately in front of me. Another part is quietly plotting future locations, future lives. What would it feel like to live somewhere dense and electric again. What would it feel like to drop into a city where no one knows me and see what kind of person I naturally become there.
@@ -67,6 +79,8 @@ Even when I am physically in one place, my brain is always halfway packed. Part 
 This year had less dramatic moving than some previous ones, but the “elsewhere” question was always humming in the background. I noticed how much environment still controls my behavior, no matter how much I pretend to be purely self directed. Certain places make it easier to be serious. Others make it dangerously easy to drift. That is not a moral judgment on any city, just an honest observation about me.
 
 Looking ahead, I know there is at least one long flight in my near future. I can see myself landing in Asia again, walking through Tokyo and Singapore with a slightly older brain, comparing how different everything feels even though the buildings are the same. Partly for the food, partly for the tech scenes, partly just to measure how much I have changed relative to the last time I was there.
+
+---
 
 ## Track 7: What I Am Carrying Into 2026
 
