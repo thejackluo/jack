@@ -1,5 +1,166 @@
 [
   {
+    "title": "What startups look for?",
+    "date": "2026-10-12",
+    "read_minutes": 2,
+    "blurb": "",
+    "url": "https://medium.com/@thejackluo8/what-startups-look-for-3fc584f1de84"
+  },
+  {
+    "title": "The Air Where Ideas Should Have Been",
+    "date": "2026-07-12",
+    "read_minutes": 32,
+    "blurb": "",
+    "url": "https://medium.com/@thejackluo8/the-air-where-ideas-should-have-been-ebdae1c4f608"
+  },
+  {
+    "title": "Credibility Debt",
+    "date": "2026-07-10",
+    "read_minutes": 10,
+    "blurb": "The gap between the credibility you borrow (raises, accelerator logos, LOIs, prestige) and what your actual work can support, and why it eventually comes due.",
+    "url": "https://medium.com/@thejackluo8/credibility-debt-a874e177cb57"
+  },
+  {
+    "title": "a graduation for dropouts",
+    "date": "2026-06-22",
+    "read_minutes": 4,
+    "blurb": "Notes from the ZFellows dropout graduation: speaker highlights, recurring themes, and where I think swarm intelligence and personal AI are headed.",
+    "url": "https://medium.com/@thejackluo8/a-graduation-for-dropouts-9a6f2a6ca682"
+  },
+  {
+    "title": "Onism",
+    "date": "2026-04-29",
+    "read_minutes": 8,
+    "blurb": "Chopin's Ballade No. 4, a stranger named Patrick, the last standby seat at a Boston concert, and finding my way back to the piano.",
+    "url": "https://medium.com/@thejackluo8/onism-37db34c5b531"
+  },
+  {
+    "title": "Vivarium",
+    "date": "2026-03-12",
+    "read_minutes": 30,
+    "blurb": "",
+    "url": "https://medium.com/@thejackluo8/vivarium-dc7cd79dc328"
+  },
+  {
+    "title": "Dear Dear Jack,",
+    "date": "2026-02-09",
+    "read_minutes": 5,
+    "blurb": "",
+    "url": "https://medium.com/@thejackluo8/dear-dear-jack-234ba8488407"
+  },
+  {
+    "title": "Philmont — A Journey of Hiking Through Mountains (2019)",
+    "date": "2026-02-08",
+    "read_minutes": 18,
+    "blurb": "Twelve days, 65 miles, 40+ pound packs and 11k feet of elevation change: a day-by-day journal of the Philmont trek that turned a little boy into a grown man.",
+    "url": "https://medium.com/@thejackluo8/philmont-a-journey-of-hiking-through-mountains-2019-1165c9c1f1e8"
+  },
+  {
+    "title": "The biggest unsolved question",
+    "date": "2026-01-24",
+    "read_minutes": 1,
+    "blurb": "Elite colleges, YC, and Davos work because they compress exceptional people into one place. Can we create exceptional environments for everyone?",
+    "url": "https://medium.com/@thejackluo8/the-biggest-unsolved-question-c8ba54c80275"
+  },
+  {
+    "title": "CES 2026 NVIDIA Keynote",
+    "date": "2026-01-24",
+    "read_minutes": 7,
+    "blurb": "NVIDIA's CES 2026 keynote framed AI as the next computing platform: open models, agentic architectures, physical AI, and co-designed hardware reinventing the stack.",
+    "url": "https://medium.com/@thejackluo8/ces-2026-nvidia-keynote-33960ee9fbef"
+  },
+  {
+    "title": "2026 FAQ",
+    "date": "2026-01-18",
+    "read_minutes": 1,
+    "blurb": "",
+    "url": "https://medium.com/@thejackluo8/2026-faq-7df08eded073"
+  },
+  {
+    "title": "My 2025 recap in bullet points (part 1)",
+    "date": "2026-01-16",
+    "read_minutes": 4,
+    "blurb": "",
+    "url": "https://medium.com/@thejackluo8/my-2025-recap-in-bullet-points-part-1-31a37a0f5068"
+  },
+  {
+    "title": "before the 2025 recap",
+    "date": "2026-01-04",
+    "read_minutes": 8,
+    "blurb": "",
+    "url": "https://medium.com/@thejackluo8/before-the-2025-recap-b8227924dff7"
+  },
+  {
+    "title": "Dinner Notes from a brain that refuses to shut up",
+    "date": "2025-12-12",
+    "read_minutes": 10,
+    "blurb": "",
+    "url": "https://medium.com/@thejackluo8/dinner-notes-from-a-brain-that-refuses-to-shut-up-f8992602690c"
+  },
+  {
+    "title": "2025 Recap",
+    "date": "2025-12-08",
+    "read_minutes": 8,
+    "blurb": "",
+    "url": "https://medium.com/@thejackluo8/2025-recap-b734a8433778"
+  },
+  {
+    "title": "Slime, Deadlines, And Trying Not To Explode",
+    "date": "2025-12-06",
+    "read_minutes": 8,
+    "blurb": "",
+    "url": "https://medium.com/@thejackluo8/slime-deadlines-and-trying-not-to-explode-4951b8cbd51a"
+  },
+  {
+    "title": "The only two things that are important in your life are work and love.",
+    "date": "2025-12-05",
+    "read_minutes": 3,
+    "blurb": "",
+    "url": "https://medium.com/@thejackluo8/the-only-two-things-that-are-important-in-your-life-are-work-and-love-7b8a4aa5186b"
+  },
+  {
+    "title": "Thanksgiving 2025",
+    "date": "2025-11-27",
+    "read_minutes": 6,
+    "blurb": "",
+    "url": "https://medium.com/@thejackluo8/thanksgiving-2025-c80951a30e10"
+  },
+  {
+    "title": "Why Can not My AI Just Beatbox 50 Times?",
+    "date": "2025-11-25",
+    "read_minutes": 1,
+    "blurb": "",
+    "url": "https://medium.com/@thejackluo8/why-can-not-my-ai-just-beatbox-50-times-55eb0b7c93ba"
+  },
+  {
+    "title": "Stupid blog ideas that will never become a real blog",
+    "date": "2025-11-23",
+    "read_minutes": 2,
+    "blurb": "",
+    "url": "https://medium.com/@thejackluo8/stupid-blog-ideas-that-will-never-become-a-real-blog-072f044a36c9"
+  },
+  {
+    "title": "Dream journal 11/19/25",
+    "date": "2025-11-20",
+    "read_minutes": 6,
+    "blurb": "",
+    "url": "https://medium.com/@thejackluo8/dream-journal-11-19-25-446d7a925a42"
+  },
+  {
+    "title": "Acquaintances, Friends, and Close Friends",
+    "date": "2025-11-19",
+    "read_minutes": 15,
+    "blurb": "",
+    "url": "https://medium.com/@thejackluo8/acquaintances-friends-and-close-friends-6bb85e766484"
+  },
+  {
+    "title": "What does AI think of this guy called Jack",
+    "date": "2025-11-18",
+    "read_minutes": 6,
+    "blurb": "",
+    "url": "https://medium.com/@thejackluo8/what-does-ai-think-of-this-guy-called-jack-bc14cf1b8add"
+  },
+  {
     "title": "The World Map of Higher Ed: Dragon Hoards, Prestige Bubbles, and Why Some \"Small Countries\" Win",
     "date": "2025-09-19",
     "read_minutes": 6,

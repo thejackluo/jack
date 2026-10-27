@@ -9,6 +9,7 @@ const blogs = defineCollection({
     excerpt: z.string(),
     heroImage: z.string(),
     externalUrl: z.string().url().optional(),
+    readingMinutes: z.number().int().positive().optional(),
   }),
 });
 

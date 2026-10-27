@@ -15,7 +15,7 @@ const blogs = allBlogs
   })
   .map(blog => ({
     ...blog,
-    readingTime: calculateReadingTime(blog.body),
+    readingTime: blog.data.readingMinutes ?? calculateReadingTime(blog.body),
   }))
   .sort((a, b) => {
     // Sort by publish date, newest first
