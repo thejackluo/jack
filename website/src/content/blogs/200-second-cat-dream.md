@@ -1,14 +1,18 @@
 ---
-title: "200 second cat dream"
+title: '200 second cat dream'
 publishDate: 2025-11-03
 tags:
-  - "dreams"
-  - "personal"
-  - "reflection"
-  - "cats"
-excerpt: "A dream about adopting a cat from Instagram, the practical challenges of responsibility, and the weight of decisions made without thinking them through."
-heroImage: "/assets/images/jack/main.jpg"
+  - 'dreams'
+  - 'personal'
+  - 'reflection'
+  - 'cats'
+excerpt: 'A dream about adopting a cat from Instagram, the practical challenges of responsibility, and the weight of decisions made without thinking them through.'
+heroImage: '/assets/images/jack/main.jpg'
 ---
+
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 3 min read_
 
 I saw an Instagram story of a cat for adoption. the tabby cat in the photo looked gentle in that way that makes you think your life might soften a little if you just said yes (or nya). I decided to open myself up to it. At pickup the woman asked whether I had a pet permit. For a second I tried to remember what kind of permit that even is. I heard myself say yeah. She did not check anything. We chatted for a moment and then I walked out with the cat like that was the most normal thing in the world.
 

@@ -1,15 +1,19 @@
 ---
-title: "Improving Browser Autonomous Agents with Deep Reinforcement Learning and Memory"
+title: 'Improving Browser Autonomous Agents with Deep Reinforcement Learning and Memory'
 publishDate: 2025-11-06
 tags:
-  - "ai"
-  - "agents"
-  - "reinforcement-learning"
-  - "memory"
-  - "web-automation"
-excerpt: "Exploring how deep reinforcement learning and memory systems can make browser automation agents faster and more accurate, with insights on Composite and other web agent frameworks."
-heroImage: "/assets/images/jack/main.jpg"
+  - 'ai'
+  - 'agents'
+  - 'reinforcement-learning'
+  - 'memory'
+  - 'web-automation'
+excerpt: 'Exploring how deep reinforcement learning and memory systems can make browser automation agents faster and more accurate, with insights on Composite and other web agent frameworks.'
+heroImage: '/assets/images/jack/main.jpg'
 ---
+
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 4 min read_
 
 As we enter the age of web agents, we are bombarded with new software releases every few days like Comet, Composite, and Fellou. These apps promise to automate everyday tasks, with travel planning as the overused demo. In practice, current approaches are slow. Large language models often take five or more seconds to perform a single action such as a click or scroll.
 

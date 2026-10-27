@@ -1,15 +1,19 @@
 ---
-title: "Hierarchical Memory and Adaptive State Management for an AI Agent"
+title: 'Hierarchical Memory and Adaptive State Management for an AI Agent'
 publishDate: 2025-11-05
 tags:
-  - "ai"
-  - "agents"
-  - "memory"
-  - "deep-learning"
-  - "architecture"
-excerpt: "A comprehensive exploration of how to build powerful AI assistants through memory partitioning, goal-driven state transitions, graph-based retrieval, and multi-step prompting strategies."
-heroImage: "/assets/images/jack/main.jpg"
+  - 'ai'
+  - 'agents'
+  - 'memory'
+  - 'deep-learning'
+  - 'architecture'
+excerpt: 'A comprehensive exploration of how to build powerful AI assistants through memory partitioning, goal-driven state transitions, graph-based retrieval, and multi-step prompting strategies.'
+heroImage: '/assets/images/jack/main.jpg'
 ---
+
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 11 min read_
 
 To build a powerful AI assistant (sometimes called an agent), we need to carefully design how it remembers information, transitions between tasks, retrieves knowledge quickly, and orchestrates multi-step operations. We also want the system to be transparent (showing its plan or reasoning to the user) and customizable (able to adjust components like models or memory settings). Below, we break down each of these aspects in detail.
 

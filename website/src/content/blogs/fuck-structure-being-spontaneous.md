@@ -2,15 +2,19 @@
 title: "Fuck Structure. Let's Talk About Being Spontaneous."
 publishDate: 2025-11-16
 tags:
-  - "personal"
-  - "philosophy"
-  - "life-lessons"
-  - "spontaneity"
-excerpt: "My 50th blog post about why being spontaneous matters more than planning, featuring stories of biking to Facebook as a ninth grader, flying to San Diego in under an hour, and crawling through unmapped caves."
-heroImage: "/assets/images/jack/main.jpg"
+  - 'personal'
+  - 'philosophy'
+  - 'life-lessons'
+  - 'spontaneity'
+excerpt: 'My 50th blog post about why being spontaneous matters more than planning, featuring stories of biking to Facebook as a ninth grader, flying to San Diego in under an hour, and crawling through unmapped caves.'
+heroImage: '/assets/images/jack/main.jpg'
 ---
 
-> *Author's Note: You know what's crazy? This is my 50th blog. If my mentor saw this three years ago when I first proposed this blog project he would be like wow, that is 5x your original goal. Granted, I had three years to do this, but I think that's crazy, yeah. Enjoy, this is gonna be a crazy story.*
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 14 min read_
+
+> _Author's Note: You know what's crazy? This is my 50th blog. If my mentor saw this three years ago when I first proposed this blog project he would be like wow, that is 5x your original goal. Granted, I had three years to do this, but I think that's crazy, yeah. Enjoy, this is gonna be a crazy story._
 
 Do you want to take a guess how this blog became the way it is?
 

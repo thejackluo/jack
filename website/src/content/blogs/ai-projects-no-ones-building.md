@@ -2,18 +2,22 @@
 title: "The AI Projects No One's Building (But Should Be)"
 publishDate: 2025-11-10
 tags:
-  - "ai"
-  - "productivity"
-  - "music"
-  - "gaming"
-  - "startups"
-excerpt: "A dialogue between two builders exploring the overlooked frontiers of artificial intelligence: emotionally intelligent productivity software, personalized music creation tools, and memory-aware games."
-heroImage: "/assets/images/jack/main.jpg"
+  - 'ai'
+  - 'productivity'
+  - 'music'
+  - 'gaming'
+  - 'startups'
+excerpt: 'A dialogue between two builders exploring the overlooked frontiers of artificial intelligence: emotionally intelligent productivity software, personalized music creation tools, and memory-aware games.'
+heroImage: '/assets/images/jack/main.jpg'
 ---
 
-> *A Conversation About the Future of Creative Technology*
+![Jack Luo](/assets/images/jack/main.jpg)
+
+> _Jack Luo — 13 min read_
+
+> _A Conversation About the Future of Creative Technology_
 >
-> *A dialogue between two builders exploring the overlooked frontiers of artificial intelligence*
+> _A dialogue between two builders exploring the overlooked frontiers of artificial intelligence_
 
 **Jack:** You know what strikes me about most AI discussions today? Everyone's talking about the same things: chatbots, image generators, code assistants. But there's this entire landscape of possibilities that barely anyone's exploring.
 
@@ -121,4 +125,4 @@ heroImage: "/assets/images/jack/main.jpg"
 
 ---
 
-*Jack and Arman are builders exploring the intersection of AI and human experience. They believe the most interesting applications aren't the ones everyone's talking about; they're the ones nobody's built yet.*
+_Jack and Arman are builders exploring the intersection of AI and human experience. They believe the most interesting applications aren't the ones everyone's talking about; they're the ones nobody's built yet._
