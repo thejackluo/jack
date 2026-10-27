@@ -29,4 +29,4 @@ heroImage: '/assets/images/jack/main.jpg'
 15. Creativity is a time-consuming process, not something to be forced.
 16. Do something you always wanted to do, right now! Don't wait.
 17. Don't simply follow what others have done! For instance, the 18th thing is purposefully left blank for you to fill out.
-18. ***
+18. \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_

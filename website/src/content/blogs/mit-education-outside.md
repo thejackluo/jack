@@ -45,9 +45,7 @@ To obtain a MIT styled education, there are four things to consider.
 3. You should surround yourself with great people.
 4. You should have an optimistic attitude.
 
-If you are reading this article, you already met requirement
-
-1. We will explore point 2–4 down below. Let's dive in.
+If you are reading this article, you already met requirement 1. We will explore point 2–4 down below. Let’s dive in.
 
 ## Part 2: Drink from the right firehose
 
