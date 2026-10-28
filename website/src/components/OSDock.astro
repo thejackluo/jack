@@ -64,6 +64,7 @@ const dockItems = [
     ))}
   </div>
 </nav>
+<div class="os-dock-fade" aria-hidden="true"></div>
 
 <!-- Toggle Button for Mobile - Opens Command Palette on Mobile -->
 <button class="os-dock-toggle" id="osDockToggle" aria-label="Open command palette on mobile, toggle navigation dock on desktop">
@@ -85,6 +86,22 @@ const dockItems = [
     transform: translateX(-50%) translateY(0);
     z-index: 1000;
     transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+  }
+
+  .os-dock-fade {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 7rem;
+    z-index: 999;
+    pointer-events: none;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+    transition: opacity 0.3s ease;
+  }
+
+  .os-dock.hidden ~ .os-dock-fade {
+    opacity: 0;
   }
 
   .os-dock.hidden {
@@ -384,7 +401,7 @@ const dockItems = [
 
   // Auto-hide dock on scroll down, show on scroll up
   let lastScroll = 0;
-  const scrollThreshold = 100;
+  const scrollThreshold = 24;
 
   window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
