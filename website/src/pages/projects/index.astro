@@ -106,6 +106,10 @@ const minorCategories = [...new Set(minorProjects.map((p) => p.data.category))];
                   <article class="project-card minor-card" data-project-slug={project.slug}>
                     {project.data.video ? (
                       <video class="project-image minor-image" src={project.data.video.src} poster={project.data.video.poster} autoplay muted loop playsinline preload="metadata" aria-label={project.data.gallery[0]?.alt ?? project.data.title} />
+                    ) : project.data.youtube ? (
+                      <div class="project-image minor-image minor-yt">
+                        <iframe src={'https://www.youtube-nocookie.com/embed/' + project.data.youtube} title={project.data.title + ' demo video'} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                      </div>
                     ) : project.data.gallery && project.data.gallery.length > 0 && project.data.gallery[0].src ? (
                       <img
                         src={project.data.gallery[0].src}
@@ -453,6 +457,19 @@ const minorCategories = [...new Set(minorProjects.map((p) => p.data.category))];
 
   .minor-image {
     aspect-ratio: 16 / 10;
+  }
+
+  .minor-yt {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .minor-yt iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
   }
 
   .minor-placeholder {
