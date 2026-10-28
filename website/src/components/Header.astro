@@ -8,7 +8,7 @@ const navLinks = [
   { href: '/writing', label: 'Writing', page: 'writing' },
 ];
 ---
-<section id="landing" class:list={[{ 'has-hero': hasHero }]}>
+<section id="landing" class:list={[{ 'has-hero': hasHero, 'home-landing': currentPage === 'home' }]}>
   <div class="landing-container horizontal-align container-fluid">
     <nav class="navbar">
       <div class="container-fluid">
@@ -56,6 +56,26 @@ const navLinks = [
 </section>
 
 <style>
+  .home-landing {
+    position: relative;
+    height: auto;
+    min-height: 100svh;
+  }
+
+  .home-landing > .landing-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 100svh;
+  }
+
+  .home-landing > .landing-angular-filter {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
   /* Mobile Hamburger Menu Styles */
   .hamburger-menu {
     display: none;
@@ -146,7 +166,9 @@ const navLinks = [
 
   .mobile-nav-link h2 {
     margin: 0;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
+    color: #fff;
+    text-shadow: 0 0 14px rgba(255, 255, 255, 0.3);
   }
 
   .mobile-nav-link[aria-current="page"] {
@@ -162,6 +184,7 @@ const navLinks = [
   }
 
   .navbar {
+    flex-shrink: 0;
     height: 72px;
     padding: 0 2rem !important;
     display: flex;
@@ -207,18 +230,18 @@ const navLinks = [
   .nav-desktop .nav-item h2 {
     position: relative;
     margin: 0;
-    font-size: clamp(1.05rem, 1.3vw, 1.2rem);
+    font-size: clamp(1.5rem, 2.2vw, 2.25rem);
     font-weight: 400;
     letter-spacing: 0.02em;
-    opacity: 0.7;
-    text-shadow: none !important;
-    transition: opacity 0.2s ease;
+    color: #fff;
+    text-shadow: 0 0 14px rgba(255, 255, 255, 0.3), 0 0 28px rgba(255, 255, 255, 0.15) !important;
+    transition: text-shadow 0.2s ease;
   }
 
   .nav-desktop .nav-item a:hover h2,
   .nav-desktop .nav-item a:focus-visible h2,
   .nav-desktop .nav-item a[aria-current='page'] h2 {
-    opacity: 1;
+    text-shadow: 0 0 14px rgba(255, 255, 255, 0.5), 0 0 28px rgba(255, 255, 255, 0.25) !important;
   }
 
   .nav-desktop .nav-item h2::after {
