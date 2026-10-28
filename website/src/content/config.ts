@@ -26,6 +26,8 @@ const projects = defineCollection({
     status: z.enum(['Ongoing', 'Completed', 'Archived']).default('Completed'),
     category: z.enum(['AI & Agents', 'Energy & Infrastructure', 'Security & Safety', 'Productivity', 'Community', 'Research', 'Archive']).default('Archive'),
     featured: z.boolean().default(false),
+  video: z.object({ src: z.string(), poster: z.string().optional() }).optional(),
+    video: z.object({ src: z.string(), poster: z.string().optional() }).optional(),
     gallery: z
       .array(
         z.object({

@@ -15,7 +15,7 @@ description: 'MAGK Excel lets non-technical users describe what they need in pla
 startDate: 2024-06-01
 status: 'Ongoing'
 category: 'AI & Agents'
-featured: true
+featured: false
 gallery:
   - src: '/assets/projects/magk-excel.png'
     alt: 'MAGK Excel workflow builder interface'

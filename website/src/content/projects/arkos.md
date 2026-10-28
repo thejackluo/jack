@@ -14,7 +14,7 @@ description: 'Backend contributor to ARK, a modular agentic assistant platform b
 startDate: 2024-09-01
 status: 'Ongoing'
 category: 'Research'
-featured: true
+featured: false
 gallery:
   - src: '/assets/projects/arkos.png'
     alt: 'ARKOS architecture diagram'

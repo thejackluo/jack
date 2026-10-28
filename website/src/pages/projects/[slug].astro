@@ -94,9 +94,15 @@ const { Content } = await entry.render();
           </header>
 
           <!-- Project Gallery (if exists) -->
-          {entry.data.gallery.length > 0 && (
+          {(entry.data.video || entry.data.gallery.length > 0) && (
             <section class="project-gallery">
-              {entry.data.gallery.map(image => (
+              {entry.data.video && (
+                <figure class="gallery-item">
+                  <video src={entry.data.video.src} poster={entry.data.video.poster} autoplay muted loop playsinline controls preload="metadata" />
+                  {entry.data.gallery[0]?.caption && <figcaption>{entry.data.gallery[0].caption}</figcaption>}
+                </figure>
+              )}
+              {entry.data.gallery.filter(image => !entry.data.video || image.src !== entry.data.video.poster).map(image => (
                 <figure class="gallery-item">
                   <img src={image.src} alt={image.alt} />
                   {image.caption && <figcaption>{image.caption}</figcaption>}
@@ -393,6 +399,7 @@ const { Content } = await entry.render();
     margin: 0;
   }
 
+  .gallery-item video,
   .gallery-item img {
     width: 100%;
     height: 400px;

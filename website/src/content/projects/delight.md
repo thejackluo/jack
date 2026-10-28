@@ -14,7 +14,7 @@ description: 'Built for ambitious people who drop their biggest goals when life 
 startDate: 2024-08-01
 status: 'Ongoing'
 category: 'AI & Agents'
-featured: true
+featured: false
 gallery:
   - src: '/assets/projects/delight.png'
     alt: 'Delight dashboard showing missions and progress constellation'
