@@ -836,6 +836,23 @@ const minorCategories = [...new Set(minorProjects.map((p) => p.data.category))];
     min-height: auto !important;
   }
 
+  :global(.modal) :global(.video-embed) {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+  }
+
+  :global(.modal) :global(.video-embed iframe) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
   :global(.modal) :global(.gallery-item video),
   :global(.modal) :global(.gallery-item img) {
     height: auto !important;
@@ -954,13 +971,14 @@ const minorCategories = [...new Set(minorProjects.map((p) => p.data.category))];
     });
   });
 
-  // Close modal
-  closeBtn?.addEventListener('click', () => {
-    if (modal) {
-      modal.style.display = 'none';
-      document.body.style.overflow = '';
-    }
-  });
+  // Close modal; clearing the body unmounts embedded players so audio stops
+  function closeModal() {
+    if (modal) modal.style.display = 'none';
+    if (modalBody) modalBody.innerHTML = '';
+    document.body.style.overflow = '';
+  }
+
+  closeBtn?.addEventListener('click', closeModal);
 
   // Close on overlay click (but not on content click)
   const modalOverlay = document.querySelector('.modal-overlay');
@@ -969,18 +987,14 @@ const minorCategories = [...new Set(minorProjects.map((p) => p.data.category))];
   modalContainer?.addEventListener('click', (event) => {
     // Only close if clicking the container itself, not its children
     if (event.target === modalContainer) {
-      if (modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = '';
-      }
+      closeModal();
     }
   });
 
   // Close on escape key
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && modal && modal.style.display === 'block') {
-      modal.style.display = 'none';
-      document.body.style.overflow = '';
+      closeModal();
     }
   });
 
