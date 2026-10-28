@@ -114,7 +114,7 @@ const { Content } = await entry.render();
           {(entry.data.video || entry.data.gallery.length > 0) && (
             <section class="project-gallery">
               {entry.data.video && (
-                <figure class="gallery-item">
+                <figure class="gallery-item gallery-video">
                   <video src={entry.data.video.src} poster={entry.data.video.poster} autoplay muted loop playsinline controls preload="metadata" />
                   {entry.data.gallery[0]?.caption && <figcaption>{entry.data.gallery[0].caption}</figcaption>}
                 </figure>
@@ -416,6 +416,10 @@ const { Content } = await entry.render();
     margin: 0;
   }
 
+  .gallery-video {
+    grid-column: 1 / -1;
+  }
+
   .video-embed {
     position: relative;
     width: 100%;
@@ -441,6 +445,12 @@ const { Content } = await entry.render();
     border-radius: 0.75rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
     filter: drop-shadow(0px 4px 20px rgba(0, 0, 0, 0.3));
+  }
+
+  .gallery-item video {
+    display: block;
+    height: auto;
+    object-fit: contain;
   }
 
   .gallery-item figcaption {
