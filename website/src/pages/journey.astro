@@ -8,6 +8,8 @@ interface Moment {
   text: string;
   kind: Kind;
   href?: string;
+  img?: string;
+  imgAlt?: string;
 }
 
 const moments: Moment[] = [
@@ -23,12 +25,12 @@ const moments: Moment[] = [
   { date: '2025.02', kind: 'Milestone', title: 'MAGK CTO', href: '/projects/magk-excel/', text: 'Stepped up as CTO at MAGK, an AI workflow automation startup applying multi-agent systems to productivity.' },
   { date: '2024.10', kind: 'Milestone', title: 'Quantum Labs acquired', text: 'Quantum Labs was acquired by Hatch Coding in a six-figure deal, validating a systematic approach to building mission-driven businesses.' },
   { date: '2024.09', kind: 'Built', title: 'ARKOS at MIT SIPB', href: '/projects/arkos/', text: 'Backend work on agent orchestration, memory modules and state graphs for ARK, the modular assistant platform from MIT SIPB.' },
-  { date: '2024.08', kind: 'Built', title: 'Delight', href: '/projects/delight/', text: 'A goal companion for ambitious people that starts with how you feel and uses a three-tier memory system.' },
+  { date: '2024.08', kind: 'Built', title: 'Delight', text: 'A goal companion for ambitious people that starts with how you feel and uses a three-tier memory system.' },
   { date: '2024.06', kind: 'Milestone', title: 'Buildspace Nights & Weekends S4', text: 'Shipped alongside a global cohort of builders, and learned to ship faster and think bigger.' },
   { date: '2024.05', kind: 'Built', title: 'Efficore', href: '/projects/efficore/', text: 'Co-founded Efficore: energy optimization that treats a whole facility as one controllable system.' },
   { date: '2024.03', kind: 'Milestone', title: 'Hackathon wins & Elon calls', text: 'Top 15 at the UC Berkeley AI Hackathon, 1st place at Digitalized and CodeDay SF, and two video calls with Elon Musk about AI and the future.' },
   { date: '2023.10', kind: 'Creative', title: 'TikTok went viral', text: 'Educational tech videos on TikTok passed 2 million total views, which made me want to keep demystifying AI for a broad audience.' },
-  { date: '2023.07', kind: 'Life', title: 'Q House, Prodicity & Limbinal', href: '/projects/q-hacker-house/', text: 'Hosted a 10-person hacker house in San Francisco, co-created Prodicity (AI mentorship for 20+ high schoolers), and started writing Limbinal.' },
+  { date: '2023.07', kind: 'Life', title: 'Q Hacker House, Prodicity & Limbinal', href: '/writing/three-weeks-in-a-hacker-house/', img: '/assets/projects/hackerhouse.jpg', imgAlt: 'Group photo from the Q Hacker House rooftop', text: 'Hosted a three-week hacker house in a downtown SF loft for ten founders, researchers and makers, with nightly salon talks, Bay Area field trips, and Prodicity’s AI mentorship track pairing residents with 20+ high school builders. I ran the leasing, budget, meals and speakers. That summer I also started writing Limbinal.' },
   { date: '2023.02', kind: 'Milestone', title: 'Quantum Labs launched', text: 'An online, project-based AI education program that grew to 1,500+ students worldwide with university partnerships within 20 months.' },
   { date: '2022.08', kind: 'Life', title: 'Georgia Tech', text: 'Transferred to Georgia Tech to study Computer Science and Math, with a deeper focus on AI and robotics.' },
   { date: '2022.03', kind: 'Built', title: 'Calend.ai', href: '/projects/calendai/', text: 'An AI copilot for Google Calendar that turns free-form requests into scheduled events.' },
@@ -37,7 +39,7 @@ const moments: Moment[] = [
 const years = [...new Set(moments.map((m) => m.date.slice(0, 4)))];
 
 const experiments = [
-  { title: 'Vigama', href: '/projects/vigama/', what: 'An AI productivity app that automated scheduling and tasks from natural language.', lesson: 'Focus and timing matter more than scope.' },
+  { title: 'Vigama', what: 'An AI productivity app that automated scheduling and tasks from natural language.', lesson: 'Focus and timing matter more than scope.' },
   { title: 'Ophelus', what: 'A gamified productivity platform: task management inside a personal progress RPG.', lesson: 'Validate with a simple MVP before building the dream platform.' },
   { title: 'Sora video experiments', what: 'Experimental video and storytelling with OpenAI’s Sora.', lesson: 'Bleeding-edge tools need patience; sometimes you wait for the ecosystem.' },
   { title: 'Voice & text AI agents', what: 'Speech-to-text, LLMs and text-to-speech stitched into voice interfaces.', lesson: 'Voice has to feel instant. Small delays break the magic.' },
@@ -96,6 +98,7 @@ const explore = [
                       {m.href ? <a href={m.href}>{m.title} <span aria-hidden="true">→</span></a> : m.title}
                     </h3>
                     <p class="moment-text">{m.text}</p>
+                    {m.img && <img class="moment-img" src={m.img} alt={m.imgAlt ?? ''} loading="lazy" />}
                   </li>
                 ))}
               </ol>
@@ -386,6 +389,17 @@ const explore = [
     max-width: 42rem;
     color: rgba(255, 255, 255, 0.7);
     margin: 0;
+  }
+
+  .moment-img {
+    display: block;
+    width: 100%;
+    max-width: 34rem;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 1rem;
   }
 
   /* Experiments */
