@@ -128,7 +128,7 @@ const minorCategories = [...new Set(minorProjects.map((p) => p.data.category))];
                       <p class="minor-summary">{project.data.description}</p>
                       {project.data.links && project.data.links.length > 0 && (
                         <div class="minor-links">
-                          {project.data.links.slice(0, 2).map((link) => (
+                          {project.data.links.slice(0, 3).map((link) => (
                             <a href={link.url} target="_blank" rel="noopener noreferrer" class="minor-link" onclick="event.stopPropagation()">
                               {link.label} ↗
                             </a>
