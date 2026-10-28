@@ -429,6 +429,18 @@ const publishDate = entry.data.publishDate.toLocaleDateString('en-US', {
     font-style: normal;
   }
 
+  .blog-meta.is-merged {
+    display: none;
+  }
+
+  .blog-content > :global(p:first-child:has(img) + blockquote .author-name),
+  .blog-content > :global(blockquote:first-child .author-name) {
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.75rem 0 0 0;
+  }
+
   /* Author date styling */
   .blog-content > :global(p:first-child:has(img) + blockquote .author-date) {
     margin-top: 0.25rem;
@@ -639,7 +651,7 @@ const publishDate = entry.data.publishDate.toLocaleDateString('en-US', {
     }
   }
 
-  // Move the publish date to the author section
+  // Merge date and read time into the Medium-style author byline
   function movePublishDate() {
     const blogMeta = document.querySelector('.blog-meta');
     const blogContent = document.querySelector('.blog-content');
@@ -649,29 +661,26 @@ const publishDate = entry.data.publishDate.toLocaleDateString('en-US', {
     const publishDate = blogMeta.getAttribute('data-publish-date');
     if (!publishDate) return;
 
-    // Find the author blockquote (first blockquote that follows a paragraph with an image)
-    const firstParagraph = blogContent.querySelector('p:first-child');
-    const hasImage = firstParagraph?.querySelector('img');
+    const hasImage = blogContent.querySelector('p:first-child img');
+    const authorBlockquote = hasImage
+      ? blogContent.querySelector('p:first-child + blockquote')
+      : blogContent.querySelector('blockquote:first-child');
+    if (!authorBlockquote) return;
 
-    if (hasImage) {
-      const authorBlockquote = blogContent.querySelector('p:first-child + blockquote');
-      if (authorBlockquote) {
-        // Add the date as a new paragraph in the blockquote
-        const dateParagraph = document.createElement('p');
-        dateParagraph.className = 'author-date';
-        dateParagraph.textContent = publishDate;
-        authorBlockquote.appendChild(dateParagraph);
-      }
-    } else {
-      // If no author image, check if first element is blockquote
-      const firstBlockquote = blogContent.querySelector('blockquote:first-child');
-      if (firstBlockquote) {
-        const dateParagraph = document.createElement('p');
-        dateParagraph.className = 'author-date';
-        dateParagraph.textContent = publishDate;
-        firstBlockquote.appendChild(dateParagraph);
-      }
-    }
+    const readingTime = blogMeta.querySelector('.blog-meta-reading-time')?.textContent?.trim();
+    const bylineText = authorBlockquote.textContent?.trim() ?? '';
+    const authorName = bylineText.split(/\s+[—–-]\s+/)[0] || 'Jack Luo';
+
+    const nameParagraph = document.createElement('p');
+    nameParagraph.className = 'author-name';
+    nameParagraph.textContent = authorName;
+
+    const dateParagraph = document.createElement('p');
+    dateParagraph.className = 'author-date';
+    dateParagraph.textContent = readingTime ? `${readingTime} · ${publishDate}` : publishDate;
+
+    authorBlockquote.replaceChildren(nameParagraph, dateParagraph);
+    blogMeta.classList.add('is-merged');
   }
 
   // Run on page load

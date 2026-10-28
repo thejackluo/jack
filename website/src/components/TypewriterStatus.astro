@@ -2,7 +2,7 @@
 // TypewriterStatus.astro - Displays a rotating typewriter effect with status messages
 ---
 
-<h3>
+<h3 class="typewriter">
   <span class="typewriter-prefix">Currently </span>
   <span class="typewriter-text"></span>
   <span class="typewriter-cursor">|</span>
@@ -22,8 +22,14 @@
     }
   }
 
+  .typewriter {
+    max-width: min(40rem, 90vw);
+    min-height: 3.2em;
+    margin: 0 auto;
+  }
+
   .typewriter-text {
-    display: inline-block;
+    display: inline;
   }
 </style>
 

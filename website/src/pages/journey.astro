@@ -138,7 +138,9 @@ import BaseLayout from '../layouts/Base.astro';
 
   /* Add padding to landing-main to match original creative-container margin */
   :global(.landing-main) {
-    margin: 2em;
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: calc(72px + 0.5rem) 2rem 7rem;
   }
 
   /* Mobile responsiveness */
@@ -148,7 +150,7 @@ import BaseLayout from '../layouts/Base.astro';
     }
 
     :global(.landing-main) {
-      margin: 1em;
+      padding: calc(64px + 1.5rem) 1rem 7rem;
     }
   }
 
@@ -167,7 +169,7 @@ import BaseLayout from '../layouts/Base.astro';
     }
 
     :global(.landing-main) {
-      margin: 1em;
+      padding: calc(64px + 1.5rem) 1rem 7rem;
     }
   }
 </style>

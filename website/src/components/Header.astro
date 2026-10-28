@@ -1,5 +1,6 @@
 ---
 const { currentPage = 'home' } = Astro.props;
+const hasHero = Astro.slots.has('default');
 
 const navLinks = [
   { href: '/projects', label: 'Projects', page: 'projects' },
@@ -7,7 +8,7 @@ const navLinks = [
   { href: '/writing', label: 'Writing', page: 'writing' },
 ];
 ---
-<section id="landing">
+<section id="landing" class:list={[{ 'has-hero': hasHero }]}>
   <div class="landing-container horizontal-align container-fluid">
     <nav class="navbar">
       <div class="container-fluid">
@@ -98,8 +99,8 @@ const navLinks = [
   .mobile-nav-menu {
     display: none;
     position: fixed;
-    top: 100px;
-    right: 20px;
+    top: 72px;
+    right: 1rem;
     z-index: 9;
     opacity: 0;
     transform: translateY(-20px) scale(0.95);
@@ -153,12 +154,105 @@ const navLinks = [
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
   }
 
+  /* One slim header on every page; !important beats legacy landing.css and page-level container resets */
+  .landing-container.container-fluid,
+  .navbar > .container-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .navbar {
+    height: 72px;
+    padding: 0 2rem !important;
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar > .container-fluid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+  }
+
+  #landing:not(.has-hero) .navbar {
+    background: rgba(0, 0, 0, 0.6);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .nav-logo {
+    padding: 0 !important;
+    text-shadow: none;
+  }
+
+  .nav-logo h1 {
+    font-size: 2.4rem !important;
+    line-height: 1;
+    margin: 0;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.18) !important;
+  }
+
+  .nav-desktop {
+    gap: 2.25rem;
+  }
+
+  .nav-desktop .nav-item {
+    padding: 0 !important;
+  }
+
+  .nav-desktop .nav-item a {
+    text-decoration: none;
+  }
+
   .nav-desktop .nav-item h2 {
-    font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+    position: relative;
+    margin: 0;
+    font-size: clamp(1.05rem, 1.3vw, 1.2rem);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    opacity: 0.7;
+    text-shadow: none !important;
+    transition: opacity 0.2s ease;
+  }
+
+  .nav-desktop .nav-item a:hover h2,
+  .nav-desktop .nav-item a:focus-visible h2,
+  .nav-desktop .nav-item a[aria-current='page'] h2 {
+    opacity: 1;
+  }
+
+  .nav-desktop .nav-item h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transform: scaleX(0);
+    transition: transform 0.2s ease;
+  }
+
+  .nav-desktop .nav-item a[aria-current='page'] h2::after {
+    transform: scaleX(1);
   }
 
   /* Responsive behavior */
   @media (max-width: 768px) {
+    .navbar {
+      height: 64px;
+      padding: 0 1.25rem !important;
+    }
+
+    .nav-logo h1 {
+      font-size: 2rem !important;
+    }
+
+    .mobile-nav-menu {
+      top: 64px;
+    }
+
     .nav-desktop {
       display: none !important;
     }
