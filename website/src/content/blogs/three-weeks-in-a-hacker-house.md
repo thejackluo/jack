@@ -2,7 +2,7 @@
 title: '3 weeks in a hacker house: the experience'
 publishDate: 2023-08-15
 tags:
-  - community
+  - life
   - startups
 excerpt: 'Notes from forming a hacker house, the people it attracted, and what the experiment taught.'
 heroImage: '/assets/images/jack/main.jpg'

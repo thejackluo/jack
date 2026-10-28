@@ -1,6 +1,6 @@
 ---
 const { currentPage = 'home' } = Astro.props;
-const hasHero = Astro.slots.has('default');
+const hasHero = Astro.props.hasHero ?? Astro.slots.has('default');
 
 const navLinks = [
   { href: '/projects', label: 'Projects', page: 'projects' },

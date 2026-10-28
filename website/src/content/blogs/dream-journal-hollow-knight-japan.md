@@ -2,9 +2,8 @@
 title: 'Dream journal 11/07/25'
 publishDate: 2025-11-07
 tags:
-  - 'dreams'
-  - 'personal'
-  - 'reflection'
+  - creative
+  - life
 excerpt: 'A strange dream with two parts that somehow connected: starting in the world of Hollow Knight and ending in Japan, exploring themes of transition and borders.'
 heroImage: '/assets/images/jack/main.jpg'
 ---

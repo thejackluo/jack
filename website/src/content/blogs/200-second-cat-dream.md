@@ -2,10 +2,8 @@
 title: '200 second cat dream'
 publishDate: 2025-11-03
 tags:
-  - 'dreams'
-  - 'personal'
-  - 'reflection'
-  - 'cats'
+  - creative
+  - life
 excerpt: 'A dream about adopting a cat from Instagram, the practical challenges of responsibility, and the weight of decisions made without thinking them through.'
 heroImage: '/assets/images/jack/main.jpg'
 ---

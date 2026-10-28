@@ -3,7 +3,7 @@ title: '18 things I learned at 18'
 publishDate: 2022-12-18
 tags:
   - reflection
-  - personal
+  - life
 excerpt: 'Eighteen bite-sized lessons on relationships, focus, urgency, and owning your growth.'
 heroImage: '/assets/images/jack/main.jpg'
 ---

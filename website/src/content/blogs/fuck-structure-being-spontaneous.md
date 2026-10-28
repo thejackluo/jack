@@ -2,10 +2,8 @@
 title: "Fuck Structure. Let's Talk About Being Spontaneous."
 publishDate: 2025-11-16
 tags:
-  - 'personal'
-  - 'philosophy'
-  - 'life-lessons'
-  - 'spontaneity'
+  - life
+  - philosophy
 excerpt: 'My 50th blog post about why being spontaneous matters more than planning, featuring stories of biking to Facebook as a ninth grader, flying to San Diego in under an hour, and crawling through unmapped caves.'
 heroImage: '/assets/images/jack/main.jpg'
 ---

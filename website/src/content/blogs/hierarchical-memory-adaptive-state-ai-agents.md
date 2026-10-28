@@ -2,11 +2,7 @@
 title: 'Hierarchical Memory and Adaptive State Management for an AI Agent'
 publishDate: 2025-11-05
 tags:
-  - 'ai'
-  - 'agents'
-  - 'memory'
-  - 'deep-learning'
-  - 'architecture'
+  - ai
 excerpt: 'A comprehensive exploration of how to build powerful AI assistants through memory partitioning, goal-driven state transitions, graph-based retrieval, and multi-step prompting strategies.'
 heroImage: '/assets/images/jack/main.jpg'
 ---

@@ -3,7 +3,7 @@ title: '2025 Recap'
 publishDate: 2025-12-08
 tags:
   - reflection
-  - personal
+  - life
 excerpt: '2025 on 2x speed: work vs love, the fast food decision that never ended, a generalist brain in a specialist world, and what I am carrying into 2026.'
 heroImage: '/assets/images/jack/main.jpg'
 externalUrl: 'https://medium.com/@thejackluo8/2025-recap-b734a8433778'

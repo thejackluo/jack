@@ -2,7 +2,7 @@
   Name: font.css
   Description: A default css file that provides custom fonts for all pages, add new fonts here.
   Note: the fontfaces are used in the other css files in this folder
-  Current fonts: Dual-300.ttf, Elianto-Regular.ttf, PPStella-Bold.otf, and PPStella-Light.otf (fonts in ../../assets/fonts )
+  Current fonts: Dual-300.ttf, Elianto-Regular.ttf, PPStellar-Bold.otf, and PPStellar-Light.otf (fonts in ../../assets/fonts )
 */
 
 @font-face {
@@ -23,16 +23,14 @@
 
 @font-face {
   font-family: "PP Stellar";
-  src: url("../../assets/fonts/PPStella-Bold.ttf") format("truetype"),
-    url("../../assets/fonts/PPStella-Bold.otf") format("opentype");
+  src: url("../../assets/fonts/PPStellar-Bold.otf") format("opentype");
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: "PP Stellar";
-  src: url("../../assets/fonts/PPStella-Light.ttf") format("truetype"),
-    url("../../assets/fonts/PPStella-Light.otf") format("opentype");
+  src: url("../../assets/fonts/PPStellar-Light.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }

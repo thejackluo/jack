@@ -2,11 +2,8 @@
 title: "The AI Projects No One's Building (But Should Be)"
 publishDate: 2025-11-10
 tags:
-  - 'ai'
-  - 'productivity'
-  - 'music'
-  - 'gaming'
-  - 'startups'
+  - ai
+  - creative
 excerpt: 'A dialogue between two builders exploring the overlooked frontiers of artificial intelligence: emotionally intelligent productivity software, personalized music creation tools, and memory-aware games.'
 heroImage: '/assets/images/jack/main.jpg'
 ---

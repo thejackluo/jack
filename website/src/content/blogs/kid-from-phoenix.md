@@ -2,10 +2,8 @@
 title: 'A Kid From Phoenix and the Question That Stopped Me'
 publishDate: 2025-09-23
 tags:
-  - 'personal'
-  - 'philosophy'
-  - 'mentorship'
-  - 'life-lessons'
+  - life
+  - philosophy
 excerpt: 'I met him on ome.tv: a fourteen-year-old kid from Phoenix who wanted to sell drugs. Then he asked me if I was content with who I am. This is that conversation.'
 heroImage: '/assets/images/jack/main.jpg'
 ---

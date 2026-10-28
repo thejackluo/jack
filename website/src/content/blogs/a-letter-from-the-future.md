@@ -3,8 +3,7 @@ title: 'A Letter From the Future'
 publishDate: 2025-04-22
 tags:
   - reflection
-  - personal
-  - vision
+  - life
 excerpt: 'Future Jack writes to present Jack about seven lifetimes of projects, emotion‑capable robots, quantum moral algorithms and the importance of purpose.'
 heroImage: '/assets/images/jack/main.jpg'
 ---

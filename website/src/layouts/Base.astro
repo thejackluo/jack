@@ -45,7 +45,7 @@ const {
   </head>
   <body>
     <div id="fullpage">
-      <Header currentPage={currentPage}>
+      <Header currentPage={currentPage} hasHero={Astro.slots.has("hero")}>
         <slot name="hero" />
       </Header>
       <slot />

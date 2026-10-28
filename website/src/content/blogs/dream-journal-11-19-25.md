@@ -2,8 +2,8 @@
 title: 'Dream journal 11/19/25'
 publishDate: 2025-11-20
 tags:
-  - dreams
-  - personal
+  - creative
+  - life
 excerpt: "A dream about my dad's spirit, the Reaper, and three attempts to escape, written down before it could fade."
 heroImage: '/assets/images/jack/main.jpg'
 externalUrl: 'https://medium.com/@thejackluo8/dream-journal-11-19-25-446d7a925a42'

@@ -2,11 +2,7 @@
 title: 'Improving Browser Autonomous Agents with Deep Reinforcement Learning and Memory'
 publishDate: 2025-11-06
 tags:
-  - 'ai'
-  - 'agents'
-  - 'reinforcement-learning'
-  - 'memory'
-  - 'web-automation'
+  - ai
 excerpt: 'Exploring how deep reinforcement learning and memory systems can make browser automation agents faster and more accurate, with insights on Composite and other web agent frameworks.'
 heroImage: '/assets/images/jack/main.jpg'
 ---
