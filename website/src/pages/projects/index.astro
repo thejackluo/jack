@@ -56,7 +56,7 @@ const minorCategories = [...new Set(minorProjects.map((p) => p.data.category))];
                   <video class="project-image" src={project.data.video.src} poster={project.data.video.poster} autoplay muted loop playsinline preload="metadata" aria-label={project.data.gallery?.[0]?.alt ?? project.data.title} />
                 ) : project.data.youtube ? (
                   <div class="project-image yt-embed">
-                    <iframe src={'https://www.youtube-nocookie.com/embed/' + project.data.youtube} title={project.data.title + ' demo video'} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <iframe src={'https://www.youtube-nocookie.com/embed/' + project.data.youtube + '?enablejsapi=1'} title={project.data.title + ' demo video'} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                   </div>
                 ) : project.data.gallery && project.data.gallery.length > 0 && project.data.gallery[0].src ? (
                   <img
@@ -112,7 +112,7 @@ const minorCategories = [...new Set(minorProjects.map((p) => p.data.category))];
                       <video class="project-image minor-image" src={project.data.video.src} poster={project.data.video.poster} autoplay muted loop playsinline preload="metadata" aria-label={project.data.gallery[0]?.alt ?? project.data.title} />
                     ) : project.data.youtube ? (
                       <div class="project-image minor-image yt-embed">
-                        <iframe src={'https://www.youtube-nocookie.com/embed/' + project.data.youtube} title={project.data.title + ' demo video'} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <iframe src={'https://www.youtube-nocookie.com/embed/' + project.data.youtube + '?enablejsapi=1'} title={project.data.title + ' demo video'} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                       </div>
                     ) : project.data.gallery && project.data.gallery.length > 0 && project.data.gallery[0].src ? (
                       <img
@@ -1113,6 +1113,11 @@ const minorCategories = [...new Set(minorProjects.map((p) => p.data.category))];
             modalBody.innerHTML = detailSection.innerHTML;
             if (modal) modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
+
+            // Pause any playing card embeds so audio doesn't run behind the modal
+            document.querySelectorAll('.yt-embed iframe').forEach((frame) => {
+              frame.contentWindow?.postMessage(JSON.stringify({ event: 'command', func: 'pauseVideo', args: [] }), '*');
+            });
             
             // Fix images that fail to load
             const images = modalBody.querySelectorAll('img');
