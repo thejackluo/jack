@@ -224,10 +224,10 @@ const { Content } = await entry.render();
 
   .project-title {
     font-family: "Dual-300";
-    font-size: 2.75rem;
+    font-size: clamp(3rem, 5vw, 4.25rem);
+    line-height: 1.05;
     color: white;
     margin: 0;
-    line-height: 1.2;
     text-align: left;
     display: block;
     flex: 1;
@@ -691,7 +691,7 @@ const { Content } = await entry.render();
     }
 
     .project-title {
-      font-size: 2rem;
+      font-size: 2.75rem;
     }
 
     .project-header-top {
@@ -718,7 +718,7 @@ const { Content } = await entry.render();
 
   @media (max-width: 576px) {
     .project-title {
-      font-size: 1.75rem;
+      font-size: 2.4rem;
     }
 
     .project-content {

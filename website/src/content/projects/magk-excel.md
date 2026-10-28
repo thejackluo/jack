@@ -16,7 +16,13 @@ startDate: 2024-06-01
 status: 'Ongoing'
 category: 'AI & Agents'
 featured: false
+video:
+  src: '/assets/projects/magk-excel-demo.mp4'
+  poster: '/assets/projects/magk-excel-poster.webp'
 gallery:
+  - src: '/assets/projects/magk-excel-poster.webp'
+    alt: 'MAGK Excel analyst demo: a chat request builds a peer comps workflow from SEC 10-K filings'
+    caption: 'Analyst demo — peer comps from SEC filings, built from one chat message'
   - src: '/assets/projects/magk-excel.png'
     alt: 'MAGK Excel workflow builder interface'
 links:
