@@ -836,6 +836,23 @@ const minorCategories = [...new Set(minorProjects.map((p) => p.data.category))];
     min-height: auto !important;
   }
 
+  :global(.modal) :global(.video-embed) {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+  }
+
+  :global(.modal) :global(.video-embed iframe) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
   :global(.modal) :global(.gallery-item video),
   :global(.modal) :global(.gallery-item img) {
     height: auto !important;

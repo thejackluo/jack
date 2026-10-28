@@ -13,6 +13,7 @@ startDate: 2026-02-01
 status: 'Ongoing'
 category: 'AI & Agents'
 featured: true
+youtube: '3Z0M8cLz4ac'
 gallery:
   - src: '/assets/projects/rolo.png'
     alt: 'Rolo dashboard with quick capture, person of the day, today’s agenda, and Signals sidebar'
@@ -21,6 +22,8 @@ gallery:
     alt: 'Rolo contact profile with relationship metrics and chronological timeline with auto-captured touchpoints'
     caption: 'Contact view — rich context and relationship record'
 links:
+  - label: 'Demo video'
+    url: 'https://www.youtube.com/watch?v=3Z0M8cLz4ac'
   - label: 'Open app'
     url: 'https://rolo.agentschool.io'
   - label: 'Features'
