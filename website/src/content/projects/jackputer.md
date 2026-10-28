@@ -12,6 +12,9 @@ startDate: 2026-06-30
 status: 'Ongoing'
 category: 'Research'
 gallery:
+  - src: '/assets/projects/jackputer-alu.webp'
+    alt: 'Jackputer ALU schematic expanded one level, showing Mux, Not and And subchips wired across 16 bits'
+    caption: 'ALU chip design, expanded one level into its Mux16, Not16 and And16 subchips'
   - src: '/assets/projects/jackputer.webp'
     alt: 'Jackputer chip visualization index'
     caption: 'Chip visualizations'
