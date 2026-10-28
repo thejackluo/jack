@@ -13,7 +13,7 @@ description: 'Co-founding engineer building unified energy optimization that tre
 startDate: 2024-05-01
 status: 'Ongoing'
 category: 'Energy & Infrastructure'
-featured: true
+featured: false
 gallery:
   - src: '/assets/projects/efficore.png'
     alt: 'Efficore optimization dashboard'
