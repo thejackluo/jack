@@ -2,7 +2,7 @@
 title: 'Philmont — A Journey of Hiking Through Mountains (2019)'
 publishDate: 2026-02-08
 tags:
-  - personal
+  - life
   - reflection
 excerpt: 'Twelve days, 65 miles, 40+ pound packs and 11k feet of elevation change: a day-by-day journal of the Philmont trek that turned a little boy into a grown man.'
 heroImage: '/assets/images/jack/main.jpg'

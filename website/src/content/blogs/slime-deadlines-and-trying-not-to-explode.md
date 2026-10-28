@@ -2,7 +2,7 @@
 title: 'Slime, Deadlines, And Trying Not To Explode'
 publishDate: 2025-12-06
 tags:
-  - personal
+  - life
 excerpt: 'On being curious about everything: why generalists get stuck, and how containers, deadlines, and constraints let the slime harden.'
 heroImage: '/assets/images/jack/main.jpg'
 externalUrl: 'https://medium.com/@thejackluo8/slime-deadlines-and-trying-not-to-explode-4951b8cbd51a'

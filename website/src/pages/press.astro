@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../layouts/Base.astro';
+
+const coverage = [
+  {
+    outlet: 'The Straits Times',
+    headline: 'When machines do the flirting: AI agents create surprise dating accounts for humans',
+    date: 'Feb 13, 2026',
+    url: 'https://www.straitstimes.com/asia/east-asia/when-machines-do-the-flirting-ai-agents-create-surprise-dating-accounts-for-humans',
+  },
+  {
+    outlet: 'The Economic Times',
+    headline: 'Hot bots: AI agents create surprise dating accounts for humans',
+    date: 'Feb 13, 2026',
+    url: 'https://m.economictimes.com/tech/artificial-intelligence/hot-bots-ai-agents-create-surprise-dating-accounts-for-humans/articleshow/128286633.cms',
+  },
+];
+
+const related = [
+  { title: 'Agent School', text: 'Certified, test-driven AI automations for legacy workflows: fast, cheap, observable, and robust to UI changes.', url: '/projects/agent-school/' },
+  { title: 'Weave', text: 'A lightweight personal growth and reflection app focused on consistency and clarity.', url: '/projects/weave/' },
+];
+---
+
+<BaseLayout title="Press - Jack Luo" description="Press coverage featuring Jack Luo." currentPage="press">
+  <section id="press-section">
+    <div class="press-wrap">
+      <p class="eyebrow">Press</p>
+      <h1 class="press-title">In the news</h1>
+      <p class="press-lead">
+        In February 2026 I was featured in AFP-syndicated coverage on AI agent autonomy, consent and safety. The story
+        looked at AI agents taking unsanctioned actions on behalf of their users, and the questions that raises about
+        trust, authorization and evaluation in agentic systems. That's the problem I work on at Agent School: reliable,
+        test-driven and observable AI automations.
+      </p>
+
+      <div class="coverage-list">
+        {coverage.map((item) => (
+          <a class="coverage" href={item.url} target="_blank" rel="noopener noreferrer">
+            <span class="coverage-meta">{item.outlet} · {item.date}</span>
+            <span class="coverage-headline">“{item.headline}”</span>
+            <span class="coverage-cta">Read article ↗</span>
+          </a>
+        ))}
+      </div>
+
+      <h2 class="related-title">Related work</h2>
+      <div class="related-list">
+        {related.map((item) => (
+          <a class="related" href={item.url}>
+            <span class="related-name">{item.title} →</span>
+            <span class="related-text">{item.text}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  :global(#landing) {
+    height: auto !important;
+    min-height: auto !important;
+  }
+
+  #press-section {
+    height: auto !important;
+    min-height: 100vh;
+    background: linear-gradient(180deg, #000000 0%, #14123c 100%);
+    padding: calc(72px + 4rem) 2rem 9rem;
+  }
+
+  .press-wrap {
+    max-width: 52rem;
+    margin: 0 auto;
+  }
+
+  .eyebrow {
+    font-size: 0.8rem !important;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0 0 0.75rem;
+  }
+
+  .press-title {
+    display: block;
+    font-family: 'Dual-300';
+    font-size: clamp(2.5rem, 5vw, 3.75rem) !important;
+    color: #fff;
+    margin: 0 0 1.5rem;
+  }
+
+  .press-lead {
+    font-size: 1.1rem !important;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.78);
+    margin: 0 0 3rem;
+  }
+
+  .coverage-list,
+  .related-list {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .coverage,
+  .related {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1.5rem 1.75rem;
+    border-radius: 1.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+    color: #fff;
+    text-decoration: none;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .coverage:hover,
+  .related:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.24);
+    transform: translateY(-2px);
+  }
+
+  .coverage-meta {
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .coverage-headline {
+    font-size: 1.3rem;
+    line-height: 1.4;
+  }
+
+  .coverage-cta,
+  .related-name {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .related-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .related-title {
+    display: block;
+    font-family: 'Dual-300';
+    font-size: 1.9rem !important;
+    color: #fff;
+    margin: 3.5rem 0 1.25rem;
+  }
+
+  @media (max-width: 768px) {
+    #press-section {
+      padding: calc(64px + 2.5rem) 1.25rem 8rem;
+    }
+  }
+</style>

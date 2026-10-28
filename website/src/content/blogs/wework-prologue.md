@@ -2,7 +2,7 @@
 title: 'WeWork'
 publishDate: 2023-04-01
 tags:
-  - personal
+  - life
   - education
 excerpt: 'An unfinished prologue introducing Jack and teeing up a deeper dive on learning outside college.'
 heroImage: '/assets/images/jack/main.jpg'

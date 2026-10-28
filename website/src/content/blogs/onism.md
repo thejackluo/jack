@@ -2,8 +2,8 @@
 title: 'Onism'
 publishDate: 2026-04-29
 tags:
-  - music
-  - personal
+  - creative
+  - life
 excerpt: "Chopin's Ballade No. 4, a stranger named Patrick, the last standby seat at a Boston concert, and finding my way back to the piano."
 heroImage: '/assets/images/jack/main.jpg'
 externalUrl: 'https://medium.com/@thejackluo8/onism-37db34c5b531'

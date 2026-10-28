@@ -3,7 +3,6 @@ title: 'Thoughts on Hiring and the Future'
 publishDate: 2025-07-25
 tags:
   - startups
-  - vision
 excerpt: 'Four traits for day‑one hires, and a twenty‑year lens on where leverage concentrates in AI and beyond.'
 heroImage: '/assets/images/jack/main.jpg'
 ---

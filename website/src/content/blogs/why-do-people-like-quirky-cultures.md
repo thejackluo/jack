@@ -2,7 +2,7 @@
 title: 'Why do people like quirky cultures?'
 publishDate: 2025-02-26
 tags:
-  - community
+  - life
   - reflection
 excerpt: 'A look at why unconventional communities like hacker houses and East Campus feel like home, the psychology behind self‑selection and the risks of staying too long.'
 heroImage: '/assets/images/jack/main.jpg'

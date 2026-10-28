@@ -1,175 +1,586 @@
 ---
 import BaseLayout from '../layouts/Base.astro';
+
+type Kind = 'Built' | 'Milestone' | 'Creative' | 'Press' | 'Life';
+interface Moment {
+  date: string;
+  title: string;
+  text: string;
+  kind: Kind;
+  href?: string;
+}
+
+const moments: Moment[] = [
+  { date: '2026.10', kind: 'Built', title: 'Asymmetry', href: '/projects/asymmetry/', text: 'Coordinated four parallel Devins in a five-hour hackathon to build digital-twin agents that surface the supply and demand hidden in your extended network.' },
+  { date: '2026.10', kind: 'Built', title: 'T Run · MBTA Route Studio', href: '/projects/t-run/', text: 'A rail schedule backend and route studio for planning a Guinness World Record all-stations MBTA run.' },
+  { date: '2026.06', kind: 'Built', title: 'Jackputer', href: '/projects/jackputer/', text: 'A nand2tetris computer from NAND gates up, compiled to Verilog and rendered as explorable chip visualizations.' },
+  { date: '2026.04', kind: 'Built', title: 'Jackipedia', href: '/projects/jackipedia/', text: 'A Wikipedia-style personal knowledge base, compiled from Markdown into a searchable site.' },
+  { date: '2026.02', kind: 'Press', title: 'In the press', href: '/press', text: 'Featured in AFP-syndicated coverage on AI agent autonomy and consent, picked up by The Straits Times and The Economic Times.' },
+  { date: '2026.02', kind: 'Built', title: 'Rolo', href: '/projects/rolo/', text: 'Relationship intelligence for operators: search your network by intent, prep for meetings in minutes, and keep context attached to people.' },
+  { date: '2026.01', kind: 'Built', title: 'Agent School', href: '/projects/agent-school/', text: 'Started Agent School to build where people and agents actually work together, beginning with Agent Slack and multi-agent workflows.' },
+  { date: '2025.11', kind: 'Life', title: 'Personal Site V4 & Fitness Streak', text: 'Rebuilt this site (v4), hit a streak of 10 weekly gym sessions, and got back to serious work on Limbinal.' },
+  { date: '2025.06', kind: 'Built', title: 'Weave', href: '/projects/weave/', text: 'A dark-first React Native app that breaks goals into daily actions and keeps you consistent with streaks, proof and coaching.' },
+  { date: '2025.02', kind: 'Milestone', title: 'MAGK CTO', href: '/projects/magk-excel/', text: 'Stepped up as CTO at MAGK, an AI workflow automation startup applying multi-agent systems to productivity.' },
+  { date: '2024.10', kind: 'Milestone', title: 'Quantum Labs acquired', text: 'Quantum Labs was acquired by Hatch Coding in a six-figure deal, validating a systematic approach to building mission-driven businesses.' },
+  { date: '2024.09', kind: 'Built', title: 'ARKOS at MIT SIPB', href: '/projects/arkos/', text: 'Backend work on agent orchestration, memory modules and state graphs for ARK, the modular assistant platform from MIT SIPB.' },
+  { date: '2024.08', kind: 'Built', title: 'Delight', href: '/projects/delight/', text: 'A goal companion for ambitious people that starts with how you feel and uses a three-tier memory system.' },
+  { date: '2024.06', kind: 'Milestone', title: 'Buildspace Nights & Weekends S4', text: 'Shipped alongside a global cohort of builders, and learned to ship faster and think bigger.' },
+  { date: '2024.05', kind: 'Built', title: 'Efficore', href: '/projects/efficore/', text: 'Co-founded Efficore: energy optimization that treats a whole facility as one controllable system.' },
+  { date: '2024.03', kind: 'Milestone', title: 'Hackathon wins & Elon calls', text: 'Top 15 at the UC Berkeley AI Hackathon, 1st place at Digitalized and CodeDay SF, and two video calls with Elon Musk about AI and the future.' },
+  { date: '2023.10', kind: 'Creative', title: 'TikTok went viral', text: 'Educational tech videos on TikTok passed 2 million total views, which made me want to keep demystifying AI for a broad audience.' },
+  { date: '2023.07', kind: 'Life', title: 'Q House, Prodicity & Limbinal', href: '/projects/q-hacker-house/', text: 'Hosted a 10-person hacker house in San Francisco, co-created Prodicity (AI mentorship for 20+ high schoolers), and started writing Limbinal.' },
+  { date: '2023.02', kind: 'Milestone', title: 'Quantum Labs launched', text: 'An online, project-based AI education program that grew to 1,500+ students worldwide with university partnerships within 20 months.' },
+  { date: '2022.08', kind: 'Life', title: 'Georgia Tech', text: 'Transferred to Georgia Tech to study Computer Science and Math, with a deeper focus on AI and robotics.' },
+  { date: '2022.03', kind: 'Built', title: 'Calend.ai', href: '/projects/calendai/', text: 'An AI copilot for Google Calendar that turns free-form requests into scheduled events.' },
+];
+
+const years = [...new Set(moments.map((m) => m.date.slice(0, 4)))];
+
+const experiments = [
+  { title: 'Vigama', href: '/projects/vigama/', what: 'An AI productivity app that automated scheduling and tasks from natural language.', lesson: 'Focus and timing matter more than scope.' },
+  { title: 'Ophelus', what: 'A gamified productivity platform: task management inside a personal progress RPG.', lesson: 'Validate with a simple MVP before building the dream platform.' },
+  { title: 'Sora video experiments', what: 'Experimental video and storytelling with OpenAI’s Sora.', lesson: 'Bleeding-edge tools need patience; sometimes you wait for the ecosystem.' },
+  { title: 'Voice & text AI agents', what: 'Speech-to-text, LLMs and text-to-speech stitched into voice interfaces.', lesson: 'Voice has to feel instant. Small delays break the magic.' },
+  { title: 'Personal AI avatars', what: 'LLM avatars that answered in my voice and style for async messages.', lesson: 'Authenticity matters more than efficiency.' },
+  { title: 'Discord bot ecosystem', what: 'Bots for community management, automation and AI interactions.', lesson: 'Build where your community actually lives.' },
+];
+
+const explore = [
+  { title: 'Liminal', label: 'Manga', text: 'A full-screen reader for Limbinal, a guy stuck in a liminal space.', href: '/liminal', img: '/assets/explore/liminal.webp' },
+  { title: 'Vivarium', label: 'Manga', text: 'My second manga, in the same web reader.', href: '/vivarium', img: '/assets/explore/vivarium.webp' },
+  { title: 'Bookshelf', label: 'Reading', text: 'Every book I’ve read or am reading, as a shelf of spines.', href: '/special/books', img: '/assets/explore/books.webp' },
+  { title: 'Toy Product Design', label: 'Design', text: 'Sketches and concepts for playful educational toys.', href: '/special/toy.html', img: '/assets/explore/toy.webp' },
+  { title: 'Funny Moments', label: 'Just for fun', text: 'A collection of the chaos and humor that comes with building things.', href: '/special/funny.html', img: '/assets/explore/funny.webp' },
+  { title: 'Resume', label: 'Work', text: 'The one-page version of all of this.', href: '/resume.html' },
+];
 ---
 
 <BaseLayout
   title="Journey - Jack Luo"
-  description="A place to showcase achievements, journey throughout different fields, and creative works."
+  description="What I've built, made, and learned: a timeline, experiments, creative work, and the less obvious corners of this site."
   currentPage="journey"
 >
-  <!-- Creative Content in Hero Slot (goes into #landing section) -->
-  <div slot="hero" class="landing-main container-fluid">
-    <div class="landing-row row">
-      <h3>Creative</h3>
-      <p>
-        From July 23 onwards, I started writing a book about a guy
-        stuck in a liminal space. In 'Limbinal,' I created a world
-        where reality blurs, and boundaries between dreams and waking
-        life become indistinguishable. I explore things like identity,
-        the pursuit of meaning, and "robotic racism". Feel free to read a
-        sample
-        <a class="a-underline" href="/assets/pdf/limbinal-v12.03.23.pdf">here</a>
-        and let me know
-        <a href="https://instagram.com/thejackluo">here</a> any
-        feedback and questions about the book (bonus points if you know
-        publishers). Or read the full manga in the
-        <a class="a-underline" href="/liminal">Liminal web reader</a>
-        (and my other manga
-        <a class="a-underline" href="/vivarium">Vivarium</a>).
-        <br />
-        <br />
+  <section id="journey-section">
+    <div class="journey-wrap">
+      <header class="journey-hero">
+        <p class="eyebrow">Journey</p>
+        <h1 class="journey-title">What I’ve built, made, and learned</h1>
+        <p class="journey-lead">
+          A running log of projects, pivots and side quests, plus the stories, music and stranger corners of this site that
+          don’t fit anywhere else.
+        </p>
+        <nav class="journey-jump" aria-label="Journey sections">
+          <a href="#timeline">Timeline</a>
+          <a href="#experiments">Experiments</a>
+          <a href="#creative">Creative</a>
+          <a href="#explore">Explore</a>
+          <a href="/press">Press</a>
+        </nav>
+      </header>
 
-        On social, I’ve posted <b>30+ one‑minute stories</b> on Instagram with <b>250k+ views</b> total, plus a
-        <a class="a-underline" href="https://www.instagram.com/eddie_the_lou/reel/DSRhLfijpJ5/">1M+ view reel</a>.
-        <br />
-        <br />
+      <section id="timeline" class="journey-block">
+        <h2 class="block-title">Timeline</h2>
+        <div class="timeline">
+          {years.map((year) => (
+            <div class="timeline-year">
+              <div class="year-label">{year}</div>
+              <ol class="year-items">
+                {moments.filter((m) => m.date.startsWith(year)).map((m) => (
+                  <li class="moment">
+                    <span class={`moment-dot kind-${m.kind.toLowerCase()}`} aria-hidden="true"></span>
+                    <div class="moment-meta">
+                      <span>{m.date.replace('.', ' · ')}</span>
+                      <span class={`moment-kind kind-${m.kind.toLowerCase()}`}>{m.kind}</span>
+                    </div>
+                    <h3 class="moment-title">
+                      {m.href ? <a href={m.href}>{m.title} <span aria-hidden="true">→</span></a> : m.title}
+                    </h3>
+                    <p class="moment-text">{m.text}</p>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ))}
+        </div>
+      </section>
 
-        <b>Reading</b>: Check out my complete bookshelf and reading progress
-        <a class="a-underline" href="/special/books">here</a>.
-      </p>
-      <p>
-        I've been making music since 10th grade. Most pieces are experimental, but
-        I'd recommend you check out a few highlights on my
-        <a class="a-underline" href="https://soundcloud.com/thejackluo">SoundCloud</a>:
-        <a
-          class="a-underline"
-          href="https://soundcloud.com/thejackluo/intersection"
-          >intersection</a
-        >,
-        <a
-          class="a-underline"
-          href="https://soundcloud.com/thejackluo/memories-v2"
-          >memory v2</a
-        >,
-        <a
-          class="a-underline"
-          href="https://soundcloud.com/thejackluo/007-mirrox"
-          >007 - mirrox</a
-        >, and my latest track
-        <a
-          class="a-underline"
-          href="https://soundcloud.com/thejackluo/011-mom"
-          >011 - mom</a
-        >, which I'm excited about.
-      </p>
-      <p>
-        I also have a <a class="a-underline" href="/special/toy">toy portfolio</a> showcasing
-        experimental projects and a <a class="a-underline" href="/special/funny">funny experiment</a>
-        with some memorable moments.
-        <span style="font-style: italic; color: rgba(255, 255, 255, 0.7);">
-          <b>Note</b>: I'm completely revamping the journey page. See you soon... maybe in a year? 😅
-        </span>
-      </p>
+      <section id="experiments" class="journey-block">
+        <h2 class="block-title">Experiments that didn’t stick</h2>
+        <p class="block-lead">Things I built or explored that didn’t last, and what each one taught me.</p>
+        <div class="experiment-grid">
+          {experiments.map((e) => (
+            <div class="experiment">
+              <h3 class="experiment-title">{e.href ? <a href={e.href}>{e.title}</a> : e.title}</h3>
+              <p class="experiment-what">{e.what}</p>
+              <p class="experiment-lesson">{e.lesson}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="creative" class="journey-block">
+        <h2 class="block-title">Creative</h2>
+        <div class="creative-grid">
+          <div class="creative-card">
+            <p class="card-label">Writing · since July 2023</p>
+            <h3 class="card-title">Limbinal</h3>
+            <p>
+              A book about a guy stuck in a liminal space, where reality blurs and the line between dreams and waking life
+              disappears. It explores identity, the pursuit of meaning, and “robotic racism”.
+            </p>
+            <div class="card-links">
+              <a href="/liminal">Read the manga →</a>
+              <a href="/assets/pdf/limbinal-v12.03.23.pdf">Book sample (PDF) ↗</a>
+              <a href="https://instagram.com/thejackluo" target="_blank" rel="noopener noreferrer">Send feedback ↗</a>
+            </div>
+          </div>
+          <div class="creative-card">
+            <p class="card-label">Music · since 10th grade</p>
+            <h3 class="card-title">SoundCloud</h3>
+            <p>Mostly experimental pieces. A few highlights, including my latest track, which I’m excited about:</p>
+            <div class="card-links">
+              <a href="https://soundcloud.com/thejackluo/intersection" target="_blank" rel="noopener noreferrer">intersection ↗</a>
+              <a href="https://soundcloud.com/thejackluo/memories-v2" target="_blank" rel="noopener noreferrer">memory v2 ↗</a>
+              <a href="https://soundcloud.com/thejackluo/007-mirrox" target="_blank" rel="noopener noreferrer">007 - mirrox ↗</a>
+              <a href="https://soundcloud.com/thejackluo/011-mom" target="_blank" rel="noopener noreferrer">011 - mom ↗</a>
+            </div>
+          </div>
+          <div class="creative-card">
+            <p class="card-label">Stories · Instagram</p>
+            <h3 class="card-title">One-minute stories</h3>
+            <p>30+ one-minute stories with 250k+ views in total, including one reel past 1M views.</p>
+            <div class="card-links">
+              <a href="https://www.instagram.com/eddie_the_lou/reel/DSRhLfijpJ5/" target="_blank" rel="noopener noreferrer">Watch the 1M reel ↗</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="explore" class="journey-block">
+        <h2 class="block-title">Explore</h2>
+        <p class="block-lead">Pages that live a little off the main path.</p>
+        <div class="explore-grid">
+          {explore.map((x) => (
+            <a class="explore-card" href={x.href}>
+              {x.img ? (
+                <img src={x.img} alt="" loading="lazy" />
+              ) : (
+                <div class="explore-placeholder" aria-hidden="true"><span>{x.title}</span></div>
+              )}
+              <div class="explore-body">
+                <span class="card-label">{x.label}</span>
+                <span class="explore-title">{x.title} <span aria-hidden="true">→</span></span>
+                <span class="explore-text">{x.text}</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <a class="press-strip" href="/press">
+        <span class="card-label">Press · Feb 2026</span>
+        <span class="press-strip-text">Featured in AFP coverage on AI agent autonomy, in The Straits Times and The Economic Times</span>
+        <span class="press-strip-cta">Read →</span>
+      </a>
     </div>
-  </div>
+  </section>
 </BaseLayout>
 
 <style>
-  /* Import journey-specific CSS files */
-  @import url('/src/css/journey.css');
-  @import url('/src/css/creative.css');
-
-  /* Ensure #landing has proper height for background layers to work */
-  /* The Header component provides landing-angular-filter and landing-city divs */
-  /* journey.css defines .landing-city with city4.png which matches Header */
   :global(#landing) {
-    min-height: 100vh;
-    position: relative;
-    background-color: black;
+    height: auto !important;
+    min-height: auto !important;
   }
 
-  /* landing-container should be absolute positioned (from landing.css) */
   :global(.landing-container) {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    width: 100%;
+    height: auto !important;
+  }
+
+  #journey-section {
+    height: auto !important;
     min-height: 100vh;
-  }
-
-  /* Prevent horizontal scrolling globally */
-  :global(html),
-  :global(body),
-  :global(#fullpage) {
-    max-width: 100vw;
-    overflow-x: hidden;
-  }
-
-  /* Ensure all containers respect viewport width */
-  :global(.container-fluid) {
-    max-width: 100%;
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  /* Ensure rows don't overflow */
-  :global(.row) {
-    margin-left: 0;
-    margin-right: 0;
-    max-width: 100%;
-  }
-
-  /* Override creative-container absolute positioning that causes gaps */
-  /* This prevents any creative-container styles from creating gaps */
-  :global(.creative-container) {
-    position: relative !important;
-    top: auto !important;
-    margin: 0 !important;
-  }
-
-  /* Match original creative section padding and alignment */
-  /* Original had creative-container with margin: 2em and landing-row with margin: 1.5em */
-  /* Text is naturally left-aligned (not in horizontal-align context in original) */
-  .landing-row {
+    background: linear-gradient(180deg, #000000 0%, #14123c 55%, #0d0b2a 100%);
+    padding: calc(72px + 4.5rem) 2rem 9rem;
+    color: #fff;
     text-align: left;
-    margin: 1.5em;
+    font-family: 'Stellar', 'Century Gothic', sans-serif;
   }
 
-  /* Add padding to landing-main to match original creative-container margin */
-  :global(.landing-main) {
-    max-width: 72rem;
+  #journey-section h1,
+  #journey-section h2,
+  #journey-section h3 {
+    text-align: left;
+  }
+
+  .journey-wrap {
+    max-width: 68rem;
     margin: 0 auto;
-    padding: calc(72px + 0.5rem) 2rem 7rem;
   }
 
-  /* Mobile responsiveness */
+  .eyebrow,
+  .card-label {
+    display: block;
+    font-size: 0.75rem !important;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0 0 0.75rem;
+  }
+
+  .journey-title {
+    display: block;
+    font-family: 'Dual-300';
+    font-size: clamp(2.5rem, 5.5vw, 4.25rem) !important;
+    line-height: 1.08;
+    max-width: 16ch;
+    margin: 0 0 1.5rem;
+  }
+
+  .journey-lead {
+    font-size: 1.15rem !important;
+    line-height: 1.75;
+    max-width: 40rem;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0 0 2rem;
+  }
+
+  .journey-jump {
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: flex-start !important;
+    gap: 0.6rem;
+    width: auto !important;
+    height: auto !important;
+    padding: 0 !important;
+    position: static !important;
+    background: none !important;
+  }
+
+  .journey-jump a {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0.45rem 1rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .journey-jump a:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.24);
+    color: #fff;
+  }
+
+  .journey-block {
+    height: auto !important;
+    width: 100%;
+    margin-top: 6.5rem;
+    scroll-margin-top: calc(72px + 1.5rem);
+  }
+
+  .block-title {
+    display: block;
+    font-family: 'Dual-300';
+    font-size: clamp(2rem, 3.4vw, 2.75rem) !important;
+    margin: 0 0 0.75rem;
+  }
+
+  .block-lead {
+    font-size: 1rem !important;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0 0 2.25rem;
+  }
+
+  /* Timeline */
+  .timeline {
+    margin-top: 2.5rem;
+  }
+
+  .timeline-year {
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  .year-label {
+    font-family: 'Dual-300';
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.9);
+    position: sticky;
+    top: calc(72px + 1.5rem);
+    align-self: start;
+    padding-top: 0.1rem;
+  }
+
+  .year-items {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 2.5rem 2rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .moment {
+    position: relative;
+    padding-bottom: 2.25rem;
+    font-size: 1rem;
+  }
+
+  .moment-dot {
+    position: absolute;
+    left: calc(-2rem - 5px);
+    top: 0.35rem;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow: 0 0 0 4px #100e30;
+  }
+
+  .moment-meta {
+    display: flex;
+    gap: 0.9rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+    margin-bottom: 0.4rem;
+  }
+
+  .kind-built { color: #8fb4ff; }
+  .kind-milestone { color: #f2c46d; }
+  .kind-creative { color: #e597ff; }
+  .kind-press { color: #7fe0c0; }
+  .kind-life { color: #a9b0c8; }
+
+  .moment-title {
+    display: block;
+    font-size: 1.3rem !important;
+    line-height: 1.3;
+    margin: 0 0 0.4rem;
+    color: #fff;
+  }
+
+  .moment-title a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .moment-title a span {
+    display: inline-block;
+    color: rgba(255, 255, 255, 0.45);
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  .moment-title a:hover span {
+    transform: translateX(3px);
+    color: #fff;
+  }
+
+  .moment-text {
+    font-size: 1rem !important;
+    line-height: 1.65;
+    max-width: 42rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+  }
+
+  /* Experiments */
+  .experiment-grid,
+  .creative-grid,
+  .explore-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .experiment,
+  .creative-card {
+    padding: 1.5rem;
+    border-radius: 1.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  .experiment-title,
+  .card-title {
+    display: block;
+    font-size: 1.2rem !important;
+    margin: 0 0 0.6rem;
+  }
+
+  .experiment-title a {
+    color: #fff;
+  }
+
+  .experiment p,
+  .creative-card p:not(.card-label) {
+    font-size: 0.95rem !important;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 0.75rem;
+  }
+
+  .experiment .experiment-lesson {
+    color: rgba(255, 255, 255, 0.9);
+    font-style: italic;
+    margin: 0;
+  }
+
+  .card-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    margin-top: 0.75rem;
+  }
+
+  .card-links a {
+    font-size: 0.92rem;
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .card-links a:hover {
+    border-color: #fff;
+  }
+
+  /* Explore */
+  .explore-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.035);
+    color: #fff;
+    text-decoration: none;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .explore-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.24);
+  }
+
+  .explore-card img,
+  .explore-placeholder {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+  }
+
+  .explore-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(120% 120% at 20% 0%, rgba(120, 110, 255, 0.35), rgba(20, 18, 60, 0.9));
+  }
+
+  .explore-placeholder span {
+    font-family: 'Dual-300';
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .explore-body {
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem 1.4rem 1.5rem;
+  }
+
+  .explore-body .card-label {
+    margin-bottom: 0.5rem;
+  }
+
+  .explore-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .explore-text {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .press-strip {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 5rem;
+    padding: 1.4rem 1.75rem;
+    border-radius: 1.25rem;
+    border: 1px solid rgba(127, 224, 192, 0.25);
+    background: rgba(127, 224, 192, 0.05);
+    color: #fff;
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+
+  .press-strip:hover {
+    background: rgba(127, 224, 192, 0.1);
+  }
+
+  .press-strip .card-label {
+    margin: 0;
+    color: #7fe0c0;
+  }
+
+  .press-strip-text {
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 991px) {
+    .experiment-grid,
+    .creative-grid,
+    .explore-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
   @media (max-width: 768px) {
-    .landing-row {
-      margin: 1rem 0.5rem;
+    #journey-section {
+      padding: calc(64px + 2.5rem) 1.25rem 8rem;
     }
 
-    :global(.landing-main) {
-      padding: calc(64px + 1.5rem) 1rem 7rem;
+    .timeline-year {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
     }
-  }
 
-  @media (max-width: 576px) {
-    :global(.nav-container) {
-      flex-wrap: wrap;
+    .year-label {
+      position: static;
+    }
+
+    .year-items {
+      padding-left: 1.5rem;
+    }
+
+    .moment-dot {
+      left: calc(-1.5rem - 5px);
+    }
+
+    .experiment-grid,
+    .creative-grid,
+    .explore-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .press-strip {
+      grid-template-columns: 1fr;
       gap: 0.5rem;
     }
 
-    :global(.nav-item) {
-      padding: 0 0.5em;
-    }
-
-    .landing-row {
-      margin: 1rem 0.5rem;
-    }
-
-    :global(.landing-main) {
-      padding: calc(64px + 1.5rem) 1rem 7rem;
+    .journey-block {
+      margin-top: 4.5rem;
     }
   }
 </style>

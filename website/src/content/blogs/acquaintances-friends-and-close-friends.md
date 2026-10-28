@@ -3,7 +3,7 @@ title: 'Acquaintances, Friends, and Close Friends'
 publishDate: 2025-11-19
 tags:
   - reflection
-  - community
+  - life
 excerpt: 'A framework for sorting people into acquaintances, friends, and close friends, four common social builds, and the configuration I want.'
 heroImage: '/assets/images/jack/main.jpg'
 externalUrl: 'https://medium.com/@thejackluo8/acquaintances-friends-and-close-friends-6bb85e766484'
