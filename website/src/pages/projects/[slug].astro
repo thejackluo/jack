@@ -96,7 +96,7 @@ const { Content } = await entry.render();
           <!-- Project Gallery (if exists) -->
           {entry.data.youtube && (
             <section class="project-gallery">
-              <figure class="gallery-item">
+              <figure class="gallery-item gallery-video">
                 <div class="video-embed">
                   <iframe
                     src={`https://www.youtube-nocookie.com/embed/${entry.data.youtube}`}
