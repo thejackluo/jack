@@ -49,54 +49,43 @@ const minorCategories = [...new Set(minorProjects.map((p) => p.data.category))];
         <div class="section-header">
           <h2>Major Projects</h2>
         </div>
-        <div class="row projects-grid major-grid">
-          {majorProjects.map((project) => (
-            <div class="col-12 col-md-6">
-              <article class="project-card major-card" data-project-slug={project.slug}>
+        <div class="showcase-list">
+          {majorProjects.map((project, index) => (
+            <article class="project-card showcase" data-project-slug={project.slug}>
+              <div class="showcase-media">
                 {project.data.video ? (
-                  <video class="project-image" src={project.data.video.src} poster={project.data.video.poster} autoplay muted loop playsinline preload="metadata" aria-label={project.data.gallery[0]?.alt ?? project.data.title} />
-                ) : project.data.gallery && project.data.gallery.length > 0 && project.data.gallery[0].src && (
+                  <video class="project-image" src={project.data.video.src} poster={project.data.video.poster} autoplay muted loop playsinline preload="metadata" aria-label={project.data.gallery?.[0]?.alt ?? project.data.title} />
+                ) : project.data.gallery && project.data.gallery.length > 0 && project.data.gallery[0].src ? (
                   <img
                     src={project.data.gallery[0].src}
                     alt={project.data.gallery[0].alt}
                     class="project-image"
                     loading="lazy"
                   />
+                ) : (
+                  <div class="project-image minor-placeholder" aria-hidden="true">
+                    <span>{project.data.title}</span>
+                  </div>
                 )}
+              </div>
 
-                <div class="project-card-content">
-                  <div class="project-card-header">
-                    <h3 class="project-title">{project.data.title}</h3>
-                    <div class="project-badges">
-                      {project.data.featured && (
-                        <span class="badge-featured">Featured</span>
-                      )}
-                      {project.data.status && (
-                        <span class={`badge-status status-${project.data.status.toLowerCase()}`}>
-                          {project.data.status}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
-                  <p class="project-role">{project.data.role}</p>
-                  <p class="project-summary">{project.data.summary}</p>
-
-                  <div class="project-meta">
-                    <span class="project-category">{project.data.category}</span>
-                  </div>
-
-                  <div class="project-tech">
-                    {project.data.tech.slice(0, 4).map(tech => (
-                      <span class="tech-tag">{tech}</span>
-                    ))}
-                    {project.data.tech.length > 4 && (
-                      <span class="tech-more">+{project.data.tech.length - 4}</span>
-                    )}
-                  </div>
+              <div class="showcase-body">
+                <div class="showcase-kicker">
+                  <span class="showcase-index">{String(index + 1).padStart(2, '0')}</span>
+                  <span>{project.data.category}</span>
+                  <span class="showcase-dot" aria-hidden="true">·</span>
+                  <span>
+                    {project.data.startDate.getUTCFullYear()}
+                    {project.data.status === 'Ongoing' ? ' – now' : project.data.endDate && project.data.endDate.getUTCFullYear() !== project.data.startDate.getUTCFullYear() ? ` – ${project.data.endDate.getUTCFullYear()}` : ''}
+                  </span>
                 </div>
-              </article>
-            </div>
+                <h3 class="showcase-title">{project.data.title}</h3>
+                <p class="showcase-role">{project.data.role}</p>
+                <p class="showcase-summary">{project.data.summary}</p>
+                <p class="showcase-tech">{project.data.tech.slice(0, 5).join(' · ')}</p>
+                <span class="showcase-cta">View project <span aria-hidden="true">→</span></span>
+              </div>
+            </article>
           ))}
         </div>
 
@@ -114,7 +103,7 @@ const minorCategories = [...new Set(minorProjects.map((p) => p.data.category))];
             </div>
             <div class="row projects-grid minor-grid">
               {minorProjects.map((project) => (
-                <div class="col-12 col-sm-6 col-lg-4 col-xl-3 minor-col" data-category={project.data.category}>
+                <div class="col-12 col-md-6 col-xl-4 minor-col" data-category={project.data.category}>
                   <article class="project-card minor-card" data-project-slug={project.slug}>
                     {project.data.video ? (
                       <video class="project-image minor-image" src={project.data.video.src} poster={project.data.video.poster} autoplay muted loop playsinline preload="metadata" aria-label={project.data.gallery[0]?.alt ?? project.data.title} />
@@ -428,9 +417,9 @@ const minorCategories = [...new Set(minorProjects.map((p) => p.data.category))];
 
   /* Section Headers */
   .section-header {
-    margin: 3rem auto 2rem auto;
+    margin: 3rem auto 2.5rem auto;
     padding: 0 2rem;
-    max-width: 1400px;
+    max-width: 1240px;
   }
 
   .section-header h2 {
@@ -861,6 +850,156 @@ const minorCategories = [...new Set(minorProjects.map((p) => p.data.category))];
   }
 
   /* Responsive */
+  /* Major projects: wide alternating showcase rows */
+  .showcase-list {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 5.5rem;
+  }
+
+  .project-card.showcase {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: 3.5rem;
+    align-items: center;
+    background: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    border: none;
+    border-radius: 0;
+    overflow: visible;
+    margin: 0;
+  }
+
+  .project-card.showcase:nth-child(even) .showcase-media {
+    order: 2;
+  }
+
+  .project-card.showcase:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .showcase-media {
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.02);
+    transition: transform 0.4s ease, border-color 0.4s ease;
+  }
+
+  .showcase-media .project-image {
+    transition: transform 0.6s ease;
+  }
+
+  .project-card.showcase:hover .showcase-media {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.22);
+  }
+
+  .project-card.showcase:hover .showcase-media .project-image {
+    transform: scale(1.02);
+  }
+
+  .showcase-body {
+    text-align: left;
+  }
+
+  .showcase-kicker {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Stellar', 'Century Gothic', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 1rem;
+  }
+
+  .showcase-index {
+    color: rgba(255, 255, 255, 0.85);
+    margin-right: 0.35rem;
+  }
+
+  .showcase-title {
+    display: block;
+    text-align: left;
+    font-family: 'Dual-300';
+    font-size: clamp(2rem, 3.2vw, 2.9rem);
+    line-height: 1.1;
+    color: #fff;
+    margin: 0 0 0.6rem;
+  }
+
+  .showcase-role {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0 0 1.25rem;
+  }
+
+  .showcase-summary {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.82);
+    margin: 0 0 1.25rem;
+  }
+
+  .showcase-tech {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.45);
+    margin: 0 0 1.75rem;
+  }
+
+  .showcase-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Stellar', 'Century Gothic', sans-serif;
+    font-size: 0.95rem;
+    color: #fff;
+    padding: 0.55rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.06);
+    transition: background 0.3s ease, border-color 0.3s ease, gap 0.3s ease;
+  }
+
+  .project-card.showcase:hover .showcase-cta {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.35);
+    gap: 0.8rem;
+  }
+
+  .minor-grid {
+    max-width: 1240px;
+  }
+
+  @media (max-width: 991px) {
+    .project-card.showcase {
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+
+    .project-card.showcase:nth-child(even) .showcase-media {
+      order: 0;
+    }
+
+    .showcase-list {
+      gap: 4rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .showcase-list {
+      padding: 0 1.25rem;
+    }
+  }
+
   @media (max-width: 768px) {
     .projects-page-header h1 {
       font-size: 2.5rem;
