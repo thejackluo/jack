@@ -18,14 +18,19 @@ gallery:
   - src: '/assets/projects/t-run.webp'
     alt: 'MBTA Route Studio: Boston rail map with stations, itinerary panel and coverage counter'
     caption: 'Route studio — 125 stations to cover'
+  - src: '/assets/projects/t-run-demo.webp'
+    alt: 'T Run guided demo tour: the full MBTA rail network as an interactive map with chapter captions'
+    caption: 'Guided demo — a seven-chapter tour computed from the live GTFS schedule'
 links:
+  - label: 'Guided demo'
+    url: 'https://mbta-route-studio.vercel.app/demo'
   - label: 'Live app'
     url: 'https://mbta-route-studio.vercel.app'
   - label: 'GitHub'
     url: 'https://github.com/thejackluo/t'
 ---
 
-The goal: ride every MBTA rapid transit station in one day, fast enough for a **Guinness World Record**.
+The goal: ride every MBTA rapid transit station in one day, fast enough for a **Guinness World Record**. There's a self-running [guided demo](https://mbta-route-studio.vercel.app/demo) that tours the studio in seven chapters — rides, transfers, auto timing, buses and the Silver Line, backtracking detection, and sharing — all computed live from the real GTFS schedule.
 
 **T Run** imports the official MBTA GTFS feed and compiles it into schedule tables. The **route studio** lets you click two stations, or drag along a line, to preview the path. **Auto** mode times the train against a Google street run for the same pair and puts the fastest first. Every leg shows its scheduled time, and coverage is counted from every station a ridden train passes.
 
