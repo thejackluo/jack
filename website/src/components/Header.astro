@@ -217,10 +217,12 @@ const navLinks = [
   }
 
   .nav-logo h1 {
-    font-size: clamp(2.6rem, 3vw, 3.2rem) !important;
+    font-size: clamp(3rem, 3.5vw, 3.75rem) !important;
     line-height: 1;
     margin: 0;
-    text-shadow: 0 0 12px rgba(255, 255, 255, 0.18) !important;
+    text-shadow:
+      4px 4px 10px rgba(255, 255, 255, 0.25),
+      0 0 18px rgba(255, 255, 255, 0.3) !important;
   }
 
   .nav-desktop {
@@ -267,6 +269,7 @@ const navLinks = [
 
   .nav-desktop .nav-item a[aria-current='page'] h2::after {
     transform: scaleX(1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
   }
 
   /* Responsive behavior */
@@ -277,7 +280,7 @@ const navLinks = [
     }
 
     .nav-logo h1 {
-      font-size: 2.5rem !important;
+      font-size: 2.75rem !important;
     }
 
     .mobile-nav-menu {
