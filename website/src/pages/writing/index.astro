@@ -185,7 +185,7 @@ const allYears = [...new Set(blogs.map(blog => blog.data.publishDate.getFullYear
       ),
       linear-gradient(180deg, #000000 0%, #14123c 100%);
     min-height: 100vh;
-    padding: 2rem 0 4rem 0;
+    padding: calc(72px + 2rem) 0 4rem 0;
   }
 
   /* Page Header */
@@ -474,7 +474,7 @@ const allYears = [...new Set(blogs.map(blog => blog.data.publishDate.getFullYear
 
   @media (max-width: 576px) {
     #writing-section {
-      padding: 1rem 0 2rem 0;
+      padding: calc(64px + 1rem) 0 2rem 0;
     }
 
     .writing-page-header {
