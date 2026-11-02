@@ -191,6 +191,19 @@ const navLinks = [
     align-items: center;
   }
 
+  /* Non-hero pages: overlay navbar, transparent — page's own background shows through */
+  #landing:not(.has-hero) {
+    position: absolute;
+    inset: 0 0 auto 0;
+    background: transparent !important;
+    overflow: visible;
+    z-index: 10;
+  }
+
+  #landing:not(.has-hero) .landing-angular-filter {
+    display: none;
+  }
+
   .navbar > .container-fluid {
     display: flex;
     align-items: center;
@@ -204,7 +217,7 @@ const navLinks = [
   }
 
   .nav-logo h1 {
-    font-size: 2.4rem !important;
+    font-size: clamp(2.6rem, 3vw, 3.2rem) !important;
     line-height: 1;
     margin: 0;
     text-shadow: 0 0 12px rgba(255, 255, 255, 0.18) !important;
@@ -264,7 +277,7 @@ const navLinks = [
     }
 
     .nav-logo h1 {
-      font-size: 2rem !important;
+      font-size: 2.5rem !important;
     }
 
     .mobile-nav-menu {
