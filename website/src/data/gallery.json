@@ -1,10 +1,10 @@
 {
   "gallery": {
     "title": "Gallery",
-    "subtitle": "Twenty-one photographs",
+    "subtitle": "Twenty photographs",
     "intro": "Wing A, Of Jack: portraits of Jack. Wing B, By Jack: photographs by Jack. Hung chronologically within each wing. No quality photographs from November to December 2022 were found in the library, so the earliest work is August 2023.",
     "sourceAlbum": "Museum Gallery 2022-2026 (private Google Photos album)",
-    "count": 21,
+    "count": 20,
     "wings": [
       {
         "id": "A",
@@ -15,7 +15,7 @@
       {
         "id": "B",
         "name": "By Jack",
-        "count": 18,
+        "count": 17,
         "description": "Photographs taken by Jack, Jack behind the camera, August 2023 to August 2026."
       }
     ]
@@ -241,22 +241,6 @@
       "image": "/gallery/b11.jpg",
       "description": "A pedestrian walkway running toward Manhattan's glass towers at sunset, one distant walker, lamps lit.",
       "curatorialNote": "The strongest leading line in the New York group. One small figure walks the line the photograph draws, which is all the human presence it needs.",
-      "centrepiece": false,
-      "width": 1200,
-      "height": 1600
-    },
-    {
-      "id": "B12",
-      "wing": "B",
-      "wingName": "By Jack",
-      "title": "The Hotpot",
-      "date": "Aug 17, 2025",
-      "location": "Chongqing Lao Zao, Flushing, Queens, New York",
-      "medium": "12.2 MP, iPhone 14",
-      "file": "b12.jpg",
-      "image": "/gallery/b12.jpg",
-      "description": "A friend in a red apron ladling over a large divided hotpot, chillies in the foreground, steam and colour everywhere.",
-      "curatorialNote": "The exhibition's single food work, and its warmest. Everything in this frame is either red, rising, or about to be eaten.",
       "centrepiece": false,
       "width": 1200,
       "height": 1600
