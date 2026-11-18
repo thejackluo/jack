@@ -1,5 +1,6 @@
 ---
-// TypewriterStatus.astro - Displays a rotating typewriter effect with status messages
+// TypewriterStatus.astro - rotating typewriter with randomized statuses,
+// a live busy flag from Jack's Google Calendar, and a real visitor count.
 ---
 
 <h3 class="typewriter">
@@ -34,123 +35,158 @@
 </style>
 
 <script>
-  // Status messages to cycle through
-  const statuses = [
-  { prefix: 'project', text: 'building strange agentic things at @ MAGK', link: 'https://magk.app' },
-  { prefix: 'personal', text: 'accidentally meeting new friends everywhere' },
-  { prefix: 'status', text: 'sleeping in a conference room again' },
-  { prefix: 'traveling', text: 'plotting a slightly unhinged trip to Europe' },
-  { prefix: 'meta', text: 'procrastinating by updating this website instead of resting' },
-  { prefix: 'technical', text: 'wiring up memory architectures so agents remember your life better than you do' },
-  { prefix: 'entertainment', text: 'playing Cyberpunk 2077 when I should be working' },
-  { prefix: 'reading', text: 'rereading "The Subtle Art of Not Giving a F*ck" and pretending it is not about me' },
-  { prefix: 'surprised', text: 'wait, you are still here scrolling this?' },
-  {
-    prefix: 'visitor',
-    text: `welcome to the chaos. you are visitor #${Math.floor(Math.random() * 1000) + 1000}`,
-    isRandom: true
-  },
+  // When the calendar says Jack is in something, this pool takes over.
+  const busyStatuses = [
+    { text: 'in a meeting rn — back soon' },
+    { text: 'booked rn, my calendar made me say this' },
+    { text: 'heads down rn (calendar-confirmed busy)' },
+    { text: 'occupied — the calendar snitched on me' },
+    { text: 'busy until further notice, per google calendar' },
+  ];
 
-  // new ones
-  {
-    prefix: 'connection',
-    text: 'quietly looking for a partner in crime who thinks late night bug hunting counts as a date :p'
-  },
-  {
-    prefix: 'habits',
-    text: 'trying this radical new thing called being consistent with my day to day work'
-  },
-  {
-    prefix: 'networking',
-    text: 'easing off the networking gas pedal so I can actually deepen the connections I already have'
+  const freeStatuses = [
+    { text: 'building strange agentic things at @ MAGK', link: 'https://magk.app' },
+    { text: 'building juno, the newest experiment' },
+    { text: 'maintaining rolo, the relationship brain that knows who i owe a reply' },
+    { text: 'occasionally attending georgia tech' },
+    { text: 'accidentally ended up on the news, oops', link: '/press' },
+    { text: 'curating my second brain', link: 'https://jackipedia.agentschool.io' },
+    { text: 'teaching stuff at learn.jack-luo.com', link: 'https://learn.jack-luo.com' },
+    { text: 'training for the t run — every mbta station, one day', link: 'https://mbta-route-studio.vercel.app' },
+    { text: 'day whatever of the gym streak' },
+    { text: 'writing liminal chapters nobody asked for' },
+    { text: 'making beats i will never release' },
+    { text: 'somewhere between atlanta and boston rn' },
+    { text: 'plotting a slightly unhinged trip to europe' },
+    { text: 'ordering hotpot alone at 1am' },
+    { text: 'listening to jpop remixes on loop' },
+    { text: 'dreaming in transit maps' },
+    { text: 'reading manga and calling it research' },
+    { text: 'packing for a trip i planned 20 minutes ago' },
+    { text: 'answering emails at unreasonable hours' },
+    { text: 'rereading "the subtle art of not giving a f*ck" and pretending it is not about me' },
+    { text: 'wiring up memory architectures so agents remember your life better than you do' },
+    { text: 'accidentally meeting new friends everywhere' },
+    { text: 'sleeping in a conference room again' },
+    { text: 'quietly looking for a partner in crime who thinks late night bug hunting counts as a date :p' },
+    { text: 'easing off the networking gas pedal so i can actually deepen the connections i already have' },
+    { text: 'procrastinating by updating this website instead of resting' },
+    { text: 'wait, you are still here scrolling this?' },
+  ];
+
+  let isBusy = null;
+  let visitorCount = null;
+
+  // Live busy flag — polled every 5 min; event details never reach the client.
+  async function pollBusy() {
+    try {
+      const r = await fetch('/.netlify/functions/calendar-busy');
+      const j = await r.json();
+      isBusy = j.busy;
+    } catch {}
+    setTimeout(pollBusy, 5 * 60 * 1000);
   }
-];
+  pollBusy();
 
-  let currentStatusIndex = 0;
-  let currentCharIndex = 0;
-  let isDeleting = false;
-  let isPaused = false;
+  // Real visitor count — one increment per browser session.
+  (async () => {
+    const counted = sessionStorage.getItem('jk-counted');
+    try {
+      const r = await fetch('/.netlify/functions/visitor-count', {
+        method: counted ? 'GET' : 'POST',
+      });
+      const j = await r.json();
+      if (j.count) visitorCount = j.count;
+    } catch {}
+    sessionStorage.setItem('jk-counted', '1');
+  })();
+
+  // Shuffled-bag rotation so the order is different every visit and
+  // nothing repeats until the whole pool has been seen.
+  let bag = [];
+  let lastText = '';
+
+  function nextStatus() {
+    const pool = isBusy ? busyStatuses : freeStatuses;
+    if (bag.length === 0) {
+      bag = [...pool].sort(() => Math.random() - 0.5);
+      // avoid an immediate repeat of what was just shown
+      if (bag.length > 1 && bag[bag.length - 1].text === lastText) {
+        bag.unshift(bag.pop());
+      }
+    }
+    return bag.pop();
+  }
+
+  function getText(s) {
+    if (s.isVisitor) {
+      const n = visitorCount ?? Math.floor(Math.random() * 1000) + 1000;
+      return `welcome to the chaos. you are visitor #${n}`;
+    }
+    return s.text;
+  }
 
   const typewriterTextElement = document.querySelector('.typewriter-text');
 
-  // Typing speed settings
-  const TYPING_SPEED = 100;        // Speed when typing
-  const DELETING_SPEED = 50;       // Speed when deleting
-  const PAUSE_AFTER_TYPE = 3000;   // Pause after typing complete message
-  const PAUSE_AFTER_DELETE = 500;  // Pause after deleting complete message
+  let charIndex = 0;
+  let deleting = false;
+  let paused = false;
 
-  function getCurrentStatus() {
-    const status = statuses[currentStatusIndex];
+  const TYPE_MS = 100;
+  const DELETE_MS = 50;
+  const PAUSE_TYPED = 3000;
+  const PAUSE_DELETED = 500;
 
-    // Generate new random visitor number if needed
-    if (status.isRandom) {
-      const visitorNum = Math.floor(Math.random() * 1000) + 1000;
-      return {
-        ...status,
-        text: `welcome to the chaos. you are visitor #${visitorNum}`
-      };
+  let current = null;
+
+  function tick() {
+    if (paused || !typewriterTextElement) return;
+    if (!current) {
+      current = nextStatus();
+      lastText = current.text;
+      charIndex = 0;
     }
+    const full = getText(current);
 
-    return status;
-  }
-
-  function updateTypewriter() {
-    if (isPaused || !typewriterTextElement) return;
-
-    const currentStatus = getCurrentStatus();
-    const fullText = currentStatus.text;
-
-    if (!isDeleting) {
-      // Typing characters
-      currentCharIndex++;
-      const displayText = fullText.substring(0, currentCharIndex);
-
-      // Update the text content
-      if (currentStatus.link && currentCharIndex === fullText.length) {
-        // If there's a link and we've finished typing, make it clickable
-        typewriterTextElement.innerHTML = `<a href="${currentStatus.link}" target="_blank">${displayText}</a>`;
+    if (!deleting) {
+      charIndex++;
+      const shown = full.substring(0, charIndex);
+      if (current.link && charIndex === full.length) {
+        typewriterTextElement.innerHTML = `<a href="${current.link}" target="_blank" rel="noopener">${shown}</a>`;
       } else {
-        typewriterTextElement.textContent = displayText;
+        typewriterTextElement.textContent = shown;
       }
-
-      if (currentCharIndex === fullText.length) {
-        // Finished typing, pause before deleting
-        isPaused = true;
+      if (charIndex === full.length) {
+        paused = true;
         setTimeout(() => {
-          isPaused = false;
-          isDeleting = true;
-          updateTypewriter();
-        }, PAUSE_AFTER_TYPE);
+          paused = false;
+          deleting = true;
+          tick();
+        }, PAUSE_TYPED);
         return;
       }
     } else {
-      // Deleting characters
-      currentCharIndex--;
-      const displayText = fullText.substring(0, currentCharIndex);
-      typewriterTextElement.textContent = displayText;
-
-      if (currentCharIndex === 0) {
-        // Finished deleting, move to next status
-        isDeleting = false;
-        currentStatusIndex = (currentStatusIndex + 1) % statuses.length;
-
-        // Pause before typing next message
-        isPaused = true;
+      charIndex--;
+      typewriterTextElement.textContent = full.substring(0, charIndex);
+      if (charIndex === 0) {
+        deleting = false;
+        current = null;
+        paused = true;
         setTimeout(() => {
-          isPaused = false;
-          updateTypewriter();
-        }, PAUSE_AFTER_DELETE);
+          paused = false;
+          tick();
+        }, PAUSE_DELETED);
         return;
       }
     }
 
-    // Schedule next update
-    const speed = isDeleting ? DELETING_SPEED : TYPING_SPEED;
-    setTimeout(updateTypewriter, speed);
+    // slight jitter so typing feels organic rather than metronomic
+    const speed = deleting ? DELETE_MS : TYPE_MS + Math.random() * 60 - 30;
+    setTimeout(tick, speed);
   }
 
-  // Start the typewriter effect when the page loads
-  if (typewriterTextElement) {
-    updateTypewriter();
-  }
+  // visitor entry joins the pool once the real count is known (or the joke # if not)
+  freeStatuses.push({ text: '', isVisitor: true });
+
+  if (typewriterTextElement) tick();
 </script>
