@@ -1,9 +1,0 @@
-{
-  "name": "jack-functions",
-  "private": true,
-  "type": "module",
-  "dependencies": {
-    "node-ical": "^0.27.6",
-    "@netlify/blobs": "^11.1.9"
-  }
-}
