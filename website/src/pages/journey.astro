@@ -13,38 +13,54 @@ interface Moment {
 }
 
 const moments: Moment[] = [
-  { date: '2026.10', kind: 'Built', title: 'Asymmetry', href: '/projects/asymmetry/', text: 'Coordinated four parallel Devins in a five-hour hackathon to build digital-twin agents that surface the supply and demand hidden in your extended network.' },
-  { date: '2026.10', kind: 'Built', title: 'T Run · MBTA Route Studio', href: '/projects/t-run/', text: 'A rail schedule backend and route studio for planning a Guinness World Record all-stations MBTA run.' },
-  { date: '2026.06', kind: 'Built', title: 'Jackputer', href: '/projects/jackputer/', text: 'A nand2tetris computer from NAND gates up, compiled to Verilog and rendered as explorable chip visualizations.' },
-  { date: '2026.04', kind: 'Built', title: 'Jackipedia', href: '/projects/jackipedia/', text: 'A Wikipedia-style personal knowledge base, compiled from Markdown into a searchable site.' },
-  { date: '2026.02', kind: 'Press', title: 'In the press', href: '/press', text: 'Featured in AFP-syndicated coverage on AI agent autonomy and consent, picked up by The Straits Times and The Economic Times.' },
-  { date: '2026.02', kind: 'Built', title: 'Rolo', href: '/projects/rolo/', text: 'Relationship intelligence for operators: search your network by intent, prep for meetings in minutes, and keep context attached to people.' },
-  { date: '2026.01', kind: 'Built', title: 'Agent School', href: '/projects/agent-school/', text: 'Started Agent School to build where people and agents actually work together, beginning with Agent Slack and multi-agent workflows.' },
-  { date: '2025.11', kind: 'Life', title: 'Personal Site V4 & Fitness Streak', text: 'Rebuilt this site (v4), hit a streak of 10 weekly gym sessions, and got back to serious work on Limbinal.' },
-  { date: '2025.06', kind: 'Built', title: 'Weave', href: '/projects/weave/', text: 'A dark-first React Native app that breaks goals into daily actions and keeps you consistent with streaks, proof and coaching.' },
-  { date: '2025.02', kind: 'Milestone', title: 'MAGK CTO', href: '/projects/magk-excel/', text: 'Stepped up as CTO at MAGK, an AI workflow automation startup applying multi-agent systems to productivity.' },
-  { date: '2024.10', kind: 'Milestone', title: 'Quantum Labs acquired', text: 'Quantum Labs was acquired by Hatch Coding in a six-figure deal, validating a systematic approach to building mission-driven businesses.' },
-  { date: '2024.09', kind: 'Built', title: 'ARKOS at MIT SIPB', href: '/projects/arkos/', text: 'Backend work on agent orchestration, memory modules and state graphs for ARK, the modular assistant platform from MIT SIPB.' },
-  { date: '2024.08', kind: 'Built', title: 'Delight', text: 'A goal companion for ambitious people that starts with how you feel and uses a three-tier memory system.' },
-  { date: '2024.06', kind: 'Milestone', title: 'Buildspace Nights & Weekends S4', text: 'Shipped alongside a global cohort of builders, and learned to ship faster and think bigger.' },
-  { date: '2024.05', kind: 'Built', title: 'Efficore', href: '/projects/efficore/', text: 'Co-founded Efficore: energy optimization that treats a whole facility as one controllable system.' },
-  { date: '2024.03', kind: 'Milestone', title: 'Hackathon wins & Elon calls', text: 'Top 15 at the UC Berkeley AI Hackathon, 1st place at Digitalized and CodeDay SF, and two video calls with Elon Musk about AI and the future.' },
-  { date: '2023.10', kind: 'Creative', title: 'TikTok went viral', text: 'Educational tech videos on TikTok passed 2 million total views, which made me want to keep demystifying AI for a broad audience.' },
+  { date: '2026.10', kind: 'Built', title: 'Asymmetry', href: '/projects/asymmetry/', text: 'Built in a five-hour hackathon by coordinating four parallel Devin sessions, each owning one slice of the stack. The result is a set of digital-twin agents that map your extended network and surface the supply and demand hidden inside it: who needs something, and who is quietly able to help.' },
+  { date: '2026.10', kind: 'Built', title: 'T Run · MBTA Route Studio', href: '/projects/t-run/', text: 'A map studio for planning a Guinness World Record attempt at every MBTA station. Routes follow the real tracks, mix train rides with street runs, and every leg is timed against the official schedule, then exported as a full itinerary with a guided demo tour.' },
+  { date: '2026.06', kind: 'Built', title: 'Jackputer', href: '/projects/jackputer/', text: 'A nand2tetris computer built from NAND gates up: logic gates, ALU, CPU and memory. Every chip is compiled to Verilog and rendered as an explorable visualization, so you can click into the ALU and keep expanding until you hit individual gates.' },
+  { date: '2026.04', kind: 'Built', title: 'Jackipedia', href: '/projects/jackipedia/', text: 'A Wikipedia-style second brain. Markdown pages are compiled into a searchable static site with infoboxes and cross-links, and an LLM maintains the wiki layer: ingesting new sources, updating pages and keeping every reference consistent.' },
+  { date: '2026.02', kind: 'Press', title: 'In the press', href: '/press', text: 'Featured in AFP-syndicated coverage on AI agent autonomy and consent, picked up by The Straits Times and The Economic Times. The piece looked at what happens when agents act on your behalf, and who is responsible when they do.' },
+  { date: '2026.02', kind: 'Built', title: 'Rolo', href: '/projects/rolo/', text: 'A relationship brain, the Rolodex for the AI age. One Google connection imports contacts and calendar; Rolo then tracks meeting history, surfaces follow-ups before relationships go cold, and lets you search your network by intent. Launched publicly in April with a waitlist-first, organic-only launch.' },
+  { date: '2026.01', kind: 'Built', title: 'Agent School', href: '/projects/agent-school/', text: 'The umbrella for building where people and agents actually work together. It started with Agent Slack, shared rooms for humans and agents, and grew into the infrastructure that runs Rolo, Jackipedia and the internal agent tooling behind them.' },
+  { date: '2025.11', kind: 'Creative', title: 'Personal site v4', text: 'Rebuilt this site from scratch on Astro, with Markdown collections for writing and projects, then got back to serious work on Limbinal.' },
+  { date: '2025.09', kind: 'Milestone', title: 'HackGT', text: 'Competed at HackGT in Atlanta, closing out a run of three major university hackathons in fifteen months: Berkeley AI, TreeHacks and HackGT. Each one landed in a high-momentum stretch and worked as a forcing function to cut scope and ship.' },
+  { date: '2025.06', kind: 'Built', title: 'Weave', href: '/projects/weave/', text: 'A dark-first React Native app with a FastAPI backend that turns goals into daily “binds”. Proof and reflections, streaks and heatmaps, and a Dream Self coach that turns vague ambition into a narrative you don’t want to quit.' },
+  { date: '2025.02', kind: 'Milestone', title: 'MAGK CTO & TreeHacks', href: '/projects/magk-excel/', text: 'Stepped up as CTO at MAGK, an AI workflow automation startup applying multi-agent systems to spreadsheet-heavy analyst work. The same month: a full-send 36 hours at TreeHacks, Stanford’s flagship hackathon.' },
+  { date: '2024.10', kind: 'Milestone', title: 'Quantum Labs acquired', text: 'Quantum Labs was acquired by Hatch Coding in a six-figure deal. It validated a systematic approach to building mission-driven education businesses, and funded the next round of experiments.' },
+  { date: '2024.09', kind: 'Built', title: 'ARKOS at MIT SIPB', href: '/projects/arkos/', text: 'Backend contributor to ARK, the open-source, privacy-first assistant platform from MIT SIPB. Worked on agent orchestration, memory modules and the state-graph architecture that lets tools and behaviors plug in as modules.' },
+  { date: '2024.06', kind: 'Milestone', title: 'Buildspace Nights & Weekends S4', text: 'Shipped alongside a global cohort of builders in Buildspace’s six-week, no-equity, ship-first program, and placed top 15 at the UC Berkeley AI Hackathon the same month.' },
+  { date: '2024.05', kind: 'Built', title: 'Efficore', href: '/projects/efficore/', text: 'Co-founded Efficore (mira.energy): energy optimization for data centers that treats a whole facility as one controllable system. I lead the software and decision-making systems; the partnership started at Q House the summer before.' },
+  { date: '2024.03', kind: 'Milestone', title: 'Hackathon wins & Elon calls', text: '1st place at Digitalized and CodeDay SF, finalist at the Penn and Northwestern pitch competitions, and two Hack Club video calls with Elon Musk about AI and the future.' },
+  { date: '2023.10', kind: 'Creative', title: 'TikTok went viral', text: 'Videos on TikTok passed 2 million total views, mostly through reposts, which made me want to keep demystifying tech for a broad audience.' },
   { date: '2023.07', kind: 'Life', title: 'Q Hacker House, Prodicity & Limbinal', img: '/assets/projects/hackerhouse.jpg', imgAlt: 'Group photo from the Q Hacker House rooftop', text: 'Hosted a three-week hacker house in a downtown SF loft for ten founders, researchers and makers, with nightly salon talks, Bay Area field trips, and Prodicity’s AI mentorship track pairing residents with 20+ high school builders. I ran the leasing, budget, meals and speakers. That summer I also started writing Limbinal.' },
-  { date: '2023.02', kind: 'Milestone', title: 'Quantum Labs launched', text: 'An online, project-based AI education program that grew to 1,500+ students worldwide with university partnerships within 20 months.' },
-  { date: '2022.08', kind: 'Life', title: 'Georgia Tech', text: 'Transferred to Georgia Tech to study Computer Science and Math, with a deeper focus on AI and robotics.' },
-  { date: '2022.03', kind: 'Built', title: 'Calend.ai', href: '/projects/calendai/', text: 'An AI copilot for Google Calendar that turns free-form requests into scheduled events.' },
+  { date: '2023.02', kind: 'Milestone', title: 'Quantum Labs launched', text: 'An online, project-based AI education program. Students learned by shipping real projects rather than watching lectures, and it grew to 1,500+ students worldwide with university partnerships within 20 months.' },
+  { date: '2022.08', kind: 'Milestone', title: 'Georgia Tech', text: 'Transferred to Georgia Tech to study Computer Science and Math, with a focus on the Intelligence thread: machine learning, AI and robotics.' },
+  { date: '2022.03', kind: 'Built', title: 'Calend.ai', href: '/projects/calendai/', text: 'An AI copilot for Google Calendar that turns free-form requests into scheduled events, one of the first things I built on top of language models.' },
 ];
 
-const years = [...new Set(moments.map((m) => m.date.slice(0, 4)))];
+const yearStart = new Set<number>();
+moments.forEach((m, i) => {
+  if (i === 0 || moments[i - 1].date.slice(0, 4) !== m.date.slice(0, 4)) yearStart.add(i);
+});
 
 const experiments = [
-  { title: 'Vigama', what: 'An AI productivity app that automated scheduling and tasks from natural language.', lesson: 'Focus and timing matter more than scope.' },
-  { title: 'Ophelus', what: 'A gamified productivity platform: task management inside a personal progress RPG.', lesson: 'Validate with a simple MVP before building the dream platform.' },
-  { title: 'Sora video experiments', what: 'Experimental video and storytelling with OpenAI’s Sora.', lesson: 'Bleeding-edge tools need patience; sometimes you wait for the ecosystem.' },
-  { title: 'Voice & text AI agents', what: 'Speech-to-text, LLMs and text-to-speech stitched into voice interfaces.', lesson: 'Voice has to feel instant. Small delays break the magic.' },
-  { title: 'Personal AI avatars', what: 'LLM avatars that answered in my voice and style for async messages.', lesson: 'Authenticity matters more than efficiency.' },
-  { title: 'Discord bot ecosystem', what: 'Bots for community management, automation and AI interactions.', lesson: 'Build where your community actually lives.' },
+  { year: '2022', title: 'Lingua Scan', what: 'A camera tutor that labeled real-world objects with live detection and narrated bilingual translations.', lesson: 'A delightful demo is not a daily habit.' },
+  { year: '2022', title: 'StockBot', what: 'Reddit and Twitter sentiment turned into trading signals, backtested in simulation.', lesson: 'Naive signals look brilliant in backtests and fall apart live.' },
+  { year: '2023', title: 'Vigama', what: 'A voice-first assistant that turned spoken intent into scheduled routines and follow-ups.', lesson: 'Focus and timing matter more than scope.' },
+  { year: '2023', title: 'Ophelus', what: 'A gamified productivity platform: task management inside a personal progress RPG.', lesson: 'Validate with a simple MVP before building the dream platform.' },
+  { year: '2024', title: 'CollectWise', what: 'An LLM agent that drafted messages to debt collectors and reasoned about payment plans.', lesson: 'High-stakes domains need trust before they need features.' },
+  { year: '2024', title: 'Delight', what: 'A goal companion that started with how you feel, backed by a three-tier memory system.', lesson: 'Its narrative coaching lived on in Weave.' },
+  { year: '2025', title: 'Sora video experiments', what: 'Experimental video and storytelling with OpenAI’s Sora.', lesson: 'Bleeding-edge tools need patience; sometimes you wait for the ecosystem.' },
+  { year: '2025', title: 'Ride Dispatch Sim', what: 'A grid-city ride-hailing simulator balancing low ETAs against driver fairness.', lesson: 'Fairness is a design parameter, not an afterthought.' },
+  { year: '2026', title: 'Personal AI avatars', what: 'LLM avatars that answered async messages in my voice and style.', lesson: 'Authenticity matters more than efficiency.' },
+  { year: '2026', title: 'Voice agents', what: 'Speech-to-text, LLMs and text-to-speech stitched into real-time voice interfaces.', lesson: 'Voice has to feel instant. Small delays break the magic.' },
+];
+const expYears = [...new Set(experiments.map((e) => e.year))];
+
+const sc = (slug: string, visual = false) =>
+  `https://w.soundcloud.com/player/?url=${encodeURIComponent(`https://soundcloud.com/thejackluo/${slug}`)}&color=%23ffffff&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=${visual}`;
+const tracks = [
+  { slug: 'memories-v2', title: 'memory v2' },
+  { slug: '007-mirrox', title: '007 - mirrox' },
+  { slug: '011-mom', title: '011 - mom' },
 ];
 
 const explore = [
@@ -54,8 +70,7 @@ const explore = [
   { title: 'Toy Product Design', label: 'Design', text: 'Sketches and concepts for playful educational toys.', href: '/special/toy.html', img: '/assets/explore/toy.webp' },
   { title: 'Funny Moments', label: 'Just for fun', text: 'A collection of the chaos and humor that comes with building things.', href: '/special/funny.html', img: '/assets/explore/funny.webp' },
   { title: 'Resume', label: 'Work', text: 'The one-page version of all of this.', href: '/resume.html' },
-];
----
+];---
 
 <BaseLayout
   title="Journey - Jack Luo"
@@ -81,41 +96,49 @@ const explore = [
       </header>
 
       <section id="timeline" class="journey-block">
-        <h2 class="block-title">Timeline</h2>
-        <div class="timeline">
-          {years.map((year) => (
-            <div class="timeline-year">
-              <div class="year-label">{year}</div>
-              <ol class="year-items">
-                {moments.filter((m) => m.date.startsWith(year)).map((m) => (
-                  <li class="moment">
-                    <span class={`moment-dot kind-${m.kind.toLowerCase()}`} aria-hidden="true"></span>
-                    <div class="moment-meta">
-                      <span>{m.date.replace('.', ' · ')}</span>
-                      <span class={`moment-kind kind-${m.kind.toLowerCase()}`}>{m.kind}</span>
-                    </div>
-                    <h3 class="moment-title">
-                      {m.href ? <a href={m.href}>{m.title} <span aria-hidden="true">→</span></a> : m.title}
-                    </h3>
-                    <p class="moment-text">{m.text}</p>
-                    {m.img && <img class="moment-img" src={m.img} alt={m.imgAlt ?? ''} loading="lazy" />}
-                  </li>
-                ))}
-              </ol>
-            </div>
+        <h2 class="block-title centered">Timeline</h2>
+        <ol class="timeline" data-timeline>
+          <span class="spine" aria-hidden="true"><span class="spine-fill" data-spine-fill></span></span>
+          {moments.map((m, i) => (
+            <>
+              {yearStart.has(i) && (
+                <li class="year-marker reveal" aria-hidden="true"><span>{m.date.slice(0, 4)}</span></li>
+              )}
+              <li class={`moment reveal ${i % 2 === 0 ? 'left' : 'right'}`} style={`--accent: var(--k-${m.kind.toLowerCase()})`}>
+                <span class="moment-dot" aria-hidden="true"></span>
+                <article class="moment-card">
+                  <div class="moment-meta">
+                    <span>{m.date.replace('.', ' · ')}</span>
+                    <span class="moment-kind">{m.kind}</span>
+                  </div>
+                  <h3 class="moment-title">
+                    {m.href ? <a href={m.href}>{m.title} <span aria-hidden="true">→</span></a> : m.title}
+                  </h3>
+                  <p class="moment-text">{m.text}</p>
+                  {m.img && <img class="moment-img" src={m.img} alt={m.imgAlt ?? ''} loading="lazy" />}
+                </article>
+              </li>
+            </>
           ))}
-        </div>
+        </ol>
       </section>
 
       <section id="experiments" class="journey-block">
         <h2 class="block-title">Experiments that didn’t stick</h2>
-        <p class="block-lead">Things I built or explored that didn’t last, and what each one taught me.</p>
-        <div class="experiment-grid">
-          {experiments.map((e) => (
-            <div class="experiment">
-              <h3 class="experiment-title">{e.href ? <a href={e.href}>{e.title}</a> : e.title}</h3>
-              <p class="experiment-what">{e.what}</p>
-              <p class="experiment-lesson">{e.lesson}</p>
+        <p class="block-lead">Two a year: things I built or explored that didn’t last, and what each one taught me.</p>
+        <div class="exp-years">
+          {expYears.map((y) => (
+            <div class="exp-year reveal">
+              <div class="exp-year-label">{y}</div>
+              <div class="exp-row">
+                {experiments.filter((e) => e.year === y).map((e) => (
+                  <div class="experiment">
+                    <h3 class="experiment-title">{e.title}</h3>
+                    <p class="experiment-what">{e.what}</p>
+                    <p class="experiment-lesson">{e.lesson}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>
@@ -123,38 +146,59 @@ const explore = [
 
       <section id="creative" class="journey-block">
         <h2 class="block-title">Creative</h2>
-        <div class="creative-grid">
-          <div class="creative-card">
-            <p class="card-label">Writing · since July 2023</p>
-            <h3 class="card-title">Limbinal</h3>
-            <p>
-              A book about a guy stuck in a liminal space, where reality blurs and the line between dreams and waking life
-              disappears. It explores identity, the pursuit of meaning, and “robotic racism”.
-            </p>
-            <div class="card-links">
-              <a href="/liminal">Read the manga →</a>
-              <a href="/assets/pdf/limbinal-v12.03.23.pdf">Book sample (PDF) ↗</a>
-              <a href="https://instagram.com/thejackluo" target="_blank" rel="noopener noreferrer">Send feedback ↗</a>
-            </div>
-          </div>
-          <div class="creative-card">
+
+        <div class="feature reveal">
+          <div class="feature-copy">
             <p class="card-label">Music · since 10th grade</p>
-            <h3 class="card-title">SoundCloud</h3>
-            <p>Mostly experimental pieces. A few highlights, including my latest track, which I’m excited about:</p>
-            <div class="card-links">
-              <a href="https://soundcloud.com/thejackluo/intersection" target="_blank" rel="noopener noreferrer">intersection ↗</a>
-              <a href="https://soundcloud.com/thejackluo/memories-v2" target="_blank" rel="noopener noreferrer">memory v2 ↗</a>
-              <a href="https://soundcloud.com/thejackluo/007-mirrox" target="_blank" rel="noopener noreferrer">007 - mirrox ↗</a>
-              <a href="https://soundcloud.com/thejackluo/011-mom" target="_blank" rel="noopener noreferrer">011 - mom ↗</a>
+            <h3 class="feature-title">SoundCloud</h3>
+            <p>
+              I’ve been making music since 10th grade, mostly experimental: ambient, a little industrial, the kind of
+              thing that plays during late-night builds. <em>intersection</em> is the newest track and the one I’m most
+              excited about. A few older favorites sit underneath it.
+            </p>
+            <a class="feature-link" href="https://soundcloud.com/thejackluo" target="_blank" rel="noopener noreferrer">All tracks on SoundCloud ↗</a>
+          </div>
+          <div class="feature-media">
+            <iframe class="sc-main" title="intersection by Jack Luo" src={sc('intersection', true)} loading="lazy" allow="autoplay"></iframe>
+            {tracks.map((t) => (
+              <iframe class="sc-mini" title={`${t.title} by Jack Luo`} src={sc(t.slug)} loading="lazy" allow="autoplay"></iframe>
+            ))}
+          </div>
+        </div>
+
+        <div class="feature flip reveal">
+          <div class="feature-copy">
+            <p class="card-label">Writing · since July 2023</p>
+            <h3 class="feature-title">Limbinal</h3>
+            <p>
+              A book about a guy stuck in a liminal space, where reality blurs and the line between dreams and waking
+              life disappears. It explores identity, the pursuit of meaning, and “robotic racism”: how a world might
+              sort and judge minds that aren’t human. The sample is embedded here; the manga adaptation lives in its own
+              reader.
+            </p>
+            <div class="feature-links">
+              <a class="feature-link" href="/liminal">Read the manga →</a>
+              <a class="feature-link" href="/assets/pdf/limbinal-v12.03.23.pdf" target="_blank" rel="noopener noreferrer">Open the sample ↗</a>
+              <a class="feature-link" href="https://instagram.com/thejackluo" target="_blank" rel="noopener noreferrer">Send feedback ↗</a>
             </div>
           </div>
-          <div class="creative-card">
+          <div class="feature-media">
+            <iframe class="pdf-embed" title="Limbinal book sample" src="/assets/pdf/limbinal-v12.03.23.pdf#view=FitH&toolbar=0" loading="lazy"></iframe>
+          </div>
+        </div>
+
+        <div class="feature reveal">
+          <div class="feature-copy">
             <p class="card-label">Stories · Instagram</p>
-            <h3 class="card-title">One-minute stories</h3>
-            <p>30+ one-minute stories with 250k+ views in total, including one reel past 1M views.</p>
-            <div class="card-links">
-              <a href="https://www.instagram.com/eddie_the_lou/reel/DSRhLfijpJ5/" target="_blank" rel="noopener noreferrer">Watch the 1M reel ↗</a>
-            </div>
+            <h3 class="feature-title">One-minute stories</h3>
+            <p>
+              Thirty-plus stories, each told in under a minute, with 250k+ views in total. The constraint is the point:
+              one idea, one turn, no filler. This one passed a million views.
+            </p>
+            <a class="feature-link" href="https://www.instagram.com/eddie_the_lou/reel/DSRhLfijpJ5/" target="_blank" rel="noopener noreferrer">Watch on Instagram ↗</a>
+          </div>
+          <div class="feature-media reel">
+            <iframe class="reel-embed" title="One-minute story reel" src="https://www.instagram.com/reel/DSRhLfijpJ5/embed/" loading="lazy" allowtransparency="true" scrolling="no"></iframe>
           </div>
         </div>
       </section>
@@ -164,7 +208,7 @@ const explore = [
         <p class="block-lead">Pages that live a little off the main path.</p>
         <div class="explore-grid">
           {explore.map((x) => (
-            <a class="explore-card" href={x.href}>
+            <a class="explore-card reveal" href={x.href}>
               {x.img ? (
                 <img src={x.img} alt="" loading="lazy" />
               ) : (
@@ -189,6 +233,44 @@ const explore = [
   </section>
 </BaseLayout>
 
+<script>
+  const reveals = document.querySelectorAll('#journey-section .reveal');
+  if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    reveals.forEach((el) => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('in');
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -12% 0px', threshold: 0.12 }
+    );
+    reveals.forEach((el) => io.observe(el));
+  }
+
+  const timeline = document.querySelector<HTMLElement>('[data-timeline]');
+  const fill = document.querySelector<HTMLElement>('[data-spine-fill]');
+  if (timeline && fill) {
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const r = timeline.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, (innerHeight * 0.6 - r.top) / r.height));
+      fill.style.transform = `scaleY(${p})`;
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    document.addEventListener('scroll', onScroll, { capture: true, passive: true });
+    addEventListener('resize', onScroll);
+    update();
+  }
+</script>
+
 <style>
   :global(#landing) {
     height: auto !important;
@@ -200,6 +282,11 @@ const explore = [
   }
 
   #journey-section {
+    --k-built: #8fb4ff;
+    --k-milestone: #f2c46d;
+    --k-creative: #e597ff;
+    --k-press: #7fe0c0;
+    --k-life: #a9b0c8;
     height: auto !important;
     min-height: 100vh;
     background: linear-gradient(180deg, #000000 0%, #14123c 55%, #0d0b2a 100%);
@@ -216,7 +303,7 @@ const explore = [
   }
 
   .journey-wrap {
-    max-width: 68rem;
+    max-width: 72rem;
     margin: 0 auto;
   }
 
@@ -292,55 +379,158 @@ const explore = [
     margin: 0 0 0.75rem;
   }
 
+  #journey-section .block-title.centered {
+    text-align: center;
+  }
+
   .block-lead {
     font-size: 1rem !important;
     color: rgba(255, 255, 255, 0.6);
     margin: 0 0 2.25rem;
   }
 
-  /* Timeline */
+  /* Reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Timeline: centered spine, alternating cards */
   .timeline {
-    margin-top: 2.5rem;
-  }
-
-  .timeline-year {
-    display: grid;
-    grid-template-columns: 7rem minmax(0, 1fr);
-    gap: 2rem;
-  }
-
-  .year-label {
-    font-family: 'Dual-300';
-    font-size: 2rem;
-    color: rgba(255, 255, 255, 0.9);
-    position: sticky;
-    top: calc(72px + 1.5rem);
-    align-self: start;
-    padding-top: 0.1rem;
-  }
-
-  .year-items {
+    position: relative;
     list-style: none;
-    margin: 0;
-    padding: 0 0 2.5rem 2rem;
-    border-left: 1px solid rgba(255, 255, 255, 0.12);
+    margin: 3rem 0 0;
+    padding: 0;
+  }
+
+  .spine {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    margin-left: -1px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+  }
+
+  .spine-fill {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, #8fb4ff, #e597ff 60%, #f2c46d);
+    box-shadow: 0 0 14px rgba(143, 180, 255, 0.55);
+    transform-origin: top;
+    transform: scaleY(0);
+    border-radius: 2px;
+  }
+
+  .year-marker {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0 2rem;
+  }
+
+  .year-marker span {
+    position: relative;
+    font-family: 'Dual-300';
+    font-size: 1.6rem;
+    padding: 0.35rem 1.2rem;
+    border-radius: 999px;
+    background: #100e30;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 0 24px rgba(120, 110, 255, 0.25);
   }
 
   .moment {
     position: relative;
-    padding-bottom: 2.25rem;
-    font-size: 1rem;
+    width: 50%;
+    margin-bottom: 1.75rem;
+  }
+
+  .moment.left {
+    padding-right: 2.75rem;
+  }
+
+  .moment.right {
+    margin-left: 50%;
+    padding-left: 2.75rem;
+  }
+
+  .moment.left.reveal {
+    transform: translateX(-36px);
+  }
+
+  .moment.right.reveal {
+    transform: translateX(36px);
+  }
+
+  .moment.reveal.in {
+    transform: none;
   }
 
   .moment-dot {
     position: absolute;
-    left: calc(-2rem - 5px);
-    top: 0.35rem;
-    width: 9px;
-    height: 9px;
+    top: 1.6rem;
+    width: 13px;
+    height: 13px;
     border-radius: 50%;
-    background: currentColor;
-    box-shadow: 0 0 0 4px #100e30;
+    background: var(--accent);
+    box-shadow: 0 0 0 5px #100e30, 0 0 16px var(--accent);
+    transform: scale(0.4);
+    transition: transform 0.5s 0.2s cubic-bezier(0.3, 1.6, 0.5, 1);
+  }
+
+  .moment.in .moment-dot {
+    transform: scale(1);
+  }
+
+  .moment.left .moment-dot {
+    right: -6.5px;
+  }
+
+  .moment.right .moment-dot {
+    left: -6.5px;
+  }
+
+  .moment-card {
+    position: relative;
+    padding: 1.5rem 1.6rem 1.6rem;
+    border-radius: 1.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+    backdrop-filter: blur(6px);
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+  }
+
+  .moment-card::before {
+    content: '';
+    position: absolute;
+    top: 1.85rem;
+    width: 2.75rem;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18));
+  }
+
+  .moment.left .moment-card::before {
+    right: -2.75rem;
+    transform: scaleX(-1);
+  }
+
+  .moment.right .moment-card::before {
+    left: -2.75rem;
+  }
+
+  .moment-card:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+    box-shadow: 0 14px 40px -18px var(--accent);
   }
 
   .moment-meta {
@@ -350,20 +540,18 @@ const explore = [
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.45);
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.55rem;
   }
 
-  .kind-built { color: #8fb4ff; }
-  .kind-milestone { color: #f2c46d; }
-  .kind-creative { color: #e597ff; }
-  .kind-press { color: #7fe0c0; }
-  .kind-life { color: #a9b0c8; }
+  .moment-kind {
+    color: var(--accent);
+  }
 
   .moment-title {
     display: block;
-    font-size: 1.3rem !important;
+    font-size: 1.35rem !important;
     line-height: 1.3;
-    margin: 0 0 0.4rem;
+    margin: 0 0 0.55rem;
     color: #fff;
   }
 
@@ -385,57 +573,72 @@ const explore = [
 
   .moment-text {
     font-size: 1rem !important;
-    line-height: 1.65;
-    max-width: 42rem;
-    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.72);
     margin: 0;
   }
 
   .moment-img {
     display: block;
     width: 100%;
-    max-width: 34rem;
     aspect-ratio: 16 / 9;
     object-fit: cover;
-    border-radius: 1rem;
+    border-radius: 0.9rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
     margin-top: 1rem;
   }
 
-  /* Experiments */
-  .experiment-grid,
-  .creative-grid,
-  .explore-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* Experiments: two per year */
+  .exp-years {
+    display: flex;
+    flex-direction: column;
     gap: 1.25rem;
   }
 
-  .experiment,
-  .creative-card {
-    padding: 1.5rem;
+  .exp-year {
+    display: grid;
+    grid-template-columns: 6rem minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .exp-year-label {
+    font-family: 'Dual-300';
+    font-size: 1.8rem;
+    color: rgba(255, 255, 255, 0.85);
+    padding-top: 1.1rem;
+  }
+
+  .exp-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .experiment {
+    padding: 1.4rem 1.5rem;
     border-radius: 1.25rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: rgba(255, 255, 255, 0.035);
+    transition: border-color 0.3s ease, background 0.3s ease;
   }
 
-  .experiment-title,
-  .card-title {
+  .experiment:hover {
+    border-color: rgba(255, 255, 255, 0.22);
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .experiment-title {
     display: block;
     font-size: 1.2rem !important;
-    margin: 0 0 0.6rem;
+    margin: 0 0 0.5rem;
   }
 
-  .experiment-title a {
-    color: #fff;
-  }
-
-  .experiment p,
-  .creative-card p:not(.card-label) {
+  .experiment p {
     font-size: 0.95rem !important;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.7);
-    margin: 0 0 0.75rem;
+    margin: 0 0 0.6rem;
   }
 
   .experiment .experiment-lesson {
@@ -444,22 +647,91 @@ const explore = [
     margin: 0;
   }
 
-  .card-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1rem;
-    margin-top: 0.75rem;
+  /* Creative: prose + embeds */
+  .feature {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: 3rem;
+    align-items: center;
+    padding: 2.5rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
 
-  .card-links a {
-    font-size: 0.92rem;
+  .feature:first-of-type {
+    border-top: 0;
+  }
+
+  .feature.flip .feature-copy {
+    order: 2;
+  }
+
+  .feature-title {
+    display: block;
+    font-family: 'Dual-300';
+    font-size: 2rem !important;
+    margin: 0 0 1rem;
+  }
+
+  .feature-copy p:not(.card-label) {
+    font-size: 1.05rem !important;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0 0 1.25rem;
+  }
+
+  .feature-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+  }
+
+  .feature-link {
+    font-size: 0.95rem;
     color: #fff;
     text-decoration: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.25);
   }
 
-  .card-links a:hover {
+  .feature-link:hover {
     border-color: #fff;
+  }
+
+  .feature-media {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .feature-media iframe {
+    display: block;
+    width: 100%;
+    border: 0;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .sc-main {
+    height: 300px;
+  }
+
+  .sc-mini {
+    height: 120px;
+  }
+
+  .pdf-embed {
+    height: 560px;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    background: #fff !important;
+  }
+
+  .feature-media.reel {
+    align-items: center;
+  }
+
+  .reel-embed {
+    max-width: 400px;
+    height: 640px;
+    background: #fff !important;
   }
 
   /* Explore */
@@ -552,11 +824,47 @@ const explore = [
     line-height: 1.5;
   }
 
+  .press-strip {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 5rem;
+    padding: 1.4rem 1.75rem;
+    border-radius: 1.25rem;
+    border: 1px solid rgba(127, 224, 192, 0.25);
+    background: rgba(127, 224, 192, 0.05);
+    color: #fff;
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+
+  .press-strip:hover {
+    background: rgba(127, 224, 192, 0.1);
+  }
+
+  .press-strip .card-label {
+    margin: 0;
+    color: #7fe0c0;
+  }
+
+  .press-strip-text {
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+
   @media (max-width: 991px) {
-    .experiment-grid,
-    .creative-grid,
     .explore-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .feature {
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+
+    .feature.flip .feature-copy {
+      order: 0;
     }
   }
 
@@ -565,25 +873,53 @@ const explore = [
       padding: calc(64px + 2.5rem) 1.25rem 8rem;
     }
 
-    .timeline-year {
+    /* Timeline collapses to a single left rail on mobile */
+    .spine {
+      left: 7px;
+      margin-left: 0;
+    }
+
+    .year-marker {
+      justify-content: flex-start;
+      padding-left: 1.5rem;
+    }
+
+    .moment,
+    .moment.left,
+    .moment.right {
+      width: 100%;
+      margin-left: 0;
+      padding: 0 0 0 1.75rem;
+    }
+
+    .moment.left.reveal,
+    .moment.right.reveal {
+      transform: translateY(28px);
+    }
+
+    .moment.left .moment-dot,
+    .moment.right .moment-dot {
+      left: 0;
+      right: auto;
+    }
+
+    .moment-card::before {
+      display: none;
+    }
+
+    .exp-year {
       grid-template-columns: 1fr;
       gap: 0.75rem;
     }
 
-    .year-label {
-      position: static;
+    .exp-year-label {
+      padding-top: 0;
     }
 
-    .year-items {
-      padding-left: 1.5rem;
+    .exp-row {
+      grid-template-columns: 1fr;
     }
 
-    .moment-dot {
-      left: calc(-1.5rem - 5px);
-    }
-
-    .experiment-grid,
-    .creative-grid,
     .explore-grid {
       grid-template-columns: 1fr;
     }
@@ -595,6 +931,14 @@ const explore = [
 
     .journey-block {
       margin-top: 4.5rem;
+    }
+
+    .pdf-embed {
+      height: 420px;
+    }
+
+    .reel-embed {
+      max-width: 100%;
     }
   }
 </style>
