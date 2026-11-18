@@ -1,7 +1,8 @@
 import ical from 'node-ical';
 
 // Returns only { busy, until } — the private ICS URL stays server-side and
-// event titles/details never leave this function.
+// event titles/details never leave this function. busy is null when no feed
+// could be read, so an outage shows "unknown" rather than a false "free".
 export default async () => {
   const urls = (process.env.CALENDAR_ICS_URL || '')
     .split(',')
@@ -11,23 +12,20 @@ export default async () => {
 
   const now = new Date();
   const results = await Promise.allSettled(urls.map((u) => loadEvents(u, now)));
-
-  let busy = false;
-  let until = null;
-  for (const r of results) {
-    if (r.status !== 'fulfilled') continue;
-    for (const [s, e] of r.value) {
-      busy = true;
-      if (!until || e > until) until = e;
-    }
+  const spans = results.filter((r) => r.status === 'fulfilled').flatMap((r) => r.value);
+  if (urls.length && !spans.length && results.every((r) => r.status === 'rejected')) {
+    return json({ busy: null });
   }
-  return json({ busy, until });
+
+  const until = spans.reduce((latest, [, e]) => (e > latest ? e : latest), null);
+  return json({ busy: spans.length > 0, until });
 };
 
-// Events spanning `now`, from every calendar feed provided.
+// Events spanning `now` in one feed. Throws on fetch failure so all-dead
+// calendars are distinguishable from genuinely empty ones.
 async function loadEvents(url, now) {
   const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
-  if (!res.ok) return [];
+  if (!res.ok) throw new Error(`ical ${res.status}`);
   const data = ical.sync.parseICS(await res.text());
   const spans = [];
   for (const ev of Object.values(data)) {
@@ -45,28 +43,49 @@ async function loadEvents(url, now) {
 function* instances(ev, now) {
   const start = new Date(ev.start);
   const end = new Date(ev.end);
-  const dur = end - start;
+  if (!isFinite(start) || !isFinite(end)) return;
+
+  // Rescheduled single instances live in ev.recurrences (each stored under two
+  // keys — dedupe by recurrenceid). Yield them, and remember which original
+  // occurrences they replaced so the rrule expansion skips them.
+  const overridden = new Set();
+  const seenOverrides = new Set();
+  for (const rec of Object.values(ev.recurrences || {})) {
+    const rid = String(rec.recurrenceid || '');
+    if (seenOverrides.has(rid)) continue;
+    seenOverrides.add(rid);
+    if (rid) overridden.add(new Date(rec.recurrenceid).getTime());
+    if (rec.status === 'CANCELLED' || rec.transparency === 'TRANSPARENT' || rec.datetype === 'date') continue;
+    const s = new Date(rec.start);
+    const e = new Date(rec.end);
+    if (isFinite(s) && isFinite(e) && s <= now && now < e) yield [s, e];
+  }
 
   if (!ev.rrule) {
     if (start <= now && now < end) yield [start, end];
     return;
   }
 
-  // recurring: an instance that covers `now` started within [now-dur, now]
-  const dates = ev.rrule.between(new Date(now - dur), new Date(now + dur), true);
-  for (const d of dates) {
-    if (ev.exdate) {
-      const key = d.toISOString().slice(0, 10);
-      if (Object.keys(ev.exdate).some((x) => x.startsWith(key))) continue;
+  // Expand recurrences near now; a rescheduled occurrence is replaced by its
+  // RECURRENCE-ID override above, so the original time no longer counts.
+  const dur = end.getTime() - start.getTime();
+  const exdates = new Set();
+  if (ev.exdate) {
+    for (const v of Object.values(ev.exdate)) {
+      if (typeof v === 'string') exdates.add(new Date(v).getTime());
     }
-    yield [d, new Date(d.getTime() + dur)];
+  }
+  const occs = ev.rrule.between(new Date(now.getTime() - dur - 86400000), new Date(now.getTime() + 86400000));
+  for (const o of occs) {
+    const s = o.getTime();
+    if (exdates.has(s) || overridden.has(s)) continue;
+    const e = s + dur;
+    if (s <= now.getTime() && now.getTime() < e) yield [o, new Date(e)];
   }
 }
 
-const json = (body) =>
-  new Response(JSON.stringify(body), {
-    headers: {
-      'Content-Type': 'application/json',
-      'Cache-Control': 'public, max-age=60',
-    },
+function json(body) {
+  return Response.json(body, {
+    headers: { 'Cache-Control': 'public, max-age=60' },
   });
+}
