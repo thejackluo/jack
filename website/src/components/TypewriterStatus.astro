@@ -82,7 +82,11 @@
     try {
       const r = await fetch('/.netlify/functions/calendar-busy');
       const j = await r.json();
-      isBusy = j.busy;
+      if (j.busy !== isBusy) {
+        isBusy = j.busy;
+        // pool switched — refill the bag so busy/free statuses surface now
+        bag = [];
+      }
     } catch {}
     setTimeout(pollBusy, 5 * 60 * 1000);
   }
@@ -96,9 +100,13 @@
         method: counted ? 'GET' : 'POST',
       });
       const j = await r.json();
-      if (j.count) visitorCount = j.count;
+      if (j.count) {
+        visitorCount = j.count;
+        // only mark counted when the increment actually landed — a failed
+        // POST gets retried on the next page load
+        if (!counted) sessionStorage.setItem('jk-counted', '1');
+      }
     } catch {}
-    sessionStorage.setItem('jk-counted', '1');
   })();
 
   // Shuffled-bag rotation so the order is different every visit and
